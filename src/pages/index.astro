@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import heroImage from '../pages/assets/hero.webp';
 import heroImageSp from '../pages/assets/hero-sp.webp';
+import heroImageTb from '../pages/assets/hero-tb.webp';
 
 import titleTextImg from '../pages/assets/title-text.png';
 import komafesLabel from '../pages/assets/komafesLabel.png';
@@ -10,9 +11,9 @@ import mainLogoImg from '../pages/assets/Komafes69Logo.png';
 import hatImg from '../pages/assets/hat.png';
 import typoImg from '../pages/assets/typo.png';
 
-import instagramIcon from '../pages/assets/InstagramLogo.png';
-import youtubeIcon from '../pages/assets/YoutubeLogo.png';
-import xIcon from '../pages/assets/XLogo.png';
+import instagramIcon from '../pages/assets/instagram.svg';
+import youtubeIcon from '../pages/assets/youtube.svg';
+import xIcon from '../pages/assets/X.svg';
 
 import scrollIcon from '../pages/assets/scroll.png';
 
@@ -67,15 +68,15 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       </ul>
       <div class="mobile-sns-links">
         <a href="https://www.instagram.com/komafes68/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-          <Image src={instagramIcon} alt="" format="webp" quality={100} class="sns-icon" />
+          <Image src={instagramIcon} alt="" format="svg" quality={100} class="sns-icon" />
           <span>Instagram</span>
         </a>
         <a href="https://www.youtube.com/@komafes68" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-          <Image src={youtubeIcon} alt="" format="webp" quality={100} class="sns-icon" />
+          <Image src={youtubeIcon} alt="" format="svg" quality={100} class="sns-icon" />
           <span>YouTube</span>
         </a>
         <a href="https://x.com/Komafes68" aria-label="X" target="_blank" rel="noopener noreferrer">
-          <Image src={xIcon} alt="" format="webp" quality={100} class="sns-icon" />
+          <Image src={xIcon} alt="" format="svg" quality={100} class="sns-icon" />
           <span>X</span>
         </a>
       </div>
@@ -104,6 +105,18 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
         loading="eager"        
         fetchpriority="high"  
         class="hero-bg sp-bg"
+      />
+
+      <Image 
+        src={heroImageTb} 
+        alt="タブレット用トップページの背景画像" 
+        widths={[768, 1024, 1280]}
+        sizes="100vw"
+        quality={90}
+        format="webp"
+        loading="eager"        
+        fetchpriority="high"  
+        class="hero-bg tb-bg"
       />
 
       <div class="top-logo">
@@ -162,15 +175,15 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
 
         <div class="sns-links">
           <a href="https://www.instagram.com/komafes68/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-            <Image src={instagramIcon} alt="" format="webp" quality={100} class="sns-icon" />
+            <Image src={instagramIcon} alt="" format="svg" quality={100} class="sns-icon" />
             <span>Instagram</span>
           </a>
           <a href="https://www.youtube.com/@komafes68" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-            <Image src={youtubeIcon} alt="" format="webp" quality={100} class="sns-icon" />
+            <Image src={youtubeIcon} alt="" format="svg" quality={100} class="sns-icon" />
             <span>YouTube</span>
           </a>
           <a href="https://x.com/Komafes68" aria-label="X" target="_blank" rel="noopener noreferrer">
-            <Image src={xIcon} alt="" format="webp" quality={100} class="sns-icon" />
+            <Image src={xIcon} alt="" format="svg" quality={100} class="sns-icon" />
             <span>X</span>
           </a>
         </div>
@@ -236,21 +249,27 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
           hamburger.addEventListener('click', () => {
             const isActive = hamburger.classList.contains('is-active');
             if (isActive) {
+              // 閉じる時の処理
               hamburger.classList.remove('is-active');
               mobileNav.classList.remove('is-active');
               hamburger.setAttribute('aria-expanded', 'false');
+              document.body.classList.remove('no-scroll'); // ▼ スクロールロック解除 ▼
             } else {
+              // 開く時の処理
               hamburger.classList.add('is-active');
               mobileNav.classList.add('is-active');
               hamburger.setAttribute('aria-expanded', 'true');
+              document.body.classList.add('no-scroll'); // ▼ スクロールロックを適用 ▼
             }
           });
 
           mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
+              // リンクをクリックしてメニューを閉じる時の処理
               hamburger.classList.remove('is-active');
               mobileNav.classList.remove('is-active');
               hamburger.setAttribute('aria-expanded', 'false');
+              document.body.classList.remove('no-scroll'); // ▼ スクロールロック解除 ▼
             });
           });
         }
@@ -286,6 +305,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
 
   .pc-bg { display: block; }
   .sp-bg { display: none; }
+  .tb-bg { display: none; }
 
   .top-logo { position: absolute; top: 3.5%; left: 50%; transform: translateX(-50%); width: 8%; max-width: 140px; }
   .top-logo-img { width: 100%; height: auto; display: block; }
@@ -333,10 +353,43 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
 
   footer { text-align: center; padding: 2rem 0; color: #000000; background-color: #f6f9f6; font-size: 0.8rem; height: 1000px; }
 
+  body.no-scroll {
+    overflow: hidden; /* メニュー展開時に背景のスクロールを防ぐ */
+  }
 
-  /* =======================================================
-     スマホ版レスポンシブデザイン (画面幅 768px 以下)
+
+/* =======================================================
+     タブレット版レスポンシブデザイン (画面幅 1024px 以下)
      ======================================================= */
+  @media screen and (max-width: 1024px) {
+    /* メインロゴを中央付近に大きく配置 */
+    .main-logo-container { top: 13%; width: 35%; }
+    
+    /* タイポグラフィ(SAIL BEYOND)を画面下部に配置 */
+    .typo-container { top: 53%; width: 50%; }
+
+    /*Komafes69の上の画像を調整 */
+    .top-logo { top: 4%; width: 10%; }
+    
+    /* 左側のテキスト・情報群の縦位置を調整 */
+    .hero-title-container { top: 4%; width: 21%; left: 5%; }
+    .komafesLabel { top: 30%; width: 14%; left: 5%; }
+    .date-info { top: 37%; left: 5%; }
+    
+    /* SCROLLアニメーションを左下に配置 */
+    .scroll-animation { top: 63%; left: 8%; }
+
+    /* 右側ナビゲーションの微調整（タブレットサイズに合わせた余白） */
+    .right-nav { top: 22%; right: 4%; }
+    .right-nav li { margin-bottom: 2vw; }
+    .sns-links { margin-top: 3vw; left: 35%; }
+
+    /* 背景画像の切り替え */
+    .pc-bg { display: none; }
+    .tb-bg { display: block; width: 100%; height: auto; }
+    .sp-bg { display: none; }
+  }
+
   /* =======================================================
      スマホ版レスポンシブデザイン (画面幅 768px 以下)
      ======================================================= */
@@ -348,6 +401,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       width: 100%; 
       height: auto; 
     }
+    .tb-bg { display: none; }
 
     /* PC用ナビゲーションを非表示にする */
     .right-nav { 
@@ -410,7 +464,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     /* ========================================
        スマホ用オーバーレイメニュー
        ======================================== */
-    .mobile-nav {
+  .mobile-nav {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -419,13 +473,14 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh;
+      height: 100vh; /* 古いブラウザ用のフォールバック */
+      height: 100dvh; /* ▼ スマホのアドレスバー領域を考慮した最新の高さ指定 ▼ */
       background-color: rgba(0, 0, 0, 0.9);
       z-index: 999;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
-    }
+  }
 
     .mobile-nav.is-active {
       opacity: 1;
