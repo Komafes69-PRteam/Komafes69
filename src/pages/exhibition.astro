@@ -1,0 +1,534 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '../pages/assets/hero.webp';
+import heroImageSp from '../pages/assets/hero-sp.webp';
+import heroImageTb from '../pages/assets/hero-tb.webp';
+
+import titleTextImg from '../pages/assets/title-text.png';
+import komafesLabel from '../pages/assets/komafesLabel.png';
+import topLogoImg from '../pages/assets/topLogo.png';
+import mainLogoImg from '../pages/assets/Komafes69Logo.png';
+import hatImg from '../pages/assets/hat.png';
+import typoImg from '../pages/assets/typo.png';
+
+import instagramIcon from '../pages/assets/Instagram.svg';
+import youtubeIcon from '../pages/assets/youtube.svg';
+import xIcon from '../pages/assets/X.svg';
+
+import scrollIcon from '../pages/assets/scroll.png';
+
+const pageTitle = "トップページ | Komafes69";
+const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公式サイトです。開催日時：9月19日(土)・20日(日) 9:00〜17:00。テーマや各展示、タイムテーブル、マップなどの最新情報を掲載しています。";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+
+    <meta name="description" content={pageDescription} />
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link 
+      rel="preload" 
+      as="style" 
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700;900&display=swap" 
+    />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700;900&display=swap" 
+      rel="stylesheet" 
+      media="print" 
+      onload="this.media='all'" 
+    />
+  </head>
+  <body>
+    <!-- ハンバーガーボタン (スマホ専用) -->
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <!-- スマホ用オーバーレイメニュー -->
+    <nav id="mobile-menu" class="mobile-nav">
+      <ul>
+        <li><a href="#top">TOP</a></li>
+        <li><a href="#theme">THEME</a></li>
+        <li><a href="#exhibition">EXHIBITION</a></li>
+        <li><a href="#articles">ARTICLES</a></li>
+        <li><a href="#timetable">TIME TABLE</a></li>
+        <li><a href="#map">MAP</a></li>
+        <li><a href="#archives">ARCHIVES</a></li>
+      </ul>
+      <div class="mobile-sns-links">
+        <a href="https://www.instagram.com/komafes68/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <Image src={instagramIcon} alt="" format="svg" quality={100} class="sns-icon" />
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.youtube.com/@komafes68" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+          <Image src={youtubeIcon} alt="" format="svg" quality={100} class="sns-icon" />
+          <span>YouTube</span>
+        </a>
+        <a href="https://x.com/Komafes68" aria-label="X" target="_blank" rel="noopener noreferrer">
+          <Image src={xIcon} alt="" format="svg" quality={100} class="sns-icon" />
+          <span>X</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <Image 
+        src={heroImage} 
+        alt="トップページの背景画像です" 
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        quality={90}
+        format="webp"
+        loading="eager"        
+        fetchpriority="high"  
+        class="hero-bg pc-bg"
+      />
+
+      <Image 
+        src={heroImageSp} 
+        alt="スマホ用トップページの背景画像" 
+        widths={[320, 640, 768]}
+        sizes="100vw"
+        quality={90}
+        format="webp"
+        loading="eager"        
+        fetchpriority="high"  
+        class="hero-bg sp-bg"
+      />
+
+      <Image 
+        src={heroImageTb} 
+        alt="タブレット用トップページの背景画像" 
+        widths={[768, 1024, 1280]}
+        sizes="100vw"
+        quality={90}
+        format="webp"
+        loading="eager"        
+        fetchpriority="high"  
+        class="hero-bg tb-bg"
+      />
+
+      <div class="top-logo">
+        <Image src={topLogoImg} alt="Komafes69" format="webp" quality={80} class="top-logo-img" />
+      </div>
+
+      <div class="main-logo-container">
+        <Image src={mainLogoImg} alt="Komafes 69 SAIL BEYOND" format="webp" quality={85} class="main-logo-img" />
+        <div class="hat-container">
+          <Image src={hatImg} alt="Komafes 帽子" format="webp" quality={85} class="hat-img" />
+        </div>
+      </div>
+
+      <div class="typo-container">
+        <Image src={typoImg} alt="SAIL BEYOND" format="webp" quality={85} class="typo-img" />
+      </div>
+
+      <div class="hero-title-container">
+        <Image src={titleTextImg} alt="駒場東邦 第69代 文化祭" format="webp" quality={80} class="hero-title-img" />
+      </div>
+
+      <div class="komafesLabel">
+        <Image src={komafesLabel} alt="Komafes69ラベル" format="webp" quality={80} class="komafes-label-img" />
+      </div>
+
+      <div class="date-info">
+        <div class="date-row">
+          <span class="num">9.19</span><span class="day">(SAT.)</span>
+        </div>
+        <div class="date-row separator">
+          <span class="dash">—</span>
+          <span class="num">9.20</span><span class="day">(SUN.)</span>
+        </div>
+        <div class="time-row">
+          <span class="time">[ 9:00 - 17:00 ]</span>
+        </div>
+      </div>
+
+      <div class="scroll-animation">
+        <span class="scroll-text">SCROLL</span>
+        <div class="scroll-line"></div>
+        <Image src={scrollIcon} alt="Scroll Animation" format="webp" quality={100} class="scroll-icon" />
+      </div>
+
+      <!-- 右側ナビゲーションメニュー (PC用) -->
+      <nav class="right-nav">
+        <ul>
+          <li><a href="#top">TOP</a></li>
+          <li><a href="#theme">THEME</a></li>
+          <li><a href="#exhibition">EXHIBITION</a></li>
+          <li><a href="#articles">ARTICLES</a></li>
+          <li><a href="#timetable">TIME TABLE</a></li>
+          <li><a href="#map">MAP</a></li>
+          <li><a href="#archives">ARCHIVES</a></li>
+        </ul>
+
+        <div class="sns-links">
+          <a href="https://www.instagram.com/komafes68/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <Image src={instagramIcon} alt="" format="svg" quality={100} class="sns-icon" />
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.youtube.com/@komafes68" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+            <Image src={youtubeIcon} alt="" format="svg" quality={100} class="sns-icon" />
+            <span>YouTube</span>
+          </a>
+          <a href="https://x.com/Komafes68" aria-label="X" target="_blank" rel="noopener noreferrer">
+            <Image src={xIcon} alt="" format="svg" quality={100} class="sns-icon" />
+            <span>X</span>
+          </a>
+        </div>
+      </nav>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Komafes69</p>
+    </footer>
+
+    <script>
+      import { gsap } from 'gsap';
+
+      window.addEventListener('load', () => {
+        // --- 既存のGSAPアニメーション ---
+        gsap.fromTo('.top-logo-img', { clipPath: 'inset(0 0 100% 0)', opacity: 1 }, { clipPath: 'inset(0 0 0% 0)', duration: 0.8, ease: 'power2.out', delay: 0.1 });
+        gsap.fromTo('.main-logo-img', { scale: 0.85, rotation: -140, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: 'back.out(1.2)', delay: 0.4 });
+        gsap.fromTo('.hat-img', { xPercent: 120, yPercent: -90, rotation: 35, scale: 1.15, opacity: 0 }, { xPercent: 0, yPercent: 0, rotation: 0, scale: 1, opacity: 1, duration: 1.1, ease: 'power3.out', delay: 0.9, onComplete: startPeriodicAndInteractiveEffects });
+        gsap.fromTo('.typo-img', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power2.out', delay: 0.8 });
+        gsap.fromTo('.hero-title-img', { clipPath: 'inset(0 100% 0 0)', opacity: 1 }, { clipPath: 'inset(0 0% 0 0)', duration: 0.8, ease: 'power2.out', delay: 0.3 });
+        gsap.fromTo('.komafes-label-img', { clipPath: 'inset(0 100% 0 0)', opacity: 1 }, { clipPath: 'inset(0 0% 0 0)', duration: 0.8, ease: 'power2.out', delay: 0.45 });
+        gsap.fromTo('.date-info', { clipPath: 'inset(0 100% 0 0)', opacity: 1 }, { clipPath: 'inset(0 0% 0 0)', duration: 0.8, ease: 'power2.out', delay: 0.6 });
+        gsap.fromTo('.right-nav', { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.5 });
+        gsap.fromTo('.scroll-animation', { opacity: 0, y: 0 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 1.0 });
+
+        gsap.to('.scroll-line', {
+          height: '40%',             
+          duration: 2,
+          ease: 'power1.inOut',
+          repeat: -1,             
+          yoyo: true              
+        });
+
+        function startPeriodicAndInteractiveEffects() {
+          function playHatFlip() {
+            return gsap.timeline()
+              .to('.hat-img', { yPercent: -70, xPercent: 70, rotation: '+=30', scale: 1.3, duration: 0.55, ease: 'power2.out' })
+              .to('.hat-img', { yPercent: 0, xPercent: 0, rotation: '+=330', scale: 1, duration: 0.95, ease: 'power2.inOut' });
+          }
+
+          const loopTimeline = gsap.timeline({ repeat: -1, repeatDelay: 3.0 });
+          loopTimeline
+            .to('.main-logo-img', { rotation: '+=360', duration: 1.5, ease: 'power2.inOut' }, 0)
+            .add(playHatFlip(), 0);
+
+          const logoContainer = document.querySelector('.main-logo-container');
+          if (logoContainer) {
+            logoContainer.addEventListener('mouseenter', () => {
+              gsap.to('.main-logo-container', { scale: 1.05, duration: 0.3, ease: 'power2.out' });
+            });
+            logoContainer.addEventListener('mouseleave', () => {
+              gsap.to('.main-logo-container', { scale: 1, duration: 0.3, ease: 'power2.inOut' });
+            });
+          }
+        }
+
+        // --- ハンバーガーメニューの開閉処理 ---
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+
+        if (hamburger && mobileNav) {
+          hamburger.addEventListener('click', () => {
+            const isActive = hamburger.classList.contains('is-active');
+            if (isActive) {
+              // 閉じる時の処理
+              hamburger.classList.remove('is-active');
+              mobileNav.classList.remove('is-active');
+              hamburger.setAttribute('aria-expanded', 'false');
+              document.body.classList.remove('no-scroll'); // ▼ スクロールロック解除 ▼
+            } else {
+              // 開く時の処理
+              hamburger.classList.add('is-active');
+              mobileNav.classList.add('is-active');
+              hamburger.setAttribute('aria-expanded', 'true');
+              document.body.classList.add('no-scroll'); // ▼ スクロールロックを適用 ▼
+            }
+          });
+
+          mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+              // リンクをクリックしてメニューを閉じる時の処理
+              hamburger.classList.remove('is-active');
+              mobileNav.classList.remove('is-active');
+              hamburger.setAttribute('aria-expanded', 'false');
+              document.body.classList.remove('no-scroll'); // ▼ スクロールロック解除 ▼
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  body {
+    font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+	overflow-x: hidden;
+  }
+
+  /* PC表示時はスマホ用メニュー関連を隠す */
+  .hamburger, .mobile-nav {
+    display: none;
+  }
+
+  .hero {
+    position: relative;
+    width: 100%;
+  }
+
+  .hero-bg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .pc-bg { display: block; }
+  .sp-bg { display: none; }
+  .tb-bg { display: none; }
+
+  .top-logo { position: absolute; top: 3.5%; left: 50%; transform: translateX(-50%); width: 8%; max-width: 140px; }
+  .top-logo-img { width: 100%; height: auto; display: block; }
+
+  .main-logo-container {
+    position: absolute; top: 9%; left: 50%; transform: translateX(-50%); width: 27%; max-width: 520px;
+    pointer-events: auto; cursor: pointer; will-change: transform;
+  }
+  .main-logo-img { width: 100%; height: auto; display: block; transform-origin: center center; }
+
+  .hat-container { position: absolute; top: 10%; right: 6%; width: 45%; pointer-events: none; }
+  .hat-img { width: 100%; height: auto; display: block; transform-origin: center center; will-change: transform, opacity; }
+
+  .typo-container { position: absolute; top: 55%; left: 50%; transform: translateX(-50%); width: 35%; max-width: 560px; pointer-events: none; }
+  .typo-img { width: 100%; height: auto; display: block; will-change: transform, opacity; }
+
+  .hero-title-container { position: absolute; top: 5%; left: 4%; width: 15%; max-width: 450px; }
+  .hero-title-img { width: 90%; height: auto; display: block; }
+
+  .komafesLabel { position: absolute; top: 34%; left: 4%; width: 10%; max-width: 300px; }
+  .komafes-label-img { width: 100%; height: auto; display: block; }
+
+  .date-info { position: absolute; top: 41%; left: 4%; color: #f6f9f6; font-family: 'Noto Sans JP', sans-serif; font-weight: 700; line-height: 1.3; }
+  .date-row { display: flex; align-items: baseline; font-size: clamp(1.1rem, 2.2vw, 2.2rem); }
+  .date-row.separator { margin-left: 0.2em; margin-top: 0.35em; }
+  .dash { display: inline-block; transform: scaleX(1.8); transform-origin: left center; margin-right: 0.8em; font-weight: 300; }
+  .day { font-size: 0.75em; margin-left: 0.3em; opacity: 0.9; }
+  .time-row { margin-top: 0.6em; font-size: clamp(0.85rem, 1.6vw, 1.5rem); letter-spacing: 0.05em; }
+
+  .scroll-animation { position: absolute; top: 65%; left: 7%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 20%; gap: 8px; }
+  .scroll-text { font-family: 'Bebas Neue', cursive; color: #f6f9f6; font-size: clamp(0.7rem, 0.9vw, 1.1rem); letter-spacing: 0.1em; }
+  .scroll-line { width: 1px; height: 10%; background-color: #f6f9f6; will-change: height; }
+  .scroll-icon { width: clamp(14px, 1.5vw, 20px); height: auto; display: block; object-fit: contain; }
+
+  /* PC版ナビゲーション */
+  .right-nav { position: absolute; top: 18%; right: 3%; text-align: left; font-family: 'Bebas Neue', cursive; }
+  .right-nav ul { list-style: none; margin: 0; padding: 0; }
+  .right-nav li { margin-bottom: clamp(0.5rem, 2vw, 2.4rem); }
+  .right-nav a { color: #f6f9f6; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.44rem); letter-spacing: 0.12em; transition: opacity 0.2s ease, transform 0.2s ease; display: inline-block; transform-origin: left center; }
+  .right-nav a:hover { opacity: 0.8; transform: scale(1.08); }
+  .sns-links { margin-top: clamp(1.5rem, 1vw, 3.5rem); display: flex; gap: 1rem; align-items: flex-end; justify-content: center; position: relative; left: 27%; transform: translateX(-50%); width: max-content; }
+  .sns-links a { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 0.35rem; color: #ffffff; text-decoration: none; font-size: clamp(8px, 0.6vw, 0.8rem); opacity: 1; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .sns-links a:hover { opacity: 1; transform: translateY(-3px) scale(1.05); }
+  .sns-icon { width: clamp(14px, 1.6vw, 34px); height: clamp(14px, 1.6vw, 34px); display: block; object-fit: contain; }
+
+  footer { text-align: center; padding: 2rem 0; color: #000000; background-color: #f6f9f6; font-size: 0.8rem; height: 1000px; }
+
+  body.no-scroll {
+    overflow: hidden; /* メニュー展開時に背景のスクロールを防ぐ */
+  }
+
+
+/* =======================================================
+     タブレット版レスポンシブデザイン (画面幅 1024px 以下)
+     ======================================================= */
+  @media screen and (max-width: 1024px) {
+    /* メインロゴを中央付近に大きく配置 */
+    .main-logo-container { top: 13%; width: 35%; }
+    
+    /* タイポグラフィ(SAIL BEYOND)を画面下部に配置 */
+    .typo-container { top: 53%; width: 50%; }
+
+    /*Komafes69の上の画像を調整 */
+    .top-logo { top: 4%; width: 10%; }
+    
+    /* 左側のテキスト・情報群の縦位置を調整 */
+    .hero-title-container { top: 4%; width: 21%; left: 5%; }
+    .komafesLabel { top: 30%; width: 14%; left: 5%; }
+    .date-info { top: 37%; left: 5%; }
+    
+    /* SCROLLアニメーションを左下に配置 */
+    .scroll-animation { top: 63%; left: 8%; }
+
+    /* 右側ナビゲーションの微調整（タブレットサイズに合わせた余白） */
+    .right-nav { top: 22%; right: 4%; }
+    .right-nav li { margin-bottom: 2vw; }
+    .sns-links { margin-top: 3vw; left: 35%; }
+
+    /* 背景画像の切り替え */
+    .pc-bg { display: none; }
+    .tb-bg { display: block; width: 100%; height: auto; }
+    .sp-bg { display: none; }
+  }
+
+  /* =======================================================
+     スマホ版レスポンシブデザイン (画面幅 768px 以下)
+     ======================================================= */
+  @media screen and (max-width: 768px) {
+    /* 画像の切り替え */
+    .pc-bg { display: none; }
+    .sp-bg { 
+      display: block; 
+      width: 100%; 
+      height: auto; 
+    }
+    .tb-bg { display: none; }
+
+    /* PC用ナビゲーションを非表示にする */
+    .right-nav { 
+      display: none; 
+    }
+
+    /* 各要素の配置調整 */
+    .top-logo { opacity: 0; }
+    .main-logo-container { top: 37%; width: 62%; }
+    .typo-container { top: 70%; width: 75%; }
+    .hero-title-container { top: 4%; width: 45%; left: 6%; }
+    .komafesLabel { top:28%; width: 34%; left: 6%; }
+    
+    /* ▼ ここを変更・追加 ▼ */
+    .date-info { top: 21%; left: 52%; }
+    /* スマホの画面幅(vw)に連動して大きさが変わるようにする */
+    .date-row { font-size: clamp(0.8rem, 5vw, 1.6rem); }
+    .time-row { font-size: clamp(0.6rem, 4vw, 1.2rem); }
+
+    .scroll-animation { top: 90%; left: 45%; }
+    
+    /* ========================================
+       ハンバーガーボタン
+       ======================================== */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 32px;
+      height: 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      top: 3.5%; 
+      right: 6%;
+      z-index: 1000; 
+      padding: 0;
+    }
+
+    .hamburger-line {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #f6f9f6;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.is-active .hamburger-line:nth-child(1) {
+      transform: translateY(11px) rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.is-active .hamburger-line:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* ========================================
+       スマホ用オーバーレイメニュー
+       ======================================== */
+  .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh; /* 古いブラウザ用のフォールバック */
+      height: 100dvh; /* ▼ スマホのアドレスバー領域を考慮した最新の高さ指定 ▼ */
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+  }
+
+    .mobile-nav.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    .mobile-nav li {
+      margin: 1.5rem 0;
+    }
+
+    .mobile-nav a {
+      color: #f6f9f6;
+      text-decoration: none;
+      font-size: 1.8rem;
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 0.15em;
+    }
+
+.mobile-sns-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      
+      transform: translateX(-20px);
+    }
+
+    .mobile-sns-links a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .mobile-sns-links .sns-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+  }
+</style>
