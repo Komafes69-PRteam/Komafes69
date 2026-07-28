@@ -1,10 +1,10 @@
 ---
-import { Image } from 'astro:assets';
-import rawExhibitions from '../pages/data/exhibitions.json';
+import { Image } from "astro:assets";
+import rawExhibitions from "../pages/data/exhibitions.json";
 
-import instagramIcon from '../pages/assets/Instagram.svg';
-import youtubeIcon from '../pages/assets/youtube.svg';
-import xIcon from '../pages/assets/X.svg';
+import instagramIcon from "../pages/assets/Instagram.svg";
+import youtubeIcon from "../pages/assets/youtube.svg";
+import xIcon from "../pages/assets/X.svg";
 
 // --- TypeScript 型定義 ---
 export interface Exhibition {
@@ -20,17 +20,22 @@ export interface Exhibition {
 }
 
 // --- データクレンジング ---
-const exhibitions: Exhibition[] = (rawExhibitions as any[]).filter((item): item is Exhibition => {
-  return Boolean(item && item.name && item.name !== "nan" && typeof item.name === 'string');
-});
+const exhibitions: Exhibition[] = (rawExhibitions as any[]).filter(
+  (item): item is Exhibition => {
+    return Boolean(
+      item && item.name && item.name !== "nan" && typeof item.name === "string",
+    );
+  },
+);
 
 // カテゴリー（体験目的）の動的抽出
 const availableCategories = Array.from(
-  new Set(exhibitions.flatMap(item => item.categories || []))
+  new Set(exhibitions.flatMap((item) => item.categories || [])),
 ).filter(Boolean);
 
 const pageTitle = "参加団体一覧 | Komafes69";
-const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参加団体・展示一覧ページです。";
+const pageDescription =
+  "駒場東邦 第69代 文化祭「SAIL BEYOND」の参加団体・展示一覧ページです。";
 ---
 
 <html lang="ja">
@@ -41,12 +46,14 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-
     <!-- スマホ用ハンバーガーボタン -->
     <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
       <span class="hamburger-line"></span>
@@ -66,15 +73,27 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
         <li><a href="/#archives">ARCHIVES</a></li>
       </ul>
       <div class="mobile-sns-links">
-        <a href="https://www.instagram.com/komafes68/" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.instagram.com/komafes68/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src={instagramIcon} alt="" class="sns-icon" />
           <span>Instagram</span>
         </a>
-        <a href="https://www.youtube.com/@komafes68" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.youtube.com/@komafes68"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src={youtubeIcon} alt="" class="sns-icon" />
           <span>YouTube</span>
         </a>
-        <a href="https://x.com/Komafes68" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://x.com/Komafes68"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src={xIcon} alt="" class="sns-icon" />
           <span>X</span>
         </a>
@@ -99,31 +118,52 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     <!-- メインコンテンツ -->
     <main class="exhibition-container">
       <header class="page-header">
-        <h1 class="page-title">EXHIBITIONS</h1>
-        <p class="page-subtitle">参加団体・展示一覧</p>
+        <div class="page-header-inner">
+          <h1 class="page-title">EXHIBITIONS</h1>
+          <p class="page-subtitle">参加団体紹介</p>
+        </div>
       </header>
 
       <!-- 検索＆フィルターエリア -->
       <section class="filter-section">
-        
         <!-- 検索バー & カテゴリー選択 -->
         <div class="search-controls">
           <div class="search-box">
-            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              class="search-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="search-input" placeholder="団体名、キーワード、部屋名から検索..." />
-            <button id="clear-btn" class="clear-btn" aria-label="クリア" style="display: none;">×</button>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="団体名、キーワード、部屋名から検索..."
+            />
+            <button
+              id="clear-btn"
+              class="clear-btn"
+              aria-label="クリア"
+              style="display: none;">×</button
+            >
           </div>
 
           <!-- 体験目的カテゴリー選択 -->
           <div class="category-select-wrapper">
             <select id="category-select" class="category-select">
               <option value="ALL">すべてのカテゴリー（体験目的）</option>
-              {availableCategories.map(cat => (
-                <option value={cat}>{cat}</option>
-              ))}
+              {
+                availableCategories.map((cat) => (
+                  <option value={cat}>{cat}</option>
+                ))
+              }
             </select>
           </div>
         </div>
@@ -136,7 +176,9 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
           <button class="chip" data-floor="3">3階</button>
           <button class="chip" data-floor="4">4階</button>
           <button class="chip" data-floor="5">5階</button>
-          <button class="chip" data-floor="OTHER">その他（講堂・体育館等）</button>
+          <button class="chip" data-floor="OTHER"
+            >その他（講堂・体育館等）</button
+          >
         </div>
 
         <!-- 件数表示 -->
@@ -160,26 +202,69 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
       <p>&copy; 2026 Komafes69</p>
     </footer>
 
-    <!-- クライアントサイド スクリプト -->
+    <!-- 1. サーバー側のデータをクライアント(window)に渡すためだけのスクリプト -->
+   <!-- 1. サーバー側のデータをクライアント(window)に渡すためだけのスクリプト -->
     <script is:inline define:vars={{ exhibitions }}>
-      document.addEventListener('DOMContentLoaded', () => {
-        const grid = document.getElementById('exhibition-grid');
-        const searchInput = document.getElementById('search-input');
-        const clearBtn = document.getElementById('clear-btn');
-        const categorySelect = document.getElementById('category-select');
-        const chips = document.querySelectorAll('.chip');
-        const countNum = document.getElementById('count-num');
-        const noResults = document.getElementById('no-results');
+      window.exhibitionsData = exhibitions;
+    </script>
 
-        let currentFloor = 'ALL';
-        let currentCategory = 'ALL';
-        let currentKeyword = '';
+    <!-- 2. メイン処理 -->
+    <script>
+      import { gsap } from "gsap";
 
-        // ダミープレースホルダーSVG（画像がない・エラー時の美しいフォールバック）
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- GSAP アニメーション実行 ---
+        gsap.fromTo(
+          ".page-title",
+          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+          {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 2.5,
+            ease: "power2.out",
+            delay: 0.3,
+          }
+        );
+
+        gsap.fromTo(
+          ".page-subtitle",
+          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+          {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 2.5,
+            ease: "power2.out",
+            delay: 0.45,
+          }
+        );
+
+        // --- フィルター＆カード生成処理 ---
+        // エラー回避のため「as HTMLElement」等をつけて確実に要素が存在することをTSに伝えます
+        const grid = document.getElementById("exhibition-grid") as HTMLElement;
+        const searchInput = document.getElementById("search-input") as HTMLInputElement;
+        const clearBtn = document.getElementById("clear-btn") as HTMLButtonElement;
+        const categorySelect = document.getElementById("category-select") as HTMLSelectElement;
+        const chips = document.querySelectorAll(".chip");
+        const countNum = document.getElementById("count-num") as HTMLElement;
+        const noResults = document.getElementById("no-results") as HTMLElement;
+
+        const stickyHeader = document.querySelector(".sticky-header");
+        if (stickyHeader) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+              stickyHeader.classList.add("is-scrolled");
+            } else {
+              stickyHeader.classList.remove("is-scrolled");
+            }
+          });
+        }
+
+        let currentFloor = "ALL";
+        let currentCategory = "ALL";
+        let currentKeyword = "";
+
         const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a0aec0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`;
 
-        // Fisher-Yates シャッフル
-        const shuffleArray = (array) => {
+        // 引数 array に any[] 型を指定
+        const shuffleArray = (array: any[]) => {
           const shuffled = [...array];
           for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -188,96 +273,114 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
           return shuffled;
         };
 
-        const items = shuffleArray(exhibitions);
+        // windowに独自のプロパティを追加したことを(window as any)でエラー回避
+        const items = shuffleArray((window as any).exhibitionsData || []);
 
-        // カード描画関数
-        // カード描画処理
-        const renderCards = (data) => {
-          grid.innerHTML = '';
+        // 引数 data に any[] 型を指定
+        const renderCards = (data: any[]) => {
+          grid.innerHTML = "";
           countNum.textContent = data.length.toString();
 
           if (data.length === 0) {
-            noResults.style.display = 'block';
+            noResults.style.display = "block";
             return;
           } else {
-            noResults.style.display = 'none';
+            noResults.style.display = "none";
           }
 
-          data.forEach(item => {
-            const card = document.createElement('a');
+          // item と index に型を指定
+          data.forEach((item: any, index: number) => {
+            const card = document.createElement("a");
             card.href = `/exhibition/${item.slug}`;
-            card.className = 'exhibition-card';
+            card.className = "exhibition-card";
 
-            const roomText = (item.room && item.room !== 'NaN') ? item.room : '';
-            const rawFloor = item.floor ? String(item.floor) : '';
-            const floorText = (rawFloor && rawFloor !== 'NaN') 
-              ? (['1','2','3','4','5'].includes(rawFloor) ? `${rawFloor}階` : rawFloor)
-              : '';
-            
-            const locationText = [floorText, roomText].filter(Boolean).join(' / ');
+            const delay = Math.min(index * 0.04, 0.5);
+            card.style.animationDelay = `${delay}s`;
+
+            const roomText = item.room && item.room !== "NaN" ? item.room : "";
+            const rawFloor = item.floor ? String(item.floor) : "";
+            const floorText =
+              rawFloor && rawFloor !== "NaN"
+                ? ["1", "2", "3", "4", "5"].includes(rawFloor)
+                  ? `${rawFloor}階`
+                  : rawFloor
+                : "";
+
+            const locationText = [floorText, roomText]
+              .filter(Boolean)
+              .join(" / ");
 
             const categoryBadges = (item.categories || [])
-              .map(c => `<span class="cat-badge">${c}</span>`)
-              .join('');
+              .map((c: string) => `<span class="cat-badge">${c}</span>`)
+              .join("");
 
-            const hasValidImage = Boolean(item.image && item.image.startsWith('/'));
+            const hasValidImage = Boolean(
+              item.image && item.image.startsWith("/"),
+            );
 
-            let rawDesc = item.description || '';
+            let rawDesc = item.description || "";
             if (rawDesc.length > 120) {
-              rawDesc = rawDesc.substring(0, 120) + '...';
+              rawDesc = rawDesc.substring(0, 120) + "...";
             }
-            const formattedDesc = rawDesc.replace(/\n/g, '<br>');
+            const formattedDesc = rawDesc.replace(/\n/g, "<br>");
 
             card.innerHTML = `
               <div class="card-image-wrapper">
                 <img 
                   src="${hasValidImage ? item.image : fallbackSvg}" 
                   alt="${item.name}" 
-                  class="${hasValidImage ? 'card-img' : 'card-img fallback'}"
+                  class="${hasValidImage ? "card-img" : "card-img fallback"}"
                 />
-                <!-- クラス名を location-chip に統一 -->
-                ${locationText ? `<span class="location-chip">${locationText}</span>` : ''}
+                ${locationText ? `<span class="location-chip">${locationText}</span>` : ""}
               </div>
               <div class="card-body">
                 <h2 class="card-title">${item.name}</h2>
-                ${categoryBadges ? `<div class="card-categories">${categoryBadges}</div>` : ''}
+                ${categoryBadges ? `<div class="card-categories">${categoryBadges}</div>` : ""}
                 <p class="card-description">${formattedDesc}</p>
               </div>
             `;
 
-            const imgEl = card.querySelector('.card-img');
+            const imgEl = card.querySelector(".card-img") as HTMLImageElement;
             if (imgEl && hasValidImage) {
-              imgEl.addEventListener('error', () => {
-                imgEl.src = fallbackSvg;
-                imgEl.classList.add('fallback');
-              }, { once: true });
+              imgEl.addEventListener(
+                "error",
+                () => {
+                  imgEl.src = fallbackSvg;
+                  imgEl.classList.add("fallback");
+                },
+                { once: true },
+              );
             }
 
             grid.appendChild(card);
           });
         };
-        // フィルター処理
+
         const filterData = () => {
           const keyword = currentKeyword.toLowerCase().trim();
 
-          const filtered = items.filter(item => {
-            const itemFloor = item.floor ? String(item.floor) : '';
+          const filtered = items.filter((item: any) => {
+            const itemFloor = item.floor ? String(item.floor) : "";
             let matchesFloor = false;
 
-            if (currentFloor === 'ALL') {
+            if (currentFloor === "ALL") {
               matchesFloor = true;
-            } else if (currentFloor === 'OTHER') {
-              matchesFloor = !['1', '2', '3', '4', '5'].includes(itemFloor);
+            } else if (currentFloor === "OTHER") {
+              matchesFloor = !["1", "2", "3", "4", "5"].includes(itemFloor);
             } else {
-              matchesFloor = (itemFloor === currentFloor);
+              matchesFloor = itemFloor === currentFloor;
             }
 
             const itemCategories = item.categories || [];
-            const matchesCategory = (currentCategory === 'ALL') || itemCategories.includes(currentCategory);
+            const matchesCategory =
+              currentCategory === "ALL" ||
+              itemCategories.includes(currentCategory);
 
-            const matchesKeyword = !keyword || 
+            const matchesKeyword =
+              !keyword ||
               (item.name && item.name.toLowerCase().includes(keyword)) ||
-              (item.description && item.description.toLowerCase().includes(keyword)) ||
+              (item.description &&
+                item.description.toLowerCase().includes(keyword)) ||
               (item.room && item.room.toLowerCase().includes(keyword));
 
             return matchesFloor && matchesCategory && matchesKeyword;
@@ -286,43 +389,41 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
           renderCards(filtered);
         };
 
-        // イベント設定
-        searchInput.addEventListener('input', (e) => {
-          currentKeyword = e.target.value;
-          clearBtn.style.display = currentKeyword ? 'block' : 'none';
+        searchInput.addEventListener("input", (e) => {
+          currentKeyword = (e.target as HTMLInputElement).value;
+          clearBtn.style.display = currentKeyword ? "block" : "none";
           filterData();
         });
 
-        clearBtn.addEventListener('click', () => {
-          searchInput.value = '';
-          currentKeyword = '';
-          clearBtn.style.display = 'none';
+        clearBtn.addEventListener("click", () => {
+          searchInput.value = "";
+          currentKeyword = "";
+          clearBtn.style.display = "none";
           filterData();
         });
 
-        categorySelect.addEventListener('change', (e) => {
-          currentCategory = e.target.value;
+        categorySelect.addEventListener("change", (e) => {
+          currentCategory = (e.target as HTMLSelectElement).value;
           filterData();
         });
 
-        chips.forEach(chip => {
-          chip.addEventListener('click', () => {
-            chips.forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            currentFloor = chip.getAttribute('data-floor') || 'ALL';
+        chips.forEach((chip) => {
+          chip.addEventListener("click", () => {
+            chips.forEach((c) => c.classList.remove("active"));
+            chip.classList.add("active");
+            currentFloor = chip.getAttribute("data-floor") || "ALL";
             filterData();
           });
         });
 
-        // スマホメニュー
-        const hamburger = document.querySelector('.hamburger');
-        const mobileNav = document.querySelector('.mobile-nav');
+        const hamburger = document.querySelector(".hamburger");
+        const mobileNav = document.querySelector(".mobile-nav");
 
         if (hamburger && mobileNav) {
-          hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('is-active');
-            mobileNav.classList.toggle('is-active');
-            document.body.classList.toggle('no-scroll');
+          hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("is-active");
+            mobileNav.classList.toggle("is-active");
+            document.body.classList.toggle("no-scroll");
           });
         }
 
@@ -337,14 +438,20 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
      全体基本スタイル
      ======================================== */
   body {
-    font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+    font-family:
+      "Noto Sans JP",
+      system-ui,
+      -apple-system,
+      sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f6f8; /* ほんのり明るいグレーでカードを引き立たせる */
     color: #1a202c;
   }
 
-  body.no-scroll { overflow: hidden; }
+  body.no-scroll {
+    overflow: hidden;
+  }
 
   /* ========================================
      ヘッダー & ナビゲーション
@@ -355,11 +462,21 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     left: 0;
     width: 100%;
     z-index: 900;
+    /* 初期状態（トップ）は背景なし、境界線なし */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 1px solid transparent;
+    padding: 1rem 0;
+    transition: all 0.3s ease; /* スクロール時の変化をふんわりさせる */
+  }
+
+  /* スクロールしてバナーを過ぎた時のスタイル（JSで付与） */
+  .sticky-header.is-scrolled {
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 1rem 0;
   }
 
   .sticky-header-inner {
@@ -380,16 +497,26 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
   }
 
   .sticky-header-inner a {
-    color: #111111;
+    /* 初期状態（トップ）は白文字 */
+    color: #ffffff;
     text-decoration: none;
-    font-family: 'Bebas Neue', cursive;
+    font-family: "Bebas Neue", cursive;
     font-size: clamp(0.95rem, 1.2vw, 1.15rem);
     letter-spacing: 0.12em;
-    transition: opacity 0.2s ease;
+    transition:
+      color 0.3s ease,
+      opacity 0.2s ease;
+  }
+
+  /* スクロール時は黒文字に戻す */
+  .sticky-header.is-scrolled .sticky-header-inner a {
+    color: #111111;
   }
 
   .sticky-header-inner a.active,
-  .sticky-header-inner a:hover { opacity: 0.5; }
+  .sticky-header-inner a:hover {
+    opacity: 0.5;
+  }
 
   /* モバイルナビゲーション（普段は非表示） */
   .mobile-nav {
@@ -406,12 +533,18 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     align-items: center;
   }
 
-  .mobile-nav.is-active { display: flex; }
+  .mobile-nav.is-active {
+    display: flex;
+  }
 
-  .hamburger { display: none; }
+  .hamburger {
+    display: none;
+  }
 
   @media screen and (max-width: 768px) {
-    .sticky-header { display: none !important; }
+    .sticky-header {
+      display: none !important;
+    }
 
     .hamburger {
       display: flex;
@@ -435,52 +568,73 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
       height: 2px;
       background-color: #111111;
       border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s;
+      transition:
+        transform 0.3s,
+        opacity 0.3s;
     }
 
-    .hamburger.is-active .hamburger-line { background-color: #ffffff; }
-    .hamburger.is-active .hamburger-line:nth-child(1) { transform: translateY(10px) rotate(45deg); }
-    .hamburger.is-active .hamburger-line:nth-child(2) { opacity: 0; }
-    .hamburger.is-active .hamburger-line:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+    .hamburger.is-active .hamburger-line {
+      background-color: #ffffff;
+    }
+    .hamburger.is-active .hamburger-line:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.is-active .hamburger-line:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
 
-    .mobile-nav ul { list-style: none; padding: 0; margin: 0; text-align: center; }
-    .mobile-nav li { margin: 1.5rem 0; }
-    .mobile-nav a { color: #ffffff; text-decoration: none; font-size: 1.8rem; font-family: 'Bebas Neue', cursive; }
-    .mobile-sns-links { display: flex; gap: 2rem; margin-top: 2rem; }
-    .mobile-sns-links a { color: #fff; text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 0.8rem; }
-    .sns-icon { width: 24px; height: 24px; }
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+    .mobile-nav li {
+      margin: 1.5rem 0;
+    }
+    .mobile-nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.8rem;
+      font-family: "Bebas Neue", cursive;
+    }
+    .mobile-sns-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .mobile-sns-links a {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    .sns-icon {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   /* ========================================
      メインレイアウト
      ======================================== */
-  .exhibition-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 100px 1.5rem 60px;
-  }
 
   .page-header {
     text-align: center;
     margin-bottom: 2rem;
   }
 
-  .page-title {
-    font-family: 'Bebas Neue', cursive;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    letter-spacing: 0.1em;
-    margin: 0;
-    color: #111;
-  }
-
-  .page-subtitle {
-    margin-top: 0.2rem;
-    color: #666;
-    font-weight: 500;
-  }
-
   .filter-section {
+    position: relative;
+    z-index: 10; /* バナーの装飾(::after)より前に出す */
+    margin-top: -1.5rem; /* ネガティブマージンで境界線上に重ねる */
     margin-bottom: 2.5rem;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -495,7 +649,9 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
   }
 
   @media screen and (max-width: 640px) {
-    .search-controls { flex-direction: column; }
+    .search-controls {
+      flex-direction: column;
+    }
   }
 
   .search-box {
@@ -526,7 +682,9 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     transition: border-color 0.2s;
   }
 
-  .search-box input:focus { border-color: #111; }
+  .search-box input:focus {
+    border-color: #111;
+  }
 
   .clear-btn {
     position: absolute;
@@ -540,7 +698,9 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     cursor: pointer;
   }
 
-  .category-select-wrapper { min-width: 200px; }
+  .category-select-wrapper {
+    min-width: 200px;
+  }
 
   .category-select {
     width: 100%;
@@ -554,6 +714,18 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     outline: none;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+
+  /* フェードイン ＋ 上に浮き上がるアニメーション */
+  @keyframes cardFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* フロアチップ UI */
@@ -577,7 +749,10 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     transition: all 0.2s ease;
   }
 
-  .chip:hover { border-color: #111; color: #111; }
+  .chip:hover {
+    border-color: #111;
+    color: #111;
+  }
 
   .chip.active {
     background-color: #111111;
@@ -600,27 +775,39 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
   }
 
   @media screen and (max-width: 960px) {
-    .exhibition-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .exhibition-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
   }
 
   @media screen and (max-width: 580px) {
-    .exhibition-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+    .exhibition-grid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
   }
 
   /* カード本体 */
-/* カード本体 */
+
+  /* カード本体 */
   .exhibition-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
-    text-decoration: none !important; /* 青い下線を強制削除 */
-    color: inherit !important;           /* 文字色（黒）を保持 */
+    text-decoration: none !important;
+    color: inherit !important;
     cursor: pointer;
+
+    opacity: 0;
+    animation: cardFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   /* 場所チップ（画像左下に重ねる設定） */
@@ -628,15 +815,15 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     position: absolute;
     bottom: 12px;
     left: 12px;
-    background: rgba(17, 24, 39, 0.85);
-    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.85);
+    color: #060906 !important;
     font-size: 0.75rem;
     font-weight: 500;
     padding: 0.35rem 0.75rem;
     border-radius: 20px;
     backdrop-filter: blur(6px);
     letter-spacing: 0.02em;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     z-index: 2;
   }
 
@@ -689,7 +876,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     border-radius: 6px;
     backdrop-filter: blur(6px);
     letter-spacing: 0.02em;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   }
 
   /* カード本文領域 */
@@ -739,6 +926,106 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の参�
     text-align: center;
     padding: 4rem 0;
     color: #a0aec0;
+  }
+
+  /* ========================================
+   メインレイアウト
+   ======================================== */
+  .exhibition-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* 上の余白(100px)を0にしてバナーを上端まで引っ張り上げます */
+    padding: 0 1.5rem 60px;
+  }
+
+  /* ========================================
+   画面幅100% 横長ヘッダーバナー
+   ======================================== */
+  .page-header {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    /* 👇 下のマージンを0にし、下パディングを少し増やして文字のゆとりを確保 */
+    margin-bottom: 0;
+    padding: 5.5rem 0 4.5rem 0;
+
+    background-image: url("./assets/TitleBackground.webp");
+    background-size: cover;
+    background-position: center;
+
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 文字位置を画面中央のレイアウト幅に収める */
+  .page-header-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem; /* 左右の余白 */
+    text-align: left;
+  }
+
+  .page-title {
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(2rem, 18vw, 8rem);
+    letter-spacing: 0.04em;
+    margin-top: 10px;
+    color: #ffffff;
+    line-height: 0.85;
+    font-weight: 900;
+
+    /* 追加: 初期状態は右側100%マスク */
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .page-subtitle {
+    margin-top: -50px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    font-size: clamp(1.25rem, 3vw, 30px);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+
+    /* 追加: 初期状態は右側100%マスク */
+    clip-path: inset(0 100% 0 0);
+  }
+
+  /* 右側の太い斜めライン（アクセント） */
+  .page-header::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    bottom: -50%;
+    right: 14%;
+    width: 65px; /* ラインの太さ */
+    background-color: #ffffff;
+    transform: skewX(-20deg); /* 傾斜 */
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* スマホ対応 */
+  @media screen and (max-width: 768px) {
+    .page-header {
+      /* スマホ時はPC用固定ヘッダーが消えるため上の余白を調整 */
+      padding: 3.5rem 0 2.2rem 0;
+    }
+
+    .page-header-inner {
+      padding: 0 1.2rem;
+    }
+
+    .page-header::after {
+      right: 8%;
+      width: 32px; /* スマホ用にラインを細く調整 */
+    }
   }
 
   footer {

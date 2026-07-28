@@ -83,7 +83,7 @@ const pageTitle = `${exhibition.name} | Komafes69`;
           <!-- カテゴリーバッジ -->
           {exhibition.categories && exhibition.categories.length > 0 && (
             <div class="category-list">
-              {exhibition.categories.map((cat) => (
+              {exhibition.categories.map((cat :string) => (
                 <span class="cat-badge">{cat}</span>
               ))}
             </div>
