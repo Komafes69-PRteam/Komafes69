@@ -48,14 +48,15 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     />
   </head>
   <body>
-    <!-- ハンバーガーボタン (スマホ専用) -->
+    <!-- ========================================
+         スマホ用ハンバーガーボタン & メニュー
+         ======================================== -->
     <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
     </button>
 
-    <!-- スマホ用オーバーレイメニュー -->
     <nav id="mobile-menu" class="mobile-nav">
       <ul>
         <li><a href="#top">TOP</a></li>
@@ -82,6 +83,26 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       </div>
     </nav>
 
+    <!-- ========================================
+         PC・タブレット用 追従固定ヘッダー (Hero通過後出現)
+         ======================================== -->
+    <header class="sticky-header">
+      <nav class="sticky-header-inner">
+        <ul>
+          <li><a href="#top">TOP</a></li>
+          <li><a href="#theme">THEME</a></li>
+          <li><a href="/exhibition">EXHIBITION</a></li>
+          <li><a href="#articles">ARTICLES</a></li>
+          <li><a href="#timetable">TIME TABLE</a></li>
+          <li><a href="#map">MAP</a></li>
+          <li><a href="#archives">ARCHIVES</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ========================================
+         Hero セクション
+         ======================================== -->
     <section class="hero">
       <Image 
         src={heroImage} 
@@ -161,7 +182,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
         <Image src={scrollIcon} alt="Scroll Animation" format="webp" quality={100} class="scroll-icon" />
       </div>
 
-      <!-- 右側ナビゲーションメニュー (PC用) -->
+      <!-- 右側ナビゲーションメニュー (PC Hero内用) -->
       <nav class="right-nav">
         <ul>
           <li><a href="#top">TOP</a></li>
@@ -194,11 +215,14 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       <p>&copy; 2026 Komafes69</p>
     </footer>
 
+    <!-- ========================================
+         JavaScript 統合処理
+         ======================================== -->
     <script>
       import { gsap } from 'gsap';
 
-      window.addEventListener('load', () => {
-        // --- 既存のGSAPアニメーション ---
+      const initApp = () => {
+        // --- 1. GSAP アニメーション ---
         gsap.fromTo('.top-logo-img', { clipPath: 'inset(0 0 100% 0)', opacity: 1 }, { clipPath: 'inset(0 0 0% 0)', duration: 0.8, ease: 'power2.out', delay: 0.1 });
         gsap.fromTo('.main-logo-img', { scale: 0.85, rotation: -140, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: 'back.out(1.2)', delay: 0.4 });
         gsap.fromTo('.hat-img', { xPercent: 120, yPercent: -90, rotation: 35, scale: 1.15, opacity: 0 }, { xPercent: 0, yPercent: 0, rotation: 0, scale: 1, opacity: 1, duration: 1.1, ease: 'power3.out', delay: 0.9, onComplete: startPeriodicAndInteractiveEffects });
@@ -240,7 +264,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
           }
         }
 
-        // --- ハンバーガーメニューの開閉処理 ---
+        // --- 2. スマホ用ハンバーガーメニュー制御 ---
         const hamburger = document.querySelector('.hamburger');
         const mobileNav = document.querySelector('.mobile-nav');
         const mobileLinks = document.querySelectorAll('.mobile-nav a');
@@ -249,31 +273,60 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
           hamburger.addEventListener('click', () => {
             const isActive = hamburger.classList.contains('is-active');
             if (isActive) {
-              // 閉じる時の処理
               hamburger.classList.remove('is-active');
               mobileNav.classList.remove('is-active');
               hamburger.setAttribute('aria-expanded', 'false');
-              document.body.classList.remove('no-scroll'); // ▼ スクロールロック解除 ▼
+              document.body.classList.remove('no-scroll');
             } else {
-              // 開く時の処理
               hamburger.classList.add('is-active');
               mobileNav.classList.add('is-active');
               hamburger.setAttribute('aria-expanded', 'true');
-              document.body.classList.add('no-scroll'); // ▼ スクロールロックを適用 ▼
+              document.body.classList.add('no-scroll');
             }
           });
 
           mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-              // リンクをクリックしてメニューを閉じる時の処理
               hamburger.classList.remove('is-active');
               mobileNav.classList.remove('is-active');
               hamburger.setAttribute('aria-expanded', 'false');
-              document.body.classList.remove('no-scroll'); // ▼ スクロールロック解除 ▼
+              document.body.classList.remove('no-scroll');
             });
           });
         }
-      });
+
+        // --- 3. スクロール連動処理（ヘッダーふわっと表示 & ハンバーガー色切り替え） ---
+        const stickyHeader = document.querySelector('.sticky-header');
+        const heroSection = document.querySelector('.hero');
+
+        const handleScroll = () => {
+          if (!heroSection) return;
+          const heroBottom = heroSection.getBoundingClientRect().bottom;
+
+          // Hero画像を完全に超えたら（heroBottom <= 80px 程度になったら）
+          if (heroBottom <= 80) {
+            // PC用ヘッダーを表示
+            if (stickyHeader) stickyHeader.classList.add('is-show');
+            // スマホハンバーガーを黒線に変更
+            if (hamburger) hamburger.classList.add('is-black');
+          } else {
+            // PC用ヘッダーを非表示
+            if (stickyHeader) stickyHeader.classList.remove('is-show');
+            // スマホハンバーガーを白線に変更
+            if (hamburger) hamburger.classList.remove('is-black');
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // 初期チェック
+      };
+
+      // 確実に初期化処理を実行
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+      } else {
+        initApp();
+      }
     </script>
   </body>
 </html>
@@ -284,14 +337,210 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     margin: 0;
     padding: 0;
     background-color: #000;
-	overflow-x: hidden;
+    overflow-x: hidden;
   }
 
-  /* PC表示時はスマホ用メニュー関連を隠す */
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  /* ========================================
+     PC・タブレット用 追従固定ヘッダー
+     (グラスモーフィズムデザイン)
+     ======================================== */
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 900;
+
+    /* 控えめなグラスモーフィズム（写真イメージを反映） */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+
+    padding: 1.1rem 0;
+
+    /* 初期状態：画面上に隠して透明にしておく */
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  /* Heroを超えた時に付与される表示用クラス */
+  .sticky-header.is-show {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sticky-header-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end; /* 写真と同じく右寄りに配置 */
+    padding-right: 5%;
+  }
+
+  .sticky-header-inner ul {
+    display: flex;
+    gap: clamp(1.2rem, 2.5vw, 2.5rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sticky-header-inner a {
+    color: #111111;
+    text-decoration: none;
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+    letter-spacing: 0.12em;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .sticky-header-inner a:hover {
+    opacity: 0.6;
+    transform: translateY(-1px);
+  }
+
+  /* ========================================
+     スマホ用 ハンバーガー & モバイルナビ
+     ======================================== */
   .hamburger, .mobile-nav {
     display: none;
   }
 
+  @media screen and (max-width: 768px) {
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 32px;
+      height: 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: fixed; 
+      top: 3.5%; 
+      right: 6%;
+      z-index: 1000; 
+      padding: 0;
+    }
+
+    .hamburger-line {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #ffffff; /* 初期色: 白 */
+      border-radius: 2px;
+      transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+      filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Hero通過後（白背景領域）で完全な「黒」にする */
+    .hamburger.is-black .hamburger-line {
+      background-color: #000000;
+      filter: none;
+    }
+
+    /* メニューが開いている間は常に「白」 */
+    .hamburger.is-active .hamburger-line {
+      background-color: #ffffff !important;
+      filter: none;
+    }
+
+    .hamburger.is-active .hamburger-line:nth-child(1) {
+      transform: translateY(11px) rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.is-active .hamburger-line:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* オーバーレイナビゲーション */
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      background-color: rgba(0, 0, 0, 0.92);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-nav.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    .mobile-nav li {
+      margin: 1.5rem 0;
+    }
+
+    .mobile-nav a {
+      color: #f6f9f6;
+      text-decoration: none;
+      font-size: 1.8rem;
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 0.15em;
+    }
+
+    .mobile-sns-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      transform: translateX(-20px);
+    }
+
+    .mobile-sns-links a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .mobile-sns-links .sns-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    /* スマホ表示時はPC用固定ヘッダーを隠す */
+    .sticky-header {
+      display: none !important;
+    }
+  }
+
+  /* ========================================
+     Hero & 各パーツレイアウト
+     ======================================== */
   .hero {
     position: relative;
     width: 100%;
@@ -340,7 +589,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
   .scroll-line { width: 1px; height: 10%; background-color: #f6f9f6; will-change: height; }
   .scroll-icon { width: clamp(14px, 1.5vw, 20px); height: auto; display: block; object-fit: contain; }
 
-  /* PC版ナビゲーション */
+  /* PC版ナビゲーション (Hero画像右側) */
   .right-nav { position: absolute; top: 18%; right: 3%; text-align: left; font-family: 'Bebas Neue', cursive; }
   .right-nav ul { list-style: none; margin: 0; padding: 0; }
   .right-nav li { margin-bottom: clamp(0.5rem, 2vw, 2.4rem); }
@@ -353,182 +602,41 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
 
   footer { text-align: center; padding: 2rem 0; color: #000000; background-color: #f6f9f6; font-size: 0.8rem; height: 1000px; }
 
-  body.no-scroll {
-    overflow: hidden; /* メニュー展開時に背景のスクロールを防ぐ */
-  }
-
-
-/* =======================================================
-     タブレット版レスポンシブデザイン (画面幅 1024px 以下)
-     ======================================================= */
+  /* タブレットレスポンシブ (1024px 以下) */
   @media screen and (max-width: 1024px) {
-    /* メインロゴを中央付近に大きく配置 */
     .main-logo-container { top: 13%; width: 35%; }
-    
-    /* タイポグラフィ(SAIL BEYOND)を画面下部に配置 */
     .typo-container { top: 53%; width: 50%; }
-
-    /*Komafes69の上の画像を調整 */
     .top-logo { top: 4%; width: 10%; }
-    
-    /* 左側のテキスト・情報群の縦位置を調整 */
     .hero-title-container { top: 4%; width: 21%; left: 5%; }
     .komafesLabel { top: 30%; width: 14%; left: 5%; }
     .date-info { top: 37%; left: 5%; }
-    
-    /* SCROLLアニメーションを左下に配置 */
     .scroll-animation { top: 63%; left: 8%; }
-
-    /* 右側ナビゲーションの微調整（タブレットサイズに合わせた余白） */
     .right-nav { top: 22%; right: 4%; }
     .right-nav li { margin-bottom: 2vw; }
     .sns-links { margin-top: 3vw; left: 35%; }
 
-    /* 背景画像の切り替え */
     .pc-bg { display: none; }
     .tb-bg { display: block; width: 100%; height: auto; }
     .sp-bg { display: none; }
   }
 
-  /* =======================================================
-     スマホ版レスポンシブデザイン (画面幅 768px 以下)
-     ======================================================= */
+  /* スマホレスポンシブ (768px 以下) */
   @media screen and (max-width: 768px) {
-    /* 画像の切り替え */
     .pc-bg { display: none; }
-    .sp-bg { 
-      display: block; 
-      width: 100%; 
-      height: auto; 
-    }
+    .sp-bg { display: block; width: 100%; height: auto; }
     .tb-bg { display: none; }
 
-    /* PC用ナビゲーションを非表示にする */
-    .right-nav { 
-      display: none; 
-    }
-
-    /* 各要素の配置調整 */
+    .right-nav { display: none; }
     .top-logo { opacity: 0; }
     .main-logo-container { top: 37%; width: 62%; }
     .typo-container { top: 70%; width: 75%; }
     .hero-title-container { top: 4%; width: 45%; left: 6%; }
-    .komafesLabel { top:28%; width: 34%; left: 6%; }
+    .komafesLabel { top: 28%; width: 34%; left: 6%; }
     
-    /* ▼ ここを変更・追加 ▼ */
     .date-info { top: 21%; left: 52%; }
-    /* スマホの画面幅(vw)に連動して大きさが変わるようにする */
     .date-row { font-size: clamp(0.8rem, 5vw, 1.6rem); }
     .time-row { font-size: clamp(0.6rem, 4vw, 1.2rem); }
 
     .scroll-animation { top: 90%; left: 45%; }
-    
-    /* ========================================
-       ハンバーガーボタン
-       ======================================== */
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 32px;
-      height: 24px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      position: absolute;
-      top: 3.5%; 
-      right: 6%;
-      z-index: 1000; 
-      padding: 0;
-    }
-
-    .hamburger-line {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: #f6f9f6;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .hamburger.is-active .hamburger-line:nth-child(1) {
-      transform: translateY(11px) rotate(45deg);
-    }
-    .hamburger.is-active .hamburger-line:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.is-active .hamburger-line:nth-child(3) {
-      transform: translateY(-11px) rotate(-45deg);
-    }
-
-    /* ========================================
-       スマホ用オーバーレイメニュー
-       ======================================== */
-  .mobile-nav {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh; /* 古いブラウザ用のフォールバック */
-      height: 100dvh; /* ▼ スマホのアドレスバー領域を考慮した最新の高さ指定 ▼ */
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-  }
-
-    .mobile-nav.is-active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .mobile-nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      text-align: center;
-    }
-
-    .mobile-nav li {
-      margin: 1.5rem 0;
-    }
-
-    .mobile-nav a {
-      color: #f6f9f6;
-      text-decoration: none;
-      font-size: 1.8rem;
-      font-family: 'Bebas Neue', cursive;
-      letter-spacing: 0.15em;
-    }
-
-.mobile-sns-links {
-      display: flex;
-      gap: 2rem;
-      margin-top: 3rem;
-      
-      transform: translateX(-20px);
-    }
-
-    .mobile-sns-links a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-family: 'Noto Sans JP', sans-serif;
-    }
-
-    .mobile-sns-links .sns-icon {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-    }
   }
 </style>
