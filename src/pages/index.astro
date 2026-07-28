@@ -84,7 +84,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     </nav>
 
     <!-- ========================================
-         PC・タブレット用 追従固定ヘッダー (Hero通過後出現)
+         PC・タブレット用 追従固定ヘッダー (中央配置)
          ======================================== -->
     <header class="sticky-header">
       <nav class="sticky-header-inner">
@@ -185,13 +185,13 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       <!-- 右側ナビゲーションメニュー (PC Hero内用) -->
       <nav class="right-nav">
         <ul>
-          <li><a href="#top">TOP</a></li>
-          <li><a href="#theme">THEME</a></li>
+          <li><a href="/">TOP</a></li>
+          <li><a href="/theme">THEME</a></li>
           <li><a href="/exhibition">EXHIBITION</a></li>
-          <li><a href="#articles">ARTICLES</a></li>
-          <li><a href="#timetable">TIME TABLE</a></li>
-          <li><a href="#map">MAP</a></li>
-          <li><a href="#archives">ARCHIVES</a></li>
+          <li><a href="/articles">ARTICLES</a></li>
+          <li><a href="/timetable">TIME TABLE</a></li>
+          <li><a href="/map">MAP</a></li>
+          <li><a href="/archives">ARCHIVES</a></li>
         </ul>
 
         <div class="sns-links">
@@ -295,7 +295,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
           });
         }
 
-        // --- 3. スクロール連動処理（ヘッダーふわっと表示 & ハンバーガー色切り替え） ---
+        // --- 3. スクロール連動処理（ヘッダーフェードイン & ハンバーガー色切り替え） ---
         const stickyHeader = document.querySelector('.sticky-header');
         const heroSection = document.querySelector('.hero');
 
@@ -303,25 +303,20 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
           if (!heroSection) return;
           const heroBottom = heroSection.getBoundingClientRect().bottom;
 
-          // Hero画像を完全に超えたら（heroBottom <= 80px 程度になったら）
+          // Hero画像を通過したら表示
           if (heroBottom <= 80) {
-            // PC用ヘッダーを表示
             if (stickyHeader) stickyHeader.classList.add('is-show');
-            // スマホハンバーガーを黒線に変更
             if (hamburger) hamburger.classList.add('is-black');
           } else {
-            // PC用ヘッダーを非表示
             if (stickyHeader) stickyHeader.classList.remove('is-show');
-            // スマホハンバーガーを白線に変更
             if (hamburger) hamburger.classList.remove('is-black');
           }
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // 初期チェック
+        handleScroll();
       };
 
-      // 確実に初期化処理を実行
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initApp);
       } else {
@@ -346,7 +341,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
 
   /* ========================================
      PC・タブレット用 追従固定ヘッダー
-     (グラスモーフィズムデザイン)
      ======================================== */
   .sticky-header {
     position: fixed;
@@ -355,7 +349,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     width: 100%;
     z-index: 900;
 
-    /* 控えめなグラスモーフィズム（写真イメージを反映） */
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -364,32 +357,30 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
 
     padding: 1.1rem 0;
 
-    /* 初期状態：画面上に隠して透明にしておく */
-    transform: translateY(-100%);
+    /* ふわっとフェードイン */
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
-  /* Heroを超えた時に付与される表示用クラス */
   .sticky-header.is-show {
-    transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
 
+  /* メニューを画面幅の中で中央揃えに変更 */
   .sticky-header-inner {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-end; /* 写真と同じく右寄りに配置 */
-    padding-right: 5%;
+    justify-content: center; /* 右寄りを中央揃えに変更 */
+    padding: 0 1rem;
   }
 
   .sticky-header-inner ul {
     display: flex;
-    gap: clamp(1.2rem, 2.5vw, 2.5rem);
+    gap: clamp(1.2rem, 2.8vw, 3rem); /* 間隔を適度に均等化 */
     list-style: none;
     margin: 0;
     padding: 0;
@@ -437,19 +428,17 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       display: block;
       width: 100%;
       height: 2px;
-      background-color: #ffffff; /* 初期色: 白 */
+      background-color: #ffffff;
       border-radius: 2px;
       transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
       filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
     }
 
-    /* Hero通過後（白背景領域）で完全な「黒」にする */
     .hamburger.is-black .hamburger-line {
       background-color: #000000;
       filter: none;
     }
 
-    /* メニューが開いている間は常に「白」 */
     .hamburger.is-active .hamburger-line {
       background-color: #ffffff !important;
       filter: none;
@@ -465,7 +454,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       transform: translateY(-11px) rotate(-45deg);
     }
 
-    /* オーバーレイナビゲーション */
     .mobile-nav {
       display: flex;
       flex-direction: column;
@@ -532,7 +520,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       object-fit: contain;
     }
 
-    /* スマホ表示時はPC用固定ヘッダーを隠す */
     .sticky-header {
       display: none !important;
     }

@@ -1,0 +1,273 @@
+---
+import rawExhibitions from '../data/exhibitions.json';
+
+// --- TypeScript 型定義 ---
+export interface Exhibition {
+  id: number;
+  slug: string;
+  name: string;
+  room: string | null;
+  floor: string | null;
+  description: string | null;
+  image: string;
+  categories: string[];
+  favorite?: boolean;
+}
+
+// --- 1. 静的ページの事前生成 (getStaticPaths) ---
+export async function getStaticPaths() {
+  const exhibitions: Exhibition[] = (rawExhibitions as any[]).filter(
+    (item): item is Exhibition => Boolean(item && item.slug)
+  );
+
+  return exhibitions.map((item) => ({
+    params: { slug: item.slug },
+    props: { exhibition: item },
+  }));
+}
+
+// --- 2. ページごとのデータ取得 ---
+const { exhibition } = Astro.props;
+
+// 場所情報の整形
+const roomText = (exhibition.room && exhibition.room !== 'NaN') ? exhibition.room : '';
+const rawFloor = exhibition.floor ? String(exhibition.floor) : '';
+const floorText = (rawFloor && rawFloor !== 'NaN') 
+  ? (['1','2','3','4','5'].includes(rawFloor) ? `${rawFloor}階` : rawFloor)
+  : '';
+const locationText = [floorText, roomText].filter(Boolean).join(' / ');
+
+// 画像パスチェック
+const hasValidImage = Boolean(exhibition.image && exhibition.image.startsWith('/'));
+const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a0aec0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`;
+
+const pageTitle = `${exhibition.name} | Komafes69`;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- 固定ヘッダー（戻るボタン） -->
+    <header class="detail-header">
+      <div class="header-inner">
+        <a href="/exhibition" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          一覧に戻る
+        </a>
+      </div>
+    </header>
+
+    <main class="detail-container">
+      <article class="detail-card">
+        <!-- メイン画像 -->
+        <div class="detail-image-wrapper">
+          <img 
+            src={hasValidImage ? exhibition.image : fallbackSvg} 
+            alt={exhibition.name}
+            class={`detail-img ${!hasValidImage ? 'fallback' : ''}`}
+          />
+          {locationText && <span class="location-badge">{locationText}</span>}
+        </div>
+
+        <!-- 本文コンテンツ -->
+        <div class="detail-body">
+          <!-- カテゴリーバッジ -->
+          {exhibition.categories && exhibition.categories.length > 0 && (
+            <div class="category-list">
+              {exhibition.categories.map((cat) => (
+                <span class="cat-badge">{cat}</span>
+              ))}
+            </div>
+          )}
+
+          <!-- 団体名・タイトル -->
+          <h1 class="detail-title">{exhibition.name}</h1>
+
+          <hr class="divider" />
+
+          <!-- 詳細説明文 -->
+          <div class="detail-description">
+            <h2 class="section-label">展示・企画紹介</h2>
+            <p set:html={exhibition.description ? exhibition.description.replace(/\n/g, '<br>') : '説明文はありません。'} />
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Komafes69</p>
+    </footer>
+
+  </body>
+</html>
+
+<style>
+  body {
+    font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f8;
+    color: #1a202c;
+  }
+
+  /* ヘッダー */
+  .detail-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #1a202c;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: opacity 0.2s;
+  }
+
+  .back-link:hover {
+    opacity: 0.6;
+  }
+
+  /* コンテナ */
+  .detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 90px 1.5rem 60px;
+  }
+
+  /* メインカード */
+  .detail-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+  }
+
+  /* 画像エリア */
+  .detail-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-height: 450px;
+    aspect-ratio: 16 / 9;
+    background: #edf2f7;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .detail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .detail-img.fallback {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    opacity: 0.4;
+  }
+
+  .location-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(17, 24, 39, 0.85);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+  }
+
+  /* 本文 */
+  .detail-body {
+    padding: 2.5rem;
+  }
+
+  @media screen and (max-width: 640px) {
+    .detail-body {
+      padding: 1.5rem;
+    }
+  }
+
+  .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .cat-badge {
+    background-color: #edf2f7;
+    color: #4a5568;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+  }
+
+  .detail-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 900;
+    margin: 0;
+    line-height: 1.3;
+    color: #111;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 1.8rem 0;
+  }
+
+  .section-label {
+    font-size: 1rem;
+    color: #718096;
+    margin: 0 0 0.8rem 0;
+    font-weight: 700;
+  }
+
+  .detail-description p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #2d3748;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: #a0aec0;
+    font-size: 0.85rem;
+  }
+</style>
