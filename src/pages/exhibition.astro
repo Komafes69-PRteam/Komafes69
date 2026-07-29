@@ -5,6 +5,9 @@ import rawExhibitions from "../pages/data/exhibitions.json";
 import instagramIcon from "../pages/assets/Instagram.svg";
 import youtubeIcon from "../pages/assets/youtube.svg";
 import xIcon from "../pages/assets/X.svg";
+import anchorIcon from "../pages/assets/scroll.svg";
+// 背景画像をAstroのassetsとしてインポート（ビルド時のパスエラー防止）
+import titleBg from "../pages/assets/TitleBackground.webp";
 
 // --- TypeScript 型定義 ---
 export interface Exhibition {
@@ -102,22 +105,35 @@ const pageDescription =
 
     <!-- デスクトップ用常時固定ヘッダー -->
     <header class="sticky-header">
-      <nav class="sticky-header-inner">
-        <ul>
-          <li><a href="/">TOP</a></li>
-          <li><a href="/#theme">THEME</a></li>
-          <li><a href="/exhibition" class="active">EXHIBITION</a></li>
-          <li><a href="/#articles">ARTICLES</a></li>
-          <li><a href="/#timetable">TIME TABLE</a></li>
-          <li><a href="/#map">MAP</a></li>
-          <li><a href="/#archives">ARCHIVES</a></li>
-        </ul>
-      </nav>
+      <div class="sticky-header-inner">
+        <a href="/" class="header-brand">
+          <img src="/logo.svg" alt="Logo" class="header-logo" />
+          <img
+            src="/typo.svg"
+            alt="SAIL BEYOND"
+            class="header-typo"
+          />
+        </a>
+
+        <!-- ▼右側: ナビゲーションメニュー -->
+        <nav class="header-nav">
+          <ul>
+            <li><a href="/">TOP</a></li>
+            <li><a href="/#theme">THEME</a></li>
+            <li><a href="/exhibition" class="active">EXHIBITION</a></li>
+            <li><a href="/#articles">ARTICLES</a></li>
+            <li><a href="/#timetable">TIME TABLE</a></li>
+            <li><a href="/#map">MAP</a></li>
+            <li><a href="/#archives">ARCHIVES</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <!-- メインコンテンツ -->
     <main class="exhibition-container">
-      <header class="page-header">
+      <!-- 背景画像をインラインスタイルで適用（確実なパス解決） -->
+      <header class="page-header" style={`background-image: url('${titleBg.src}');`}>
         <div class="page-header-inner">
           <h1 class="page-title">EXHIBITIONS</h1>
           <p class="page-subtitle">参加団体紹介</p>
@@ -198,12 +214,19 @@ const pageDescription =
       </div>
     </main>
 
+    <!-- スクロール連動：錨（アンカー）上に戻るボタン -->
+    <div id="anchor-scroll-top" class="anchor-scroll-top">
+      <div class="anchor-line"></div>
+      <div class="anchor-body">
+        <span class="anchor-text">PULL TO TOP</span>
+        <img src={anchorIcon.src} alt="PAGE TOP" class="anchor-img" />
+      </div>
+    </div>
+
     <footer>
       <p>&copy; 2026 Komafes69</p>
     </footer>
 
-    <!-- 1. サーバー側のデータをクライアント(window)に渡すためだけのスクリプト -->
-   <!-- 1. サーバー側のデータをクライアント(window)に渡すためだけのスクリプト -->
     <script is:inline define:vars={{ exhibitions }}>
       window.exhibitionsData = exhibitions;
     </script>
@@ -211,6 +234,13 @@ const pageDescription =
     <!-- 2. メイン処理 -->
     <script>
       import { gsap } from "gsap";
+
+      // TypeScriptの型定義（windowに生やしたデータを認識させる）
+      declare global {
+        interface Window {
+          exhibitionsData: any[];
+        }
+      }
 
       document.addEventListener("DOMContentLoaded", () => {
         // --- GSAP アニメーション実行 ---
@@ -222,7 +252,7 @@ const pageDescription =
             duration: 2.5,
             ease: "power2.out",
             delay: 0.3,
-          }
+          },
         );
 
         gsap.fromTo(
@@ -233,15 +263,20 @@ const pageDescription =
             duration: 2.5,
             ease: "power2.out",
             delay: 0.45,
-          }
+          },
         );
 
         // --- フィルター＆カード生成処理 ---
-        // エラー回避のため「as HTMLElement」等をつけて確実に要素が存在することをTSに伝えます
         const grid = document.getElementById("exhibition-grid") as HTMLElement;
-        const searchInput = document.getElementById("search-input") as HTMLInputElement;
-        const clearBtn = document.getElementById("clear-btn") as HTMLButtonElement;
-        const categorySelect = document.getElementById("category-select") as HTMLSelectElement;
+        const searchInput = document.getElementById(
+          "search-input",
+        ) as HTMLInputElement;
+        const clearBtn = document.getElementById(
+          "clear-btn",
+        ) as HTMLButtonElement;
+        const categorySelect = document.getElementById(
+          "category-select",
+        ) as HTMLSelectElement;
         const chips = document.querySelectorAll(".chip");
         const countNum = document.getElementById("count-num") as HTMLElement;
         const noResults = document.getElementById("no-results") as HTMLElement;
@@ -263,7 +298,6 @@ const pageDescription =
 
         const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a0aec0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`;
 
-        // 引数 array に any[] 型を指定
         const shuffleArray = (array: any[]) => {
           const shuffled = [...array];
           for (let i = shuffled.length - 1; i > 0; i--) {
@@ -273,10 +307,8 @@ const pageDescription =
           return shuffled;
         };
 
-        // windowに独自のプロパティを追加したことを(window as any)でエラー回避
-        const items = shuffleArray((window as any).exhibitionsData || []);
+        const items = shuffleArray(window.exhibitionsData || []);
 
-        // 引数 data に any[] 型を指定
         const renderCards = (data: any[]) => {
           grid.innerHTML = "";
           countNum.textContent = data.length.toString();
@@ -288,7 +320,6 @@ const pageDescription =
             noResults.style.display = "none";
           }
 
-          // item と index に型を指定
           data.forEach((item: any, index: number) => {
             const card = document.createElement("a");
             card.href = `/exhibition/${item.slug}`;
@@ -427,6 +458,37 @@ const pageDescription =
           });
         }
 
+        // --- 錨（アンカー）のスクロール連動＆「上に戻る」処理 ---
+        const anchorBtn = document.getElementById("anchor-scroll-top");
+        const anchorLine = document.querySelector(".anchor-line") as HTMLElement;
+
+        if (anchorBtn && anchorLine) {
+          window.addEventListener("scroll", () => {
+            const scrollY = window.scrollY;
+            const docHeight =
+              document.documentElement.scrollHeight - window.innerHeight;
+
+            if (scrollY > 150) {
+              anchorBtn.classList.add("is-visible");
+            } else {
+              anchorBtn.classList.remove("is-visible");
+            }
+
+            const scrollRatio = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
+            const maxLineHeight = window.innerHeight * 0.70;
+            const currentLineHeight = scrollRatio * maxLineHeight;
+
+            anchorLine.style.height = `${currentLineHeight}px`;
+          });
+
+          anchorBtn.addEventListener("click", () => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          });
+        }
+
         renderCards(items);
       });
     </script>
@@ -445,7 +507,7 @@ const pageDescription =
       sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f6f8; /* ほんのり明るいグレーでカードを引き立たせる */
+    background-color: #f4f6f8;
     color: #1a202c;
   }
 
@@ -462,16 +524,14 @@ const pageDescription =
     left: 0;
     width: 100%;
     z-index: 900;
-    /* 初期状態（トップ）は背景なし、境界線なし */
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-bottom: 1px solid transparent;
     padding: 1rem 0;
-    transition: all 0.3s ease; /* スクロール時の変化をふんわりさせる */
+    transition: all 0.3s ease;
   }
 
-  /* スクロールしてバナーを過ぎた時のスタイル（JSで付与） */
   .sticky-header.is-scrolled {
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
@@ -480,12 +540,12 @@ const pageDescription =
   }
 
   .sticky-header-inner {
-    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
     display: flex;
-    justify-content: center;
-    padding: 0 1rem;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .sticky-header-inner ul {
@@ -497,7 +557,6 @@ const pageDescription =
   }
 
   .sticky-header-inner a {
-    /* 初期状態（トップ）は白文字 */
     color: #ffffff;
     text-decoration: none;
     font-family: "Bebas Neue", cursive;
@@ -508,7 +567,6 @@ const pageDescription =
       opacity 0.2s ease;
   }
 
-  /* スクロール時は黒文字に戻す */
   .sticky-header.is-scrolled .sticky-header-inner a {
     color: #111111;
   }
@@ -518,7 +576,45 @@ const pageDescription =
     opacity: 0.5;
   }
 
-  /* モバイルナビゲーション（普段は非表示） */
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+  }
+
+  .header-logo {
+    height: 32px;
+    width: auto;
+  }
+
+  .header-typo {
+    height: 18px;
+    width: auto;
+  }
+
+  .header-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-logo,
+  .header-typo {
+    filter: brightness(0) invert(1);
+    transition:
+      filter 0.3s ease,
+      opacity 0.2s ease;
+  }
+
+  .sticky-header.is-scrolled .header-logo,
+  .sticky-header.is-scrolled .header-typo {
+    filter: brightness(0);
+  }
+
   .mobile-nav {
     display: none;
     position: fixed;
@@ -621,20 +717,13 @@ const pageDescription =
   }
 
   /* ========================================
-     メインレイアウト
+     メインレイアウト & フィルター
      ======================================== */
-
-  .page-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
   .filter-section {
     position: relative;
-    z-index: 10; /* バナーの装飾(::after)より前に出す */
-    margin-top: -1.5rem; /* ネガティブマージンで境界線上に重ねる */
+    z-index: 10;
+    margin-top: -1.5rem;
     margin-bottom: 2.5rem;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -682,8 +771,16 @@ const pageDescription =
     transition: border-color 0.2s;
   }
 
-  .search-box input:focus {
-    border-color: #111;
+  #search-input:focus,
+  #category-select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  }
+
+  #search-input:hover,
+  #category-select:hover {
+    border-color: #93c5fd;
   }
 
   .clear-btn {
@@ -716,7 +813,6 @@ const pageDescription =
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
   }
 
-  /* フェードイン ＋ 上に浮き上がるアニメーション */
   @keyframes cardFadeIn {
     from {
       opacity: 0;
@@ -728,7 +824,6 @@ const pageDescription =
     }
   }
 
-  /* フロアチップ UI */
   .floor-chips {
     display: flex;
     flex-wrap: wrap;
@@ -738,26 +833,27 @@ const pageDescription =
   }
 
   .chip {
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
     background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    padding: 0.45rem 1.1rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #4a5568;
+    color: #374151;
+    border: 1px solid #e5e7eb;
     cursor: pointer;
+    font-weight: 600;
     transition: all 0.2s ease;
   }
 
   .chip:hover {
-    border-color: #111;
-    color: #111;
+    border-color: #2563eb;
+    color: #2563eb;
+    background-color: #eff6ff;
   }
 
   .chip.active {
-    background-color: #111111;
+    background-color: #2563eb;
     color: #ffffff;
-    border-color: #111111;
+    border-color: #2563eb;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
   }
 
   .result-count {
@@ -766,7 +862,7 @@ const pageDescription =
   }
 
   /* ========================================
-     本格 Card UI スタイル
+     カード UI スタイル
      ======================================== */
   .exhibition-grid {
     display: grid;
@@ -788,9 +884,6 @@ const pageDescription =
     }
   }
 
-  /* カード本体 */
-
-  /* カード本体 */
   .exhibition-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
@@ -805,18 +898,16 @@ const pageDescription =
     text-decoration: none !important;
     color: inherit !important;
     cursor: pointer;
-
     opacity: 0;
     animation: cardFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  /* 場所チップ（画像左下に重ねる設定） */
   .location-chip {
     position: absolute;
     bottom: 12px;
     left: 12px;
     background: rgba(255, 255, 255, 0.85);
-    color: #060906 !important;
+    color: #060709 !important;
     font-size: 0.75rem;
     font-weight: 500;
     padding: 0.35rem 0.75rem;
@@ -833,7 +924,6 @@ const pageDescription =
     border-color: #cbd5e0;
   }
 
-  /* カード上部画像領域 */
   .card-image-wrapper {
     position: relative;
     width: 100%;
@@ -863,23 +953,6 @@ const pageDescription =
     opacity: 0.5;
   }
 
-  /* 場所バッジ */
-  .location-badge {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    background: rgba(17, 24, 39, 0.85);
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.3rem 0.7rem;
-    border-radius: 6px;
-    backdrop-filter: blur(6px);
-    letter-spacing: 0.02em;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  }
-
-  /* カード本文領域 */
   .card-body {
     padding: 1.4rem;
     display: flex;
@@ -928,19 +1001,12 @@ const pageDescription =
     color: #a0aec0;
   }
 
-  /* ========================================
-   メインレイアウト
-   ======================================== */
   .exhibition-container {
     max-width: 1200px;
     margin: 0 auto;
-    /* 上の余白(100px)を0にしてバナーを上端まで引っ張り上げます */
     padding: 0 1.5rem 60px;
   }
 
-  /* ========================================
-   画面幅100% 横長ヘッダーバナー
-   ======================================== */
   .page-header {
     position: relative;
     width: 100vw;
@@ -948,27 +1014,21 @@ const pageDescription =
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-
-    /* 👇 下のマージンを0にし、下パディングを少し増やして文字のゆとりを確保 */
     margin-bottom: 0;
     padding: 5.5rem 0 4.5rem 0;
-
-    background-image: url("./assets/TitleBackground.webp");
     background-size: cover;
     background-position: center;
-
     overflow: hidden;
     box-sizing: border-box;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 
-  /* 文字位置を画面中央のレイアウト幅に収める */
   .page-header-inner {
     position: relative;
     z-index: 2;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem; /* 左右の余白 */
+    padding: 0 2rem;
     text-align: left;
   }
 
@@ -980,8 +1040,6 @@ const pageDescription =
     color: #ffffff;
     line-height: 0.85;
     font-weight: 900;
-
-    /* 追加: 初期状態は右側100%マスク */
     clip-path: inset(0 100% 0 0);
   }
 
@@ -992,29 +1050,24 @@ const pageDescription =
     font-size: clamp(1.25rem, 3vw, 30px);
     font-weight: 700;
     letter-spacing: 0.05em;
-
-    /* 追加: 初期状態は右側100%マスク */
     clip-path: inset(0 100% 0 0);
   }
 
-  /* 右側の太い斜めライン（アクセント） */
   .page-header::after {
     content: "";
     position: absolute;
     top: -50%;
     bottom: -50%;
     right: 14%;
-    width: 65px; /* ラインの太さ */
+    width: 65px;
     background-color: #ffffff;
-    transform: skewX(-20deg); /* 傾斜 */
+    transform: skewX(-20deg);
     z-index: 1;
     pointer-events: none;
   }
 
-  /* スマホ対応 */
   @media screen and (max-width: 768px) {
     .page-header {
-      /* スマホ時はPC用固定ヘッダーが消えるため上の余白を調整 */
       padding: 3.5rem 0 2.2rem 0;
     }
 
@@ -1024,17 +1077,91 @@ const pageDescription =
 
     .page-header::after {
       right: 8%;
-      width: 32px; /* スマホ用にラインを細く調整 */
+      width: 32px;
     }
   }
 
+  /* ========================================
+     錨（アンカー）スクロールボタン
+     ======================================== */
+  .anchor-scroll-top {
+    position: fixed;
+    top: 5%;
+    right: 2.5rem;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .anchor-scroll-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .anchor-line {
+    width: 2px;
+    height: 0px;
+    border-left: 2px dashed #042452;
+    transition: height 0.1s linear;
+  }
+
+  .anchor-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transform-origin: top center;
+    transition: transform 0.3s ease;
+  }
+
+  .anchor-text {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: #031c3f;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    user-select: none;
+    font-weight: 600;
+  }
+
+.anchor-img {
+  width: 32px;
+  height: auto;
+  filter: brightness(0) drop-shadow(0 4px 6px rgba(3, 37, 87, 0.15));
+  transition: transform 0.2s ease;
+}
+
+  .anchor-scroll-top:hover .anchor-body {
+    animation: anchorSwing 1.2s infinite ease-in-out alternate;
+  }
+
+  @media screen and (max-width: 1400px) {
+    .anchor-scroll-top {
+      display: none;
+    }
+  }
+
+  @keyframes anchorSwing {
+    0% {
+      transform: rotate(-12deg);
+    }
+    100% {
+      transform: rotate(12deg);
+    }
+  }
   footer {
     text-align: center;
     padding: 2.5rem 0;
     background-color: #ffffff;
     border-top: 1px solid #e2e8f0;
     font-size: 0.85rem;
-    color: #718096;
+    color: #000b1b;
     margin-top: 4rem;
   }
 </style>

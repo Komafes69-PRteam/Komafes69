@@ -15,7 +15,7 @@ import instagramIcon from '../pages/assets/Instagram.svg';
 import youtubeIcon from '../pages/assets/youtube.svg';
 import xIcon from '../pages/assets/X.svg';
 
-import scrollIcon from '../pages/assets/scroll.png';
+import scrollIcon from '../pages/assets/scroll.svg';
 
 const pageTitle = "トップページ | Komafes69";
 const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公式サイトです。開催日時：9月19日(土)・20日(日) 9:00〜17:00。テーマや各展示、タイムテーブル、マップなどの最新情報を掲載しています。";
@@ -47,7 +47,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       onload="this.media='all'" 
     />
   </head>
-  <body>
+  <body id="top">
     <!-- ========================================
          スマホ用ハンバーガーボタン & メニュー
          ======================================== -->
@@ -84,20 +84,29 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     </nav>
 
     <!-- ========================================
-         PC・タブレット用 追従固定ヘッダー (中央配置)
+         PC・タブレット用 追従固定ヘッダー
          ======================================== -->
     <header class="sticky-header">
-      <nav class="sticky-header-inner">
-        <ul>
-          <li><a href="#top">TOP</a></li>
-          <li><a href="#theme">THEME</a></li>
-          <li><a href="/exhibition">EXHIBITION</a></li>
-          <li><a href="#articles">ARTICLES</a></li>
-          <li><a href="#timetable">TIME TABLE</a></li>
-          <li><a href="#map">MAP</a></li>
-          <li><a href="#archives">ARCHIVES</a></li>
-        </ul>
-      </nav>
+      <div class="sticky-header-inner">
+        <!-- 左側: ロゴとタイポ -->
+        <a href="#top" class="header-brand">
+          <Image src={mainLogoImg} alt="Komafes69 Logo" format="webp" quality={85} class="header-logo" />
+          <Image src={typoImg} alt="SAIL BEYOND" format="webp" quality={85} class="header-typo" />
+        </a>
+
+        <!-- 右側: ナビゲーションメニュー -->
+        <nav class="header-nav">
+          <ul>
+            <li><a href="#top">TOP</a></li>
+            <li><a href="#theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="#articles">ARTICLES</a></li>
+            <li><a href="#timetable">TIME TABLE</a></li>
+            <li><a href="#map">MAP</a></li>
+            <li><a href="#archives">ARCHIVES</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <!-- ========================================
@@ -179,7 +188,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       <div class="scroll-animation">
         <span class="scroll-text">SCROLL</span>
         <div class="scroll-line"></div>
-        <Image src={scrollIcon} alt="Scroll Animation" format="webp" quality={100} class="scroll-icon" />
+        <Image src={scrollIcon} alt="Scroll Animation" format="svg" quality={100} class="scroll-icon" />
       </div>
 
       <!-- 右側ナビゲーションメニュー (PC Hero内用) -->
@@ -355,9 +364,8 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 
-    padding: 1.1rem 0;
+    padding: 0.8rem 0; /* 少しパディングを調整 */
 
-    /* ふわっとフェードイン */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -368,25 +376,52 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     pointer-events: auto;
   }
 
-  /* メニューを画面幅の中で中央揃えに変更 */
+  /* ヘッダー内部のレイアウト（左右配置） */
   .sticky-header-inner {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: center; /* 右寄りを中央揃えに変更 */
-    padding: 0 1rem;
+    justify-content: space-between; /* 左ロゴ・右ナビに分ける */
+    align-items: center;
+    padding: 0 1.5rem;
   }
 
-  .sticky-header-inner ul {
+  /* ヘッダー左側のロゴとタイポ */
+  .header-brand {
     display: flex;
-    gap: clamp(1.2rem, 2.8vw, 3rem); /* 間隔を適度に均等化 */
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .header-brand:hover {
+    opacity: 0.7;
+  }
+
+  .header-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .header-typo {
+    height: 20px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* ヘッダー右側のナビゲーション */
+  .header-nav ul {
+    display: flex;
+    gap: clamp(1rem, 2vw, 2.5rem);
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .sticky-header-inner a {
+  .header-nav a {
     color: #111111;
     text-decoration: none;
     font-family: 'Bebas Neue', cursive;
@@ -395,7 +430,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
-  .sticky-header-inner a:hover {
+  .header-nav a:hover {
     opacity: 0.6;
     transform: translateY(-1px);
   }
