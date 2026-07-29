@@ -9,13 +9,17 @@ import komafesLabel from '../pages/assets/komafesLabel.png';
 import topLogoImg from '../pages/assets/topLogo.png';
 import mainLogoImg from '../pages/assets/Komafes69Logo.png';
 import hatImg from '../pages/assets/hat.png';
-import typoImg from '../pages/assets/typo.png';
+import maintypoImg from '../pages/assets/typo.png';
 
 import instagramIcon from '../pages/assets/Instagram.svg';
 import youtubeIcon from '../pages/assets/youtube.svg';
 import xIcon from '../pages/assets/X.svg';
 
 import scrollIcon from '../pages/assets/scroll.svg';
+
+import logoImg from '../pages/assets/logo.svg';
+import typoImg from '../pages/assets/typo.svg';
+
 
 const pageTitle = "トップページ | Komafes69";
 const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公式サイトです。開催日時：9月19日(土)・20日(日) 9:00〜17:00。テーマや各展示、タイムテーブル、マップなどの最新情報を掲載しています。";
@@ -90,8 +94,8 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       <div class="sticky-header-inner">
         <!-- 左側: ロゴとタイポ -->
         <a href="#top" class="header-brand">
-          <Image src={mainLogoImg} alt="Komafes69 Logo" format="webp" quality={85} class="header-logo" />
-          <Image src={typoImg} alt="SAIL BEYOND" format="webp" quality={85} class="header-typo" />
+          <Image src={logoImg} alt="Komafes69 Logo" format="svg" quality={85} class="header-logo" />
+          <Image src={typoImg} alt="SAIL BEYOND" format="svg" quality={85} class="header-typo" />
         </a>
 
         <!-- 右側: ナビゲーションメニュー -->
@@ -161,7 +165,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       </div>
 
       <div class="typo-container">
-        <Image src={typoImg} alt="SAIL BEYOND" format="webp" quality={85} class="typo-img" />
+        <Image src={maintypoImg} alt="SAIL BEYOND" format="webp" quality={85} class="typo-img" />
       </div>
 
       <div class="hero-title-container">
@@ -364,7 +368,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 
-    padding: 0.8rem 0; /* 少しパディングを調整 */
+    padding: 0.8rem 0;
 
     opacity: 0;
     pointer-events: none;
@@ -382,7 +386,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* 左ロゴ・右ナビに分ける */
+    justify-content: space-between;
     align-items: center;
     padding: 0 1.5rem;
   }
@@ -400,16 +404,19 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     opacity: 0.7;
   }
 
+  /* ▼ こちらに filter: brightness(0); を追加して常に黒にしています ▼ */
   .header-logo {
     height: 40px;
     width: auto;
     object-fit: contain;
+    filter: brightness(0);
   }
 
   .header-typo {
     height: 20px;
     width: auto;
     object-fit: contain;
+    filter: brightness(0);
   }
 
   /* ヘッダー右側のナビゲーション */

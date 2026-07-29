@@ -8,6 +8,8 @@ import xIcon from "../pages/assets/X.svg";
 import anchorIcon from "../pages/assets/scroll.svg";
 // 背景画像をAstroのassetsとしてインポート（ビルド時のパスエラー防止）
 import titleBg from "../pages/assets/TitleBackground.webp";
+import logoImg from "../pages/assets/logo.svg";
+import typoImg from "../pages/assets/typo.svg";
 
 // --- TypeScript 型定義 ---
 export interface Exhibition {
@@ -107,9 +109,9 @@ const pageDescription =
     <header class="sticky-header">
       <div class="sticky-header-inner">
         <a href="/" class="header-brand">
-          <img src="/logo.svg" alt="Logo" class="header-logo" />
+          <img src={logoImg.src} alt="Logo" class="header-logo" />
           <img
-            src="/typo.svg"
+            src={typoImg.src}
             alt="SAIL BEYOND"
             class="header-typo"
           />
