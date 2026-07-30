@@ -69,17 +69,23 @@ const pageDescription =
     <!-- スマホ用スライドメニュー -->
     <nav class="mobile-nav">
       <ul>
-        <li><a href="/Komafes69">TOP</a></li>
-        <li><a href="/Komafes69/theme">THEME</a></li>
-        <li><a href="/Komafes69/exhibition">EXHIBITION</a></li>
-        <li><a href="/Komafes69/articles">ARTICLES</a></li>
-        <li><a href="/Komafes69/timetable">TIME TABLE</a></li>
-        <li><a href="/Komafes69/map">MAP</a></li>
-        <li><a href="/Komafes69/archives">ARCHIVES</a></li>
+        <li><a href="/">TOP</a></li>
+        <li><a href="/theme">THEME</a></li>
+        <li><a href="/exhibition">EXHIBITION</a></li>
+        <!-- 追加: FAVORITES (スマホメニュー) -->
+        <li>
+          <a href="/favorites" style="display:inline-flex; align-items:center; gap:8px;">
+            FAVORITES <span style="font-size: 1.2rem;">❤️</span>
+          </a>
+        </li>
+        <li><a href="/articles">ARTICLES</a></li>
+        <li><a href="/timetable">TIME TABLE</a></li>
+        <li><a href="/map">MAP</a></li>
+        <li><a href="/archives">ARCHIVES</a></li>
       </ul>
       <div class="mobile-sns-links">
         <a
-          href="https://www.instagram.com/komafes68/"
+          href="https://www.instagram.com/komafes69/"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -108,7 +114,7 @@ const pageDescription =
     <!-- デスクトップ用常時固定ヘッダー -->
     <header class="sticky-header">
       <div class="sticky-header-inner">
-        <a href="/komafes69" class="header-brand">
+        <a href="/" class="header-brand">
           <img src={logoImg.src} alt="Logo" class="header-logo" />
           <img
             src={typoImg.src}
@@ -117,18 +123,26 @@ const pageDescription =
           />
         </a>
 
-        <!-- ▼右側: ナビゲーションメニュー -->
-        <nav class="header-nav">
-          <ul>
-            <li><a href="/Komafes69">TOP</a></li>
-            <li><a href="/Komafes69/theme">THEME</a></li>
-            <li><a href="/Komafes69/exhibition" class="active">EXHIBITION</a></li>
-            <li><a href="/Komafes69/articles">ARTICLES</a></li>
-            <li><a href="/Komafes69/timetable">TIME TABLE</a></li>
-            <li><a href="/Komafes69/map">MAP</a></li>
-            <li><a href="/Komafes69/archives">ARCHIVES</a></li>
-          </ul>
-        </nav>
+        <!-- ▼右側: ナビゲーションメニュー ＋ いいねボタン -->
+        <div class="header-right-actions">
+          <nav class="header-nav">
+            <ul>
+              <li><a href="/">TOP</a></li>
+              <li><a href="/theme">THEME</a></li>
+              <li><a href="/exhibition" class="active">EXHIBITION</a></li>
+              <li><a href="/articles">ARTICLES</a></li>
+              <li><a href="/timetable">TIME TABLE</a></li>
+              <li><a href="/map">MAP</a></li>
+              <li><a href="/archives">ARCHIVES</a></li>
+            </ul>
+          </nav>
+          <!-- 追加: お気に入りページへ飛ぶ丸いボタン -->
+          <a href="/favorites" class="header-fav-btn" aria-label="お気に入り一覧を見る">
+            <svg viewBox="0 0 24 24" class="heart-svg">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </header>
 
@@ -199,6 +213,14 @@ const pageDescription =
           >
         </div>
 
+        <!-- 追加: お気に入り団体を見るボタン -->
+        <div class="view-favorites-container">
+          <a href="/favorites" class="view-favorites-btn">
+            <svg viewBox="0 0 24 24" class="btn-heart-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            お気に入り団体を見る
+          </a>
+        </div>
+
         <!-- 件数表示 -->
         <div class="result-count">
           <span id="count-num">0</span> 件を表示中
@@ -245,6 +267,16 @@ const pageDescription =
       }
 
       document.addEventListener("DOMContentLoaded", () => {
+        // --- お気に入り情報の取得 (localStorage) ---
+        const STORAGE_KEY = 'komafes_favorites';
+        const getFavorites = (): string[] => {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          } catch {
+            return [];
+          }
+        };
+
         // --- GSAP アニメーション実行 ---
         gsap.fromTo(
           ".page-title",
@@ -314,6 +346,9 @@ const pageDescription =
         const renderCards = (data: any[]) => {
           grid.innerHTML = "";
           countNum.textContent = data.length.toString();
+          
+          // レンダリング時に現在のお気に入りリストを取得
+          const favorites = getFavorites();
 
           if (data.length === 0) {
             noResults.style.display = "block";
@@ -356,8 +391,18 @@ const pageDescription =
               rawDesc = rawDesc.substring(0, 120) + "...";
             }
             const formattedDesc = rawDesc.replace(/\n/g, "<br>");
+            
+            // お気に入り状態の判定
+            const isFav = favorites.includes(item.slug) ? 'is-active' : '';
 
             card.innerHTML = `
+              <!-- 追加: いいねボタン (slugをIDとして利用) -->
+              <button class="favorite-toggle-btn ${isFav}" data-id="${item.slug}" aria-label="お気に入りに追加">
+                <svg viewBox="0 0 24 24" class="heart-svg">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+
               <div class="card-image-wrapper">
                 <img 
                   src="${hasValidImage ? item.image : fallbackSvg}" 
@@ -388,6 +433,36 @@ const pageDescription =
             grid.appendChild(card);
           });
         };
+
+        // --- お気に入りボタンのクリックイベント（イベント委譲） ---
+        grid.addEventListener('click', (e) => {
+          const btn = (e.target as Element).closest('.favorite-toggle-btn');
+          if (!btn) return;
+          
+          // リンク遷移をキャンセル
+          e.preventDefault();
+          e.stopPropagation();
+
+          const slug = btn.getAttribute('data-id');
+          if (!slug) return;
+          
+          const isActive = btn.classList.contains('is-active');
+          let currentFavorites = getFavorites();
+
+          if (isActive) {
+            // お気に入り解除
+            btn.classList.remove('is-active');
+            currentFavorites = currentFavorites.filter(id => id !== slug);
+          } else {
+            // お気に入り追加
+            btn.classList.add('is-active');
+            if (!currentFavorites.includes(slug)) {
+              currentFavorites.push(slug);
+            }
+          }
+          
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFavorites));
+        });
 
         const filterData = () => {
           const keyword = currentKeyword.toLowerCase().trim();
@@ -550,15 +625,23 @@ const pageDescription =
     justify-content: space-between;
   }
 
-  .sticky-header-inner ul {
+  /* ヘッダー右側のグループ (ナビゲーション＋いいねボタン) */
+  .header-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .header-nav ul {
     display: flex;
     gap: clamp(1.2rem, 2.8vw, 3rem);
     list-style: none;
     margin: 0;
     padding: 0;
+    align-items: center;
   }
 
-  .sticky-header-inner a {
+  .header-nav a {
     color: #ffffff;
     text-decoration: none;
     font-family: "Bebas Neue", cursive;
@@ -569,13 +652,38 @@ const pageDescription =
       opacity 0.2s ease;
   }
 
-  .sticky-header.is-scrolled .sticky-header-inner a {
+  .sticky-header.is-scrolled .header-nav a {
     color: #111111;
   }
 
-  .sticky-header-inner a.active,
-  .sticky-header-inner a:hover {
+  .header-nav a.active,
+  .header-nav a:hover {
     opacity: 0.5;
+  }
+
+  /* ヘッダーのお気に入り丸ボタン */
+  .header-fav-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #f6f9f6;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .header-fav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .header-fav-btn .heart-svg {
+    width: 16px;
+    height: 16px;
+    fill: #ff4b4b; /* デフォルトで赤色 */
   }
 
   .header-brand {
@@ -593,15 +701,6 @@ const pageDescription =
   .header-typo {
     height: 18px;
     width: auto;
-  }
-
-  .header-nav ul {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 
   .header-logo,
@@ -858,9 +957,41 @@ const pageDescription =
     box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
   }
 
+  /* お気に入り団体を見るボタン */
+  .view-favorites-container {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .view-favorites-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fff;
+    color: #333;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+  .view-favorites-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 75, 75, 0.15);
+    color: #ff4b4b;
+  }
+  .btn-heart-icon {
+    width: 18px;
+    height: 18px;
+    fill: #ff4b4b;
+  }
+
   .result-count {
     font-size: 0.85rem;
     color: #718096;
+    margin-top: 0.5rem;
   }
 
   /* ========================================
@@ -887,6 +1018,7 @@ const pageDescription =
   }
 
   .exhibition-card {
+    position: relative; /* いいねボタンの絶対配置のため必須 */
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
@@ -904,6 +1036,55 @@ const pageDescription =
     animation: cardFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
+  .exhibition-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e0;
+  }
+
+  /* カード右上のいいねボタン */
+  .favorite-toggle-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 10;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .favorite-toggle-btn:hover {
+    background: #ffffff;
+    transform: scale(1.05);
+  }
+  .favorite-toggle-btn .heart-svg {
+    width: 18px;
+    height: 18px;
+    fill: transparent;
+    stroke: #999;
+    stroke-width: 2px;
+    transition: stroke 0.2s ease;
+  }
+  /* いいねされた状態（アニメーションつき） */
+  .favorite-toggle-btn.is-active .heart-svg {
+    fill: #ff4b4b;
+    stroke: #ff4b4b;
+    animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  @keyframes heartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+
   .location-chip {
     position: absolute;
     bottom: 12px;
@@ -918,12 +1099,6 @@ const pageDescription =
     letter-spacing: 0.02em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     z-index: 2;
-  }
-
-  .exhibition-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-    border-color: #cbd5e0;
   }
 
   .card-image-wrapper {
@@ -1132,12 +1307,12 @@ const pageDescription =
     font-weight: 600;
   }
 
-.anchor-img {
-  width: 32px;
-  height: auto;
-  filter: brightness(0) drop-shadow(0 4px 6px rgba(3, 37, 87, 0.15));
-  transition: transform 0.2s ease;
-}
+  .anchor-img {
+    width: 32px;
+    height: auto;
+    filter: brightness(0) drop-shadow(0 4px 6px rgba(3, 37, 87, 0.15));
+    transition: transform 0.2s ease;
+  }
 
   .anchor-scroll-top:hover .anchor-body {
     animation: anchorSwing 1.2s infinite ease-in-out alternate;
@@ -1157,6 +1332,7 @@ const pageDescription =
       transform: rotate(12deg);
     }
   }
+  
   footer {
     text-align: center;
     padding: 2.5rem 0;

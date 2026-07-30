@@ -1,0 +1,670 @@
+---
+import { Image } from "astro:assets";
+import rawExhibitions from "../pages/data/exhibitions.json";
+
+import instagramIcon from "../pages/assets/Instagram.svg";
+import youtubeIcon from "../pages/assets/youtube.svg";
+import xIcon from "../pages/assets/X.svg";
+// 背景画像やロゴ類（exhibitionページと同じパス構成）
+import titleBg from "../pages/assets/TitleBackground.webp";
+import logoImg from "../pages/assets/logo.svg";
+import typoImg from "../pages/assets/typo.svg";
+
+// --- TypeScript 型定義 ---
+export interface Exhibition {
+  id: number;
+  slug: string;
+  name: string;
+  room: string | null;
+  floor: string | null;
+  description: string | null;
+  image: string;
+  categories: string[];
+}
+
+// --- データクレンジング ---
+const exhibitions: Exhibition[] = (rawExhibitions as any[]).filter(
+  (item): item is Exhibition => {
+    return Boolean(
+      item && item.name && item.name !== "nan" && typeof item.name === "string",
+    );
+  },
+);
+
+const pageTitle = "お気に入り一覧 | Komafes69";
+const pageDescription = "お気に入りに登録した展示・参加団体の一覧です。";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- スマホ用ハンバーガーボタン -->
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <!-- スマホ用スライドメニュー -->
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="/">TOP</a></li>
+        <li><a href="/theme">THEME</a></li>
+        <li><a href="/exhibition">EXHIBITION</a></li>
+        <li>
+          <a href="/favorites" style="display:inline-flex; align-items:center; gap:8px;">
+            FAVORITES
+          </a>
+        </li>
+        <li><a href="/articles">ARTICLES</a></li>
+        <li><a href="/timetable">TIME TABLE</a></li>
+        <li><a href="/map">MAP</a></li>
+        <li><a href="/archives">ARCHIVES</a></li>
+      </ul>
+      <div class="mobile-sns-links">
+        <a href="https://www.instagram.com/komafes69/" target="_blank" rel="noopener noreferrer">
+          <Image src={instagramIcon} alt="" class="sns-icon" />
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.youtube.com/@komafes68" target="_blank" rel="noopener noreferrer">
+          <Image src={youtubeIcon} alt="" class="sns-icon" />
+          <span>YouTube</span>
+        </a>
+        <a href="https://x.com/Komafes68" target="_blank" rel="noopener noreferrer">
+          <Image src={xIcon} alt="" class="sns-icon" />
+          <span>X</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- デスクトップ用常時固定ヘッダー -->
+    <header class="sticky-header">
+      <div class="sticky-header-inner">
+        <a href="/" class="header-brand">
+          <img src={logoImg.src} alt="Logo" class="header-logo" />
+          <img src={typoImg.src} alt="SAIL BEYOND" class="header-typo" />
+        </a>
+
+        <div class="header-right-actions">
+          <nav class="header-nav">
+            <ul>
+              <li><a href="/">TOP</a></li>
+              <li><a href="/theme">THEME</a></li>
+              <li><a href="/exhibition">EXHIBITION</a></li>
+              <li><a href="/articles">ARTICLES</a></li>
+              <li><a href="/timetable">TIME TABLE</a></li>
+              <li><a href="/map">MAP</a></li>
+              <li><a href="/archives">ARCHIVES</a></li>
+            </ul>
+          </nav>
+          <!-- お気に入りページ用のハイライトされたボタン -->
+          <a href="/favorites" class="header-fav-btn" aria-label="お気に入り一覧を見る">
+            <svg viewBox="0 0 24 24" class="heart-svg">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="favorites-container">
+      <header class="page-header" style={`background-image: url('${titleBg.src}');`}>
+        <div class="page-header-inner">
+          <h1 class="page-title">FAVORITES</h1>
+          <p class="page-subtitle">お気に入り団体</p>
+        </div>
+      </header>
+
+      <section class="controls-section">
+        <a href="/exhibition" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-icon"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          参加団体一覧へ戻る
+        </a>
+        <div class="result-count">
+          <span id="count-num">0</span> 件のお気に入り
+        </div>
+      </section>
+
+      <!-- お気に入りリスト -->
+      <section class="exhibition-grid" id="favorites-grid">
+        <!-- JSでカードが生成されます -->
+      </section>
+
+      <!-- お気に入りがない場合のメッセージ -->
+      <div id="no-favorites" class="no-favorites" style="display: none;">
+        <svg viewBox="0 0 24 24" class="empty-heart-icon">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <h2>お気に入りに登録された団体がありません</h2>
+        <p>展示一覧から気になる団体を見つけて、<br/>ハートマークをタップして追加してみましょう！</p>
+        <a href="/exhibition" class="go-exhibition-btn">展示一覧を見る</a>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Komafes69</p>
+    </footer>
+
+    <!-- クライアントに全展示データを渡す -->
+    <script is:inline define:vars={{ exhibitions }}>
+      window.exhibitionsData = exhibitions;
+    </script>
+
+    <script>
+      import { gsap } from "gsap";
+
+      declare global {
+        interface Window {
+          exhibitionsData: any[];
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const STORAGE_KEY = 'komafes_favorites';
+        const grid = document.getElementById("favorites-grid") as HTMLElement;
+        const noFavorites = document.getElementById("no-favorites") as HTMLElement;
+        const countNum = document.getElementById("count-num") as HTMLElement;
+
+        // GSAP アニメーション
+        gsap.fromTo(
+          ".page-title",
+          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+          { clipPath: "inset(0 0% 0 0)", duration: 2.5, ease: "power2.out", delay: 0.2 }
+        );
+        gsap.fromTo(
+          ".page-subtitle",
+          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+          { clipPath: "inset(0 0% 0 0)", duration: 2.5, ease: "power2.out", delay: 0.35 }
+        );
+
+        // ヘッダースクロール処理
+        const stickyHeader = document.querySelector(".sticky-header");
+        if (stickyHeader) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+              stickyHeader.classList.add("is-scrolled");
+            } else {
+              stickyHeader.classList.remove("is-scrolled");
+            }
+          });
+        }
+
+        // ハンバーガーメニュー
+        const hamburger = document.querySelector(".hamburger");
+        const mobileNav = document.querySelector(".mobile-nav");
+        if (hamburger && mobileNav) {
+          hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("is-active");
+            mobileNav.classList.toggle("is-active");
+            document.body.classList.toggle("no-scroll");
+          });
+        }
+
+        const getFavorites = (): string[] => {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          } catch {
+            return [];
+          }
+        };
+
+        const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a0aec0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`;
+
+        // カード描画処理
+        const renderFavorites = () => {
+          const favoriteSlugs = getFavorites();
+          // 保存されたID（slug）に一致するデータのみ抽出
+          const favoriteData = window.exhibitionsData.filter((item) => favoriteSlugs.includes(item.slug));
+
+          grid.innerHTML = "";
+          countNum.textContent = favoriteData.length.toString();
+
+          if (favoriteData.length === 0) {
+            noFavorites.style.display = "flex";
+            return;
+          } else {
+            noFavorites.style.display = "none";
+          }
+
+          favoriteData.forEach((item: any, index: number) => {
+            const card = document.createElement("a");
+            card.href = `/exhibition/${item.slug}`;
+            card.className = "exhibition-card";
+            
+            // 少しずつ表示アニメーション
+            const delay = Math.min(index * 0.04, 0.4);
+            card.style.animationDelay = `${delay}s`;
+
+            const roomText = item.room && item.room !== "NaN" ? item.room : "";
+            const rawFloor = item.floor ? String(item.floor) : "";
+            const floorText = rawFloor && rawFloor !== "NaN"
+              ? ["1", "2", "3", "4", "5"].includes(rawFloor) ? `${rawFloor}階` : rawFloor
+              : "";
+            const locationText = [floorText, roomText].filter(Boolean).join(" / ");
+            
+            const categoryBadges = (item.categories || []).map((c: string) => `<span class="cat-badge">${c}</span>`).join("");
+            const hasValidImage = Boolean(item.image && item.image.startsWith("/"));
+
+            let rawDesc = item.description || "";
+            if (rawDesc.length > 120) {
+              rawDesc = rawDesc.substring(0, 120) + "...";
+            }
+            const formattedDesc = rawDesc.replace(/\n/g, "<br>");
+
+            card.innerHTML = `
+              <!-- お気に入り解除用ボタン (is-active状態にしておく) -->
+              <button class="favorite-toggle-btn is-active" data-id="${item.slug}" aria-label="お気に入りから外す">
+                <svg viewBox="0 0 24 24" class="heart-svg">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+
+              <div class="card-image-wrapper">
+                <img 
+                  src="${hasValidImage ? item.image : fallbackSvg}" 
+                  alt="${item.name}" 
+                  class="${hasValidImage ? "card-img" : "card-img fallback"}"
+                />
+                ${locationText ? `<span class="location-chip">${locationText}</span>` : ""}
+              </div>
+              <div class="card-body">
+                <h2 class="card-title">${item.name}</h2>
+                ${categoryBadges ? `<div class="card-categories">${categoryBadges}</div>` : ""}
+                <p class="card-description">${formattedDesc}</p>
+              </div>
+            `;
+
+            grid.appendChild(card);
+          });
+        };
+
+        // お気に入り解除処理（イベント委譲）
+        grid.addEventListener('click', (e) => {
+          const btn = (e.target as Element).closest('.favorite-toggle-btn');
+          if (!btn) return;
+          
+          e.preventDefault();
+          e.stopPropagation();
+
+          const slug = btn.getAttribute('data-id');
+          if (!slug) return;
+          
+          let currentFavorites = getFavorites();
+          // 解除のみ行う（このページにある＝必ずお気に入り状態なので）
+          currentFavorites = currentFavorites.filter(id => id !== slug);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFavorites));
+          
+          // その場で再描画してリストから消す
+          renderFavorites();
+        });
+
+        // 初回描画
+        renderFavorites();
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* 基本設定 (Exhibitionページと共通) */
+  body {
+    font-family: "Noto Sans JP", system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f8;
+    color: #1a202c;
+  }
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  /* ヘッダー周り (Exhibitionページと共通) */
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 900;
+    background: transparent;
+    transition: all 0.3s ease;
+    padding: 1rem 0;
+  }
+  .sticky-header.is-scrolled {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .sticky-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+  }
+  .header-logo { height: 32px; width: auto; }
+  .header-typo { height: 18px; width: auto; }
+  .header-logo, .header-typo {
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+  }
+  .sticky-header.is-scrolled .header-logo,
+  .sticky-header.is-scrolled .header-typo {
+    filter: brightness(0);
+  }
+
+  .header-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .header-nav ul {
+    display: flex;
+    gap: clamp(1.2rem, 2.8vw, 3rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .header-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+    letter-spacing: 0.12em;
+    transition: color 0.3s, opacity 0.2s;
+  }
+  .sticky-header.is-scrolled .header-nav a {
+    color: #111111;
+  }
+  .header-nav a:hover { opacity: 0.5; }
+
+  .header-fav-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #f6f9f6;
+    border: 1px solid #eaeaea;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .header-fav-btn.is-active, .header-fav-btn:hover {
+    background-color: #fff0f0;
+  }
+  .header-fav-btn .heart-svg {
+    width: 16px;
+    height: 16px;
+    fill: #ff4b4b;
+  }
+
+  .hamburger { display: none; }
+  .mobile-nav { display: none; }
+
+  @media screen and (max-width: 768px) {
+    .sticky-header { display: none !important; }
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 22px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      padding: 0;
+    }
+    .hamburger-line {
+      display: block; width: 100%; height: 2px;
+      background-color: #111111; border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.is-active .hamburger-line { background-color: #ffffff; }
+    .hamburger.is-active .hamburger-line:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+    .hamburger.is-active .hamburger-line:nth-child(2) { opacity: 0; }
+    .hamburger.is-active .hamburger-line:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+
+    .mobile-nav {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-color: rgba(17, 17, 17, 0.96); z-index: 999;
+      flex-direction: column; justify-content: center; align-items: center;
+    }
+    .mobile-nav.is-active { display: flex; }
+    .mobile-nav ul { list-style: none; padding: 0; margin: 0; text-align: center; }
+    .mobile-nav li { margin: 1.5rem 0; }
+    .mobile-nav a {
+      color: #ffffff; text-decoration: none; font-size: 1.8rem;
+      font-family: "Bebas Neue", cursive;
+    }
+    .mobile-sns-links { display: flex; gap: 2rem; margin-top: 2rem; }
+    .mobile-sns-links a { display: flex; flex-direction: column; align-items: center; color: #fff; font-size: 0.8rem; text-decoration: none; }
+    .sns-icon { width: 24px; height: 24px; }
+  }
+
+  /* ページヘッダー */
+  .favorites-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 60px;
+  }
+  .page-header {
+    position: relative; width: 100vw; left: 50%; right: 50%;
+    margin-left: -50vw; margin-right: -50vw; margin-bottom: 0;
+    padding: 5.5rem 0 4.5rem 0;
+    background-size: cover; background-position: center;
+    overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .page-header-inner {
+    position: relative; z-index: 2; max-width: 1200px;
+    margin: 0 auto; padding: 0 2rem; text-align: left;
+  }
+  .page-title {
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(2rem, 18vw, 8rem);
+    letter-spacing: 0.04em; margin-top: 10px; color: #ffffff;
+    line-height: 0.85; font-weight: 900;
+  }
+  .page-subtitle {
+    margin-top: -50px; margin-bottom: 30px; color: #ffffff;
+    font-size: clamp(1.25rem, 3vw, 30px); font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .page-header::after {
+    content: ""; position: absolute; top: -50%; bottom: -50%; right: 14%;
+    width: 65px; background-color: #ffffff; transform: skewX(-20deg);
+    z-index: 1; pointer-events: none;
+  }
+  @media screen and (max-width: 768px) {
+    .page-header { padding: 3.5rem 0 2.2rem 0; }
+    .page-header-inner { padding: 0 1.2rem; }
+    .page-header::after { right: 8%; width: 32px; }
+  }
+
+  /* コントロール周り（戻るボタンなど） */
+  .controls-section {
+    position: relative;
+    z-index: 10;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+  .back-link:hover {
+    color: #2563eb;
+  }
+  .back-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .result-count {
+    font-size: 0.9rem;
+    color: #718096;
+    font-weight: 500;
+  }
+
+  /* カードレイアウト */
+  .exhibition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  @media screen and (max-width: 960px) {
+    .exhibition-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  }
+  @media screen and (max-width: 580px) {
+    .exhibition-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  }
+
+  @keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .exhibition-card {
+    position: relative;
+    background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;
+    overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    display: flex; flex-direction: column;
+    text-decoration: none !important; color: inherit !important;
+    transition: transform 0.25s, box-shadow 0.25s;
+    opacity: 0; animation: cardFadeIn 0.4s ease-out forwards;
+  }
+  .exhibition-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e0;
+  }
+
+  /* お気に入り解除ボタン */
+  .favorite-toggle-btn {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none; width: 36px; height: 36px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 10; transition: transform 0.2s ease;
+  }
+  .favorite-toggle-btn:hover {
+    transform: scale(1.1);
+  }
+  .favorite-toggle-btn .heart-svg {
+    width: 18px; height: 18px;
+    fill: #ff4b4b; /* Favoritesページでは初期状態がアクティブ */
+    stroke: #ff4b4b;
+    stroke-width: 2px;
+  }
+
+  .location-chip {
+    position: absolute; bottom: 12px; left: 12px;
+    background: rgba(255, 255, 255, 0.85); color: #060709 !important;
+    font-size: 0.75rem; font-weight: 500; padding: 0.35rem 0.75rem;
+    border-radius: 20px; backdrop-filter: blur(6px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); z-index: 2;
+  }
+  .card-image-wrapper {
+    position: relative; width: 100%; aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #edf2f7, #e2e8f0);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+  .exhibition-card:hover .card-img:not(.fallback) { transform: scale(1.04); }
+  .card-img.fallback { width: 48px; height: 48px; object-fit: contain; opacity: 0.5; }
+
+  .card-body { padding: 1.4rem; display: flex; flex-direction: column; flex-grow: 1; }
+  .card-title { font-size: 1.2rem; font-weight: 700; margin: 0 0 0.5rem 0; line-height: 1.4; }
+  .card-categories { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+  .cat-badge { background-color: #edf2f7; color: #4a5568; font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 4px; }
+  .card-description { font-size: 0.88rem; line-height: 1.65; color: #4a5568; margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* お気に入りがない場合のデザイン */
+  .no-favorites {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 16px;
+    border: 1px  #cbd5e0;
+    margin-top: 2rem;
+  }
+  .empty-heart-icon {
+    width: 64px;
+    height: 64px;
+    fill: none;
+    stroke: #cbd5e0;
+    stroke-width: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  .no-favorites h2 {
+    font-size: 1.4rem;
+    color: #2d3748;
+    margin: 0 0 1rem 0;
+  }
+  .no-favorites p {
+    color: #718096;
+    line-height: 1.7;
+    margin: 0 0 2rem 0;
+  }
+  .go-exhibition-btn {
+    background-color: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  }
+  .go-exhibition-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2.5rem 0;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+    color: #000b1b;
+    margin-top: 4rem;
+  }
+</style>

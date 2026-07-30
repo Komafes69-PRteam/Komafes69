@@ -1,5 +1,7 @@
 ---
 import rawExhibitions from '../data/exhibitions.json';
+// 背景画像をインポート
+import titleBgImage from '../assets/TitleBackground.webp';
 
 // --- TypeScript 型定義 ---
 export interface Exhibition {
@@ -42,6 +44,7 @@ const hasValidImage = Boolean(exhibition.image && exhibition.image.startsWith('/
 const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a0aec0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`;
 
 const pageTitle = `${exhibition.name} | Komafes69`;
+const formattedDesc = exhibition.description ? exhibition.description.replace(/\n/g, '<br>') : '説明文はありません。';
 ---
 
 <html lang="ja">
@@ -57,56 +60,159 @@ const pageTitle = `${exhibition.name} | Komafes69`;
   <body>
 
     <!-- 固定ヘッダー（戻るボタン） -->
-    <header class="detail-header">
-      <div class="header-inner">
+    <header class="top-nav">
+      <div class="nav-inner">
         <a href="/exhibition" class="back-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-          一覧に戻る
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          <span class="back-text">一覧へ戻る</span>
         </a>
       </div>
     </header>
 
-    <main class="detail-container">
-      <article class="detail-card">
-        <!-- メイン画像 -->
-        <div class="detail-image-wrapper">
-          <img 
-            src={hasValidImage ? exhibition.image : fallbackSvg} 
-            alt={exhibition.name}
-            class={`detail-img ${!hasValidImage ? 'fallback' : ''}`}
-          />
-          {locationText && <span class="location-badge">{locationText}</span>}
-        </div>
+    <main class="exhibition-detail">
+      
+      <!-- 大胆なヒーローバナー画像 -->
+      <section class="hero-banner">
+        <img 
+          src={hasValidImage ? exhibition.image : fallbackSvg} 
+          alt={exhibition.name}
+          class={`hero-img ${!hasValidImage ? 'fallback' : ''}`}
+        />
+        <!-- グラデーションオーバーレイ -->
+        <div class="hero-overlay"></div>
+        
+        {locationText && (
+          <div class="hero-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            {locationText}
+          </div>
+        )}
+      </section>
 
-        <!-- 本文コンテンツ -->
-        <div class="detail-body">
-          <!-- カテゴリーバッジ -->
-          {exhibition.categories && exhibition.categories.length > 0 && (
-            <div class="category-list">
-              {exhibition.categories.map((cat :string) => (
-                <span class="cat-badge">{cat}</span>
-              ))}
+      <!-- コンテンツエリア -->
+      <section class="content-container">
+        
+        <!-- ヘッダー情報 (カテゴリー、タイトル、アクションボタン) -->
+        <div class="content-header">
+          <div class="title-area">
+            {exhibition.categories && exhibition.categories.length > 0 && (
+              <div class="category-list">
+                {exhibition.categories.map((cat: string) => (
+                  <span class="cat-badge">{cat}</span>
+                ))}
+              </div>
+            )}
+            
+            <!-- 【変更】importした画像を使用 -->
+            <div class="main-title-wrapper">
+              <img src={titleBgImage.src} alt="" class="title-bg" />
+              <h1 class="main-title">{exhibition.name}</h1>
             </div>
-          )}
 
-          <!-- 団体名・タイトル -->
-          <h1 class="detail-title">{exhibition.name}</h1>
+          </div>
 
-          <hr class="divider" />
+          <!-- いいね & シェアボタン -->
+          <div class="action-area">
+            <button class="action-btn fav-btn" id="fav-btn" data-slug={exhibition.slug} aria-label="お気に入りに追加">
+              <svg viewBox="0 0 24 24" class="icon-svg heart-icon">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              <span>いいね</span>
+            </button>
 
-          <!-- 詳細説明文 -->
-          <div class="detail-description">
-            <h2 class="section-label">展示・企画紹介</h2>
-            <p set:html={exhibition.description ? exhibition.description.replace(/\n/g, '<br>') : '説明文はありません。'} />
+            <button class="action-btn share-btn" id="share-btn" data-name={exhibition.name} aria-label="共有する">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+              <span>共有</span>
+            </button>
           </div>
         </div>
-      </article>
+
+        <!-- 本文 -->
+        <div class="description-area">
+          <h2 class="section-label">展示・公演紹介</h2>
+          <p class="description-text" set:html={formattedDesc} />
+        </div>
+
+      </section>
     </main>
 
     <footer>
       <p>&copy; 2026 Komafes69</p>
     </footer>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- いいね（お気に入り）機能 ---
+        const favBtn = document.getElementById("fav-btn");
+        const STORAGE_KEY = 'komafes_favorites';
+
+        if (favBtn) {
+          const slug = favBtn.getAttribute("data-slug");
+          if (!slug) return;
+
+          // 初期状態の反映
+          let favs = [];
+          try {
+            favs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          } catch (e) {}
+          
+          if (favs.includes(slug)) {
+            favBtn.classList.add("is-active");
+          }
+
+          // クリックイベント
+          favBtn.addEventListener("click", () => {
+            let currentFavs = [];
+            try {
+              currentFavs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            } catch (e) {}
+
+            if (currentFavs.includes(slug)) {
+              // 解除
+              currentFavs = currentFavs.filter((id: string) => id !== slug);
+              favBtn.classList.remove("is-active");
+            } else {
+              // 追加
+              currentFavs.push(slug);
+              favBtn.classList.add("is-active");
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFavs));
+          });
+        }
+
+        // --- 共有機能 ---
+        const shareBtn = document.getElementById("share-btn");
+        if (shareBtn) {
+          shareBtn.addEventListener("click", async () => {
+            const name = shareBtn.getAttribute("data-name") || "Komafes69";
+            const url = window.location.href;
+
+            const shareData = {
+              title: `${name} | Komafes69`,
+              text: `${name}の展示情報です！`,
+              url: url
+            };
+
+            if (navigator.share) {
+              try {
+                await navigator.share(shareData);
+              } catch (err) {
+                console.log('Share canceled or failed', err);
+              }
+            } else {
+              // Web Share API非対応時
+              navigator.clipboard.writeText(url).then(() => {
+                alert("URLをクリップボードにコピーしました！");
+              }).catch(() => {
+                alert("URLのコピーに失敗しました。");
+              });
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
 
@@ -115,159 +221,261 @@ const pageTitle = `${exhibition.name} | Komafes69`;
     font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f6f8;
+    background-color: #ffffff;
     color: #1a202c;
   }
 
-  /* ヘッダー */
-  .detail-header {
+  /* --- トップナビゲーション（戻るボタン） --- */
+  .top-nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    z-index: 100;
+    top: 0; left: 0; width: 100%;
+    z-index: 900;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+    transition: 0.3s;
   }
-
-  .header-inner {
-    max-width: 900px;
+  .nav-inner {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 2rem;
   }
-
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    color: #1a202c;
+    gap: 0.5rem;
+    color: #ffffff;
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.95rem;
-    transition: opacity 0.2s;
+    font-size: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transition: transform 0.2s, opacity 0.2s;
   }
-
   .back-link:hover {
-    opacity: 0.6;
+    transform: translateX(-4px);
+    opacity: 0.8;
+  }
+  @media screen and (max-width: 640px) {
+    .nav-inner { padding: 1rem 1.2rem; }
+    .back-text { display: none; } /* スマホではアイコンのみにしてスッキリさせる */
   }
 
-  /* コンテナ */
-  .detail-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 90px 1.5rem 60px;
-  }
-
-  /* メインカード */
-  .detail-card {
-    background: #ffffff;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
-  }
-
-  /* 画像エリア */
-  .detail-image-wrapper {
+  /* --- ヒーローバナー --- */
+  .hero-banner {
     position: relative;
     width: 100%;
-    max-height: 450px;
-    aspect-ratio: 16 / 9;
+    height: 55vh;
+    min-height: 400px;
+    max-height: 700px;
     background: #edf2f7;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-
-  .detail-img {
+  .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-
-  .detail-img.fallback {
-    width: 80px;
-    height: 80px;
+  .hero-img.fallback {
     object-fit: contain;
-    opacity: 0.4;
+    padding: 4rem;
+    opacity: 0.3;
   }
-
-  .location-badge {
+  .hero-overlay {
     position: absolute;
-    bottom: 16px;
-    left: 16px;
-    background: rgba(17, 24, 39, 0.85);
+    bottom: 0; left: 0; width: 100%; height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+  }
+  .hero-location {
+    position: absolute;
+    bottom: 24px;
+    left: max(2rem, calc((100vw - 1000px) / 2));
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #ffffff;
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 700;
     padding: 0.5rem 1rem;
-    border-radius: 20px;
-    backdrop-filter: blur(6px);
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .hero-location svg {
+    width: 18px; height: 18px;
+  }
+  @media screen and (max-width: 1040px) {
+    .hero-location { left: 2rem; }
   }
 
-  /* 本文 */
-  .detail-body {
-    padding: 2.5rem;
+  /* --- コンテンツエリア --- */
+  .content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
   }
-
   @media screen and (max-width: 640px) {
-    .detail-body {
-      padding: 1.5rem;
-    }
+    .content-container { padding: 2rem 1.5rem 4rem; }
   }
 
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .title-area {
+    flex: 1 1 min-width;
+  }
   .category-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 0.8rem;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
   }
-
   .cat-badge {
-    background-color: #edf2f7;
-    color: #4a5568;
+    background-color: #1e293b;
+    color: #ffffff;
     font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.3rem 0.8rem;
-    border-radius: 6px;
+    font-weight: 600;
+    padding: 0.35rem 1rem;
+    border-radius: 30px;
   }
 
-  .detail-title {
-    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  /* --- 団体名（背景画像＋アニメーション） --- */
+  .main-title-wrapper {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    padding: 0.5rem 1.5rem 0.5rem 1rem; 
+    margin-left: -1rem;
+    border-radius: 4px;
+    z-index: 1;
+  }
+
+  .title-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    border-radius: 4px;
+    transform-origin: left;
+    animation: revealBg 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes revealBg {
+    0% { transform: scaleX(0); opacity: 0; }
+    100% { transform: scaleX(1); opacity: 1; }
+  }
+
+  .main-title {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     font-weight: 900;
     margin: 0;
-    line-height: 1.3;
-    color: #111;
+    line-height: 1.25;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeInTitle 0.6s ease forwards 0.3s;
   }
 
+  @keyframes fadeInTitle {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- アクションボタン --- */
+  .action-area {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8f9fa;
+    border: 2px solid #e9eaee;
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #0f0101;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .action-btn:hover {
+    background: #2563EB;
+    border-color: #cbd5e0;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+  .icon-svg {
+    width: 20px; height: 20px;
+  }
+
+  /* いいねボタンの状態 */
+  .heart-icon {
+    padding-top: 2px;
+    fill: transparent;
+    stroke: #94a3b8;
+    stroke-width: 2px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .fav-btn.is-active {
+    border-color: #fecaca;
+    background-color: #fef2f2;
+    color: #ef4444;
+  }
+  .fav-btn.is-active .heart-icon {
+    fill: #ef4444;
+    stroke: #ef4444;
+    transform: scale(1.15);
+  }
+
+  /* --- 本文・その他 --- */
   .divider {
     border: none;
-    border-top: 1px solid #e2e8f0;
-    margin: 1.8rem 0;
+    border-top: 2px solid #e2e8f0;
+    margin: 3rem 0;
   }
 
+  .description-area {
+    max-width: 1000px;
+  }
   .section-label {
-    font-size: 1rem;
-    color: #718096;
-    margin: 0 0 0.8rem 0;
-    font-weight: 700;
+    font-size: 1.2rem;
+    color: #0f172a;
+    margin: 2rem 0 1.5rem 0;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
-
-  .detail-description p {
-    font-size: 1.05rem;
-    line-height: 1.85;
-    color: #2d3748;
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 1.2rem;
+    background: #2563eb;
+    border-radius: 4px;
+  }
+  .description-text {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #01070f;
     margin: 0;
-    white-space: pre-wrap;
   }
 
   footer {
     text-align: center;
-    padding: 2rem 0;
-    color: #a0aec0;
-    font-size: 0.85rem;
+    padding: 3rem 0;
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
   }
 </style>
