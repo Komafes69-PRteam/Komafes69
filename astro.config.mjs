@@ -1,12 +1,11 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "astro/config";
+
+const isGitHubPages = process.env.DEPLOY_TARGET === "github";
 
 export default defineConfig({
-  site: 'https://komafes69-prteam.github.io',
-  base: '/',
+  site: isGitHubPages
+    ? "https://komafes69-prteam.github.io"
+    : "https://69.komafes.com", // さくらサーバーのURL
 
-  vite: {
-    plugins: [tailwindcss()]
-  }
+  base: isGitHubPages ? "/Komafes69" : "/",
 });
