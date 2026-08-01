@@ -368,8 +368,7 @@ const pageDescription =
         >
       </div>
     </div>
-
-   <!-- ========================================
+    <!-- ========================================
          ACCESS セクション
          ======================================== -->
     <section class="access-section" id="access">
@@ -387,7 +386,9 @@ const pageDescription =
           <div class="access-info">
             <div class="access-address-box">
               <h3 class="access-school-name">駒場東邦中学校・高等学校</h3>
-              <p class="access-address-text">〒154-0001 東京都世田谷区池尻4-5-1</p>
+              <p class="access-address-text">
+                〒154-0001 東京都世田谷区池尻4-5-1
+              </p>
             </div>
 
             <div class="route-list">
@@ -395,7 +396,16 @@ const pageDescription =
               <div class="route-item">
                 <div class="route-icon-wrapper">
                   <!-- 丸い枠を廃止し、電車アイコンを直接配置 -->
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="train-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="train-icon"
+                  >
                     <rect x="4" y="3" width="16" height="16" rx="2"></rect>
                     <path d="M4 11h16"></path>
                     <path d="M12 3v8"></path>
@@ -407,14 +417,26 @@ const pageDescription =
                 </div>
                 <div class="route-details">
                   <span class="line-name">東急田園都市線</span>
-                  <span class="station-name">「池尻大橋」駅 <span class="walk-time">徒歩10分</span></span>
+                  <span class="station-name"
+                    >「池尻大橋」駅 <span class="walk-time">徒歩10分</span
+                    ></span
+                  >
                 </div>
               </div>
 
               <!-- ルート2：井の頭線 -->
               <div class="route-item">
                 <div class="route-icon-wrapper">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="train-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="train-icon"
+                  >
                     <rect x="4" y="3" width="16" height="16" rx="2"></rect>
                     <path d="M4 11h16"></path>
                     <path d="M12 3v8"></path>
@@ -426,11 +448,14 @@ const pageDescription =
                 </div>
                 <div class="route-details">
                   <span class="line-name">京王井の頭線</span>
-                  <span class="station-name">「駒場東大前」駅 <span class="walk-time">徒歩10分</span></span>
+                  <span class="station-name"
+                    >「駒場東大前」駅 <span class="walk-time">徒歩10分</span
+                    ></span
+                  >
                 </div>
               </div>
             </div>
-            
+
             <div class="access-notice">
               <p>※ご来場の際は公共交通機関をご利用ください。</p>
               <p>※近隣店舗等への無断駐車・駐輪は固くお断りいたします。</p>
@@ -439,14 +464,15 @@ const pageDescription =
 
           <!-- 右側：Googleマップ (海図・夜の海風フィルター) -->
           <div class="access-map-wrapper">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.670265749216!2d139.67803731145293!3d35.66049213103233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018f3521b2d0751%3A0x6a29f5f65f02bc6e!2z6aeS5aC05p2x6YOm5Lit5a2m5qCh44O76auY562J5a2m5qCh!5e0!3m2!1sja!2sjp!4v1714545000000!5m2!1sja!2sjp" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.670265749216!2d139.67803731145293!3d35.66049213103233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018f3521b2d0751%3A0x6a29f5f65f02bc6e!2z6aeS5aC05p2x6YOm5Lit5a2m5qCh44O76auY562J5a2m5qCh!5e0!3m2!1sja!2sjp!4v1714545000000!5m2!1sja!2sjp"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
             </iframe>
             <!-- マップ上の装飾用フレーム -->
             <div class="map-overlay-frame"></div>
@@ -874,14 +900,85 @@ const pageDescription =
         }
       };
 
+      // --- 6. セクション全体の出現アニメーション (真っ黒回避・ふわっと表示) ---
+      const initSectionFadeIn = () => {
+        const fadeObserver = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // セクションが画面に入ったら is-visible クラスを付与
+                entry.target.classList.add("is-visible");
+                // 一度表示したら監視を終了
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }, // 画面に15%入ったら発動
+        );
+
+        // exhibition-section と access-section を監視対象にする
+        const sections = document.querySelectorAll(
+          ".exhibition-section, .access-section",
+        );
+        sections.forEach((section) => {
+          fadeObserver.observe(section);
+        });
+      };
+
+      // --- 6. ACCESS セクションの出現アニメーション ---
+      const initAccessAnimation = () => {
+        const accessSection = document.querySelector(".access-section");
+        if (!accessSection) return;
+
+        // 初期状態で透明にしておく（JSが動いた時だけ）
+        gsap.set(".access-title", { clipPath: "inset(0 100% 0 0)" });
+        gsap.set(".access-subtitle", { y: 20, opacity: 0 });
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // タイトルがラベルのように表示される
+                gsap.to(".access-title", {
+                  clipPath: "inset(0 0% 0 0)",
+                  duration: 0.9,
+                  ease: "power3.inOut",
+                });
+                // サブタイトルが下からふわっと出る
+                gsap.to(".access-subtitle", {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.7,
+                  ease: "power2.out",
+                  delay: 0.4,
+                });
+                // 情報エリアやマップも少し遅れてフェードインさせる（おまけ）
+                gsap.fromTo(
+                  ".access-content",
+                  { opacity: 0, y: 20 },
+                  { opacity: 1, y: 0, duration: 1.0, ease: "power2.out", delay: 0.6 }
+                );
+                
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 } // 画面に20%入ったら発動
+        );
+
+        observer.observe(accessSection);
+      };
+
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", () => {
           initApp();
           initExhibition();
+          initAccessAnimation(); // 呼び出しを変更
         });
       } else {
         initApp();
         initExhibition();
+        initAccessAnimation(); // 呼び出しを変更
       }
     </script>
   </body>
@@ -1624,58 +1721,55 @@ const pageDescription =
       -webkit-text-stroke: 0.5px #ffffff; /* スマホ時は線を少し細く */
     }
   }
-
   /* ========================================
-     ACCESS セクション
+     ACCESS セクション (位置ズレ＆デザイン修正版)
      ======================================== */
   .access-section {
-    padding: 80px 0; /* EXHIBITIONSと縦の余白を統一 */
+    padding: 80px 0;
     background-color: #fafafa;
     position: relative;
     z-index: 5;
-    /* EXHIBITIONSと同じアニメーション初期設定 */
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
 
-  /* スクロール連動等で付与されるクラス */
-  .access-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  /* ▼ ここがズレの原因でした！ EXHIBITIONSと数値を完全に統一 */
   .access-inner {
-    max-width: 1200px; /* EXHIBITIONSと幅を統一 */
+    max-width: 1500px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 1.5rem;
   }
 
-  /* タイトル周り */
   .access-header {
-    margin-bottom: 40px; /* EXHIBITIONSと統一 */
+    margin-bottom: 40px;
   }
 
+  .access-label-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  /* タイトルのフォントサイズもEXHIBITIONSに合わせる */
   .access-title {
-    font-size: clamp(3rem, 7vw, 7rem); /* EXHIBITIONSと統一 */
+    font-size: clamp(3.5rem, 9vw, 9rem);
     font-weight: 800;
     margin: 0;
+    padding: 0;
     color: #060906;
     font-family: 'Bebas Neue', cursive;
-    line-height: 1;
+    line-height: 1.1;
     letter-spacing: 0.05em;
     display: inline-block;
   }
 
   .access-subtitle {
-    margin: 8px 0 0;
-    font-size: 1.2rem;
+    margin: 6px 0 0;
+    font-size: 1.3rem;
     color: #111;
     font-weight: 700;
-    letter-spacing: 0.02em; /* EXHIBITIONSと統一 */
+    letter-spacing: 0.02em;
   }
 
-  /* コンテンツのレイアウト (PCは左右分割) */
+  /* コンテンツのレイアウト */
   .access-content {
     display: flex;
     justify-content: space-between;
@@ -1689,6 +1783,9 @@ const pageDescription =
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* ▼ お気に入りの縦棒をここ全体に適用し、キレイに揃える */
+    border-left: 3px solid #222;
+    padding-left: 24px;
   }
 
   .access-address-box {
@@ -1709,35 +1806,35 @@ const pageDescription =
     margin: 0;
   }
 
-  /* ルート（電車）リスト */
+  /* ルート（電車）リスト：AIっぽい枠を廃止し「地べた」に貼り付け */
   .route-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
     margin-bottom: 40px;
   }
 
   .route-item {
     display: flex;
-    align-items: center;
-    gap: 20px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 4px; /* 四角いデザインに */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    align-items: flex-start;
+    gap: 16px;
+    /* 背景色・枠線・影をすべて削除 */
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
   }
 
-  /* 丸い枠を廃止し、背景を透明にしてアイコン単体で表示 */
   .route-icon-wrapper {
     background-color: transparent; 
-    color: #1e2229; /* アイコンをシックな黒系に */
-    width: 32px;
-    height: 32px;
+    color: #1e2229;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin-top: 2px;
   }
 
   .train-icon {
@@ -1761,23 +1858,24 @@ const pageDescription =
     font-size: 1.1rem;
     font-weight: 900;
     color: #111;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
   }
 
+  /* 徒歩時間の枠も廃止し、シンプルなテキストに */
   .walk-time {
-    display: inline-block;
-    margin-left: 8px;
-    padding: 2px 8px;
-    background-color: #f0f0f0;
-    border-radius: 4px; /* 四角ベース */
-    font-size: 0.8rem;
-    color: #333;
+    font-size: 0.9rem;
+    color: #555;
     font-weight: 700;
+    background: transparent;
+    padding: 0;
   }
 
   /* 注意書き */
   .access-notice {
-    padding-left: 14px;
-    border-left: 3px solid #ccc;
+    padding-left: 0;
+    border-left: none; /* 親要素で線を引いたのでここは削除 */
   }
 
   .access-notice p {
@@ -1794,13 +1892,11 @@ const pageDescription =
     max-width: 600px;
     min-height: 400px;
     position: relative;
-    border-radius: 4px; /* マップの角もシャープな四角に統一 */
+    border-radius: 0; /* マップも四角くシャープに */
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     border: 2px solid #1e2229;
   }
 
-  /* Googleマップのフィルター */
   .access-map-wrapper iframe {
     position: absolute;
     top: 0;
@@ -1819,45 +1915,32 @@ const pageDescription =
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* マップの操作を邪魔しない */
+    pointer-events: none;
     box-shadow: inset 0 0 40px rgba(0, 20, 40, 0.2);
   }
 
-  /* --- スマホ対応 --- */
   @media screen and (max-width: 768px) {
     .access-section {
-      padding: 60px 0; /* スマホもEXHIBITIONSと統一 */
+      padding: 60px 0;
     }
-    
     .access-header {
-      margin-bottom: 24px; /* スマホもEXHIBITIONSと統一 */
+      margin-bottom: 24px;
     }
-    
     .access-title {
-      font-size: 3.5rem; /* スマホもEXHIBITIONSと統一 */
+      font-size: 3.5rem;
     }
-
     .access-subtitle {
-      font-size: 1rem; /* スマホもEXHIBITIONSと統一 */
+      font-size: 1rem;
     }
-
     .access-content {
       flex-direction: column;
       gap: 40px;
+      margin-top: 24px;
     }
-
     .access-map-wrapper {
       max-width: 100%;
       height: 350px;
       min-height: auto;
-    }
-
-    .route-item {
-      padding: 16px;
-    }
-    
-    .station-name {
-      font-size: 1rem;
     }
   }
 
