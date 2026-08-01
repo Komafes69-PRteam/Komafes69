@@ -1,28 +1,30 @@
 ---
-import { Image } from 'astro:assets';
-import heroImage from '../pages/assets/hero.webp';
-import heroImageSp from '../pages/assets/hero-sp.webp';
-import heroImageTb from '../pages/assets/hero-tb.webp';
+import { Image } from "astro:assets";
+import heroImage from "../pages/assets/hero.webp";
+import heroImageSp from "../pages/assets/hero-sp.webp";
+import heroImageTb from "../pages/assets/hero-tb.webp";
 
-import titleTextImg from '../pages/assets/title-text.png';
-import komafesLabel from '../pages/assets/komafesLabel.png';
-import topLogoImg from '../pages/assets/topLogo.png';
-import mainLogoImg from '../pages/assets/Komafes69Logo.png';
-import hatImg from '../pages/assets/hat.png';
-import maintypoImg from '../pages/assets/typo.png';
+import titleTextImg from "../pages/assets/title-text.png";
+import komafesLabel from "../pages/assets/komafesLabel.png";
+import topLogoImg from "../pages/assets/topLogo.png";
+import mainLogoImg from "../pages/assets/Komafes69Logo.png";
+import hatImg from "../pages/assets/hat.png";
+import maintypoImg from "../pages/assets/typo.png";
 
-import instagramIcon from '../pages/assets/Instagram.svg';
-import youtubeIcon from '../pages/assets/youtube.svg';
-import xIcon from '../pages/assets/X.svg';
+import instagramIcon from "../pages/assets/Instagram.svg";
+import youtubeIcon from "../pages/assets/youtube.svg";
+import xIcon from "../pages/assets/X.svg";
 
-import scrollIcon from '../pages/assets/scroll.svg';
+import scrollIcon from "../pages/assets/scroll.svg";
 
-import logoImg from '../pages/assets/logo.svg';
-import typoImg from '../pages/assets/typo.svg';
-
+import logoImg from "../pages/assets/logo.svg";
+import typoImg from "../pages/assets/typo.svg";
+import titleBackgroundDark from "../pages/assets/TitleBackgroundDark.webp";
+import titleBackgroundBlack from "../pages/assets/TitleBackgroundBlack.jpg";
 
 const pageTitle = "トップページ | Komafes69";
-const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公式サイトです。開催日時：9月19日(土)・20日(日) 9:00〜17:00。テーマや各展示、タイムテーブル、マップなどの最新情報を掲載しています。";
+const pageDescription =
+  "駒場東邦 第69代 文化祭「SAIL BEYOND」の公式サイトです。開催日時：9月19日(土)・20日(日) 9:00〜17:00。テーマや各展示、タイムテーブル、マップなどの最新情報を掲載しています。";
 ---
 
 <html lang="ja">
@@ -34,28 +36,33 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
 
     <meta name="description" content={pageDescription} />
 
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link 
-      rel="preload" 
-      as="style" 
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700;900&display=swap" 
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700;900&display=swap"
     />
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700;900&display=swap" 
-      rel="stylesheet" 
-      media="print" 
-      onload="this.media='all'" 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700;900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
   </head>
   <body id="top">
     <!-- ========================================
          スマホ用ハンバーガーボタン & メニュー
          ======================================== -->
-    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+    <button
+      class="hamburger"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
@@ -72,16 +79,49 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
         <li><a href="/archives">ARCHIVES</a></li>
       </ul>
       <div class="mobile-sns-links">
-        <a href="https://www.instagram.com/komafes69/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-          <Image src={instagramIcon} alt="" format="svg" quality={100} class="sns-icon" />
+        <a
+          href="https://www.instagram.com/komafes69/"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src={instagramIcon}
+            alt=""
+            format="svg"
+            quality={100}
+            class="sns-icon"
+          />
           <span>Instagram</span>
         </a>
-        <a href="https://www.youtube.com/@komafes68" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-          <Image src={youtubeIcon} alt="" format="svg" quality={100} class="sns-icon" />
+        <a
+          href="https://www.youtube.com/@komafes68"
+          aria-label="YouTube"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src={youtubeIcon}
+            alt=""
+            format="svg"
+            quality={100}
+            class="sns-icon"
+          />
           <span>YouTube</span>
         </a>
-        <a href="https://x.com/Komafes68" aria-label="X" target="_blank" rel="noopener noreferrer">
-          <Image src={xIcon} alt="" format="svg" quality={100} class="sns-icon" />
+        <a
+          href="https://x.com/Komafes68"
+          aria-label="X"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src={xIcon}
+            alt=""
+            format="svg"
+            quality={100}
+            class="sns-icon"
+          />
           <span>X</span>
         </a>
       </div>
@@ -93,9 +133,21 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     <header class="sticky-header">
       <div class="sticky-header-inner">
         <!-- 左側: ロゴとタイポ -->
-        <a href="" class="header-brand">
-          <Image src={logoImg} alt="Komafes69 Logo" format="svg" quality={85} class="header-logo" />
-          <Image src={typoImg} alt="SAIL BEYOND" format="svg" quality={85} class="header-typo" />
+        <a href="/" class="header-brand">
+          <Image
+            src={logoImg}
+            alt="Komafes69 Logo"
+            format="svg"
+            quality={85}
+            class="header-logo"
+          />
+          <Image
+            src={typoImg}
+            alt="SAIL BEYOND"
+            format="svg"
+            quality={85}
+            class="header-typo"
+          />
         </a>
 
         <!-- 右側: ナビゲーションメニュー -->
@@ -117,63 +169,99 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
          Hero セクション
          ======================================== -->
     <section class="hero">
-      <Image 
-        src={heroImage} 
-        alt="トップページの背景画像です" 
+      <Image
+        src={heroImage}
+        alt="トップページの背景画像です"
         widths={[640, 1024, 1440, 1920]}
         sizes="100vw"
         quality={90}
         format="webp"
-        loading="eager"        
-        fetchpriority="high"  
+        loading="eager"
+        fetchpriority="high"
         class="hero-bg pc-bg"
       />
 
-      <Image 
-        src={heroImageSp} 
-        alt="スマホ用トップページの背景画像" 
+      <Image
+        src={heroImageSp}
+        alt="スマホ用トップページの背景画像"
         widths={[320, 640, 768]}
         sizes="100vw"
         quality={90}
         format="webp"
-        loading="eager"        
-        fetchpriority="high"  
+        loading="eager"
+        fetchpriority="high"
         class="hero-bg sp-bg"
       />
 
-      <Image 
-        src={heroImageTb} 
-        alt="タブレット用トップページの背景画像" 
+      <Image
+        src={heroImageTb}
+        alt="タブレット用トップページの背景画像"
         widths={[768, 1024, 1280]}
         sizes="100vw"
         quality={90}
         format="webp"
-        loading="eager"        
-        fetchpriority="high"  
+        loading="eager"
+        fetchpriority="high"
         class="hero-bg tb-bg"
       />
 
       <div class="top-logo">
-        <Image src={topLogoImg} alt="Komafes69" format="webp" quality={80} class="top-logo-img" />
+        <Image
+          src={topLogoImg}
+          alt="Komafes69"
+          format="webp"
+          quality={80}
+          class="top-logo-img"
+        />
       </div>
 
       <div class="main-logo-container">
-        <Image src={mainLogoImg} alt="Komafes 69 SAIL BEYOND" format="webp" quality={85} class="main-logo-img" />
+        <Image
+          src={mainLogoImg}
+          alt="Komafes 69 SAIL BEYOND"
+          format="webp"
+          quality={85}
+          class="main-logo-img"
+        />
         <div class="hat-container">
-          <Image src={hatImg} alt="Komafes 帽子" format="webp" quality={85} class="hat-img" />
+          <Image
+            src={hatImg}
+            alt="Komafes 帽子"
+            format="webp"
+            quality={85}
+            class="hat-img"
+          />
         </div>
       </div>
 
       <div class="typo-container">
-        <Image src={maintypoImg} alt="SAIL BEYOND" format="webp" quality={85} class="typo-img" />
+        <Image
+          src={maintypoImg}
+          alt="SAIL BEYOND"
+          format="webp"
+          quality={85}
+          class="typo-img"
+        />
       </div>
 
       <div class="hero-title-container">
-        <Image src={titleTextImg} alt="駒場東邦 第69代 文化祭" format="webp" quality={80} class="hero-title-img" />
+        <Image
+          src={titleTextImg}
+          alt="駒場東邦 第69代 文化祭"
+          format="webp"
+          quality={80}
+          class="hero-title-img"
+        />
       </div>
 
       <div class="komafesLabel">
-        <Image src={komafesLabel} alt="Komafes69ラベル" format="webp" quality={80} class="komafes-label-img" />
+        <Image
+          src={komafesLabel}
+          alt="Komafes69ラベル"
+          format="webp"
+          quality={80}
+          class="komafes-label-img"
+        />
       </div>
 
       <div class="date-info">
@@ -192,10 +280,15 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       <div class="scroll-animation">
         <span class="scroll-text">SCROLL</span>
         <div class="scroll-line"></div>
-        <Image src={scrollIcon} alt="Scroll Animation" format="svg" quality={100} class="scroll-icon" />
+        <Image
+          src={scrollIcon}
+          alt="Scroll Animation"
+          format="svg"
+          quality={100}
+          class="scroll-icon"
+        />
       </div>
 
-      <!-- 右側ナビゲーションメニュー (PC Hero内用) -->
       <nav class="right-nav">
         <ul>
           <li><a href="/">TOP</a></li>
@@ -208,132 +301,470 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
         </ul>
 
         <div class="sns-links">
-          <a href="https://www.instagram.com/komafes69/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-            <Image src={instagramIcon} alt="" format="svg" quality={100} class="sns-icon" />
+          <a
+            href="https://www.instagram.com/komafes69/"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={instagramIcon}
+              alt=""
+              format="svg"
+              quality={100}
+              class="sns-icon"
+            />
             <span>Instagram</span>
           </a>
-          <a href="https://www.youtube.com/@komafes68" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-            <Image src={youtubeIcon} alt="" format="svg" quality={100} class="sns-icon" />
+          <a
+            href="https://www.youtube.com/@komafes68"
+            aria-label="YouTube"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={youtubeIcon}
+              alt=""
+              format="svg"
+              quality={100}
+              class="sns-icon"
+            />
             <span>YouTube</span>
           </a>
-          <a href="https://x.com/Komafes68" aria-label="X" target="_blank" rel="noopener noreferrer">
-            <Image src={xIcon} alt="" format="svg" quality={100} class="sns-icon" />
+          <a
+            href="https://x.com/Komafes68"
+            aria-label="X"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={xIcon}
+              alt=""
+              format="svg"
+              quality={100}
+              class="sns-icon"
+            />
             <span>X</span>
           </a>
         </div>
       </nav>
     </section>
 
-    <footer>
-      <p>&copy; 2026 Komafes69</p>
+    <div class="marquee-container" style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}>
+      <div class="marquee-track">
+        <!-- CSSアニメーションでループさせるため、同じ内容を2つ並べます -->
+        <span class="marquee-text"
+          >KOMAFES69 KOMAFES69 KOMAFES69 KOMAFES69 KOMAFES69</span
+        >
+        <span class="marquee-text"
+          >KOMAFES69 KOMAFES69 KOMAFES69 KOMAFES69 KOMAFES69</span
+        >
+      </div>
+    </div>
+
+    <!-- ========================================
+         EXHIBITION セクション
+         ======================================== -->
+    <section class="exhibition-section" >
+      <div class="exhibition-header">
+        <div class="exhibition-title-group">
+          <!-- ラベル風のタイトル -->
+          <div class="exhibition-label-wrapper">
+            <h2 class="exhibition-title">EXHIBITIONS</h2>
+          </div>
+          <p class="exhibition-subtitle">お気に入りの団体を探そう！</p>
+        </div>
+      </div>
+
+      <!-- 画像帯（カルーセル） -->
+      <div
+        class="exhibition-carousel-wrapper"
+        style={`background-image: url('${titleBackgroundDark.src}'); background-size: cover; background-position: center;`}
+      >
+        <div class="exhibition-track" id="exhibitionTrack">
+          <!-- JavaScriptで平行四辺形カードが追加されます -->
+        </div>
+
+        <a href="/exhibition" class="btn-exhibition-floating">
+          <span class="btn-text">団体を詳しく見る</span>
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer" style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}>
+      ご提示いただいた画像「image_b19c15.jpg」のレイアウト、とてもスッキリしていてかっこいいですね！
+
+ヘッダーでインポート済みのSVGロゴ（logoImg と typoImg）を使用し、ご要望通りサイトマップを左揃え（text-align: left;）に修正したコードを作成しました。
+
+ヘッダー側ではロゴを黒色にするために filter: brightness(0); が使われていましたが、今回はフッターの暗い背景に合わせて filter: brightness(0) invert(1); を指定し、SVGを白色にして表示するよう調整しています。
+
+以下のHTMLとCSSに差し替えてください。
+
+1. HTMLの修正
+<footer>...</footer> の部分を丸ごと以下に入れ替えます。
+
+HTML
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <!-- 左側：学校情報・アクセス -->
+        <div class="footer-info">
+          <!-- SVGロゴを使用 -->
+          <a href="/" class="footer-brand">
+            <Image src={logoImg} alt="Komafes69 Logo" format="svg" quality={85} class="footer-logo" />
+            <Image src={typoImg} alt="SAIL BEYOND" format="svg" quality={85} class="footer-typo" />
+          </a>
+          <p class="school-name">駒場東邦中学校・高等学校 第69代 文化祭</p>
+          
+          <div class="school-details">
+            <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜17:00</p>
+            <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
+            <p class="access-info">
+              東急田園都市線「池尻大橋」駅より徒歩10分<br>
+              京王井の頭線「駒場東大前」駅より徒歩10分
+            </p>
+          </div>
+        </div>
+
+        <!-- 右側：ミニサイトマップとSNS -->
+        <div class="footer-nav">
+          <ul class="sitemap">
+            <li><a href="/">TOP</a></li>
+            <li><a href="/theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="/articles">ARTICLES</a></li>
+            <li><a href="/timetable">TIME TABLE</a></li>
+            <li><a href="/map">MAP</a></li>
+            <li><a href="/archives">ARCHIVES</a></li>
+          </ul>
+
+          <div class="footer-sns">
+            <a href="https://www.instagram.com/komafes69/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <Image src={instagramIcon} alt="Instagram" format="svg" class="footer-sns-icon" />
+            </a>
+            <a href="https://www.youtube.com/@komafes68" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+              <Image src={youtubeIcon} alt="YouTube" format="svg" class="footer-sns-icon" />
+            </a>
+            <a href="https://x.com/Komafes68" aria-label="X" target="_blank" rel="noopener noreferrer">
+              <Image src={xIcon} alt="X" format="svg" class="footer-sns-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
+      </div>
     </footer>
 
     <!-- ========================================
          JavaScript 統合処理
          ======================================== -->
     <script>
-      import { gsap } from 'gsap';
+      import { gsap } from "gsap";
 
       const initApp = () => {
-        // --- 1. GSAP アニメーション ---
-        gsap.fromTo('.top-logo-img', { clipPath: 'inset(0 0 100% 0)', opacity: 1 }, { clipPath: 'inset(0 0 0% 0)', duration: 0.8, ease: 'power2.out', delay: 0.1 });
-        gsap.fromTo('.main-logo-img', { scale: 0.85, rotation: -140, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: 'back.out(1.2)', delay: 0.4 });
-        gsap.fromTo('.hat-img', { xPercent: 120, yPercent: -90, rotation: 35, scale: 1.15, opacity: 0 }, { xPercent: 0, yPercent: 0, rotation: 0, scale: 1, opacity: 1, duration: 1.1, ease: 'power3.out', delay: 0.9, onComplete: startPeriodicAndInteractiveEffects });
-        gsap.fromTo('.typo-img', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power2.out', delay: 0.8 });
-        gsap.fromTo('.hero-title-img', { clipPath: 'inset(0 100% 0 0)', opacity: 1 }, { clipPath: 'inset(0 0% 0 0)', duration: 0.8, ease: 'power2.out', delay: 0.3 });
-        gsap.fromTo('.komafes-label-img', { clipPath: 'inset(0 100% 0 0)', opacity: 1 }, { clipPath: 'inset(0 0% 0 0)', duration: 0.8, ease: 'power2.out', delay: 0.45 });
-        gsap.fromTo('.date-info', { clipPath: 'inset(0 100% 0 0)', opacity: 1 }, { clipPath: 'inset(0 0% 0 0)', duration: 0.8, ease: 'power2.out', delay: 0.6 });
-        gsap.fromTo('.right-nav', { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.5 });
-        gsap.fromTo('.scroll-animation', { opacity: 0, y: 0 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 1.0 });
+        // --- 1. GSAP アニメーション (Hero) ---
+        gsap.fromTo(
+          ".top-logo-img",
+          { clipPath: "inset(0 0 100% 0)", opacity: 1 },
+          {
+            clipPath: "inset(0 0 0% 0)",
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.1,
+          },
+        );
+        gsap.fromTo(
+          ".main-logo-img",
+          { scale: 0.85, rotation: -140, opacity: 0 },
+          {
+            scale: 1,
+            rotation: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "back.out(1.2)",
+            delay: 0.4,
+          },
+        );
+        gsap.fromTo(
+          ".hat-img",
+          {
+            xPercent: 120,
+            yPercent: -90,
+            rotation: 35,
+            scale: 1.15,
+            opacity: 0,
+          },
+          {
+            xPercent: 0,
+            yPercent: 0,
+            rotation: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 1.1,
+            ease: "power3.out",
+            delay: 0.9,
+            onComplete: startPeriodicAndInteractiveEffects,
+          },
+        );
+        gsap.fromTo(
+          ".typo-img",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: "power2.out", delay: 0.8 },
+        );
+        gsap.fromTo(
+          ".hero-title-img",
+          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+          {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.3,
+          },
+        );
+        gsap.fromTo(
+          ".komafes-label-img",
+          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+          {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.45,
+          },
+        );
+        gsap.fromTo(
+          ".date-info",
+          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+          {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.6,
+          },
+        );
+        gsap.fromTo(
+          ".right-nav",
+          { x: 20, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.5 },
+        );
+        gsap.fromTo(
+          ".scroll-animation",
+          { opacity: 0, y: 0 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 1.0 },
+        );
 
-        gsap.to('.scroll-line', {
-          height: '40%',             
+        gsap.to(".scroll-line", {
+          height: "40%",
           duration: 2,
-          ease: 'power1.inOut',
-          repeat: -1,             
-          yoyo: true              
+          ease: "power1.inOut",
+          repeat: -1,
+          yoyo: true,
         });
 
         function startPeriodicAndInteractiveEffects() {
           function playHatFlip() {
-            return gsap.timeline()
-              .to('.hat-img', { yPercent: -70, xPercent: 70, rotation: '+=30', scale: 1.3, duration: 0.55, ease: 'power2.out' })
-              .to('.hat-img', { yPercent: 0, xPercent: 0, rotation: '+=330', scale: 1, duration: 0.95, ease: 'power2.inOut' });
+            return gsap
+              .timeline()
+              .to(".hat-img", {
+                yPercent: -70,
+                xPercent: 70,
+                rotation: "+=30",
+                scale: 1.3,
+                duration: 0.55,
+                ease: "power2.out",
+              })
+              .to(".hat-img", {
+                yPercent: 0,
+                xPercent: 0,
+                rotation: "+=330",
+                scale: 1,
+                duration: 0.95,
+                ease: "power2.inOut",
+              });
           }
 
           const loopTimeline = gsap.timeline({ repeat: -1, repeatDelay: 3.0 });
           loopTimeline
-            .to('.main-logo-img', { rotation: '+=360', duration: 1.5, ease: 'power2.inOut' }, 0)
+            .to(
+              ".main-logo-img",
+              { rotation: "+=360", duration: 1.5, ease: "power2.inOut" },
+              0,
+            )
             .add(playHatFlip(), 0);
 
-          const logoContainer = document.querySelector('.main-logo-container');
+          const logoContainer = document.querySelector(".main-logo-container");
           if (logoContainer) {
-            logoContainer.addEventListener('mouseenter', () => {
-              gsap.to('.main-logo-container', { scale: 1.05, duration: 0.3, ease: 'power2.out' });
+            logoContainer.addEventListener("mouseenter", () => {
+              gsap.to(".main-logo-container", {
+                scale: 1.05,
+                duration: 0.3,
+                ease: "power2.out",
+              });
             });
-            logoContainer.addEventListener('mouseleave', () => {
-              gsap.to('.main-logo-container', { scale: 1, duration: 0.3, ease: 'power2.inOut' });
+            logoContainer.addEventListener("mouseleave", () => {
+              gsap.to(".main-logo-container", {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.inOut",
+              });
             });
           }
         }
 
         // --- 2. スマホ用ハンバーガーメニュー制御 ---
-        const hamburger = document.querySelector('.hamburger');
-        const mobileNav = document.querySelector('.mobile-nav');
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        const hamburger = document.querySelector(".hamburger");
+        const mobileNav = document.querySelector(".mobile-nav");
+        const mobileLinks = document.querySelectorAll(".mobile-nav a");
 
         if (hamburger && mobileNav) {
-          hamburger.addEventListener('click', () => {
-            const isActive = hamburger.classList.contains('is-active');
+          hamburger.addEventListener("click", () => {
+            const isActive = hamburger.classList.contains("is-active");
             if (isActive) {
-              hamburger.classList.remove('is-active');
-              mobileNav.classList.remove('is-active');
-              hamburger.setAttribute('aria-expanded', 'false');
-              document.body.classList.remove('no-scroll');
+              hamburger.classList.remove("is-active");
+              mobileNav.classList.remove("is-active");
+              hamburger.setAttribute("aria-expanded", "false");
+              document.body.classList.remove("no-scroll");
             } else {
-              hamburger.classList.add('is-active');
-              mobileNav.classList.add('is-active');
-              hamburger.setAttribute('aria-expanded', 'true');
-              document.body.classList.add('no-scroll');
+              hamburger.classList.add("is-active");
+              mobileNav.classList.add("is-active");
+              hamburger.setAttribute("aria-expanded", "true");
+              document.body.classList.add("no-scroll");
             }
           });
 
-          mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-              hamburger.classList.remove('is-active');
-              mobileNav.classList.remove('is-active');
-              hamburger.setAttribute('aria-expanded', 'false');
-              document.body.classList.remove('no-scroll');
+          mobileLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              hamburger.classList.remove("is-active");
+              mobileNav.classList.remove("is-active");
+              hamburger.setAttribute("aria-expanded", "false");
+              document.body.classList.remove("no-scroll");
             });
           });
         }
 
-        // --- 3. スクロール連動処理（ヘッダーフェードイン & ハンバーガー色切り替え） ---
-        const stickyHeader = document.querySelector('.sticky-header');
-        const heroSection = document.querySelector('.hero');
+        // --- 3. スクロール連動処理 (ヘッダー) ---
+        const stickyHeader = document.querySelector(".sticky-header");
+        const heroSection = document.querySelector(".hero");
 
         const handleScroll = () => {
           if (!heroSection) return;
           const heroBottom = heroSection.getBoundingClientRect().bottom;
 
-          // Hero画像を通過したら表示
           if (heroBottom <= 80) {
-            if (stickyHeader) stickyHeader.classList.add('is-show');
-            if (hamburger) hamburger.classList.add('is-black');
+            if (stickyHeader) stickyHeader.classList.add("is-show");
+            if (hamburger) hamburger.classList.add("is-black");
           } else {
-            if (stickyHeader) stickyHeader.classList.remove('is-show');
-            if (hamburger) hamburger.classList.remove('is-black');
+            if (stickyHeader) stickyHeader.classList.remove("is-show");
+            if (hamburger) hamburger.classList.remove("is-black");
           }
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener("scroll", handleScroll);
         handleScroll();
       };
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initApp);
+      // --- 4. EXHIBITION セクションのデータ取得と無限スクロール・出現アニメーション ---
+      const initExhibition = async () => {
+        const track = document.getElementById("exhibitionTrack");
+        if (!track) return;
+
+        try {
+          const response = await fetch("/src/pages/data/exhibitions.json");
+          const exhibitions = await response.json();
+          if (!exhibitions || exhibitions.length === 0) return;
+
+          const shuffled = [...exhibitions]
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 8);
+
+          // ドロップシャドウを適用するためにラッパー(div)でaタグを囲んでいます
+          const cardHtml = shuffled
+            .map(
+              (item) => `
+            <div class="exhibition-card-wrapper">
+              <a href="/exhibition" class="exhibition-card">
+                <img src="${item.image}" alt="展示画像" class="exhibition-card-img" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'" />
+              </a>
+            </div>
+          `,
+            )
+            .join("");
+
+          track.innerHTML = cardHtml + cardHtml + cardHtml;
+
+          requestAnimationFrame(() => {
+            gsap.to(track, {
+              xPercent: -33.3333,
+              ease: "none",
+              duration: 25,
+              repeat: -1,
+            });
+          });
+        } catch (error) {
+          console.error("EXHIBITIONデータの読み込みに失敗しました:", error);
+        }
+
+        // --- 5. スクロール連動での出現アニメーション (IntersectionObserver) ---
+        const exhibitionSection = document.querySelector(".exhibition-section");
+        if (exhibitionSection) {
+          const observer = new IntersectionObserver(
+            (entries, obs) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  gsap.fromTo(
+                    ".exhibition-title",
+                    { clipPath: "inset(0 100% 0 0)" },
+                    {
+                      clipPath: "inset(0 0% 0 0)",
+                      duration: 0.9,
+                      ease: "power3.inOut",
+                    },
+                  );
+                  gsap.fromTo(
+                    ".exhibition-subtitle",
+                    { y: 20, opacity: 0 },
+                    {
+                      y: 0,
+                      opacity: 1,
+                      duration: 0.7,
+                      ease: "power2.out",
+                      delay: 0.4,
+                    },
+                  );
+                  gsap.fromTo(
+                    ".exhibition-carousel-wrapper",
+                    { clipPath: "inset(0 100% 0 0)", opacity: 0 },
+                    {
+                      clipPath: "inset(0 0% 0 0)",
+                      opacity: 1,
+                      duration: 1.2,
+                      ease: "power3.inOut",
+                      delay: 0.6,
+                    },
+                  );
+                  obs.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.2 },
+          );
+
+          observer.observe(exhibitionSection);
+        }
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          initApp();
+          initExhibition();
+        });
       } else {
         initApp();
+        initExhibition();
       }
     </script>
   </body>
@@ -341,7 +772,11 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
 
 <style>
   body {
-    font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+    font-family:
+      "Noto Sans JP",
+      system-ui,
+      -apple-system,
+      sans-serif;
     margin: 0;
     padding: 0;
     background-color: #000;
@@ -352,24 +787,19 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     overflow: hidden;
   }
 
-  /* ========================================
-     PC・タブレット用 追従固定ヘッダー
-     ======================================== */
+  /* (ヘッダーやHero等の既存スタイル) */
   .sticky-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 900;
-
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-
     padding: 0.8rem 0;
-
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -380,7 +810,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     pointer-events: auto;
   }
 
-  /* ヘッダー内部のレイアウト（左右配置） */
   .sticky-header-inner {
     width: 100%;
     max-width: 1200px;
@@ -391,7 +820,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     padding: 0 1.5rem;
   }
 
-  /* ヘッダー左側のロゴとタイポ */
   .header-brand {
     display: flex;
     align-items: center;
@@ -404,7 +832,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     opacity: 0.7;
   }
 
-  /* ▼ こちらに filter: brightness(0); を追加して常に黒にしています ▼ */
   .header-logo {
     height: 40px;
     width: auto;
@@ -419,7 +846,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     filter: brightness(0);
   }
 
-  /* ヘッダー右側のナビゲーション */
   .header-nav ul {
     display: flex;
     gap: clamp(1rem, 2vw, 2.5rem);
@@ -431,10 +857,12 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
   .header-nav a {
     color: #111111;
     text-decoration: none;
-    font-family: 'Bebas Neue', cursive;
+    font-family: "Bebas Neue", cursive;
     font-size: clamp(0.95rem, 1.2vw, 1.15rem);
     letter-spacing: 0.12em;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
   }
 
   .header-nav a:hover {
@@ -442,10 +870,8 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     transform: translateY(-1px);
   }
 
-  /* ========================================
-     スマホ用 ハンバーガー & モバイルナビ
-     ======================================== */
-  .hamburger, .mobile-nav {
+  .hamburger,
+  .mobile-nav {
     display: none;
   }
 
@@ -459,10 +885,10 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       background: transparent;
       border: none;
       cursor: pointer;
-      position: fixed; 
-      top: 3.5%; 
+      position: fixed;
+      top: 3.5%;
       right: 6%;
-      z-index: 1000; 
+      z-index: 1000;
       padding: 0;
     }
 
@@ -472,7 +898,10 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       height: 2px;
       background-color: #ffffff;
       border-radius: 2px;
-      transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+      transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
       filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
     }
 
@@ -534,7 +963,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       color: #f6f9f6;
       text-decoration: none;
       font-size: 1.8rem;
-      font-family: 'Bebas Neue', cursive;
+      font-family: "Bebas Neue", cursive;
       letter-spacing: 0.15em;
     }
 
@@ -553,7 +982,7 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
       color: #ffffff;
       text-decoration: none;
       font-size: 0.8rem;
-      font-family: 'Noto Sans JP', sans-serif;
+      font-family: "Noto Sans JP", sans-serif;
     }
 
     .mobile-sns-links .sns-icon {
@@ -567,9 +996,6 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     }
   }
 
-  /* ========================================
-     Hero & 各パーツレイアウト
-     ======================================== */
   .hero {
     position: relative;
     width: 100%;
@@ -581,91 +1007,716 @@ const pageDescription = "駒場東邦 第69代 文化祭「SAIL BEYOND」の公�
     display: block;
   }
 
-  .pc-bg { display: block; }
-  .sp-bg { display: none; }
-  .tb-bg { display: none; }
+  .pc-bg {
+    display: block;
+  }
+  .sp-bg {
+    display: none;
+  }
+  .tb-bg {
+    display: none;
+  }
 
-  .top-logo { position: absolute; top: 3.5%; left: 50%; transform: translateX(-50%); width: 8%; max-width: 140px; }
-  .top-logo-img { width: 100%; height: auto; display: block; }
+  .top-logo {
+    position: absolute;
+    top: 3.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8%;
+    max-width: 140px;
+  }
+  .top-logo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
   .main-logo-container {
-    position: absolute; top: 9%; left: 50%; transform: translateX(-50%); width: 27%; max-width: 520px;
-    pointer-events: auto; cursor: pointer; will-change: transform;
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 27%;
+    max-width: 520px;
+    pointer-events: auto;
+    cursor: pointer;
+    will-change: transform;
   }
-  .main-logo-img { width: 100%; height: auto; display: block; transform-origin: center center; }
+  .main-logo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform-origin: center center;
+  }
 
-  .hat-container { position: absolute; top: 10%; right: 6%; width: 45%; pointer-events: none; }
-  .hat-img { width: 100%; height: auto; display: block; transform-origin: center center; will-change: transform, opacity; }
+  .hat-container {
+    position: absolute;
+    top: 10%;
+    right: 6%;
+    width: 45%;
+    pointer-events: none;
+  }
+  .hat-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform-origin: center center;
+    will-change: transform, opacity;
+  }
 
-  .typo-container { position: absolute; top: 55%; left: 50%; transform: translateX(-50%); width: 35%; max-width: 560px; pointer-events: none; }
-  .typo-img { width: 100%; height: auto; display: block; will-change: transform, opacity; }
+  .typo-container {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35%;
+    max-width: 560px;
+    pointer-events: none;
+  }
+  .typo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    will-change: transform, opacity;
+  }
 
-  .hero-title-container { position: absolute; top: 5%; left: 4%; width: 15%; max-width: 450px; }
-  .hero-title-img { width: 90%; height: auto; display: block; }
+  .hero-title-container {
+    position: absolute;
+    top: 5%;
+    left: 4%;
+    width: 15%;
+    max-width: 450px;
+  }
+  .hero-title-img {
+    width: 90%;
+    height: auto;
+    display: block;
+  }
 
-  .komafesLabel { position: absolute; top: 34%; left: 4%; width: 10%; max-width: 300px; }
-  .komafes-label-img { width: 100%; height: auto; display: block; }
+  .komafesLabel {
+    position: absolute;
+    top: 34%;
+    left: 4%;
+    width: 10%;
+    max-width: 300px;
+  }
+  .komafes-label-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
-  .date-info { position: absolute; top: 41%; left: 4%; color: #f6f9f6; font-family: 'Noto Sans JP', sans-serif; font-weight: 700; line-height: 1.3; }
-  .date-row { display: flex; align-items: baseline; font-size: clamp(1.1rem, 2.2vw, 2.2rem); }
-  .date-row.separator { margin-left: 0.2em; margin-top: 0.35em; }
-  .dash { display: inline-block; transform: scaleX(1.8); transform-origin: left center; margin-right: 0.8em; font-weight: 300; }
-  .day { font-size: 0.75em; margin-left: 0.3em; opacity: 0.9; }
-  .time-row { margin-top: 0.6em; font-size: clamp(0.85rem, 1.6vw, 1.5rem); letter-spacing: 0.05em; }
+  .date-info {
+    position: absolute;
+    top: 41%;
+    left: 4%;
+    color: #f6f9f6;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .date-row {
+    display: flex;
+    align-items: baseline;
+    font-size: clamp(1.1rem, 2.2vw, 2.2rem);
+  }
+  .date-row.separator {
+    margin-left: 0.2em;
+    margin-top: 0.35em;
+  }
+  .dash {
+    display: inline-block;
+    transform: scaleX(1.8);
+    transform-origin: left center;
+    margin-right: 0.8em;
+    font-weight: 300;
+  }
+  .day {
+    font-size: 0.75em;
+    margin-left: 0.3em;
+    opacity: 0.9;
+  }
+  .time-row {
+    margin-top: 0.6em;
+    font-size: clamp(0.85rem, 1.6vw, 1.5rem);
+    letter-spacing: 0.05em;
+  }
 
-  .scroll-animation { position: absolute; top: 65%; left: 7%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 20%; gap: 8px; }
-  .scroll-text { font-family: 'Bebas Neue', cursive; color: #f6f9f6; font-size: clamp(0.7rem, 0.9vw, 1.1rem); letter-spacing: 0.1em; }
-  .scroll-line { width: 1px; height: 10%; background-color: #f6f9f6; will-change: height; }
-  .scroll-icon { width: clamp(14px, 1.5vw, 20px); height: auto; display: block; object-fit: contain; }
+  .scroll-animation {
+    position: absolute;
+    top: 65%;
+    left: 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 20%;
+    gap: 8px;
+  }
+  .scroll-text {
+    font-family: "Bebas Neue", cursive;
+    color: #f6f9f6;
+    font-size: clamp(0.7rem, 0.9vw, 1.1rem);
+    letter-spacing: 0.1em;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 10%;
+    background-color: #f6f9f6;
+    will-change: height;
+  }
+  .scroll-icon {
+    width: clamp(14px, 1.5vw, 20px);
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
 
-  /* PC版ナビゲーション (Hero画像右側) */
-  .right-nav { position: absolute; top: 18%; right: 3%; text-align: left; font-family: 'Bebas Neue', cursive; }
-  .right-nav ul { list-style: none; margin: 0; padding: 0; }
-  .right-nav li { margin-bottom: clamp(0.5rem, 2vw, 2.4rem); }
-  .right-nav a { color: #f6f9f6; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.44rem); letter-spacing: 0.12em; transition: opacity 0.2s ease, transform 0.2s ease; display: inline-block; transform-origin: left center; }
-  .right-nav a:hover { opacity: 0.8; transform: scale(1.08); }
-  .sns-links { margin-top: clamp(1.5rem, 1vw, 3.5rem); display: flex; gap: 1rem; align-items: flex-end; justify-content: center; position: relative; left: 27%; transform: translateX(-50%); width: max-content; }
-  .sns-links a { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 0.35rem; color: #ffffff; text-decoration: none; font-size: clamp(8px, 0.6vw, 0.8rem); opacity: 1; transition: transform 0.2s ease, opacity 0.2s ease; }
-  .sns-links a:hover { opacity: 1; transform: translateY(-3px) scale(1.05); }
-  .sns-icon { width: clamp(14px, 1.6vw, 34px); height: clamp(14px, 1.6vw, 34px); display: block; object-fit: contain; }
+  .right-nav {
+    position: absolute;
+    top: 18%;
+    right: 3%;
+    text-align: left;
+    font-family: "Bebas Neue", cursive;
+  }
+  .right-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .right-nav li {
+    margin-bottom: clamp(0.5rem, 2vw, 2.4rem);
+  }
+  .right-nav a {
+    color: #f6f9f6;
+    text-decoration: none;
+    font-size: clamp(1rem, 1.2vw, 1.44rem);
+    letter-spacing: 0.12em;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+    display: inline-block;
+    transform-origin: left center;
+  }
+  .right-nav a:hover {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+  .sns-links {
+    margin-top: clamp(1.5rem, 1vw, 3.5rem);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    left: 27%;
+    transform: translateX(-50%);
+    width: max-content;
+  }
+  .sns-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.35rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: clamp(8px, 0.6vw, 0.8rem);
+    opacity: 1;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+  .sns-links a:hover {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.05);
+  }
+  .sns-icon {
+    width: clamp(14px, 1.6vw, 34px);
+    height: clamp(14px, 1.6vw, 34px);
+    display: block;
+    object-fit: contain;
+  }
 
-  footer { text-align: center; padding: 2rem 0; color: #000000; background-color: #f6f9f6; font-size: 0.8rem; height: 1000px; }
 
-  /* タブレットレスポンシブ (1024px 以下) */
+
   @media screen and (max-width: 1024px) {
-    .main-logo-container { top: 13%; width: 35%; }
-    .typo-container { top: 53%; width: 50%; }
-    .top-logo { top: 4%; width: 10%; }
-    .hero-title-container { top: 4%; width: 21%; left: 5%; }
-    .komafesLabel { top: 30%; width: 14%; left: 5%; }
-    .date-info { top: 37%; left: 5%; }
-    .scroll-animation { top: 63%; left: 8%; }
-    .right-nav { top: 22%; right: 4%; }
-    .right-nav li { margin-bottom: 2vw; }
-    .sns-links { margin-top: 3vw; left: 35%; }
+    .main-logo-container {
+      top: 13%;
+      width: 35%;
+    }
+    .typo-container {
+      top: 53%;
+      width: 50%;
+    }
+    .top-logo {
+      top: 4%;
+      width: 10%;
+    }
+    .hero-title-container {
+      top: 4%;
+      width: 21%;
+      left: 5%;
+    }
+    .komafesLabel {
+      top: 30%;
+      width: 14%;
+      left: 5%;
+    }
+    .date-info {
+      top: 37%;
+      left: 5%;
+    }
+    .scroll-animation {
+      top: 63%;
+      left: 8%;
+    }
+    .right-nav {
+      top: 22%;
+      right: 4%;
+    }
+    .right-nav li {
+      margin-bottom: 2vw;
+    }
+    .sns-links {
+      margin-top: 3vw;
+      left: 35%;
+    }
 
-    .pc-bg { display: none; }
-    .tb-bg { display: block; width: 100%; height: auto; }
-    .sp-bg { display: none; }
+    .pc-bg {
+      display: none;
+    }
+    .tb-bg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .sp-bg {
+      display: none;
+    }
   }
 
-  /* スマホレスポンシブ (768px 以下) */
   @media screen and (max-width: 768px) {
-    .pc-bg { display: none; }
-    .sp-bg { display: block; width: 100%; height: auto; }
-    .tb-bg { display: none; }
+    .pc-bg {
+      display: none;
+    }
+    .sp-bg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .tb-bg {
+      display: none;
+    }
 
-    .right-nav { display: none; }
-    .top-logo { opacity: 0; }
-    .main-logo-container { top: 37%; width: 62%; }
-    .typo-container { top: 70%; width: 75%; }
-    .hero-title-container { top: 4%; width: 45%; left: 6%; }
-    .komafesLabel { top: 28%; width: 34%; left: 6%; }
-    
-    .date-info { top: 21%; left: 52%; }
-    .date-row { font-size: clamp(0.8rem, 5vw, 1.6rem); }
-    .time-row { font-size: clamp(0.6rem, 4vw, 1.2rem); }
+    .right-nav {
+      display: none;
+    }
+    .top-logo {
+      opacity: 0;
+    }
+    .main-logo-container {
+      top: 37%;
+      width: 62%;
+    }
+    .typo-container {
+      top: 70%;
+      width: 75%;
+    }
+    .hero-title-container {
+      top: 4%;
+      width: 45%;
+      left: 6%;
+    }
+    .komafesLabel {
+      top: 28%;
+      width: 34%;
+      left: 6%;
+    }
 
-    .scroll-animation { top: 90%; left: 45%; }
+    .date-info {
+      top: 21%;
+      left: 52%;
+    }
+    .date-row {
+      font-size: clamp(0.8rem, 5vw, 1.6rem);
+    }
+    .time-row {
+      font-size: clamp(0.6rem, 4vw, 1.2rem);
+    }
+
+    .scroll-animation {
+      top: 88%;
+      left: 45%;
+      height: 12%;
+    }
+  }
+
+  /* ========================================
+     マーキー装飾 (Heroの下)
+     ======================================== */
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    pointer-events: none; /* 重なった部分のクリックを妨げないようにする */
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    /* 60秒かけてループします。速度を変えたい場合は秒数を調整してください */
+    animation: marquee-anim 60s linear infinite;
+  }
+
+  .marquee-text {
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(4rem, 10vw, 14rem);
+    color: transparent; /* 文字の塗りを透明に */
+    -webkit-text-stroke: 0.01em #ffffff; /* アウトライン（縁取り）を設定 */
+    letter-spacing: 0.02em;
+    line-height: 1;
+    /* 2つのspanタグの間の隙間をなくすために少し調整 */
+    padding-right: 20px;
+    margin-top: -0.03em;
+    margin-bottom: -0.09em;
+  }
+
+  /* ダークモードや黒背景に被る際に、アウトラインを白にしたい場合は色を #fff に変更してください */
+
+  @keyframes marquee-anim {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .marquee-text {
+      -webkit-text-stroke: 0.5px #ffffff; /* スマホ時は線を少し細く */
+    }
+  }
+
+  /* ========================================
+     EXHIBITION セクション (アップデート内容)
+     ======================================== */
+  .exhibition-section {
+    padding: 40px 0;
+    background-color: #fafafa;
+    position: relative;
+  }
+
+  .exhibition-header {
+    max-width: 1500px;
+    margin: 0 auto 30px;
+    padding: 0 1.5rem;
+  }
+
+  .exhibition-label-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  /* ラベル風のタイトルデザイン＆フォントサイズ拡大 */
+  .exhibition-title {
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 800;
+    margin: 0;
+    color: #060906;
+    font-family: "Bebas Neue", cursive;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    display: inline-block;
+  }
+
+  /* サブタイトルは黒で統一 */
+  .exhibition-subtitle {
+    margin: 6px 0 0;
+    font-size: 1.3rem;
+    color: #111;
+    font-weight: 700;
+  }
+
+  .exhibition-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-color: #1e2229; /* フォールバックカラー */
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+  }
+
+  .exhibition-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    height: 92%;
+    padding-left: 45px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* clip-pathを維持したまま影をつけるためのラッパー */
+  :global(.exhibition-card-wrapper) {
+    position: relative;
+    width: 300px;
+    height: 100%;
+    flex-shrink: 0;
+    margin-left: -45px;
+    /* 重なっている部分にドロップシャドウを適用 */
+    filter: drop-shadow(-5px 5px 10px rgba(0, 0, 0, 0.5));
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* ホバー時は少しだけ上に浮く仕様（画像は暗くならない） */
+  :global(.exhibition-card-wrapper:hover) {
+    transform: translateY(-4px);
+    z-index: 5;
+  }
+
+  /* 実際のカード（切り抜き設定） */
+  :global(.exhibition-card) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+    background-color: #222;
+    overflow: hidden;
+  }
+
+  /* 画像本体（フィルターなしで通常の色を表示） */
+  :global(.exhibition-card-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .btn-exhibition-floating {
+    position: absolute;
+    right: 5%;
+    bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+
+    background: rgba(117, 120, 122, 0.726);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    transition:
+      background 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .btn-exhibition-floating:hover {
+    background: rgba(33, 35, 37, 0.8);
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 768px) {
+    .exhibition-section {
+      padding: 40px 0;
+    }
+    .exhibition-title {
+      font-size: 4rem;
+    }
+    .exhibition-subtitle {
+      font-size: 1rem;
+    }
+    .exhibition-carousel-wrapper {
+      height: 200px;
+    }
+    .exhibition-track {
+      padding-left: 30px;
+    }
+    /* スマホ時のカード幅調整 */
+    :global(.exhibition-card-wrapper) {
+      width: 200px;
+      margin-left: -30px;
+    }
+    .btn-exhibition-floating {
+      right: 50%;
+      transform: translateX(50%);
+      bottom: 12px;
+      padding: 12px 24px;
+      font-size: 0.6rem;
+      width: max-content;
+      white-space: nowrap;
+    }
+    .btn-exhibition-floating:hover {
+      transform: translateX(50%) translateY(-2px);
+    }
+  }
+
+ /* ========================================
+     FOOTER
+     ======================================== */
+  .footer {
+    background-color: #1a1b1f; /* 少し画像に近い暗い色調に */
+    color: #f6f9f6;
+    padding: 70px 0 20px;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  /* --- 左側：情報エリア --- */
+  .footer-info {
+    flex: 1;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-brand:hover {
+    opacity: 0.7;
+  }
+
+  /* filterを使ってSVGを白色に反転させています */
+  .footer-logo {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer-typo {
+    height: 14px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .school-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+  }
+
+  .school-details p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+    color: #ccc;
+  }
+
+  .school-details strong {
+    color: #f6f9f6;
+    font-weight: 500;
+  }
+
+  .access-info {
+    margin-top: 12px !important;
+    padding-left: 10px;
+    border-left: 2px solid #555;
+  }
+
+  /* --- 右側：ナビゲーションエリア --- */
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ブロック内の要素を左揃えにする */
+  }
+
+  .sitemap {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px; /* 列同士の間隔 */
+    row-gap: 16px;
+    text-align: left; /* 文字を左揃えに */
+  }
+
+  .sitemap a {
+    color: #f6f9f6;
+    text-decoration: none;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    display: inline-block; /* transformを有効化 */
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .sitemap a:hover {
+    color: #aaa;
+    transform: translateX(4px); /* 左揃えなので右側にスライドさせる */
+  }
+
+  .footer-sns {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-sns-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .footer-sns-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+
+  /* --- ボトム：コピーライト --- */
+  .footer-bottom {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #777;
+    letter-spacing: 0.05em;
+  }
+
+  /* --- スマホ対応 --- */
+  @media screen and (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .sitemap {
+      column-gap: 20px;
+      width: 100%;
+    }
   }
 </style>
