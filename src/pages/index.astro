@@ -52,6 +52,13 @@ const pageDescription =
       media="print"
       onload="this.media='all'"
     />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
+    <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body id="top">
     <!-- ========================================
@@ -368,6 +375,38 @@ const pageDescription =
         >
       </div>
     </div>
+
+    <!-- ========================================
+         COUNTDOWN / 船長の公開日誌
+         ======================================== -->
+    <section class="captains-log-section" aria-labelledby="captains-log-title">
+      <div class="captains-log-inner">
+        <div class="log-heading">
+          <p class="log-kicker">CAPTAIN'S PUBLIC LOG · NO. 69</p>
+          <h2 id="captains-log-title">船長の公開日誌</h2>
+          <p class="log-date">ENTRY: 2026 / 09 / 19 — 09:00 JST</p>
+        </div>
+
+        <div class="log-details">
+          <dl>
+            <div><dt>DESTINATION</dt><dd>駒場東邦文化祭・第69代</dd></div>
+            <div><dt>COORDINATES</dt><dd>35°39′37.8″N / 139°40′40.9″E</dd></div>
+            <div><dt>MISSION</dt><dd>未知なる二日間へ、帆を上げよ。</dd></div>
+          </dl>
+        </div>
+
+        <div class="countdown" aria-live="polite" aria-label="文化祭開始までの残り時間">
+          <div class="countdown-unit"><span id="countdown-days">00</span><small>DAYS</small></div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-unit"><span id="countdown-hours">00</span><small>HOURS</small></div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-unit"><span id="countdown-minutes">00</span><small>MINUTES</small></div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-unit"><span id="countdown-seconds">00</span><small>SECONDS</small></div>
+        </div>
+        <p class="countdown-status" id="countdown-status">DEPARTURE COUNTDOWN</p>
+      </div>
+    </section>
     <!-- ========================================
          ACCESS セクション
          ======================================== -->
@@ -456,6 +495,20 @@ const pageDescription =
               </div>
             </div>
 
+            <div class="access-map-wrapper access-map-mobile">
+              <iframe
+                src="https://www.google.com/maps?q=%E9%A7%92%E5%A0%B4%E6%9D%B1%E9%82%A6%E4%B8%AD%E5%AD%A6%E6%A0%A1%E3%83%BB%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%2C%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%96%E7%94%B0%E8%B0%B7%E5%8C%BA%E6%B1%A0%E5%B0%BB4-5-1&output=embed"
+                title="駒場東邦中学校・高等学校の地図"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <div class="map-overlay-frame"></div>
+            </div>
+
             <div class="access-notice">
               <p>※ご来場の際は公共交通機関をご利用ください。</p>
               <p>※近隣店舗等への無断駐車・駐輪は固くお断りいたします。</p>
@@ -465,7 +518,8 @@ const pageDescription =
           <!-- 右側：Googleマップ (海図・夜の海風フィルター) -->
           <div class="access-map-wrapper">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.670265749216!2d139.67803731145293!3d35.66049213103233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018f3521b2d0751%3A0x6a29f5f65f02bc6e!2z6aeS5aC05p2x6YOm5Lit5a2m5qCh44O76auY562J5a2m5qCh!5e0!3m2!1sja!2sjp!4v1714545000000!5m2!1sja!2sjp"
+              src="https://www.google.com/maps?q=%E9%A7%92%E5%A0%B4%E6%9D%B1%E9%82%A6%E4%B8%AD%E5%AD%A6%E6%A0%A1%E3%83%BB%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%2C%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%96%E7%94%B0%E8%B0%B7%E5%8C%BA%E6%B1%A0%E5%B0%BB4-5-1&output=embed"
+              title="駒場東邦中学校・高等学校の地図"
               width="100%"
               height="100%"
               style="border:0;"
@@ -480,6 +534,8 @@ const pageDescription =
         </div>
       </div>
     </section>
+
+    
 
     <!-- ========================================
          EXHIBITION セクション
@@ -508,6 +564,60 @@ const pageDescription =
           <span class="btn-text">団体を詳しく見る</span>
           <span class="btn-arrow">→</span>
         </a>
+      </div>
+    </section>
+
+    <!-- ========================================
+         SNS セクション
+         ======================================== -->
+    <section class="social-section" aria-labelledby="social-title">
+      <div class="social-map-lines" aria-hidden="true"></div>
+      <div class="social-inner">
+        <div class="social-heading">
+          <span class="social-compass" aria-hidden="true">✦</span>
+          <p class="social-kicker">FOLLOW THE WIND</p>
+          <h2 id="social-title">各種SNS</h2>
+          <p>駒場東邦文化祭の最新情報を、航海日誌のようにお届けします。</p>
+        </div>
+
+        <div class="social-cards">
+          <a
+            class="social-card"
+            href="https://www.instagram.com/komafes69/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="social-card-icon">
+              <Image src={instagramIcon} alt="" format="svg" />
+            </span>
+            <span class="social-card-text"><strong>Instagram</strong><small>写真と速報を見る</small></span>
+            <span class="social-card-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a
+            class="social-card"
+            href="https://www.youtube.com/@komafes68"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="social-card-icon">
+              <Image src={youtubeIcon} alt="" format="svg" />
+            </span>
+            <span class="social-card-text"><strong>YouTube</strong><small>映像で文化祭を巡る</small></span>
+            <span class="social-card-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a
+            class="social-card"
+            href="https://x.com/Komafes68"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="social-card-icon">
+              <Image src={xIcon} alt="" format="svg" />
+            </span>
+            <span class="social-card-text"><strong>X</strong><small>お知らせを受け取る</small></span>
+            <span class="social-card-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -610,6 +720,37 @@ const pageDescription =
       import { gsap } from "gsap";
 
       const initApp = () => {
+        const countdownTarget = new Date("2026-09-19T09:00:00+09:00").getTime();
+        const countdownParts = {
+          days: document.getElementById("countdown-days"),
+          hours: document.getElementById("countdown-hours"),
+          minutes: document.getElementById("countdown-minutes"),
+          seconds: document.getElementById("countdown-seconds"),
+        };
+        const countdownStatus = document.getElementById("countdown-status");
+
+        const updateCountdown = () => {
+          const remaining = Math.max(countdownTarget - Date.now(), 0);
+          const totalSeconds = Math.floor(remaining / 1000);
+          const days = Math.floor(totalSeconds / 86400);
+          const hours = Math.floor((totalSeconds % 86400) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+          const pad = (value: number) => String(value).padStart(2, "0");
+
+          countdownParts.days && (countdownParts.days.textContent = pad(days));
+          countdownParts.hours && (countdownParts.hours.textContent = pad(hours));
+          countdownParts.minutes && (countdownParts.minutes.textContent = pad(minutes));
+          countdownParts.seconds && (countdownParts.seconds.textContent = pad(seconds));
+
+          if (remaining === 0 && countdownStatus) {
+            countdownStatus.textContent = "ARRIVED AT DESTINATION";
+          }
+        };
+
+        updateCountdown();
+        window.setInterval(updateCountdown, 1000);
+
         // --- 1. GSAP アニメーション (Hero) ---
         gsap.fromTo(
           ".top-logo-img",
@@ -956,14 +1097,20 @@ const pageDescription =
                 gsap.fromTo(
                   ".access-content",
                   { opacity: 0, y: 20 },
-                  { opacity: 1, y: 0, duration: 1.0, ease: "power2.out", delay: 0.6 }
+                  {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.0,
+                    ease: "power2.out",
+                    delay: 0.6,
+                  },
                 );
-                
+
                 obs.unobserve(entry.target);
               }
             });
           },
-          { threshold: 0.2 } // 画面に20%入ったら発動
+          { threshold: 0.2 }, // 画面に20%入ったら発動
         );
 
         observer.observe(accessSection);
@@ -1726,12 +1873,11 @@ const pageDescription =
      ======================================== */
   .access-section {
     padding: 80px 0;
-    background-color: #fafafa;
+    background-color: #ffffff;
     position: relative;
     z-index: 5;
   }
 
-  /* ▼ ここがズレの原因でした！ EXHIBITIONSと数値を完全に統一 */
   .access-inner {
     max-width: 1500px;
     margin: 0 auto;
@@ -1755,7 +1901,7 @@ const pageDescription =
     margin: 0;
     padding: 0;
     color: #060906;
-    font-family: 'Bebas Neue', cursive;
+    font-family: "Bebas Neue", cursive;
     line-height: 1.1;
     letter-spacing: 0.05em;
     display: inline-block;
@@ -1826,7 +1972,7 @@ const pageDescription =
   }
 
   .route-icon-wrapper {
-    background-color: transparent; 
+    background-color: transparent;
     color: #1e2229;
     width: 28px;
     height: 28px;
@@ -1892,21 +2038,20 @@ const pageDescription =
     max-width: 600px;
     min-height: 400px;
     position: relative;
-    border-radius: 0; /* マップも四角くシャープに */
+    border-radius: 10px; 
     overflow: hidden;
-    border: 2px solid #1e2229;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .access-map-mobile {
+    display: none;
   }
 
   .access-map-wrapper iframe {
     position: absolute;
     top: 0;
     left: 0;
-    filter: sepia(40%) hue-rotate(180deg) saturate(120%) brightness(95%) contrast(110%);
     transition: filter 0.3s ease;
-  }
-
-  .access-map-wrapper:hover iframe {
-    filter: sepia(20%) hue-rotate(180deg) saturate(100%) brightness(100%) contrast(100%);
   }
 
   .map-overlay-frame {
@@ -1916,7 +2061,7 @@ const pageDescription =
     width: 100%;
     height: 100%;
     pointer-events: none;
-    box-shadow: inset 0 0 40px rgba(0, 20, 40, 0.2);
+    box-shadow: outset 0 0 40px rgba(0, 20, 40, 0.2);
   }
 
   @media screen and (max-width: 768px) {
@@ -1942,6 +2087,126 @@ const pageDescription =
       height: 350px;
       min-height: auto;
     }
+
+    .access-content > .access-map-wrapper:not(.access-map-mobile) {
+      display: none;
+    }
+
+    .access-map-mobile {
+      display: block !important;
+      flex: none;
+      width: 100%;
+      height: 350px;
+      min-height: 350px;
+      margin: 32px 0;
+    }
+  }
+
+  /* ========================================
+     船長の公開日誌 / COUNTDOWN
+     ======================================== */
+  .captains-log-section {
+    position: relative;
+    overflow: hidden;
+    padding: 88px 1.5rem;
+    color: #e9e0bf;
+    background:
+      radial-gradient(ellipse at 88% 10%, rgba(55, 98, 112, 0.46), transparent 36%),
+      radial-gradient(ellipse at 8% 95%, rgba(112, 76, 37, 0.4), transparent 34%),
+      #092631;
+  }
+
+  .captains-log-section::before {
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(225, 205, 149, 0.36);
+    content: "";
+    pointer-events: none;
+  }
+
+  .captains-log-section::after {
+    position: absolute;
+    top: -130px;
+    right: -80px;
+    width: 330px;
+    height: 330px;
+    border: 1px dashed rgba(226, 207, 154, 0.45);
+    border-radius: 50%;
+    content: "";
+  }
+
+  .captains-log-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem);
+    border-left: 3px solid #d6b66d;
+    background: rgba(1, 22, 30, 0.42);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.28);
+  }
+
+  .log-heading { text-align: center; }
+  .log-kicker, .log-date, .countdown-status {
+    margin: 0;
+    color: #d4bb7e;
+    font-family: "Bebas Neue", cursive;
+    letter-spacing: 0.2em;
+  }
+  .log-kicker { font-size: 1rem; }
+  .log-heading h2 {
+    margin: 0.45rem 0;
+    color: #fbf2d1;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: clamp(2rem, 4.2vw, 3.2rem);
+    letter-spacing: 0.12em;
+  }
+  .log-date { font-size: 0.78rem; }
+
+  .log-details {
+    max-width: 760px;
+    margin: 2.5rem auto;
+    padding: 1.3rem 0;
+    border-top: 1px solid rgba(225, 205, 149, 0.42);
+    border-bottom: 1px solid rgba(225, 205, 149, 0.42);
+  }
+  .log-details dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 0; }
+  .log-details div { min-width: 0; }
+  .log-details dt { margin-bottom: 0.45rem; color: #d4bb7e; font-family: "Bebas Neue", cursive; font-size: 0.9rem; letter-spacing: 0.15em; }
+  .log-details dd { margin: 0; color: #f4edcf; font-size: 0.82rem; font-weight: 700; line-height: 1.7; }
+
+  .countdown {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(0.35rem, 1.3vw, 1rem);
+  }
+  .countdown-unit { display: grid; min-width: clamp(58px, 10vw, 108px); text-align: center; }
+  .countdown-unit > span {
+    color: #fff4ce;
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(3.3rem, 8vw, 6.2rem);
+    line-height: 0.85;
+    letter-spacing: 0.02em;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.36);
+  }
+  .countdown-unit small { margin-top: 0.8rem; color: #d4bb7e; font-family: "Bebas Neue", cursive; font-size: 0.7rem; letter-spacing: 0.16em; }
+  .countdown-separator { padding-top: 0.02em; color: #d4bb7e; font-family: "Bebas Neue", cursive; font-size: clamp(2.4rem, 5vw, 4.3rem); line-height: 0.8; }
+  .countdown-status { margin-top: 1.6rem; text-align: center; font-size: 0.85rem; }
+
+  @media screen and (max-width: 768px) {
+    .captains-log-section { padding: 58px 1rem; }
+    .captains-log-section::before { inset: 9px; }
+    .captains-log-inner { padding: 2.2rem 1.1rem; }
+    .log-details { margin: 1.8rem 0; }
+    .log-details dl { grid-template-columns: 1fr; gap: 1rem; }
+    .log-details div { display: grid; grid-template-columns: 105px 1fr; gap: 0.5rem; }
+    .log-details dt { margin: 0; }
+    .countdown { gap: 0.2rem; }
+    .countdown-unit { min-width: 0; flex: 1; }
+    .countdown-unit > span { font-size: clamp(2.5rem, 13vw, 3.4rem); }
+    .countdown-unit small { font-size: 0.53rem; letter-spacing: 0.08em; }
+    .countdown-separator { font-size: 2.3rem; }
   }
 
   /* ========================================
@@ -1949,7 +2214,7 @@ const pageDescription =
      ======================================== */
   .exhibition-section {
     padding: 40px 0;
-    background-color: #fafafa;
+    background-color: #ffffff;
     position: relative;
   }
 
@@ -2106,6 +2371,162 @@ const pageDescription =
     .btn-exhibition-floating:hover {
       transform: translateX(50%) translateY(-2px);
     }
+  }
+
+  /* ========================================
+     SNS / 航海図セクション
+     ======================================== */
+  .social-section {
+    position: relative;
+    overflow: hidden;
+    padding: 100px 1.5rem;
+    color: #20180e;
+    background:
+      radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.5), transparent 26%),
+      radial-gradient(circle at 90% 82%, rgba(92, 61, 27, 0.18), transparent 30%),
+      #d7c18e;
+  }
+
+  .social-section::before,
+  .social-section::after {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border: 1px solid rgba(66, 43, 18, 0.32);
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+  }
+
+  .social-section::before { top: -110px; right: 7%; }
+  .social-section::after { bottom: -135px; left: 5%; }
+
+  .social-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4.5rem);
+    border: 1px solid rgba(64, 41, 17, 0.6);
+    box-shadow: 10px 10px 0 rgba(58, 37, 13, 0.18), inset 0 0 70px rgba(94, 58, 17, 0.14);
+    background-color: rgba(242, 230, 194, 0.9);
+  }
+
+  .social-inner::before {
+    position: absolute;
+    inset: 12px;
+    border: 1px dashed rgba(64, 41, 17, 0.45);
+    content: "";
+    pointer-events: none;
+  }
+
+  .social-map-lines {
+    position: absolute;
+    z-index: 0;
+    top: 45%;
+    left: -8%;
+    width: 116%;
+    height: 90px;
+    border-top: 2px dashed rgba(53, 79, 83, 0.46);
+    border-radius: 50%;
+    transform: rotate(-5deg);
+  }
+
+  .social-heading {
+    position: relative;
+    max-width: 640px;
+    text-align: center;
+    margin: 0 auto 3rem;
+  }
+
+  .social-compass {
+    display: block;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 0.65rem;
+    border: 1px solid #342315;
+    border-radius: 50%;
+    color: #342315;
+    font-size: 1.8rem;
+    line-height: 50px;
+    transform: rotate(45deg);
+  }
+
+  .social-kicker {
+    margin: 0 0 0.35rem;
+    color: #765226;
+    font-family: "Bebas Neue", cursive;
+    font-size: 1rem;
+    letter-spacing: 0.24em;
+  }
+
+  .social-heading h2 {
+    margin: 0;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    letter-spacing: 0.12em;
+  }
+
+  .social-heading p:last-child {
+    margin: 1rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  .social-cards {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 104px;
+    padding: 1.25rem;
+    border: 1px solid rgba(61, 39, 18, 0.72);
+    color: #21170d;
+    text-decoration: none;
+    background: rgba(255, 249, 226, 0.56);
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .social-card:hover {
+    background: #fff6d8;
+    box-shadow: 5px 5px 0 rgba(67, 43, 17, 0.32);
+    transform: translate(-3px, -3px);
+  }
+
+  .social-card-icon {
+    display: grid;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid #4d3420;
+    border-radius: 50%;
+  }
+
+  .social-card-icon :global(img) {
+    width: 21px;
+    max-height: 21px;
+    filter: sepia(1) saturate(1.2) brightness(0.48);
+  }
+
+  .social-card-text { display: grid; gap: 0.3rem; }
+  .social-card-text strong { font-family: "Bebas Neue", cursive; font-size: 1.45rem; letter-spacing: 0.08em; }
+  .social-card-text small { font-size: 0.72rem; font-weight: 700; }
+  .social-card-arrow { margin-left: auto; font-size: 1.35rem; }
+
+  @media screen and (max-width: 768px) {
+    .social-section { padding: 60px 1rem; }
+    .social-inner { padding: 2.5rem 1.25rem; box-shadow: 5px 5px 0 rgba(58, 37, 13, 0.18), inset 0 0 45px rgba(94, 58, 17, 0.14); }
+    .social-heading { margin-bottom: 2rem; }
+    .social-heading p:last-child { font-size: 0.82rem; }
+    .social-cards { grid-template-columns: 1fr; gap: 0.8rem; }
+    .social-card { min-height: 84px; padding: 1rem; }
   }
 
   /* ========================================

@@ -11,6 +11,9 @@ import titleBg from "../pages/assets/TitleBackground.webp";
 import logoImg from "../pages/assets/logo.svg";
 import typoImg from "../pages/assets/typo.svg";
 
+import titleBackgroundDark from "../pages/assets/TitleBackgroundDark.webp";
+import titleBackgroundBlack from "../pages/assets/TitleBackgroundBlack.jpg";
+
 // --- TypeScript 型定義 ---
 export interface Exhibition {
   id: number;
@@ -57,27 +60,24 @@ const pageDescription =
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
+    <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>
-    <!-- スマホ用ハンバーガーボタン -->
-    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-
-    <!-- スマホ用スライドメニュー -->
-    <nav class="mobile-nav">
+    <!-- ========================================
+         スマホ用 メニュー (中身)
+         ======================================== -->
+    <!-- ※ボタンは移動しますが、nav本体はここに残します -->
+    <nav id="mobile-menu" class="mobile-nav">
       <ul>
         <li><a href="/">TOP</a></li>
         <li><a href="/theme">THEME</a></li>
         <li><a href="/exhibition">EXHIBITION</a></li>
-        <!-- 追加: FAVORITES (スマホメニュー) -->
-        <li>
-          <a href="/favorites" style="display:inline-flex; align-items:center; gap:8px;">
-            FAVORITES <span style="font-size: 1.2rem;">❤️</span>
-          </a>
-        </li>
         <li><a href="/articles">ARTICLES</a></li>
         <li><a href="/timetable">TIME TABLE</a></li>
         <li><a href="/map">MAP</a></li>
@@ -86,62 +86,100 @@ const pageDescription =
       <div class="mobile-sns-links">
         <a
           href="https://www.instagram.com/komafes69/"
+          aria-label="Instagram"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image src={instagramIcon} alt="" class="sns-icon" />
+          <Image
+            src={instagramIcon}
+            alt=""
+            format="svg"
+            quality={100}
+            class="sns-icon"
+          />
           <span>Instagram</span>
         </a>
         <a
           href="https://www.youtube.com/@komafes68"
+          aria-label="YouTube"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image src={youtubeIcon} alt="" class="sns-icon" />
+          <Image
+            src={youtubeIcon}
+            alt=""
+            format="svg"
+            quality={100}
+            class="sns-icon"
+          />
           <span>YouTube</span>
         </a>
         <a
           href="https://x.com/Komafes68"
+          aria-label="X"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image src={xIcon} alt="" class="sns-icon" />
+          <Image
+            src={xIcon}
+            alt=""
+            format="svg"
+            quality={100}
+            class="sns-icon"
+          />
           <span>X</span>
         </a>
       </div>
     </nav>
 
-    <!-- デスクトップ用常時固定ヘッダー -->
+    <!-- ========================================
+         PC・タブレット・スマホ兼用 ヘッダー
+         ======================================== -->
     <header class="sticky-header">
       <div class="sticky-header-inner">
+        <!-- 左側: ロゴとタイポ -->
         <a href="/" class="header-brand">
-          <img src={logoImg.src} alt="Logo" class="header-logo" />
-          <img
-            src={typoImg.src}
+          <Image
+            src={logoImg}
+            alt="Komafes69 Logo"
+            format="svg"
+            quality={85}
+            class="header-logo"
+          />
+          <Image
+            src={typoImg}
             alt="SAIL BEYOND"
+            format="svg"
+            quality={85}
             class="header-typo"
           />
         </a>
 
-        <!-- ▼右側: ナビゲーションメニュー ＋ いいねボタン -->
-        <div class="header-right-actions">
+        <!-- 右側: PCナビゲーション ＆ スマホハンバーガー -->
+        <div class="header-right">
           <nav class="header-nav">
             <ul>
               <li><a href="/">TOP</a></li>
               <li><a href="/theme">THEME</a></li>
-              <li><a href="/exhibition" class="active">EXHIBITION</a></li>
+              <li><a href="/exhibition">EXHIBITION</a></li>
               <li><a href="/articles">ARTICLES</a></li>
               <li><a href="/timetable">TIME TABLE</a></li>
               <li><a href="/map">MAP</a></li>
               <li><a href="/archives">ARCHIVES</a></li>
             </ul>
           </nav>
-          <!-- 追加: お気に入りページへ飛ぶ丸いボタン -->
-          <a href="/favorites" class="header-fav-btn" aria-label="お気に入り一覧を見る">
-            <svg viewBox="0 0 24 24" class="heart-svg">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-          </a>
+
+          <!-- ハンバーガーボタンをヘッダー内に移動 -->
+          <button
+            class="hamburger"
+            aria-label="メニューを開く"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
         </div>
       </div>
     </header>
@@ -149,7 +187,10 @@ const pageDescription =
     <!-- メインコンテンツ -->
     <main class="exhibition-container">
       <!-- 背景画像をインラインスタイルで適用（確実なパス解決） -->
-      <header class="page-header" style={`background-image: url('${titleBg.src}');`}>
+      <header
+        class="page-header"
+        style={`background-image: url('${titleBg.src}');`}
+      >
         <div class="page-header-inner">
           <h1 class="page-title">EXHIBITIONS</h1>
           <p class="page-subtitle">参加団体紹介</p>
@@ -216,7 +257,11 @@ const pageDescription =
         <!-- 追加: お気に入り団体を見るボタン -->
         <div class="view-favorites-container">
           <a href="/favorites" class="view-favorites-btn">
-            <svg viewBox="0 0 24 24" class="btn-heart-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <svg viewBox="0 0 24 24" class="btn-heart-icon"
+              ><path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              ></path></svg
+            >
             お気に入り団体を見る
           </a>
         </div>
@@ -247,8 +292,96 @@ const pageDescription =
       </div>
     </div>
 
-    <footer>
-      <p>&copy; 2026 Komafes69</p>
+    <footer
+      class="footer"
+      style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}
+    >
+      <div class="footer-inner">
+        <!-- 左側：学校情報・アクセス -->
+        <div class="footer-info">
+          <p class="school-name">駒場東邦中学校・高等学校 第69代 文化祭</p>
+          <!-- SVGロゴを使用 -->
+          <a href="/" class="footer-brand">
+            <Image
+              src={logoImg}
+              alt="Komafes69 Logo"
+              format="svg"
+              quality={85}
+              class="footer-logo"
+            />
+            <Image
+              src={typoImg}
+              alt="SAIL BEYOND"
+              format="svg"
+              quality={85}
+              class="footer-typo"
+            />
+          </a>
+
+          <div class="school-details">
+            <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜17:00</p>
+            <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
+            <p class="access-info">
+              東急田園都市線「池尻大橋」駅より徒歩10分<br />
+              京王井の頭線「駒場東大前」駅より徒歩10分
+            </p>
+          </div>
+        </div>
+
+        <!-- 右側：ミニサイトマップとSNS -->
+        <div class="footer-nav">
+          <ul class="sitemap">
+            <li><a href="/">TOP</a></li>
+            <li><a href="/theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="/articles">ARTICLES</a></li>
+            <li><a href="/timetable">TIME TABLE</a></li>
+            <li><a href="/map">MAP</a></li>
+            <li><a href="/archives">ARCHIVES</a></li>
+          </ul>
+
+          <div class="footer-sns">
+            <a
+              href="https://www.instagram.com/komafes69/"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={instagramIcon}
+                alt="Instagram"
+                format="svg"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/@komafes68"
+              aria-label="YouTube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={youtubeIcon}
+                alt="YouTube"
+                format="svg"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://x.com/Komafes68"
+              aria-label="X"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src={xIcon} alt="X" format="svg" class="footer-sns-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
+      </div>
     </footer>
 
     <script is:inline define:vars={{ exhibitions }}>
@@ -268,10 +401,10 @@ const pageDescription =
 
       document.addEventListener("DOMContentLoaded", () => {
         // --- お気に入り情報の取得 (localStorage) ---
-        const STORAGE_KEY = 'komafes_favorites';
+        const STORAGE_KEY = "komafes_favorites";
         const getFavorites = (): string[] => {
           try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
           } catch {
             return [];
           }
@@ -315,16 +448,39 @@ const pageDescription =
         const countNum = document.getElementById("count-num") as HTMLElement;
         const noResults = document.getElementById("no-results") as HTMLElement;
 
+        // TOP と同様に、ページ冒頭のビジュアルを通過した後で
+        // 固定ヘッダーを表示する。
         const stickyHeader = document.querySelector(".sticky-header");
-        if (stickyHeader) {
-          window.addEventListener("scroll", () => {
-            if (window.scrollY > 50) {
-              stickyHeader.classList.add("is-scrolled");
-            } else {
-              stickyHeader.classList.remove("is-scrolled");
-            }
-          });
-        }
+        const headerTrigger = document.querySelector(".hero, .page-header");
+        const hamburger = document.querySelector(".hamburger");
+        const mobileNav = document.querySelector(".mobile-nav");
+        const mobileLinks = document.querySelectorAll(".mobile-nav a");
+
+        const closeMobileNav = () => {
+          hamburger?.classList.remove("is-active", "is-black");
+          mobileNav?.classList.remove("is-active");
+          hamburger?.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("no-scroll");
+        };
+
+        hamburger?.addEventListener("click", () => {
+          const isOpen = hamburger.classList.toggle("is-active");
+          mobileNav?.classList.toggle("is-active", isOpen);
+          hamburger.setAttribute("aria-expanded", String(isOpen));
+          document.body.classList.toggle("no-scroll", isOpen);
+        });
+        mobileLinks.forEach((link) => link.addEventListener("click", closeMobileNav));
+
+        const handleHeaderScroll = () => {
+          if (!headerTrigger) return;
+
+          const shouldShow = headerTrigger.getBoundingClientRect().bottom <= 80;
+          stickyHeader?.classList.toggle("is-show", shouldShow);
+          hamburger?.classList.toggle("is-black", shouldShow);
+        };
+
+        window.addEventListener("scroll", handleHeaderScroll, { passive: true });
+        handleHeaderScroll();
 
         let currentFloor = "ALL";
         let currentCategory = "ALL";
@@ -346,7 +502,7 @@ const pageDescription =
         const renderCards = (data: any[]) => {
           grid.innerHTML = "";
           countNum.textContent = data.length.toString();
-          
+
           // レンダリング時に現在のお気に入りリストを取得
           const favorites = getFavorites();
 
@@ -391,9 +547,9 @@ const pageDescription =
               rawDesc = rawDesc.substring(0, 120) + "...";
             }
             const formattedDesc = rawDesc.replace(/\n/g, "<br>");
-            
+
             // お気に入り状態の判定
-            const isFav = favorites.includes(item.slug) ? 'is-active' : '';
+            const isFav = favorites.includes(item.slug) ? "is-active" : "";
 
             card.innerHTML = `
               <!-- 追加: いいねボタン (slugをIDとして利用) -->
@@ -431,36 +587,39 @@ const pageDescription =
             }
 
             grid.appendChild(card);
+
+            // --- 2. スマホ用ハンバーガーメニュー制御 ---
+            // --- 3. スクロール連動処理 (ヘッダー) ---
           });
         };
 
         // --- お気に入りボタンのクリックイベント（イベント委譲） ---
-        grid.addEventListener('click', (e) => {
-          const btn = (e.target as Element).closest('.favorite-toggle-btn');
+        grid.addEventListener("click", (e) => {
+          const btn = (e.target as Element).closest(".favorite-toggle-btn");
           if (!btn) return;
-          
+
           // リンク遷移をキャンセル
           e.preventDefault();
           e.stopPropagation();
 
-          const slug = btn.getAttribute('data-id');
+          const slug = btn.getAttribute("data-id");
           if (!slug) return;
-          
-          const isActive = btn.classList.contains('is-active');
+
+          const isActive = btn.classList.contains("is-active");
           let currentFavorites = getFavorites();
 
           if (isActive) {
             // お気に入り解除
-            btn.classList.remove('is-active');
-            currentFavorites = currentFavorites.filter(id => id !== slug);
+            btn.classList.remove("is-active");
+            currentFavorites = currentFavorites.filter((id) => id !== slug);
           } else {
             // お気に入り追加
-            btn.classList.add('is-active');
+            btn.classList.add("is-active");
             if (!currentFavorites.includes(slug)) {
               currentFavorites.push(slug);
             }
           }
-          
+
           localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFavorites));
         });
 
@@ -524,20 +683,11 @@ const pageDescription =
           });
         });
 
-        const hamburger = document.querySelector(".hamburger");
-        const mobileNav = document.querySelector(".mobile-nav");
-
-        if (hamburger && mobileNav) {
-          hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("is-active");
-            mobileNav.classList.toggle("is-active");
-            document.body.classList.toggle("no-scroll");
-          });
-        }
-
         // --- 錨（アンカー）のスクロール連動＆「上に戻る」処理 ---
         const anchorBtn = document.getElementById("anchor-scroll-top");
-        const anchorLine = document.querySelector(".anchor-line") as HTMLElement;
+        const anchorLine = document.querySelector(
+          ".anchor-line",
+        ) as HTMLElement;
 
         if (anchorBtn && anchorLine) {
           window.addEventListener("scroll", () => {
@@ -551,8 +701,9 @@ const pageDescription =
               anchorBtn.classList.remove("is-visible");
             }
 
-            const scrollRatio = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
-            const maxLineHeight = window.innerHeight * 0.70;
+            const scrollRatio =
+              docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
+            const maxLineHeight = window.innerHeight * 0.7;
             const currentLineHeight = scrollRatio * maxLineHeight;
 
             anchorLine.style.height = `${currentLineHeight}px`;
@@ -592,53 +743,79 @@ const pageDescription =
     overflow: hidden;
   }
 
-  /* ========================================
-     ヘッダー & ナビゲーション
-     ======================================== */
+ /* (ヘッダーやHero等の既存スタイル) */
   .sticky-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 900;
+    z-index: 1000; /* メニューより手前に表示するため 900 -> 1000 に変更 */
     background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
     border-bottom: 1px solid transparent;
-    padding: 1rem 0;
-    transition: all 0.3s ease;
+    box-shadow: none;
+    padding: 0.8rem 0;
+    opacity: 1;
+    pointer-events: auto;
+    transition:
+      opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+      background-color 0.3s ease;
   }
 
-  .sticky-header.is-scrolled {
-    background: rgba(255, 255, 255, 0.92);
+  .sticky-header.is-show {
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  }
+
+  .sticky-header,
+  .sticky-header-inner {
+    box-sizing: border-box; /* paddingを含めた幅をきっちり100%に収める */
   }
 
   .sticky-header-inner {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
   }
 
-  /* ヘッダー右側のグループ (ナビゲーション＋いいねボタン) */
-  .header-right-actions {
+  .header-brand {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 12px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .header-brand:hover {
+    opacity: 0.7;
+  }
+
+  .header-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .header-typo {
+    height: 20px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
   }
 
   .header-nav ul {
     display: flex;
-    gap: clamp(1.2rem, 2.8vw, 3rem);
+    gap: clamp(1rem, 2vw, 2.5rem);
     list-style: none;
     margin: 0;
     padding: 0;
-    align-items: center;
   }
 
   .header-nav a {
@@ -648,139 +825,67 @@ const pageDescription =
     font-size: clamp(0.95rem, 1.2vw, 1.15rem);
     letter-spacing: 0.12em;
     transition:
-      color 0.3s ease,
-      opacity 0.2s ease;
+      opacity 0.2s ease,
+      transform 0.2s ease;
   }
 
-  .sticky-header.is-scrolled .header-nav a {
-    color: #111111;
-  }
-
-  .header-nav a.active,
   .header-nav a:hover {
-    opacity: 0.5;
+    opacity: 0.6;
+    transform: translateY(-1px);
   }
 
-  /* ヘッダーのお気に入り丸ボタン */
-  .header-fav-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: #f6f9f6;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-    text-decoration: none;
-    flex-shrink: 0;
-  }
-  .header-fav-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  .header-fav-btn .heart-svg {
-    width: 16px;
-    height: 16px;
-    fill: #ff4b4b; /* デフォルトで赤色 */
-  }
-
-  .header-brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-  }
-
-  .header-logo {
-    height: 32px;
-    width: auto;
-  }
-
-  .header-typo {
-    height: 18px;
-    width: auto;
-  }
-
-  .header-logo,
-  .header-typo {
-    filter: brightness(0) invert(1);
-    transition:
-      filter 0.3s ease,
-      opacity 0.2s ease;
-  }
-
-  .sticky-header.is-scrolled .header-logo,
-  .sticky-header.is-scrolled .header-typo {
+  .sticky-header.is-show .header-logo,
+  .sticky-header.is-show .header-typo {
     filter: brightness(0);
   }
 
-  .mobile-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(17, 17, 17, 0.96);
-    z-index: 999;
-    flex-direction: column;
-    justify-content: center;
+  .sticky-header.is-show .header-nav a {
+    color: #111111;
+  }
+
+  .header-right {
+    display: flex;
     align-items: center;
   }
-
-  .mobile-nav.is-active {
-    display: flex;
+  .hamburger,
+  .mobile-nav {
+    display: none;
+  }
+  .hamburger,
+  .mobile-nav {
+    display: none;
   }
 
-  .hamburger {
-    display: none;
+  /* PC用のナビゲーションリンクは表示 */
+  .header-nav {
+    display: block;
   }
 
   @media screen and (max-width: 768px) {
-    .sticky-header {
-      display: none !important;
-    }
-
-    .hamburger {
+    /* ========================================
+       モバイルナビゲーション画面 (スマホ用メニュー本体)
+       ======================================== */
+    .mobile-nav {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 22px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
+      justify-content: center;
+      align-items: center;
       position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      padding: 0;
-    }
-
-    .hamburger-line {
-      display: block;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 2px;
-      background-color: #111111;
-      border-radius: 2px;
-      transition:
-        transform 0.3s,
-        opacity 0.3s;
+      height: 100vh;
+      height: 100dvh;
+      background-color: rgba(0, 0, 0, 0.92);
+      z-index: 999; /* ヘッダー(1000)の下に潜り込ませる */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
-    .hamburger.is-active .hamburger-line {
-      background-color: #ffffff;
-    }
-    .hamburger.is-active .hamburger-line:nth-child(1) {
-      transform: translateY(10px) rotate(45deg);
-    }
-    .hamburger.is-active .hamburger-line:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.is-active .hamburger-line:nth-child(3) {
-      transform: translateY(-10px) rotate(-45deg);
+    .mobile-nav.is-active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .mobile-nav ul {
@@ -789,31 +894,181 @@ const pageDescription =
       margin: 0;
       text-align: center;
     }
+
     .mobile-nav li {
       margin: 1.5rem 0;
     }
+
     .mobile-nav a {
-      color: #ffffff;
+      color: #f6f9f6;
       text-decoration: none;
       font-size: 1.8rem;
       font-family: "Bebas Neue", cursive;
+      letter-spacing: 0.15em;
     }
+
     .mobile-sns-links {
       display: flex;
       gap: 2rem;
-      margin-top: 2rem;
+      margin-top: 3rem;
+      transform: translateX(-20px);
     }
+
     .mobile-sns-links a {
-      color: #fff;
-      text-decoration: none;
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 0.5rem;
+      color: #ffffff;
+      text-decoration: none;
       font-size: 0.8rem;
+      font-family: "Noto Sans JP", sans-serif;
     }
-    .sns-icon {
-      width: 24px;
+
+    .mobile-sns-links .sns-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    /* ========================================
+       ミニヘッダー (スマホ用)
+       ======================================== */
+    .sticky-header {
+      display: block !important;
+      opacity: 1;
+      pointer-events: auto;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      box-shadow: none;
+    }
+
+    /* スクロール時の背景白化 */
+    .sticky-header.is-show {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    }
+
+    .header-logo {
       height: 24px;
+    }
+
+    .header-typo {
+      height: 12px;
+    }
+
+    .header-brand {
+      gap: 8px;
+      opacity: 0; /* 透明にする */
+      visibility: hidden; /* クリック判定もなくす */
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .sticky-header.is-show .header-brand {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav.is-active ~ .sticky-header .header-brand,
+    body:has(.hamburger.is-active) .header-brand {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* 初期状態(暗い背景上)はロゴを白くする */
+    .header-logo,
+    .header-typo {
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s ease;
+    }
+
+    /* スクロールして白背景になったら、ロゴを黒に戻す */
+    .sticky-header.is-show .header-logo,
+    .sticky-header.is-show .header-typo {
+      filter: brightness(0);
+    }
+
+    /* メニューオープン時は強制的にロゴを白に戻す(黒背景になるため) */
+    .mobile-nav.is-active ~ .sticky-header .header-logo,
+    .mobile-nav.is-active ~ .sticky-header .header-typo,
+    body:has(.hamburger.is-active) .header-logo,
+    body:has(.hamburger.is-active) .header-typo {
+      filter: brightness(0) invert(1) !important;
+    }
+
+    /* PC用ナビゲーションは隠す */
+    .header-nav {
+      display: none;
+    }
+
+    /* ========================================
+       ハンバーガーボタン (ミニヘッダー内)
+       ======================================== */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+      top: auto;
+      right: auto;
+      z-index: 1000;
+    }
+
+    .hamburger-line {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #ffffff;
+      border-radius: 2px;
+      transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
+      filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+    }
+
+    /* スクロール時 (is-black) は黒 */
+    .hamburger.is-black .hamburger-line {
+      background-color: #000000;
+      filter: none;
+    }
+
+    /* メニュー展開時は強制的に白（バツ印） */
+    .hamburger.is-active .hamburger-line {
+      background-color: #ffffff !important;
+      filter: none;
+    }
+
+    /* バツ印になるアニメーション */
+    .hamburger.is-active .hamburger-line:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.is-active .hamburger-line:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .sticky-header:has(.hamburger.is-active) {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
     }
   }
 
@@ -974,7 +1229,7 @@ const pageDescription =
     border-radius: 30px;
     text-decoration: none;
     border: 1px solid #eaeaea;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
   }
   .view-favorites-btn:hover {
@@ -1056,9 +1311,11 @@ const pageDescription =
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 10;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
   }
   .favorite-toggle-btn:hover {
     background: #ffffff;
@@ -1080,9 +1337,15 @@ const pageDescription =
   }
 
   @keyframes heartPop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.4); }
-    100% { transform: scale(1); }
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   .location-chip {
@@ -1259,8 +1522,8 @@ const pageDescription =
   }
 
   /* ========================================
-     錨（アンカー）スクロールボタン
-     ======================================== */
+   錨（アンカー）スクロールボタン
+   ======================================== */
   .anchor-scroll-top {
     position: fixed;
     top: 5%;
@@ -1272,7 +1535,9 @@ const pageDescription =
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease;
   }
 
   .anchor-scroll-top.is-visible {
@@ -1293,7 +1558,10 @@ const pageDescription =
     align-items: center;
     gap: 6px;
     transform-origin: top center;
-    transition: transform 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .anchor-text {
@@ -1318,12 +1586,6 @@ const pageDescription =
     animation: anchorSwing 1.2s infinite ease-in-out alternate;
   }
 
-  @media screen and (max-width: 1400px) {
-    .anchor-scroll-top {
-      display: none;
-    }
-  }
-
   @keyframes anchorSwing {
     0% {
       transform: rotate(-12deg);
@@ -1332,14 +1594,205 @@ const pageDescription =
       transform: rotate(12deg);
     }
   }
-  
-  footer {
-    text-align: center;
-    padding: 2.5rem 0;
-    background-color: #ffffff;
-    border-top: 1px solid #e2e8f0;
+
+  /* ========================================
+   スマホ表示時のスタイル調整（背景に円を配置）
+   ======================================== */
+  @media screen and (max-width: 768px) {
+    .anchor-scroll-top {
+      right: 0.4rem; /* スマホ画面の端に寄せる */
+    }
+    .anchor-body {
+      width: 50px;
+      height: 50px;
+      border-radius: 80%;
+      /* 背景を半透明の白にする */
+      background-color: rgba(255, 255, 255, 0.5);
+      /* 背景をすりガラスのようにぼかす（Safari対応含む） */
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+
+      box-shadow: 0 4px 14px rgba(3, 37, 87, 0.3);
+      justify-content: center;
+      gap: 2px;
+      padding: 4px;
+    }
+    .anchor-text {
+      font-size: 0.55rem; /* 文字サイズを円に合わせて調整 */
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .anchor-img {
+      width: 20px; /* 錨アイコンのサイズを調整 */
+      filter: brightness(0); /* 重複影を防ぐため単色化 */
+    }
+    .anchor-line {
+      width: 1px;
+      border-left: 1px dashed #042452;
+    }
+  }
+
+  /* ========================================
+     FOOTER
+     ======================================== */
+  .footer {
+    background-color: #1a1b1f; /* 少し画像に近い暗い色調に */
+    color: #f6f9f6;
+    padding: 70px 0 20px;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  /* --- 左側：情報エリア --- */
+  .footer-info {
+    flex: 1;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-brand:hover {
+    opacity: 0.7;
+  }
+
+  /* filterを使ってSVGを白色に反転させています */
+  .footer-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer-typo {
+    height: 20px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .school-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+  }
+
+  .school-details p {
     font-size: 0.85rem;
-    color: #000b1b;
-    margin-top: 4rem;
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+    color: #ccc;
+  }
+
+  .school-details strong {
+    color: #f6f9f6;
+    font-weight: 500;
+  }
+
+  .access-info {
+    margin-top: 12px !important;
+    padding-left: 10px;
+    border-left: 2px solid #555;
+  }
+
+  /* --- 右側：ナビゲーションエリア --- */
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ブロック内の要素を左揃えにする */
+  }
+
+  .sitemap {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px; /* 列同士の間隔 */
+    row-gap: 16px;
+    text-align: left; /* 文字を左揃えに */
+  }
+
+  .sitemap a {
+    color: #f6f9f6;
+    text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    display: inline-block; /* transformを有効化 */
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .sitemap a:hover {
+    color: #aaa;
+    transform: translateX(4px); /* 左揃えなので右側にスライドさせる */
+  }
+
+  .footer-sns {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-sns-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .footer-sns-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+
+  /* --- ボトム：コピーライト --- */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #b3b1b1;
+    letter-spacing: 0.05em;
+  }
+
+  /* --- スマホ対応 --- */
+  @media screen and (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 50px;
+    }
+    .school-name {
+      font-size: 4.5vw;
+    }
+
+    .sitemap {
+      column-gap: 20px;
+      width: 100%;
+    }
   }
 </style>
