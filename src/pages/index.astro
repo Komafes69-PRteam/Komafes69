@@ -395,16 +395,30 @@ const pageDescription =
           </dl>
         </div>
 
-        <div class="countdown" aria-live="polite" aria-label="文化祭開始までの残り時間">
-          <div class="countdown-unit"><span id="countdown-days">00</span><small>DAYS</small></div>
+        <div
+          class="countdown"
+          aria-live="polite"
+          aria-label="文化祭開始までの残り時間"
+        >
+          <div class="countdown-unit">
+            <span id="countdown-days">00</span><small>DAYS</small>
+          </div>
           <span class="countdown-separator">:</span>
-          <div class="countdown-unit"><span id="countdown-hours">00</span><small>HOURS</small></div>
+          <div class="countdown-unit">
+            <span id="countdown-hours">00</span><small>HOURS</small>
+          </div>
           <span class="countdown-separator">:</span>
-          <div class="countdown-unit"><span id="countdown-minutes">00</span><small>MINUTES</small></div>
+          <div class="countdown-unit">
+            <span id="countdown-minutes">00</span><small>MINUTES</small>
+          </div>
           <span class="countdown-separator">:</span>
-          <div class="countdown-unit"><span id="countdown-seconds">00</span><small>SECONDS</small></div>
+          <div class="countdown-unit">
+            <span id="countdown-seconds">00</span><small>SECONDS</small>
+          </div>
         </div>
-        <p class="countdown-status" id="countdown-status">DEPARTURE COUNTDOWN</p>
+        <p class="countdown-status" id="countdown-status">
+          DEPARTURE COUNTDOWN
+        </p>
       </div>
     </section>
     <!-- ========================================
@@ -504,8 +518,7 @@ const pageDescription =
                 style="border:0;"
                 allowfullscreen=""
                 loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
               <div class="map-overlay-frame"></div>
             </div>
 
@@ -534,8 +547,6 @@ const pageDescription =
         </div>
       </div>
     </section>
-
-    
 
     <!-- ========================================
          EXHIBITION セクション
@@ -568,54 +579,167 @@ const pageDescription =
     </section>
 
     <!-- ========================================
-         SNS セクション
-         ======================================== -->
-    <section class="social-section" aria-labelledby="social-title">
-      <div class="social-map-lines" aria-hidden="true"></div>
-      <div class="social-inner">
-        <div class="social-heading">
-          <span class="social-compass" aria-hidden="true">✦</span>
-          <p class="social-kicker">FOLLOW THE WIND</p>
-          <h2 id="social-title">各種SNS</h2>
-          <p>駒場東邦文化祭の最新情報を、航海日誌のようにお届けします。</p>
+     SNS セクション
+     ======================================== -->
+    <section class="sns-section">
+      <div class="sns-inner">
+        <!-- ヘッダーエリア (ACCESSセクションと完全にトーンを一致) -->
+        <div class="sns-header">
+          <div class="sns-label-wrapper">
+            <h2 class="sns-title">OFFICIAL SNS</h2>
+          </div>
+          <p class="sns-subtitle">公式SNS・最新情報はこちら</p>
         </div>
 
-        <div class="social-cards">
+        <!-- SNSカードリスト -->
+        <div class="sns-content">
+          <!-- X (旧Twitter) -->
           <a
-            class="social-card"
-            href="https://www.instagram.com/komafes69/"
+            href="https://x.com/"
             target="_blank"
             rel="noopener noreferrer"
+            class="sns-card x-twitter"
           >
-            <span class="social-card-icon">
-              <Image src={instagramIcon} alt="" format="svg" />
-            </span>
-            <span class="social-card-text"><strong>Instagram</strong><small>写真と速報を見る</small></span>
-            <span class="social-card-arrow" aria-hidden="true">↗</span>
+            <div class="sns-card-left">
+              <div class="sns-icon-wrapper">
+                <!-- X (旧Twitter) Icon -->
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="sns-info">
+                <div class="sns-name-group">
+                  <span class="sns-name">X (旧Twitter)</span>
+                  <span class="sns-id">@komato_fest</span>
+                </div>
+                <p class="sns-description">
+                  文化祭の見どころや当日の混雑状況をリアルタイムに配信！
+                </p>
+              </div>
+            </div>
+            <div class="sns-arrow">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
           </a>
+
+          <!-- Instagram -->
           <a
-            class="social-card"
-            href="https://www.youtube.com/@komafes68"
+            href="https://instagram.com/"
             target="_blank"
             rel="noopener noreferrer"
+            class="sns-card instagram"
           >
-            <span class="social-card-icon">
-              <Image src={youtubeIcon} alt="" format="svg" />
-            </span>
-            <span class="social-card-text"><strong>YouTube</strong><small>映像で文化祭を巡る</small></span>
-            <span class="social-card-arrow" aria-hidden="true">↗</span>
+            <div class="sns-card-left">
+              <div class="sns-icon-wrapper">
+                <!-- Instagram Icon -->
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                  ></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </div>
+              <div class="sns-info">
+                <div class="sns-name-group">
+                  <span class="sns-name">Instagram</span>
+                  <span class="sns-id">@komato_festival</span>
+                </div>
+                <p class="sns-description">
+                  準備風景や当日の熱気が伝わる写真・リール動画を投稿中！
+                </p>
+              </div>
+            </div>
+            <div class="sns-arrow">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
           </a>
+
+          <!-- YouTube (または LINE や TikTok 等に書き換え可) -->
           <a
-            class="social-card"
-            href="https://x.com/Komafes68"
+            href="https://youtube.com/"
             target="_blank"
             rel="noopener noreferrer"
+            class="sns-card youtube"
           >
-            <span class="social-card-icon">
-              <Image src={xIcon} alt="" format="svg" />
-            </span>
-            <span class="social-card-text"><strong>X</strong><small>お知らせを受け取る</small></span>
-            <span class="social-card-arrow" aria-hidden="true">↗</span>
+            <div class="sns-card-left">
+              <div class="sns-icon-wrapper">
+                <!-- YouTube Icon -->
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="sns-info">
+                <div class="sns-name-group">
+                  <span class="sns-name">YouTube</span>
+                  <span class="sns-id">駒東文化祭公式</span>
+                </div>
+                <p class="sns-description">
+                  カウントダウン動画や各参加団体のPVを順次公開中！
+                </p>
+              </div>
+            </div>
+            <div class="sns-arrow">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
           </a>
         </div>
       </div>
@@ -739,9 +863,12 @@ const pageDescription =
           const pad = (value: number) => String(value).padStart(2, "0");
 
           countdownParts.days && (countdownParts.days.textContent = pad(days));
-          countdownParts.hours && (countdownParts.hours.textContent = pad(hours));
-          countdownParts.minutes && (countdownParts.minutes.textContent = pad(minutes));
-          countdownParts.seconds && (countdownParts.seconds.textContent = pad(seconds));
+          countdownParts.hours &&
+            (countdownParts.hours.textContent = pad(hours));
+          countdownParts.minutes &&
+            (countdownParts.minutes.textContent = pad(minutes));
+          countdownParts.seconds &&
+            (countdownParts.seconds.textContent = pad(seconds));
 
           if (remaining === 0 && countdownStatus) {
             countdownStatus.textContent = "ARRIVED AT DESTINATION";
@@ -2038,7 +2165,7 @@ const pageDescription =
     max-width: 600px;
     min-height: 400px;
     position: relative;
-    border-radius: 10px; 
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
@@ -2111,8 +2238,16 @@ const pageDescription =
     padding: 88px 1.5rem;
     color: #e9e0bf;
     background:
-      radial-gradient(ellipse at 88% 10%, rgba(55, 98, 112, 0.46), transparent 36%),
-      radial-gradient(ellipse at 8% 95%, rgba(112, 76, 37, 0.4), transparent 34%),
+      radial-gradient(
+        ellipse at 88% 10%,
+        rgba(55, 98, 112, 0.46),
+        transparent 36%
+      ),
+      radial-gradient(
+        ellipse at 8% 95%,
+        rgba(112, 76, 37, 0.4),
+        transparent 34%
+      ),
       #092631;
   }
 
@@ -2146,14 +2281,20 @@ const pageDescription =
     box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.28);
   }
 
-  .log-heading { text-align: center; }
-  .log-kicker, .log-date, .countdown-status {
+  .log-heading {
+    text-align: center;
+  }
+  .log-kicker,
+  .log-date,
+  .countdown-status {
     margin: 0;
     color: #d4bb7e;
     font-family: "Bebas Neue", cursive;
     letter-spacing: 0.2em;
   }
-  .log-kicker { font-size: 1rem; }
+  .log-kicker {
+    font-size: 1rem;
+  }
   .log-heading h2 {
     margin: 0.45rem 0;
     color: #fbf2d1;
@@ -2161,7 +2302,9 @@ const pageDescription =
     font-size: clamp(2rem, 4.2vw, 3.2rem);
     letter-spacing: 0.12em;
   }
-  .log-date { font-size: 0.78rem; }
+  .log-date {
+    font-size: 0.78rem;
+  }
 
   .log-details {
     max-width: 760px;
@@ -2170,10 +2313,29 @@ const pageDescription =
     border-top: 1px solid rgba(225, 205, 149, 0.42);
     border-bottom: 1px solid rgba(225, 205, 149, 0.42);
   }
-  .log-details dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 0; }
-  .log-details div { min-width: 0; }
-  .log-details dt { margin-bottom: 0.45rem; color: #d4bb7e; font-family: "Bebas Neue", cursive; font-size: 0.9rem; letter-spacing: 0.15em; }
-  .log-details dd { margin: 0; color: #f4edcf; font-size: 0.82rem; font-weight: 700; line-height: 1.7; }
+  .log-details dl {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin: 0;
+  }
+  .log-details div {
+    min-width: 0;
+  }
+  .log-details dt {
+    margin-bottom: 0.45rem;
+    color: #d4bb7e;
+    font-family: "Bebas Neue", cursive;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+  }
+  .log-details dd {
+    margin: 0;
+    color: #f4edcf;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.7;
+  }
 
   .countdown {
     display: flex;
@@ -2181,7 +2343,11 @@ const pageDescription =
     align-items: flex-start;
     gap: clamp(0.35rem, 1.3vw, 1rem);
   }
-  .countdown-unit { display: grid; min-width: clamp(58px, 10vw, 108px); text-align: center; }
+  .countdown-unit {
+    display: grid;
+    min-width: clamp(58px, 10vw, 108px);
+    text-align: center;
+  }
   .countdown-unit > span {
     color: #fff4ce;
     font-family: "Bebas Neue", cursive;
@@ -2190,23 +2356,68 @@ const pageDescription =
     letter-spacing: 0.02em;
     text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.36);
   }
-  .countdown-unit small { margin-top: 0.8rem; color: #d4bb7e; font-family: "Bebas Neue", cursive; font-size: 0.7rem; letter-spacing: 0.16em; }
-  .countdown-separator { padding-top: 0.02em; color: #d4bb7e; font-family: "Bebas Neue", cursive; font-size: clamp(2.4rem, 5vw, 4.3rem); line-height: 0.8; }
-  .countdown-status { margin-top: 1.6rem; text-align: center; font-size: 0.85rem; }
+  .countdown-unit small {
+    margin-top: 0.8rem;
+    color: #d4bb7e;
+    font-family: "Bebas Neue", cursive;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+  }
+  .countdown-separator {
+    padding-top: 0.02em;
+    color: #d4bb7e;
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(2.4rem, 5vw, 4.3rem);
+    line-height: 0.8;
+  }
+  .countdown-status {
+    margin-top: 1.6rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
 
   @media screen and (max-width: 768px) {
-    .captains-log-section { padding: 58px 1rem; }
-    .captains-log-section::before { inset: 9px; }
-    .captains-log-inner { padding: 2.2rem 1.1rem; }
-    .log-details { margin: 1.8rem 0; }
-    .log-details dl { grid-template-columns: 1fr; gap: 1rem; }
-    .log-details div { display: grid; grid-template-columns: 105px 1fr; gap: 0.5rem; }
-    .log-details dt { margin: 0; }
-    .countdown { gap: 0.2rem; }
-    .countdown-unit { min-width: 0; flex: 1; }
-    .countdown-unit > span { font-size: clamp(2.5rem, 13vw, 3.4rem); }
-    .countdown-unit small { font-size: 0.53rem; letter-spacing: 0.08em; }
-    .countdown-separator { font-size: 2.3rem; }
+    .captains-log-section {
+      padding: 58px 1rem;
+    }
+    .captains-log-section::before {
+      inset: 9px;
+    }
+    .captains-log-inner {
+      padding: 2.2rem 1.1rem;
+    }
+    .log-details {
+      margin: 1.8rem 0;
+    }
+    .log-details dl {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .log-details div {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 0.5rem;
+    }
+    .log-details dt {
+      margin: 0;
+    }
+    .countdown {
+      gap: 0.2rem;
+    }
+    .countdown-unit {
+      min-width: 0;
+      flex: 1;
+    }
+    .countdown-unit > span {
+      font-size: clamp(2.5rem, 13vw, 3.4rem);
+    }
+    .countdown-unit small {
+      font-size: 0.53rem;
+      letter-spacing: 0.08em;
+    }
+    .countdown-separator {
+      font-size: 2.3rem;
+    }
   }
 
   /* ========================================
@@ -2374,160 +2585,204 @@ const pageDescription =
   }
 
   /* ========================================
-     SNS / 航海図セクション
-     ======================================== */
-  .social-section {
-    position: relative;
-    overflow: hidden;
-    padding: 100px 1.5rem;
-    color: #20180e;
-    background:
-      radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.5), transparent 26%),
-      radial-gradient(circle at 90% 82%, rgba(92, 61, 27, 0.18), transparent 30%),
-      #d7c18e;
+   SNS セクション
+   ======================================== */
+.sns-section {
+  padding: 80px 0;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 5;
+}
+
+.sns-inner {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.sns-header {
+  margin-bottom: 40px;
+}
+
+.sns-label-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* タイトルフォントをACCESSセクションと同一にする */
+.sns-title {
+  font-size: clamp(3.5rem, 9vw, 9rem);
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+  color: #060906;
+  font-family: "Bebas Neue", cursive;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+.sns-subtitle {
+  margin: 6px 0 0;
+  font-size: 1.3rem;
+  color: #111;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* --- コンテンツレイアウト（3カラムグリッド） --- */
+.sns-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* --- SNSカード共通スタイル --- */
+.sns-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #111;
+  background-color: #f9fafb;
+  border-radius: 20px;
+  padding: 28px 24px;
+  /* ACCESSセクションの左線をアクセントとして採用 */
+  border-left: 4px solid #111;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25 ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ホバー時のふわっと浮くアニメーション */
+.sns-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+}
+
+.sns-card-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1;
+}
+
+/* SNSアイコンの親枠 */
+.sns-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #111;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.sns-card:hover .sns-icon-wrapper {
+  transform: scale(1.08);
+}
+
+/* 各ブランドの色に合わせたい場合（お好みで調整可能） */
+.sns-card.x-twitter:hover .sns-icon-wrapper { background-color: #000000; }
+.sns-card.instagram:hover .sns-icon-wrapper { background-color: #e4405f; }
+.sns-card.youtube:hover .sns-icon-wrapper { background-color: #ff0000; }
+
+.sns-card.x-twitter { border-left-color: #000000; }
+.sns-card.instagram { border-left-color: #e4405f; }
+.sns-card.youtube { border-left-color: #ff0000; }
+
+.sns-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 12px;
+}
+
+.sns-name-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sns-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #111;
+}
+
+.sns-id {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.sns-description {
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+/* 右側矢印アイコン */
+.sns-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  transition: transform 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.sns-card:hover .sns-arrow {
+  color: #111;
+  transform: translateX(4px);
+}
+
+/* ========================================
+   レスポンシブ対応（スマホ・タブレット）
+   ======================================== */
+@media screen and (max-width: 1024px) {
+  .sns-content {
+    grid-template-columns: 1fr; /* スマホ・タブレットは縦1列に */
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sns-section {
+    padding: 60px 0;
   }
 
-  .social-section::before,
-  .social-section::after {
-    position: absolute;
-    width: 220px;
-    height: 220px;
-    border: 1px solid rgba(66, 43, 18, 0.32);
-    border-radius: 50%;
-    content: "";
-    pointer-events: none;
+  .sns-card {
+    padding: 20px 18px;
+    border-radius: 16px;
   }
 
-  .social-section::before { top: -110px; right: 7%; }
-  .social-section::after { bottom: -135px; left: 5%; }
-
-  .social-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4.5rem);
-    border: 1px solid rgba(64, 41, 17, 0.6);
-    box-shadow: 10px 10px 0 rgba(58, 37, 13, 0.18), inset 0 0 70px rgba(94, 58, 17, 0.14);
-    background-color: rgba(242, 230, 194, 0.9);
+  .sns-icon-wrapper {
+    width: 38px;
+    height: 38px;
   }
 
-  .social-inner::before {
-    position: absolute;
-    inset: 12px;
-    border: 1px dashed rgba(64, 41, 17, 0.45);
-    content: "";
-    pointer-events: none;
+  .sns-icon-wrapper svg {
+    width: 20px;
+    height: 20px;
   }
 
-  .social-map-lines {
-    position: absolute;
-    z-index: 0;
-    top: 45%;
-    left: -8%;
-    width: 116%;
-    height: 90px;
-    border-top: 2px dashed rgba(53, 79, 83, 0.46);
-    border-radius: 50%;
-    transform: rotate(-5deg);
+  .sns-name {
+    font-size: 1.05rem;
   }
 
-  .social-heading {
-    position: relative;
-    max-width: 640px;
-    text-align: center;
-    margin: 0 auto 3rem;
+  .sns-description {
+    font-size: 0.825rem;
   }
-
-  .social-compass {
-    display: block;
-    width: 52px;
-    height: 52px;
-    margin: 0 auto 0.65rem;
-    border: 1px solid #342315;
-    border-radius: 50%;
-    color: #342315;
-    font-size: 1.8rem;
-    line-height: 50px;
-    transform: rotate(45deg);
-  }
-
-  .social-kicker {
-    margin: 0 0 0.35rem;
-    color: #765226;
-    font-family: "Bebas Neue", cursive;
-    font-size: 1rem;
-    letter-spacing: 0.24em;
-  }
-
-  .social-heading h2 {
-    margin: 0;
-    font-family: "Noto Sans JP", sans-serif;
-    font-size: clamp(2rem, 4vw, 3.3rem);
-    letter-spacing: 0.12em;
-  }
-
-  .social-heading p:last-child {
-    margin: 1rem 0 0;
-    font-size: 0.95rem;
-    line-height: 1.9;
-  }
-
-  .social-cards {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-
-  .social-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    min-height: 104px;
-    padding: 1.25rem;
-    border: 1px solid rgba(61, 39, 18, 0.72);
-    color: #21170d;
-    text-decoration: none;
-    background: rgba(255, 249, 226, 0.56);
-    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .social-card:hover {
-    background: #fff6d8;
-    box-shadow: 5px 5px 0 rgba(67, 43, 17, 0.32);
-    transform: translate(-3px, -3px);
-  }
-
-  .social-card-icon {
-    display: grid;
-    flex: 0 0 42px;
-    width: 42px;
-    height: 42px;
-    place-items: center;
-    border: 1px solid #4d3420;
-    border-radius: 50%;
-  }
-
-  .social-card-icon :global(img) {
-    width: 21px;
-    max-height: 21px;
-    filter: sepia(1) saturate(1.2) brightness(0.48);
-  }
-
-  .social-card-text { display: grid; gap: 0.3rem; }
-  .social-card-text strong { font-family: "Bebas Neue", cursive; font-size: 1.45rem; letter-spacing: 0.08em; }
-  .social-card-text small { font-size: 0.72rem; font-weight: 700; }
-  .social-card-arrow { margin-left: auto; font-size: 1.35rem; }
-
-  @media screen and (max-width: 768px) {
-    .social-section { padding: 60px 1rem; }
-    .social-inner { padding: 2.5rem 1.25rem; box-shadow: 5px 5px 0 rgba(58, 37, 13, 0.18), inset 0 0 45px rgba(94, 58, 17, 0.14); }
-    .social-heading { margin-bottom: 2rem; }
-    .social-heading p:last-child { font-size: 0.82rem; }
-    .social-cards { grid-template-columns: 1fr; gap: 0.8rem; }
-    .social-card { min-height: 84px; padding: 1rem; }
-  }
+}
 
   /* ========================================
      FOOTER
