@@ -89,13 +89,7 @@ const pageDescription =
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src={instagramIcon}
-            alt=""
-            format="svg"
-            quality={100}
-            class="sns-icon"
-          />
+          <img src={instagramIcon.src} alt="" class="sns-icon" />
           <span>Instagram</span>
         </a>
         <a
@@ -104,13 +98,7 @@ const pageDescription =
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src={youtubeIcon}
-            alt=""
-            format="svg"
-            quality={100}
-            class="sns-icon"
-          />
+          <img src={youtubeIcon.src} alt="" class="sns-icon" />
           <span>YouTube</span>
         </a>
         <a
@@ -119,13 +107,7 @@ const pageDescription =
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src={xIcon}
-            alt=""
-            format="svg"
-            quality={100}
-            class="sns-icon"
-          />
+          <img src={xIcon.src} alt="" class="sns-icon" />
           <span>X</span>
         </a>
       </div>
@@ -138,20 +120,8 @@ const pageDescription =
       <div class="sticky-header-inner">
         <!-- 左側: ロゴとタイポ -->
         <a href="/" class="header-brand">
-          <Image
-            src={logoImg}
-            alt="Komafes69 Logo"
-            format="svg"
-            quality={85}
-            class="header-logo"
-          />
-          <Image
-            src={typoImg}
-            alt="SAIL BEYOND"
-            format="svg"
-            quality={85}
-            class="header-typo"
-          />
+          <img src={logoImg.src} alt="Komafes69 Logo" class="header-logo" />
+          <img src={typoImg.src} alt="SAIL BEYOND" class="header-typo" />
         </a>
 
         <!-- 右側: PCナビゲーション ＆ スマホハンバーガー -->
@@ -187,50 +157,32 @@ const pageDescription =
          Hero セクション
          ======================================== -->
     <section class="hero">
-      <Image
-        src={heroImage}
+      <img
+        src={heroImage.src}
         alt="トップページの背景画像です"
-        widths={[640, 1024, 1440, 1920]}
-        sizes="100vw"
-        quality={90}
-        format="webp"
         loading="eager"
         fetchpriority="high"
         class="hero-bg pc-bg"
       />
 
-      <Image
-        src={heroImageSp}
+      <img
+        src={heroImageSp.src}
         alt="スマホ用トップページの背景画像"
-        widths={[320, 640, 768]}
-        sizes="100vw"
-        quality={90}
-        format="webp"
         loading="eager"
         fetchpriority="high"
         class="hero-bg sp-bg"
       />
 
-      <Image
-        src={heroImageTb}
+      <img
+        src={heroImageTb.src}
         alt="タブレット用トップページの背景画像"
-        widths={[768, 1024, 1280]}
-        sizes="100vw"
-        quality={90}
-        format="webp"
         loading="eager"
         fetchpriority="high"
         class="hero-bg tb-bg"
       />
 
       <div class="top-logo">
-        <Image
-          src={topLogoImg}
-          alt="Komafes69"
-          format="webp"
-          quality={80}
-          class="top-logo-img"
-        />
+        <img src={topLogoImg.src} alt="Komafes69" class="top-logo-img" />
       </div>
 
       <div class="signal-flags">
@@ -270,50 +222,32 @@ const pageDescription =
         </div>
       </div>
       <div class="main-logo-container">
-        <Image
-          src={mainLogoImg}
+        <img
+          src={mainLogoImg.src}
           alt="Komafes 69 SAIL BEYOND"
-          format="webp"
-          quality={85}
           class="main-logo-img"
         />
         <div class="hat-container">
-          <Image
-            src={hatImg}
-            alt="Komafes 帽子"
-            format="webp"
-            quality={85}
-            class="hat-img"
-          />
+          <img src={hatImg.src} alt="Komafes 帽子" class="hat-img" />
         </div>
       </div>
 
       <div class="typo-container">
-        <Image
-          src={maintypoImg}
-          alt="SAIL BEYOND"
-          format="webp"
-          quality={85}
-          class="typo-img"
-        />
+        <img src={maintypoImg.src} alt="SAIL BEYOND" class="typo-img" />
       </div>
 
       <div class="hero-title-container">
-        <Image
-          src={titleTextImg}
+        <img
+          src={titleTextImg.src}
           alt="駒場東邦 第69代 文化祭"
-          format="webp"
-          quality={80}
           class="hero-title-img"
         />
       </div>
 
       <div class="komafesLabel">
-        <Image
-          src={komafesLabel}
+        <img
+          src={komafesLabel.src}
           alt="Komafes69ラベル"
-          format="webp"
-          quality={80}
           class="komafes-label-img"
         />
       </div>
@@ -334,13 +268,7 @@ const pageDescription =
       <div class="scroll-animation">
         <span class="scroll-text">SCROLL</span>
         <div class="scroll-line"></div>
-        <Image
-          src={scrollIcon}
-          alt="Scroll Animation"
-          format="svg"
-          quality={100}
-          class="scroll-icon"
-        />
+        <img src={scrollIcon.src} alt="Scroll Animation" class="scroll-icon" />
       </div>
 
       <nav class="right-nav">
@@ -361,13 +289,7 @@ const pageDescription =
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              src={instagramIcon}
-              alt=""
-              format="svg"
-              quality={100}
-              class="sns-icon"
-            />
+            <img src={instagramIcon.src} alt="" class="sns-icon" />
             <span>Instagram</span>
           </a>
           <a
@@ -376,13 +298,7 @@ const pageDescription =
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              src={youtubeIcon}
-              alt=""
-              format="svg"
-              quality={100}
-              class="sns-icon"
-            />
+            <img src={youtubeIcon.src} alt="" class="sns-icon" />
             <span>YouTube</span>
           </a>
           <a
@@ -391,13 +307,7 @@ const pageDescription =
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              src={xIcon}
-              alt=""
-              format="svg"
-              quality={100}
-              class="sns-icon"
-            />
+            <img src={xIcon.src} alt="" class="sns-icon" />
             <span>X</span>
           </a>
         </div>
@@ -821,20 +731,8 @@ const pageDescription =
           <p class="school-name">駒場東邦中学校・高等学校 第69代 文化祭</p>
           <!-- SVGロゴを使用 -->
           <a href="/" class="footer-brand">
-            <Image
-              src={logoImg}
-              alt="Komafes69 Logo"
-              format="svg"
-              quality={85}
-              class="footer-logo"
-            />
-            <Image
-              src={typoImg}
-              alt="SAIL BEYOND"
-              format="svg"
-              quality={85}
-              class="footer-typo"
-            />
+            <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
+            <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
           </a>
 
           <div class="school-details">
@@ -866,10 +764,9 @@ const pageDescription =
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image
-                src={instagramIcon}
+              <img
+                src={instagramIcon.src}
                 alt="Instagram"
-                format="svg"
                 class="footer-sns-icon"
               />
             </a>
@@ -879,10 +776,9 @@ const pageDescription =
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image
-                src={youtubeIcon}
+              <img
+                src={youtubeIcon.src}
                 alt="YouTube"
-                format="svg"
                 class="footer-sns-icon"
               />
             </a>
@@ -892,7 +788,7 @@ const pageDescription =
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src={xIcon} alt="X" format="svg" class="footer-sns-icon" />
+              <img src={xIcon.src} alt="X" class="footer-sns-icon" />
             </a>
           </div>
         </div>
@@ -902,475 +798,365 @@ const pageDescription =
         <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
       </div>
     </footer>
+  </body>
 
-    <!-- ========================================
+  <!-- ========================================
          JavaScript 統合処理
          ======================================== -->
-    <script>
-      import { gsap } from "gsap";
+  <script>
+    import { gsap } from "gsap";
 
-      const initApp = () => {
-        // --- 1. スクロール検知で手書きアニメーション発火 ---
-        const logBook = document.getElementById("log-book-content");
-        if (logBook) {
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  logBook.classList.add("is-animated");
-                  observer.unobserve(entry.target);
-                }
-              });
-            },
-            { threshold: 0.2 },
+    const initApp = () => {
+      // --- 1. スクロール検知で手書きアニメーション発火 ---
+      const logBook = document.getElementById("log-book-content");
+      if (logBook) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                logBook.classList.add("is-animated");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 },
+        );
+
+        observer.observe(logBook);
+      }
+
+      // --- 2. カウントダウン & イベント状態自動判定 ---
+      const startDate = new Date("2026-09-19T09:00:00+09:00").getTime();
+      const endDate = new Date("2026-09-20T17:00:00+09:00").getTime();
+
+      const timerEl = document.getElementById("komafes-countdown");
+      const titleEl = document.getElementById("countdown-title");
+      const statusEl = document.getElementById("event-status");
+
+      const daysEl = document.getElementById("countdown-days");
+      const hoursEl = document.getElementById("countdown-hours");
+      const minutesEl = document.getElementById("countdown-minutes");
+      const secondsEl = document.getElementById("countdown-seconds");
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+
+        if (now < startDate) {
+          // 開催前
+          const distance = startDate - now;
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
           );
+          const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) / (1000 * 60),
+          );
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-          observer.observe(logBook);
-        }
-
-        // --- 2. カウントダウン & イベント状態自動判定 ---
-        const startDate = new Date("2026-09-19T09:00:00+09:00").getTime();
-        const endDate = new Date("2026-09-20T17:00:00+09:00").getTime();
-
-        const timerEl = document.getElementById("komafes-countdown");
-        const titleEl = document.getElementById("countdown-title");
-        const statusEl = document.getElementById("event-status");
-
-        const daysEl = document.getElementById("countdown-days");
-        const hoursEl = document.getElementById("countdown-hours");
-        const minutesEl = document.getElementById("countdown-minutes");
-        const secondsEl = document.getElementById("countdown-seconds");
-
-        function updateCountdown() {
-          const now = new Date().getTime();
-
-          if (now < startDate) {
-            // 開催前
-            const distance = startDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor(
-              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-            );
-            const minutes = Math.floor(
-              (distance % (1000 * 60 * 60)) / (1000 * 60),
-            );
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            if (daysEl) daysEl.textContent = String(days).padStart(2, "0");
-            if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
-            if (minutesEl)
-              minutesEl.textContent = String(minutes).padStart(2, "0");
-            if (secondsEl)
-              secondsEl.textContent = String(seconds).padStart(2, "0");
-          } else if (now >= startDate && now <= endDate) {
-            // 開催中
-            if (titleEl) titleEl.style.display = "none";
-            if (timerEl) timerEl.style.display = "none";
-            if (statusEl) {
-              statusEl.style.display = "block";
-              statusEl.textContent = "本日開催中！";
-            }
-          } else {
-            // 終了後
-            if (titleEl) titleEl.style.display = "none";
-            if (timerEl) timerEl.style.display = "none";
-            if (statusEl) {
-              statusEl.style.display = "block";
-              statusEl.textContent = "Komafes69は終了しました";
-            }
+          if (daysEl) daysEl.textContent = String(days).padStart(2, "0");
+          if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
+          if (minutesEl)
+            minutesEl.textContent = String(minutes).padStart(2, "0");
+          if (secondsEl)
+            secondsEl.textContent = String(seconds).padStart(2, "0");
+        } else if (now >= startDate && now <= endDate) {
+          // 開催中
+          if (titleEl) titleEl.style.display = "none";
+          if (timerEl) timerEl.style.display = "none";
+          if (statusEl) {
+            statusEl.style.display = "block";
+            statusEl.textContent = "本日開催中！";
+          }
+        } else {
+          // 終了後
+          if (titleEl) titleEl.style.display = "none";
+          if (timerEl) timerEl.style.display = "none";
+          if (statusEl) {
+            statusEl.style.display = "block";
+            statusEl.textContent = "Komafes69は終了しました";
           }
         }
+      }
 
-        updateCountdown();
-        window.setInterval(updateCountdown, 1000);
+      updateCountdown();
+      window.setInterval(updateCountdown, 1000);
 
-        // --- 3. GSAP アニメーション (Hero) ---
-        gsap.fromTo(
-          ".top-logo-img",
-          { clipPath: "inset(0 0 100% 0)", opacity: 1 },
-          {
-            clipPath: "inset(0 0 0% 0)",
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.1,
-          },
-        );
-        gsap.fromTo(
-          ".main-logo-img",
-          { scale: 0.85, rotation: -140, opacity: 0 },
-          {
-            scale: 1,
-            rotation: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: "back.out(1.2)",
-            delay: 0.4,
-          },
-        );
-        gsap.fromTo(
-          ".hat-img",
-          {
-            xPercent: 120,
-            yPercent: -90,
-            rotation: 35,
-            scale: 1.15,
-            opacity: 0,
-          },
-          {
-            xPercent: 0,
-            yPercent: 0,
-            rotation: 0,
-            scale: 1,
-            opacity: 1,
-            duration: 1.1,
-            ease: "power3.out",
-            delay: 0.9,
-            onComplete: startPeriodicAndInteractiveEffects,
-          },
-        );
-        gsap.fromTo(
-          ".typo-img",
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9, ease: "power2.out", delay: 0.8 },
-        );
-        gsap.fromTo(
-          ".hero-title-img",
-          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-          {
-            clipPath: "inset(0 0% 0 0)",
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.3,
-          },
-        );
-        gsap.fromTo(
-          ".komafes-label-img",
-          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-          {
-            clipPath: "inset(0 0% 0 0)",
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.45,
-          },
-        );
-        gsap.fromTo(
-          ".date-info",
-          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-          {
-            clipPath: "inset(0 0% 0 0)",
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.6,
-          },
-        );
-        gsap.fromTo(
-          ".right-nav",
-          { x: 20, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.5 },
-        );
-        gsap.fromTo(
-          ".scroll-animation",
-          { opacity: 0, y: 0 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 1.0 },
-        );
+      // --- 3. GSAP アニメーション (Hero) ---
+      gsap.fromTo(
+        ".top-logo-img",
+        { clipPath: "inset(0 0 100% 0)", opacity: 1 },
+        {
+          clipPath: "inset(0 0 0% 0)",
+          duration: 0.8,
+          ease: "power2.out",
+          delay: 0.1,
+        },
+      );
+      gsap.fromTo(
+        ".main-logo-img",
+        { scale: 0.85, rotation: -140, opacity: 0 },
+        {
+          scale: 1,
+          rotation: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "back.out(1.2)",
+          delay: 0.4,
+        },
+      );
+      gsap.fromTo(
+        ".hat-img",
+        {
+          xPercent: 120,
+          yPercent: -90,
+          rotation: 35,
+          scale: 1.15,
+          opacity: 0,
+        },
+        {
+          xPercent: 0,
+          yPercent: 0,
+          rotation: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 1.1,
+          ease: "power3.out",
+          delay: 0.9,
+          onComplete: startPeriodicAndInteractiveEffects,
+        },
+      );
+      gsap.fromTo(
+        ".typo-img",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: "power2.out", delay: 0.8 },
+      );
+      gsap.fromTo(
+        ".hero-title-img",
+        { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+        {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 0.8,
+          ease: "power2.out",
+          delay: 0.3,
+        },
+      );
+      gsap.fromTo(
+        ".komafes-label-img",
+        { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+        {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 0.8,
+          ease: "power2.out",
+          delay: 0.45,
+        },
+      );
+      gsap.fromTo(
+        ".date-info",
+        { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+        {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 0.8,
+          ease: "power2.out",
+          delay: 0.6,
+        },
+      );
+      gsap.fromTo(
+        ".right-nav",
+        { x: 20, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.5 },
+      );
+      gsap.fromTo(
+        ".scroll-animation",
+        { opacity: 0, y: 0 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 1.0 },
+      );
 
-        gsap.to(".scroll-line", {
-          height: "40%",
-          duration: 2,
-          ease: "power1.inOut",
-          repeat: -1,
-          yoyo: true,
+      gsap.to(".scroll-line", {
+        height: "40%",
+        duration: 2,
+        ease: "power1.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+
+      function startPeriodicAndInteractiveEffects() {
+        function playHatFlip() {
+          return gsap
+            .timeline()
+            .to(".hat-img", {
+              yPercent: -70,
+              xPercent: 70,
+              rotation: "+=30",
+              scale: 1.3,
+              duration: 0.55,
+              ease: "power2.out",
+            })
+            .to(".hat-img", {
+              yPercent: 0,
+              xPercent: 0,
+              rotation: "+=330",
+              scale: 1,
+              duration: 0.95,
+              ease: "power2.inOut",
+            });
+        }
+
+        const loopTimeline = gsap.timeline({ repeat: -1, repeatDelay: 3.0 });
+        loopTimeline
+          .to(
+            ".main-logo-img",
+            { rotation: "+=360", duration: 1.5, ease: "power2.inOut" },
+            0,
+          )
+          .add(playHatFlip(), 0);
+
+        const logoContainer = document.querySelector(".main-logo-container");
+        if (logoContainer) {
+          logoContainer.addEventListener("mouseenter", () => {
+            gsap.to(".main-logo-container", {
+              scale: 1.05,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          });
+          logoContainer.addEventListener("mouseleave", () => {
+            gsap.to(".main-logo-container", {
+              scale: 1,
+              duration: 0.3,
+              ease: "power2.inOut",
+            });
+          });
+        }
+      }
+
+      // --- 4. スマホ用ハンバーガーメニュー制御 ---
+      const hamburger = document.querySelector(".hamburger");
+      const mobileNav = document.querySelector(".mobile-nav");
+      const mobileLinks = document.querySelectorAll(".mobile-nav a");
+
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener("click", () => {
+          const isActive = hamburger.classList.contains("is-active");
+          if (isActive) {
+            hamburger.classList.remove("is-active");
+            mobileNav.classList.remove("is-active");
+            hamburger.setAttribute("aria-expanded", "false");
+            document.body.classList.remove("no-scroll");
+          } else {
+            hamburger.classList.add("is-active");
+            mobileNav.classList.add("is-active");
+            hamburger.setAttribute("aria-expanded", "true");
+            document.body.classList.add("no-scroll");
+          }
         });
 
-        function startPeriodicAndInteractiveEffects() {
-          function playHatFlip() {
-            return gsap
-              .timeline()
-              .to(".hat-img", {
-                yPercent: -70,
-                xPercent: 70,
-                rotation: "+=30",
-                scale: 1.3,
-                duration: 0.55,
-                ease: "power2.out",
-              })
-              .to(".hat-img", {
-                yPercent: 0,
-                xPercent: 0,
-                rotation: "+=330",
-                scale: 1,
-                duration: 0.95,
-                ease: "power2.inOut",
-              });
-          }
-
-          const loopTimeline = gsap.timeline({ repeat: -1, repeatDelay: 3.0 });
-          loopTimeline
-            .to(
-              ".main-logo-img",
-              { rotation: "+=360", duration: 1.5, ease: "power2.inOut" },
-              0,
-            )
-            .add(playHatFlip(), 0);
-
-          const logoContainer = document.querySelector(".main-logo-container");
-          if (logoContainer) {
-            logoContainer.addEventListener("mouseenter", () => {
-              gsap.to(".main-logo-container", {
-                scale: 1.05,
-                duration: 0.3,
-                ease: "power2.out",
-              });
-            });
-            logoContainer.addEventListener("mouseleave", () => {
-              gsap.to(".main-logo-container", {
-                scale: 1,
-                duration: 0.3,
-                ease: "power2.inOut",
-              });
-            });
-          }
-        }
-
-        // --- 4. スマホ用ハンバーガーメニュー制御 ---
-        const hamburger = document.querySelector(".hamburger");
-        const mobileNav = document.querySelector(".mobile-nav");
-        const mobileLinks = document.querySelectorAll(".mobile-nav a");
-
-        if (hamburger && mobileNav) {
-          hamburger.addEventListener("click", () => {
-            const isActive = hamburger.classList.contains("is-active");
-            if (isActive) {
-              hamburger.classList.remove("is-active");
-              mobileNav.classList.remove("is-active");
-              hamburger.setAttribute("aria-expanded", "false");
-              document.body.classList.remove("no-scroll");
-            } else {
-              hamburger.classList.add("is-active");
-              mobileNav.classList.add("is-active");
-              hamburger.setAttribute("aria-expanded", "true");
-              document.body.classList.add("no-scroll");
-            }
+        mobileLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            hamburger.classList.remove("is-active");
+            mobileNav.classList.remove("is-active");
+            hamburger.setAttribute("aria-expanded", "false");
+            document.body.classList.remove("no-scroll");
           });
+        });
+      }
 
-          mobileLinks.forEach((link) => {
-            link.addEventListener("click", () => {
-              hamburger.classList.remove("is-active");
-              mobileNav.classList.remove("is-active");
-              hamburger.setAttribute("aria-expanded", "false");
-              document.body.classList.remove("no-scroll");
-            });
-          });
+      // --- 5. スクロール連動処理 (ヘッダー) ---
+      const stickyHeader = document.querySelector(".sticky-header");
+      const heroSection = document.querySelector(".hero");
+
+      const handleScroll = () => {
+        if (!heroSection) return;
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
+
+        if (heroBottom <= 80) {
+          if (stickyHeader) stickyHeader.classList.add("is-show");
+          if (hamburger) hamburger.classList.add("is-black");
+        } else {
+          if (stickyHeader) stickyHeader.classList.remove("is-show");
+          if (hamburger) hamburger.classList.remove("is-black");
         }
-
-        // --- 5. スクロール連動処理 (ヘッダー) ---
-        const stickyHeader = document.querySelector(".sticky-header");
-        const heroSection = document.querySelector(".hero");
-
-        const handleScroll = () => {
-          if (!heroSection) return;
-          const heroBottom = heroSection.getBoundingClientRect().bottom;
-
-          if (heroBottom <= 80) {
-            if (stickyHeader) stickyHeader.classList.add("is-show");
-            if (hamburger) hamburger.classList.add("is-black");
-          } else {
-            if (stickyHeader) stickyHeader.classList.remove("is-show");
-            if (hamburger) hamburger.classList.remove("is-black");
-          }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        handleScroll();
       };
-      import rawExhibitions from "../pages/data/exhibitions.json";
-      // --- 6. EXHIBITION セクションのデータ取得と無限スクロール・出現アニメーション ---
-      const initExhibition = async () => {
-        const track = document.getElementById("exhibitionTrack");
-        if (!track) return;
 
-        try {
-          const exhibitions = rawExhibitions;
-          if (!exhibitions || exhibitions.length === 0) return;
+      window.addEventListener("scroll", handleScroll);
+      handleScroll();
+    };
+    import rawExhibitions from "../pages/data/exhibitions.json";
+    // --- 6. EXHIBITION セクションのデータ取得と無限スクロール・出現アニメーション ---
+    const initExhibition = async () => {
+      const track = document.getElementById("exhibitionTrack");
+      if (!track) return;
 
-          const shuffled = [...exhibitions]
-            .sort(() => 0.5 - Math.random())
-            .slice(0, 8);
+      try {
+        const exhibitions = rawExhibitions;
+        if (!exhibitions || exhibitions.length === 0) return;
 
-          const cardHtml = shuffled
-            .map(
-              (item) => `
+        const shuffled = [...exhibitions]
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 8);
+
+        const cardHtml = shuffled
+          .map(
+            (item) => `
     <div class="exhibition-card-wrapper">
       <a href="/exhibition" class="exhibition-card">
         <img src="${item.image}" alt="展示画像" class="exhibition-card-img" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'" />
       </a>
     </div>
   `,
-            )
-            .join("");
+          )
+          .join("");
 
-          track.innerHTML = cardHtml + cardHtml + cardHtml;
+        track.innerHTML = cardHtml + cardHtml + cardHtml;
 
-          requestAnimationFrame(() => {
-            gsap.to(track, {
-              xPercent: -33.3333,
-              ease: "none",
-              duration: 25,
-              repeat: -1,
-            });
+        requestAnimationFrame(() => {
+          gsap.to(track, {
+            xPercent: -33.3333,
+            ease: "none",
+            duration: 25,
+            repeat: -1,
           });
-        } catch (error) {
-          console.error("EXHIBITIONデータの読み込みに失敗しました:", error);
-        }
+        });
+      } catch (error) {
+        console.error("EXHIBITIONデータの読み込みに失敗しました:", error);
+      }
 
-        const exhibitionSection = document.querySelector(".exhibition-section");
-        if (exhibitionSection) {
-          const observer = new IntersectionObserver(
-            (entries, obs) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  gsap.fromTo(
-                    ".exhibition-title",
-                    { clipPath: "inset(0 100% 0 0)" },
-                    {
-                      clipPath: "inset(0 0% 0 0)",
-                      duration: 0.9,
-                      ease: "power3.inOut",
-                    },
-                  );
-                  gsap.fromTo(
-                    ".exhibition-subtitle",
-                    { y: 20, opacity: 0 },
-                    {
-                      y: 0,
-                      opacity: 1,
-                      duration: 0.7,
-                      ease: "power2.out",
-                      delay: 0.4,
-                    },
-                  );
-                  gsap.fromTo(
-                    ".exhibition-carousel-wrapper",
-                    { clipPath: "inset(0 100% 0 0)", opacity: 0 },
-                    {
-                      clipPath: "inset(0 0% 0 0)",
-                      opacity: 1,
-                      duration: 1.2,
-                      ease: "power3.inOut",
-                      delay: 0.6,
-                    },
-                  );
-                  obs.unobserve(entry.target);
-                }
-              });
-            },
-            { threshold: 0.2 },
-          );
-
-          observer.observe(exhibitionSection);
-        }
-      };
-
-      // --- 7. Captain's Log セクションの出現アニメーション ---
-      const initCaptainsLogAnimation = () => {
-        const logSection = document.querySelector(".captains-log-section");
-        if (!logSection) return;
-
-        // 他セクションのタイトルと動きを揃える（clipPathで隠しておく）
-        gsap.set(".section-label", { clipPath: "inset(0 100% 0 0)" });
-
+      const exhibitionSection = document.querySelector(".exhibition-section");
+      if (exhibitionSection) {
         const observer = new IntersectionObserver(
           (entries, obs) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                // タイトルの出現（左から右へ）
-                gsap.to(".section-label", {
-                  clipPath: "inset(0 0% 0 0)",
-                  duration: 0.9,
-                  ease: "power3.inOut",
-                });
-
-                // 本（.log-paper）全体のフェードアップ
                 gsap.fromTo(
-                  ".log-paper",
-                  { opacity: 0, y: 40 },
+                  ".exhibition-title",
+                  { clipPath: "inset(0 100% 0 0)" },
                   {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.0,
-                    ease: "power2.out",
-                    delay: 0.3, // タイトルの少し後に出現させる
+                    clipPath: "inset(0 0% 0 0)",
+                    duration: 0.9,
+                    ease: "power3.inOut",
                   },
                 );
-
-                obs.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.2 },
-        );
-
-        observer.observe(logSection);
-      };
-
-      // --- 8. セクション全体の出現アニメーション (ふわっと表示) ---
-      const initSectionFadeIn = () => {
-        const fadeObserver = new IntersectionObserver(
-          (entries, obs) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                obs.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15 },
-        );
-
-        const sections = document.querySelectorAll(
-          ".exhibition-section, .captains-log-section, .access-section",
-        );
-        sections.forEach((section) => {
-          fadeObserver.observe(section);
-        });
-      };
-
-      // --- 9. ACCESS セクションの出現アニメーション ---
-      const initAccessAnimation = () => {
-        const accessSection = document.querySelector(".access-section");
-        if (!accessSection) return;
-
-        gsap.set(".access-title", { clipPath: "inset(0 100% 0 0)" });
-        gsap.set(".access-subtitle", { y: 20, opacity: 0 });
-
-        const observer = new IntersectionObserver(
-          (entries, obs) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                gsap.to(".access-title", {
-                  clipPath: "inset(0 0% 0 0)",
-                  duration: 0.9,
-                  ease: "power3.inOut",
-                });
-                gsap.to(".access-subtitle", {
-                  y: 0,
-                  opacity: 1,
-                  duration: 0.7,
-                  ease: "power2.out",
-                  delay: 0.4,
-                });
                 gsap.fromTo(
-                  ".access-content",
-                  { opacity: 0, y: 20 },
+                  ".exhibition-subtitle",
+                  { y: 20, opacity: 0 },
                   {
-                    opacity: 1,
                     y: 0,
-                    duration: 1.0,
+                    opacity: 1,
+                    duration: 0.7,
                     ease: "power2.out",
+                    delay: 0.4,
+                  },
+                );
+                gsap.fromTo(
+                  ".exhibition-carousel-wrapper",
+                  { clipPath: "inset(0 100% 0 0)", opacity: 0 },
+                  {
+                    clipPath: "inset(0 0% 0 0)",
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power3.inOut",
                     delay: 0.6,
                   },
                 );
-
                 obs.unobserve(entry.target);
               }
             });
@@ -1378,2281 +1164,2387 @@ const pageDescription =
           { threshold: 0.2 },
         );
 
-        observer.observe(accessSection);
-      };
+        observer.observe(exhibitionSection);
+      }
+    };
 
-      // --- 10. 万国旗（Flag & Rope）のアニメーション ---
-      const initFlagsAnimation = () => {
-        const flags = gsap.utils.toArray<HTMLDivElement>(".flag");
-        const ropePaths =
-          document.querySelectorAll<SVGPathElement>(".rope-svg path");
+    // --- 7. Captain's Log セクションの出現アニメーション ---
+    const initCaptainsLogAnimation = () => {
+      const logSection = document.querySelector(".captains-log-section");
+      if (!logSection) return;
 
-        if (flags.length === 0 && ropePaths.length === 0) return;
+      // 他セクションのタイトルと動きを揃える（clipPathで隠しておく）
+      gsap.set(".section-label", { clipPath: "inset(0 100% 0 0)" });
 
-        ropePaths.forEach((path) => {
-          const pathLength = path.getTotalLength();
-          gsap.set(path, {
-            strokeDasharray: pathLength,
-            strokeDashoffset: pathLength,
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // タイトルの出現（左から右へ）
+              gsap.to(".section-label", {
+                clipPath: "inset(0 0% 0 0)",
+                duration: 0.9,
+                ease: "power3.inOut",
+              });
+
+              // 本（.log-paper）全体のフェードアップ
+              gsap.fromTo(
+                ".log-paper",
+                { opacity: 0, y: 40 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 1.0,
+                  ease: "power2.out",
+                  delay: 0.3, // タイトルの少し後に出現させる
+                },
+              );
+
+              obs.unobserve(entry.target);
+            }
           });
+        },
+        { threshold: 0.2 },
+      );
+
+      observer.observe(logSection);
+    };
+
+    // --- 8. セクション全体の出現アニメーション (ふわっと表示) ---
+    const initSectionFadeIn = () => {
+      const fadeObserver = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+
+      const sections = document.querySelectorAll(
+        ".exhibition-section, .captains-log-section, .access-section",
+      );
+      sections.forEach((section) => {
+        fadeObserver.observe(section);
+      });
+    };
+
+    // --- 9. ACCESS セクションの出現アニメーション ---
+    const initAccessAnimation = () => {
+      const accessSection = document.querySelector(".access-section");
+      if (!accessSection) return;
+
+      gsap.set(".access-title", { clipPath: "inset(0 100% 0 0)" });
+      gsap.set(".access-subtitle", { y: 20, opacity: 0 });
+
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.to(".access-title", {
+                clipPath: "inset(0 0% 0 0)",
+                duration: 0.9,
+                ease: "power3.inOut",
+              });
+              gsap.to(".access-subtitle", {
+                y: 0,
+                opacity: 1,
+                duration: 0.7,
+                ease: "power2.out",
+                delay: 0.4,
+              });
+              gsap.fromTo(
+                ".access-content",
+                { opacity: 0, y: 20 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 1.0,
+                  ease: "power2.out",
+                  delay: 0.6,
+                },
+              );
+
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 },
+      );
+
+      observer.observe(accessSection);
+    };
+
+    // --- 10. 万国旗（Flag & Rope）のアニメーション ---
+    const initFlagsAnimation = () => {
+      const flags = gsap.utils.toArray<HTMLDivElement>(".flag");
+      const ropePaths =
+        document.querySelectorAll<SVGPathElement>(".rope-svg path");
+
+      if (flags.length === 0 && ropePaths.length === 0) return;
+
+      ropePaths.forEach((path) => {
+        const pathLength = path.getTotalLength();
+        gsap.set(path, {
+          strokeDasharray: pathLength,
+          strokeDashoffset: pathLength,
         });
+      });
 
-        gsap.set(flags, {
-          opacity: 0,
-          scale: 0,
-          rotation: 0,
-        });
+      gsap.set(flags, {
+        opacity: 0,
+        scale: 0,
+        rotation: 0,
+      });
 
-        const tl = gsap.timeline();
+      const tl = gsap.timeline();
 
-        tl.to(ropePaths, {
-          strokeDashoffset: 0,
-          duration: 1.2,
-          ease: "power2.inOut",
-        }).to(
-          flags,
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.6,
-            ease: "back.out(1.5)",
-            stagger: 0.08,
-            onComplete: () => {
-              flags.forEach((flag, index) => {
-                const baseAngle = gsap.utils.random(4, 8);
-                const duration = gsap.utils.random(2.8, 4.5);
-                const delay = index * 0.12 + Math.random() * 0.2;
-                let isAction = false;
+      tl.to(ropePaths, {
+        strokeDashoffset: 0,
+        duration: 1.2,
+        ease: "power2.inOut",
+      }).to(
+        flags,
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          ease: "back.out(1.5)",
+          stagger: 0.08,
+          onComplete: () => {
+            flags.forEach((flag, index) => {
+              const baseAngle = gsap.utils.random(4, 8);
+              const duration = gsap.utils.random(2.8, 4.5);
+              const delay = index * 0.12 + Math.random() * 0.2;
+              let isAction = false;
 
-                const startGentleSwing = () => {
-                  gsap.fromTo(
-                    flag,
-                    { rotation: -baseAngle },
-                    {
-                      rotation: baseAngle,
-                      duration: duration,
-                      repeat: -1,
-                      yoyo: true,
-                      ease: "sine.inOut",
-                    },
-                  );
-                };
+              const startGentleSwing = () => {
+                gsap.fromTo(
+                  flag,
+                  { rotation: -baseAngle },
+                  {
+                    rotation: baseAngle,
+                    duration: duration,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                  },
+                );
+              };
+
+              gsap.to(flag, {
+                rotation: -baseAngle,
+                duration: duration * 0.5,
+                ease: "sine.inOut",
+                delay: delay,
+                onComplete: startGentleSwing,
+              });
+
+              flag.addEventListener("mouseenter", () => {
+                if (isAction) return;
+                isAction = true;
+
+                gsap.killTweensOf(flag);
+
+                const currentRot = gsap.getProperty(flag, "rotation") as number;
+                const hoverAngle =
+                  gsap.utils.random(40, 60) * (currentRot >= 0 ? 1 : -1);
+                const hoverDuration = duration * 0.25;
 
                 gsap.to(flag, {
-                  rotation: -baseAngle,
-                  duration: duration * 0.5,
+                  rotation: hoverAngle,
+                  duration: hoverDuration,
                   ease: "sine.inOut",
-                  delay: delay,
-                  onComplete: startGentleSwing,
-                });
-
-                flag.addEventListener("mouseenter", () => {
-                  if (isAction) return;
-                  isAction = true;
-
-                  gsap.killTweensOf(flag);
-
-                  const currentRot = gsap.getProperty(
-                    flag,
-                    "rotation",
-                  ) as number;
-                  const hoverAngle =
-                    gsap.utils.random(40, 60) * (currentRot >= 0 ? 1 : -1);
-                  const hoverDuration = duration * 0.25;
-
-                  gsap.to(flag, {
-                    rotation: hoverAngle,
-                    duration: hoverDuration,
-                    ease: "sine.inOut",
-                    yoyo: true,
-                    repeat: 1,
-                    onComplete: () => {
-                      gsap.to(flag, {
-                        rotation: -baseAngle,
-                        duration: duration * 0.5,
-                        ease: "sine.inOut",
-                        onComplete: () => {
-                          isAction = false;
-                          startGentleSwing();
-                        },
-                      });
-                    },
-                  });
+                  yoyo: true,
+                  repeat: 1,
+                  onComplete: () => {
+                    gsap.to(flag, {
+                      rotation: -baseAngle,
+                      duration: duration * 0.5,
+                      ease: "sine.inOut",
+                      onComplete: () => {
+                        isAction = false;
+                        startGentleSwing();
+                      },
+                    });
+                  },
                 });
               });
-            },
+            });
           },
-          "-=0.8",
-        );
-      };
+        },
+        "-=0.8",
+      );
+    };
 
-      // --- 初期化実行管理 ---
-      const initAll = () => {
-        initApp();
-        initExhibition();
-        initCaptainsLogAnimation();
-        initSectionFadeIn();
-        initAccessAnimation();
-        initFlagsAnimation();
-      };
+    // --- 初期化実行管理 ---
+    const initAll = () => {
+      initApp();
+      initExhibition();
+      initCaptainsLogAnimation();
+      initSectionFadeIn();
+      initAccessAnimation();
+      initFlagsAnimation();
+    };
 
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initAll);
-      } else {
-        initAll();
-      }
-    </script>
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initAll);
+    } else {
+      initAll();
+    }
+  </script>
 
-    <style>
-      body {
-        font-family:
-          "Noto Sans JP",
-          system-ui,
-          -apple-system,
-          sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #000;
-      }
+  <style>
+    body {
+      font-family:
+        "Noto Sans JP",
+        system-ui,
+        -apple-system,
+        sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+    }
 
-      body.no-scroll {
-        overflow: hidden;
-      }
+    body.no-scroll {
+      overflow: hidden;
+    }
 
-      /* (ヘッダーやHero等の既存スタイル) */
-      .sticky-header {
+    /* (ヘッダーやHero等の既存スタイル) */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000; /* メニューより手前に表示するため 900 -> 1000 に変更 */
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      padding: 0.8rem 0;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+        background-color 0.3s ease;
+    }
+
+    .sticky-header.is-show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sticky-header,
+    .sticky-header-inner {
+      box-sizing: border-box; /* paddingを含めた幅をきっちり100%に収める */
+    }
+
+    .sticky-header-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-brand:hover {
+      opacity: 0.7;
+    }
+
+    .header-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0);
+    }
+
+    .header-typo {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0);
+    }
+
+    .header-nav ul {
+      display: flex;
+      gap: clamp(1rem, 2vw, 2.5rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header-nav a {
+      color: #111111;
+      text-decoration: none;
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+      letter-spacing: 0.12em;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .header-nav a:hover {
+      opacity: 0.6;
+      transform: translateY(-1px);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .hamburger,
+    .mobile-nav {
+      display: none;
+    }
+    .hamburger,
+    .mobile-nav {
+      display: none;
+    }
+
+    /* PC用のナビゲーションリンクは表示 */
+    .header-nav {
+      display: block;
+    }
+
+    @media screen and (max-width: 768px) {
+      /* ========================================
+       モバイルナビゲーション画面 (スマホ用メニュー本体)
+       ======================================== */
+      .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 1000; /* メニューより手前に表示するため 900 -> 1000 に変更 */
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        padding: 0.8rem 0;
+        height: 100vh;
+        height: 100dvh;
+        background-color: rgba(0, 0, 0, 0.92);
+        z-index: 999; /* ヘッダー(1000)の下に潜り込ませる */
         opacity: 0;
         pointer-events: none;
-        transition:
-          opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-          background-color 0.3s ease;
+        transition: opacity 0.3s ease;
       }
 
-      .sticky-header.is-show {
+      .mobile-nav.is-active {
         opacity: 1;
         pointer-events: auto;
       }
 
-      .sticky-header,
-      .sticky-header-inner {
-        box-sizing: border-box; /* paddingを含めた幅をきっちり100%に収める */
+      .mobile-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
       }
 
-      .sticky-header-inner {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 1.5rem;
+      .mobile-nav li {
+        margin: 1.5rem 0;
       }
 
-      .header-brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+      .mobile-nav a {
+        color: #f6f9f6;
         text-decoration: none;
-        transition: opacity 0.2s ease;
+        font-size: 1.8rem;
+        font-family: "Bebas Neue", cursive;
+        letter-spacing: 0.15em;
       }
 
-      .header-brand:hover {
-        opacity: 0.7;
+      .mobile-sns-links {
+        display: flex;
+        gap: 2rem;
+        margin-top: 3rem;
+        transform: translateX(-20px);
+      }
+
+      .mobile-sns-links a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-family: "Noto Sans JP", sans-serif;
+      }
+
+      .mobile-sns-links .sns-icon {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+      }
+
+      /* ========================================
+       ミニヘッダー (スマホ用)
+       ======================================== */
+      .sticky-header {
+        display: block !important;
+        opacity: 1;
+        pointer-events: auto;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: none;
+        box-shadow: none;
+      }
+
+      /* スクロール時の背景白化 */
+      .sticky-header.is-show {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
       }
 
       .header-logo {
-        height: 40px;
-        width: auto;
-        object-fit: contain;
-        filter: brightness(0);
+        height: 24px;
       }
 
       .header-typo {
-        height: 20px;
-        width: auto;
-        object-fit: contain;
+        height: 12px;
+      }
+
+      .header-brand {
+        gap: 8px;
+        opacity: 0; /* 透明にする */
+        visibility: hidden; /* クリック判定もなくす */
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+
+      .sticky-header.is-show .header-brand {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-nav.is-active ~ .sticky-header .header-brand,
+      body:has(.hamburger.is-active) .header-brand {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* 初期状態(暗い背景上)はロゴを白くする */
+      .header-logo,
+      .header-typo {
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      /* スクロールして白背景になったら、ロゴを黒に戻す */
+      .sticky-header.is-show .header-logo,
+      .sticky-header.is-show .header-typo {
         filter: brightness(0);
       }
 
-      .header-nav ul {
-        display: flex;
-        gap: clamp(1rem, 2vw, 2.5rem);
-        list-style: none;
-        margin: 0;
-        padding: 0;
+      /* メニューオープン時は強制的にロゴを白に戻す(黒背景になるため) */
+      .mobile-nav.is-active ~ .sticky-header .header-logo,
+      .mobile-nav.is-active ~ .sticky-header .header-typo,
+      body:has(.hamburger.is-active) .header-logo,
+      body:has(.hamburger.is-active) .header-typo {
+        filter: brightness(0) invert(1) !important;
       }
 
-      .header-nav a {
-        color: #111111;
-        text-decoration: none;
-        font-family: "Bebas Neue", cursive;
-        font-size: clamp(0.95rem, 1.2vw, 1.15rem);
-        letter-spacing: 0.12em;
-        transition:
-          opacity 0.2s ease,
-          transform 0.2s ease;
-      }
-
-      .header-nav a:hover {
-        opacity: 0.6;
-        transform: translateY(-1px);
-      }
-
-      .header-right {
-        display: flex;
-        align-items: center;
-      }
-      .hamburger,
-      .mobile-nav {
-        display: none;
-      }
-      .hamburger,
-      .mobile-nav {
-        display: none;
-      }
-
-      /* PC用のナビゲーションリンクは表示 */
+      /* PC用ナビゲーションは隠す */
       .header-nav {
-        display: block;
+        display: none;
       }
 
-      @media screen and (max-width: 768px) {
-        /* ========================================
-       モバイルナビゲーション画面 (スマホ用メニュー本体)
-       ======================================== */
-        .mobile-nav {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100vh;
-          height: 100dvh;
-          background-color: rgba(0, 0, 0, 0.92);
-          z-index: 999; /* ヘッダー(1000)の下に潜り込ませる */
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.3s ease;
-        }
-
-        .mobile-nav.is-active {
-          opacity: 1;
-          pointer-events: auto;
-        }
-
-        .mobile-nav ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          text-align: center;
-        }
-
-        .mobile-nav li {
-          margin: 1.5rem 0;
-        }
-
-        .mobile-nav a {
-          color: #f6f9f6;
-          text-decoration: none;
-          font-size: 1.8rem;
-          font-family: "Bebas Neue", cursive;
-          letter-spacing: 0.15em;
-        }
-
-        .mobile-sns-links {
-          display: flex;
-          gap: 2rem;
-          margin-top: 3rem;
-          transform: translateX(-20px);
-        }
-
-        .mobile-sns-links a {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 0.5rem;
-          color: #ffffff;
-          text-decoration: none;
-          font-size: 0.8rem;
-          font-family: "Noto Sans JP", sans-serif;
-        }
-
-        .mobile-sns-links .sns-icon {
-          width: 28px;
-          height: 28px;
-          object-fit: contain;
-        }
-
-        /* ========================================
-       ミニヘッダー (スマホ用)
-       ======================================== */
-        .sticky-header {
-          display: block !important;
-          opacity: 1;
-          pointer-events: auto;
-          background: transparent;
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-          border-bottom: none;
-          box-shadow: none;
-        }
-
-        /* スクロール時の背景白化 */
-        .sticky-header.is-show {
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        }
-
-        .header-logo {
-          height: 24px;
-        }
-
-        .header-typo {
-          height: 12px;
-        }
-
-        .header-brand {
-          gap: 8px;
-          opacity: 0; /* 透明にする */
-          visibility: hidden; /* クリック判定もなくす */
-          transition:
-            opacity 0.3s ease,
-            visibility 0.3s ease;
-        }
-
-        .sticky-header.is-show .header-brand {
-          opacity: 1;
-          visibility: visible;
-        }
-
-        .mobile-nav.is-active ~ .sticky-header .header-brand,
-        body:has(.hamburger.is-active) .header-brand {
-          opacity: 1;
-          visibility: visible;
-        }
-
-        /* 初期状態(暗い背景上)はロゴを白くする */
-        .header-logo,
-        .header-typo {
-          filter: brightness(0) invert(1);
-          transition: filter 0.3s ease;
-        }
-
-        /* スクロールして白背景になったら、ロゴを黒に戻す */
-        .sticky-header.is-show .header-logo,
-        .sticky-header.is-show .header-typo {
-          filter: brightness(0);
-        }
-
-        /* メニューオープン時は強制的にロゴを白に戻す(黒背景になるため) */
-        .mobile-nav.is-active ~ .sticky-header .header-logo,
-        .mobile-nav.is-active ~ .sticky-header .header-typo,
-        body:has(.hamburger.is-active) .header-logo,
-        body:has(.hamburger.is-active) .header-typo {
-          filter: brightness(0) invert(1) !important;
-        }
-
-        /* PC用ナビゲーションは隠す */
-        .header-nav {
-          display: none;
-        }
-
-        /* ========================================
+      /* ========================================
        ハンバーガーボタン (ミニヘッダー内)
        ======================================== */
-        .hamburger {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          width: 28px;
-          height: 20px;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          padding: 0;
-          position: relative;
-          top: auto;
-          right: auto;
-          z-index: 1000;
-        }
-
-        .hamburger-line {
-          display: block;
-          width: 100%;
-          height: 2px;
-          background-color: #ffffff;
-          border-radius: 2px;
-          transition:
-            background-color 0.3s ease,
-            transform 0.3s ease,
-            opacity 0.3s ease;
-          filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
-        }
-
-        /* スクロール時 (is-black) は黒 */
-        .hamburger.is-black .hamburger-line {
-          background-color: #000000;
-          filter: none;
-        }
-
-        /* メニュー展開時は強制的に白（バツ印） */
-        .hamburger.is-active .hamburger-line {
-          background-color: #ffffff !important;
-          filter: none;
-        }
-
-        /* バツ印になるアニメーション */
-        .hamburger.is-active .hamburger-line:nth-child(1) {
-          transform: translateY(9px) rotate(45deg);
-        }
-        .hamburger.is-active .hamburger-line:nth-child(2) {
-          opacity: 0;
-        }
-        .hamburger.is-active .hamburger-line:nth-child(3) {
-          transform: translateY(-9px) rotate(-45deg);
-        }
-
-        .sticky-header:has(.hamburger.is-active) {
-          background: transparent !important;
-          backdrop-filter: none !important;
-          -webkit-backdrop-filter: none !important;
-          border-bottom: none !important;
-          box-shadow: none !important;
-        }
-      }
-
-      .hero {
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 28px;
+        height: 20px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
         position: relative;
-        width: 100%;
+        top: auto;
+        right: auto;
+        z-index: 1000;
       }
 
-      .hero-bg {
-        width: 100%;
-        height: auto;
+      .hamburger-line {
         display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #ffffff;
+        border-radius: 2px;
+        transition:
+          background-color 0.3s ease,
+          transform 0.3s ease,
+          opacity 0.3s ease;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+      }
+
+      /* スクロール時 (is-black) は黒 */
+      .hamburger.is-black .hamburger-line {
+        background-color: #000000;
+        filter: none;
+      }
+
+      /* メニュー展開時は強制的に白（バツ印） */
+      .hamburger.is-active .hamburger-line {
+        background-color: #ffffff !important;
+        filter: none;
+      }
+
+      /* バツ印になるアニメーション */
+      .hamburger.is-active .hamburger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      .hamburger.is-active .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.is-active .hamburger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+
+      .sticky-header:has(.hamburger.is-active) {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-bg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .pc-bg {
+      display: block;
+    }
+    .sp-bg {
+      display: none;
+    }
+    .tb-bg {
+      display: none;
+    }
+
+    .top-logo {
+      position: absolute;
+      top: 3.5%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8%;
+      max-width: 140px;
+    }
+    .top-logo-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .main-logo-container {
+      position: absolute;
+      top: 9%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 27%;
+      max-width: 520px;
+      pointer-events: auto;
+      cursor: pointer;
+      will-change: transform;
+    }
+    .main-logo-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform-origin: center center;
+    }
+
+    .hat-container {
+      position: absolute;
+      top: 10%;
+      right: 6%;
+      width: 45%;
+      pointer-events: none;
+    }
+    .hat-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+
+    .typo-container {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 35%;
+      max-width: 560px;
+      pointer-events: none;
+    }
+    .typo-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      will-change: transform, opacity;
+    }
+
+    .hero-title-container {
+      position: absolute;
+      top: 5%;
+      left: 4%;
+      width: 15%;
+      max-width: 450px;
+    }
+    .hero-title-img {
+      width: 90%;
+      height: auto;
+      display: block;
+    }
+
+    .komafesLabel {
+      position: absolute;
+      top: 34%;
+      left: 4%;
+      width: 10%;
+      max-width: 300px;
+    }
+    .komafes-label-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .date-info {
+      position: absolute;
+      top: 41%;
+      left: 4%;
+      color: #f6f9f6;
+      font-family: "Noto Sans JP", sans-serif;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .date-row {
+      display: flex;
+      align-items: baseline;
+      font-size: clamp(1.1rem, 2.2vw, 2.2rem);
+    }
+    .date-row.separator {
+      margin-left: 0.2em;
+      margin-top: 0.35em;
+    }
+    .dash {
+      display: inline-block;
+      transform: scaleX(1.8);
+      transform-origin: left center;
+      margin-right: 0.8em;
+      font-weight: 300;
+    }
+    .day {
+      font-size: 0.75em;
+      margin-left: 0.3em;
+      opacity: 0.9;
+    }
+    .time-row {
+      margin-top: 0.6em;
+      font-size: clamp(0.85rem, 1.6vw, 1.5rem);
+      letter-spacing: 0.05em;
+    }
+
+    .scroll-animation {
+      position: absolute;
+      top: 65%;
+      left: 7%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 20%;
+      gap: 8px;
+    }
+    .scroll-text {
+      font-family: "Bebas Neue", cursive;
+      color: #f6f9f6;
+      font-size: clamp(0.7rem, 0.9vw, 1.1rem);
+      letter-spacing: 0.1em;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 10%;
+      background-color: #f6f9f6;
+      will-change: height;
+    }
+    .scroll-icon {
+      width: clamp(14px, 1.5vw, 20px);
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .right-nav {
+      position: absolute;
+      top: 18%;
+      right: 3%;
+      text-align: left;
+      font-family: "Bebas Neue", cursive;
+    }
+    .right-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .right-nav li {
+      margin-bottom: clamp(0.5rem, 2vw, 2.4rem);
+    }
+    .right-nav a {
+      color: #f6f9f6;
+      text-decoration: none;
+      font-size: clamp(1rem, 1.2vw, 1.44rem);
+      letter-spacing: 0.12em;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+      display: inline-block;
+      transform-origin: left center;
+    }
+    .right-nav a:hover {
+      opacity: 0.8;
+      transform: scale(1.08);
+    }
+    .sns-links {
+      margin-top: clamp(1.5rem, 1vw, 3.5rem);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+      left: 27%;
+      transform: translateX(-50%);
+      width: max-content;
+    }
+    .sns-links a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.35rem;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: clamp(8px, 0.6vw, 0.8rem);
+      opacity: 1;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+    .sns-links a:hover {
+      opacity: 1;
+      transform: translateY(-3px) scale(1.05);
+    }
+    .sns-icon {
+      width: clamp(14px, 1.6vw, 34px);
+      height: clamp(14px, 1.6vw, 34px);
+      display: block;
+      object-fit: contain;
+    }
+    /* 右上から吊るすコンテナ */
+    .signal-flags {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 420px;
+      height: 120px;
+      z-index: 20;
+      pointer-events: none; /* ロープ自体がクリックを妨げないようにする */
+    }
+
+    .rope-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .flags-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flag {
+      position: absolute; /* カーブに沿わせるため絶対配置 */
+      width: 34px; /* 旗のサイズ */
+      transform-origin: 50% -12px;
+      pointer-events: auto; /* 旗自体はホバー判定させる */
+      cursor: pointer;
+    }
+
+    /* 吊るす紐 */
+    .flag::before {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 10px;
+      background: #ffffff;
+      left: 50%;
+      top: -12px;
+      transform: translateX(-50%);
+    }
+
+    .flag img {
+      display: block;
+      width: 100%;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+      border-radius: 1px;
+    }
+
+    /* --- 画像の手書き線（右下へ落ちるカーブ）に合わせた配置 --- */
+    .flag:nth-child(1) {
+      left: 100px;
+      top: 28px;
+    }
+    .flag:nth-child(2) {
+      left: 140px;
+      top: 60px;
+    }
+    .flag:nth-child(3) {
+      left: 187px;
+      top: 80px;
+    }
+    .flag:nth-child(4) {
+      left: 235px;
+      top: 95px;
+    }
+    .flag:nth-child(5) {
+      left: 280px;
+      top: 102px;
+    }
+    .flag:nth-child(6) {
+      left: 330px;
+      top: 108px;
+    }
+    .flag:nth-child(7) {
+      left: 380px;
+      top: 108px;
+    }
+
+    /* デフォルト（PC）ではスマホ用ロープを隠す */
+    .sp-rope {
+      display: none;
+    }
+
+    /* ========================================
+   スマホ対応（テキスト被りを防ぐ右上の配置）
+   ======================================== */
+    @media screen and (max-width: 768px) {
+      .pc-rope {
+        display: none;
+      }
+      .sp-rope {
+        display: block;
+      }
+
+      .signal-flags {
+        transform: none;
+        width: 240px; /* 画面右側に収まるサイズに */
+        height: 120px;
+        top: 0px; /* ハンバーガーメニューの少し下 */
+        right: 0px; /* 画面右端に少し寄せる */
+      }
+
+      .flag {
+        width: 24px; /* テキストの邪魔にならないよう少し小さめに */
+      }
+
+      /* 新しいコンパクトなカーブに合わせた旗の配置 */
+      .flag:nth-child(1) {
+        left: 72px;
+        top: 15px;
+      }
+      .flag:nth-child(2) {
+        left: 90px;
+        top: 47px;
+      }
+      .flag:nth-child(3) {
+        left: 106px;
+        top: 75px;
+      }
+      .flag:nth-child(4) {
+        left: 130px;
+        top: 100px;
+      }
+      .flag:nth-child(5) {
+        left: 150px;
+        top: 120px;
+      }
+      .flag:nth-child(6) {
+        left: 180px;
+        top: 135px;
+      }
+      .flag:nth-child(7) {
+        left: 210px;
+        top: 150px;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      .main-logo-container {
+        top: 13%;
+        width: 35%;
+      }
+      .typo-container {
+        top: 53%;
+        width: 50%;
+      }
+      .top-logo {
+        top: 4%;
+        width: 10%;
+      }
+      .hero-title-container {
+        top: 4%;
+        width: 21%;
+        left: 5%;
+      }
+      .komafesLabel {
+        top: 30%;
+        width: 14%;
+        left: 5%;
+      }
+      .date-info {
+        top: 37%;
+        left: 5%;
+      }
+      .scroll-animation {
+        top: 63%;
+        left: 8%;
+      }
+      .right-nav {
+        top: 22%;
+        right: 4%;
+      }
+      .right-nav li {
+        margin-bottom: 2vw;
+      }
+      .sns-links {
+        margin-top: 3vw;
+        left: 35%;
       }
 
       .pc-bg {
+        display: none;
+      }
+      .tb-bg {
         display: block;
+        width: 100%;
+        height: auto;
       }
       .sp-bg {
         display: none;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .pc-bg {
+        display: none;
+      }
+      .sp-bg {
+        display: block;
+        width: 100%;
+        height: auto;
       }
       .tb-bg {
         display: none;
       }
 
+      .right-nav {
+        display: none;
+      }
       .top-logo {
-        position: absolute;
-        top: 3.5%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 8%;
-        max-width: 140px;
+        opacity: 0;
       }
-      .top-logo-img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
       .main-logo-container {
-        position: absolute;
-        top: 9%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 27%;
-        max-width: 520px;
-        pointer-events: auto;
-        cursor: pointer;
-        will-change: transform;
+        top: 37%;
+        width: 62%;
       }
-      .main-logo-img {
-        width: 100%;
-        height: auto;
-        display: block;
-        transform-origin: center center;
-      }
-
-      .hat-container {
-        position: absolute;
-        top: 10%;
-        right: 6%;
-        width: 45%;
-        pointer-events: none;
-      }
-      .hat-img {
-        width: 100%;
-        height: auto;
-        display: block;
-        transform-origin: center center;
-        will-change: transform, opacity;
-      }
-
       .typo-container {
-        position: absolute;
-        top: 55%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 35%;
-        max-width: 560px;
-        pointer-events: none;
+        top: 70%;
+        width: 75%;
       }
-      .typo-img {
-        width: 100%;
-        height: auto;
-        display: block;
-        will-change: transform, opacity;
-      }
-
       .hero-title-container {
-        position: absolute;
-        top: 5%;
-        left: 4%;
-        width: 15%;
-        max-width: 450px;
+        top: 4%;
+        width: 45%;
+        left: 6%;
       }
-      .hero-title-img {
-        width: 90%;
-        height: auto;
-        display: block;
-      }
-
       .komafesLabel {
-        position: absolute;
-        top: 34%;
-        left: 4%;
-        width: 10%;
-        max-width: 300px;
-      }
-      .komafes-label-img {
-        width: 100%;
-        height: auto;
-        display: block;
+        top: 28%;
+        width: 34%;
+        left: 6%;
       }
 
       .date-info {
-        position: absolute;
-        top: 41%;
-        left: 4%;
-        color: #f6f9f6;
-        font-family: "Noto Sans JP", sans-serif;
-        font-weight: 700;
-        line-height: 1.3;
+        top: 21%;
+        left: 52%;
       }
       .date-row {
-        display: flex;
-        align-items: baseline;
-        font-size: clamp(1.1rem, 2.2vw, 2.2rem);
-      }
-      .date-row.separator {
-        margin-left: 0.2em;
-        margin-top: 0.35em;
-      }
-      .dash {
-        display: inline-block;
-        transform: scaleX(1.8);
-        transform-origin: left center;
-        margin-right: 0.8em;
-        font-weight: 300;
-      }
-      .day {
-        font-size: 0.75em;
-        margin-left: 0.3em;
-        opacity: 0.9;
+        font-size: clamp(0.8rem, 5vw, 1.6rem);
       }
       .time-row {
-        margin-top: 0.6em;
-        font-size: clamp(0.85rem, 1.6vw, 1.5rem);
-        letter-spacing: 0.05em;
+        font-size: clamp(0.6rem, 4vw, 1.2rem);
       }
 
       .scroll-animation {
-        position: absolute;
-        top: 65%;
-        left: 7%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        height: 20%;
-        gap: 8px;
+        top: 88%;
+        left: 45%;
+        height: 12%;
       }
-      .scroll-text {
-        font-family: "Bebas Neue", cursive;
-        color: #f6f9f6;
-        font-size: clamp(0.7rem, 0.9vw, 1.1rem);
-        letter-spacing: 0.1em;
-      }
-      .scroll-line {
-        width: 1px;
-        height: 10%;
-        background-color: #f6f9f6;
-        will-change: height;
-      }
-      .scroll-icon {
-        width: clamp(14px, 1.5vw, 20px);
-        height: auto;
-        display: block;
-        object-fit: contain;
-      }
+    }
 
-      .right-nav {
-        position: absolute;
-        top: 18%;
-        right: 3%;
-        text-align: left;
-        font-family: "Bebas Neue", cursive;
-      }
-      .right-nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      .right-nav li {
-        margin-bottom: clamp(0.5rem, 2vw, 2.4rem);
-      }
-      .right-nav a {
-        color: #f6f9f6;
-        text-decoration: none;
-        font-size: clamp(1rem, 1.2vw, 1.44rem);
-        letter-spacing: 0.12em;
-        transition:
-          opacity 0.2s ease,
-          transform 0.2s ease;
-        display: inline-block;
-        transform-origin: left center;
-      }
-      .right-nav a:hover {
-        opacity: 0.8;
-        transform: scale(1.08);
-      }
-      .sns-links {
-        margin-top: clamp(1.5rem, 1vw, 3.5rem);
-        display: flex;
-        gap: 1rem;
-        align-items: flex-end;
-        justify-content: center;
-        position: relative;
-        left: 27%;
-        transform: translateX(-50%);
-        width: max-content;
-      }
-      .sns-links a {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 0.35rem;
-        color: #ffffff;
-        text-decoration: none;
-        font-size: clamp(8px, 0.6vw, 0.8rem);
-        opacity: 1;
-        transition:
-          transform 0.2s ease,
-          opacity 0.2s ease;
-      }
-      .sns-links a:hover {
-        opacity: 1;
-        transform: translateY(-3px) scale(1.05);
-      }
-      .sns-icon {
-        width: clamp(14px, 1.6vw, 34px);
-        height: clamp(14px, 1.6vw, 34px);
-        display: block;
-        object-fit: contain;
-      }
-      /* 右上から吊るすコンテナ */
-      .signal-flags {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 420px;
-        height: 120px;
-        z-index: 20;
-        pointer-events: none; /* ロープ自体がクリックを妨げないようにする */
-      }
-
-      .rope-svg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: visible;
-      }
-
-      .flags-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      .flag {
-        position: absolute; /* カーブに沿わせるため絶対配置 */
-        width: 34px; /* 旗のサイズ */
-        transform-origin: 50% -12px;
-        pointer-events: auto; /* 旗自体はホバー判定させる */
-        cursor: pointer;
-      }
-
-      /* 吊るす紐 */
-      .flag::before {
-        content: "";
-        position: absolute;
-        width: 1px;
-        height: 10px;
-        background: #ffffff;
-        left: 50%;
-        top: -12px;
-        transform: translateX(-50%);
-      }
-
-      .flag img {
-        display: block;
-        width: 100%;
-        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
-        border-radius: 1px;
-      }
-
-      /* --- 画像の手書き線（右下へ落ちるカーブ）に合わせた配置 --- */
-      .flag:nth-child(1) {
-        left: 100px;
-        top: 28px;
-      }
-      .flag:nth-child(2) {
-        left: 140px;
-        top: 60px;
-      }
-      .flag:nth-child(3) {
-        left: 187px;
-        top: 80px;
-      }
-      .flag:nth-child(4) {
-        left: 235px;
-        top: 95px;
-      }
-      .flag:nth-child(5) {
-        left: 280px;
-        top: 102px;
-      }
-      .flag:nth-child(6) {
-        left: 330px;
-        top: 108px;
-      }
-      .flag:nth-child(7) {
-        left: 380px;
-        top: 108px;
-      }
-
-      /* デフォルト（PC）ではスマホ用ロープを隠す */
-      .sp-rope {
-        display: none;
-      }
-
-      /* ========================================
-   スマホ対応（テキスト被りを防ぐ右上の配置）
-   ======================================== */
-      @media screen and (max-width: 768px) {
-        .pc-rope {
-          display: none;
-        }
-        .sp-rope {
-          display: block;
-        }
-
-        .signal-flags {
-          transform: none;
-          width: 240px; /* 画面右側に収まるサイズに */
-          height: 120px;
-          top: 0px; /* ハンバーガーメニューの少し下 */
-          right: 0px; /* 画面右端に少し寄せる */
-        }
-
-        .flag {
-          width: 24px; /* テキストの邪魔にならないよう少し小さめに */
-        }
-
-        /* 新しいコンパクトなカーブに合わせた旗の配置 */
-        .flag:nth-child(1) {
-          left: 72px;
-          top: 15px;
-        }
-        .flag:nth-child(2) {
-          left: 90px;
-          top: 47px;
-        }
-        .flag:nth-child(3) {
-          left: 106px;
-          top: 75px;
-        }
-        .flag:nth-child(4) {
-          left: 130px;
-          top: 100px;
-        }
-        .flag:nth-child(5) {
-          left: 150px;
-          top: 120px;
-        }
-        .flag:nth-child(6) {
-          left: 180px;
-          top: 135px;
-        }
-        .flag:nth-child(7) {
-          left: 210px;
-          top: 150px;
-        }
-      }
-
-      @media screen and (max-width: 1024px) {
-        .main-logo-container {
-          top: 13%;
-          width: 35%;
-        }
-        .typo-container {
-          top: 53%;
-          width: 50%;
-        }
-        .top-logo {
-          top: 4%;
-          width: 10%;
-        }
-        .hero-title-container {
-          top: 4%;
-          width: 21%;
-          left: 5%;
-        }
-        .komafesLabel {
-          top: 30%;
-          width: 14%;
-          left: 5%;
-        }
-        .date-info {
-          top: 37%;
-          left: 5%;
-        }
-        .scroll-animation {
-          top: 63%;
-          left: 8%;
-        }
-        .right-nav {
-          top: 22%;
-          right: 4%;
-        }
-        .right-nav li {
-          margin-bottom: 2vw;
-        }
-        .sns-links {
-          margin-top: 3vw;
-          left: 35%;
-        }
-
-        .pc-bg {
-          display: none;
-        }
-        .tb-bg {
-          display: block;
-          width: 100%;
-          height: auto;
-        }
-        .sp-bg {
-          display: none;
-        }
-      }
-
-      @media screen and (max-width: 768px) {
-        .pc-bg {
-          display: none;
-        }
-        .sp-bg {
-          display: block;
-          width: 100%;
-          height: auto;
-        }
-        .tb-bg {
-          display: none;
-        }
-
-        .right-nav {
-          display: none;
-        }
-        .top-logo {
-          opacity: 0;
-        }
-        .main-logo-container {
-          top: 37%;
-          width: 62%;
-        }
-        .typo-container {
-          top: 70%;
-          width: 75%;
-        }
-        .hero-title-container {
-          top: 4%;
-          width: 45%;
-          left: 6%;
-        }
-        .komafesLabel {
-          top: 28%;
-          width: 34%;
-          left: 6%;
-        }
-
-        .date-info {
-          top: 21%;
-          left: 52%;
-        }
-        .date-row {
-          font-size: clamp(0.8rem, 5vw, 1.6rem);
-        }
-        .time-row {
-          font-size: clamp(0.6rem, 4vw, 1.2rem);
-        }
-
-        .scroll-animation {
-          top: 88%;
-          left: 45%;
-          height: 12%;
-        }
-      }
-
-      /* ========================================
+    /* ========================================
      マーキー装飾 (Heroの下)
      ======================================== */
-      .marquee-container {
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-        z-index: 10;
-        pointer-events: none; /* 重なった部分のクリックを妨げないようにする */
-      }
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+      pointer-events: none; /* 重なった部分のクリックを妨げないようにする */
+    }
 
-      .marquee-track {
-        display: flex;
-        width: max-content;
-        /* 60秒かけてループします。速度を変えたい場合は秒数を調整してください */
-        animation: marquee-anim 60s linear infinite;
-      }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      /* 60秒かけてループします。速度を変えたい場合は秒数を調整してください */
+      animation: marquee-anim 60s linear infinite;
+    }
 
+    .marquee-text {
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(4rem, 6vw, 14rem);
+      color: transparent; /* 文字の塗りを透明に */
+      -webkit-text-stroke: 0.01em #ffffff; /* アウトライン（縁取り）を設定 */
+      letter-spacing: 0.01em;
+      line-height: 1;
+      /* 2つのspanタグの間の隙間をなくすために少し調整 */
+      padding-right: 20px;
+      margin-top: -0.03em;
+      margin-bottom: -0.09em;
+    }
+
+    /* ダークモードや黒背景に被る際に、アウトラインを白にしたい場合は色を #fff に変更してください */
+
+    @keyframes marquee-anim {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @media screen and (max-width: 768px) {
       .marquee-text {
-        font-family: "Bebas Neue", cursive;
-        font-size: clamp(4rem, 6vw, 14rem);
-        color: transparent; /* 文字の塗りを透明に */
-        -webkit-text-stroke: 0.01em #ffffff; /* アウトライン（縁取り）を設定 */
-        letter-spacing: 0.01em;
-        line-height: 1;
-        /* 2つのspanタグの間の隙間をなくすために少し調整 */
-        padding-right: 20px;
-        margin-top: -0.03em;
-        margin-bottom: -0.09em;
+        -webkit-text-stroke: 0.5px #ffffff; /* スマホ時は線を少し細く */
       }
+    }
 
-      /* ダークモードや黒背景に被る際に、アウトラインを白にしたい場合は色を #fff に変更してください */
+    .captains-log-section {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 1rem;
+      box-sizing: border-box;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      position: sticky; /* 画面の定位置でピタッと止まる */
+      top: 0; /* 一番上で止まる */
+      z-index: 1; /* 背面に配置 */
+    }
 
-      @keyframes marquee-anim {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
+    /* 左上のタイトル */
+    .section-label {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(1.5rem, 6vw, 9rem);
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      z-index: 10;
+    }
 
-      @media screen and (max-width: 768px) {
-        .marquee-text {
-          -webkit-text-stroke: 0.5px #ffffff; /* スマホ時は線を少し細く */
-        }
-      }
+    /* 本のベース */
+    .log-paper {
+      position: relative;
+      width: 82%;
+      max-width: 1100px;
+      aspect-ratio: 1.6 / 1;
+      /* CSS変数で指定された背景画像を適用 */
+      background-image: var(--bg-log);
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      box-sizing: border-box;
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
+    }
 
-      .captains-log-section {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 4rem 1rem;
-        box-sizing: border-box;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        overflow: hidden;
-        position: sticky; /* 画面の定位置でピタッと止まる */
-        top: 0; /* 一番上で止まる */
-        z-index: 1; /* 背面に配置 */
-      }
+    .log-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      padding: 6.5% 8.5%;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
 
-      /* 左上のタイトル */
-      .section-label {
-        position: absolute;
-        top: 2rem;
-        left: 2rem;
-        font-family: "Bebas Neue", cursive;
-        font-size: clamp(1.5rem, 6vw, 9rem);
-        color: #ffffff;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-        z-index: 10;
-      }
+    .log-page {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 1.2rem;
+      color: #120a04; /* より濃い墨インク色にして視認性UP */
+    }
 
-      /* 本のベース */
-      .log-paper {
-        position: relative;
-        width: 82%;
-        max-width: 1100px;
-        aspect-ratio: 1.6 / 1;
-        /* CSS変数で指定された背景画像を適用 */
-        background-image: var(--bg-log);
-        background-size: 100% 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        box-sizing: border-box;
-        filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
-      }
+    /* メイン見出し（カリグラフィー風） */
+    .log-title {
+      font-family: "Pinyon Script", cursive;
+      font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+      text-align: center;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px solid #2c1a0e;
+      padding-bottom: 0.1rem;
+      color: #0f0702;
+    }
 
-      .log-container {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        padding: 6.5% 8.5%;
-        box-sizing: border-box;
-        position: relative;
-        z-index: 1;
-      }
+    /* 本文：見やすい Cormorant Garamond */
+    .log-entry p {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: clamp(1.15rem, 1.55vw, 1.55rem);
+      font-weight: 600;
+      margin: 0.3rem 0;
+      line-height: 1.35;
+      border-bottom: 1px dashed rgba(44, 26, 14, 0.3);
+      padding-bottom: 0.15rem;
+      letter-spacing: 0.02em;
+    }
 
-      .log-page {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0 1.2rem;
-        color: #120a04; /* より濃い墨インク色にして視認性UP */
-      }
+    /* 項目名（Log Entry: など） */
+    .log-entry strong {
+      font-style: normal;
+      font-weight: 700;
+      color: #2b180a;
+      margin-right: 0.3rem;
+    }
 
-      /* メイン見出し（カリグラフィー風） */
-      .log-title {
-        font-family: "Pinyon Script", cursive;
-        font-size: clamp(2.4rem, 3.8vw, 3.8rem);
-        text-align: center;
-        margin-bottom: 0.8rem;
-        border-bottom: 2px solid #2c1a0e;
-        padding-bottom: 0.1rem;
-        color: #0f0702;
-      }
+    /* 日本語表記 */
+    .jp-text {
+      font-family: "Shippori Mincho", serif;
+      font-size: clamp(1rem, 1.3vw, 1.3rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #0f0702;
+      display: inline-block;
+    }
 
-      /* 本文：見やすい Cormorant Garamond */
-      .log-entry p {
-        font-family: "Cormorant Garamond", serif;
-        font-style: italic;
-        font-size: clamp(1.15rem, 1.55vw, 1.55rem);
-        font-weight: 600;
-        margin: 0.3rem 0;
-        line-height: 1.35;
-        border-bottom: 1px dashed rgba(44, 26, 14, 0.3);
-        padding-bottom: 0.15rem;
-        letter-spacing: 0.02em;
-      }
-
-      /* 項目名（Log Entry: など） */
-      .log-entry strong {
-        font-style: normal;
-        font-weight: 700;
-        color: #2b180a;
-        margin-right: 0.3rem;
-      }
-
-      /* 日本語表記 */
-      .jp-text {
-        font-family: "Shippori Mincho", serif;
-        font-size: clamp(1rem, 1.3vw, 1.3rem);
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        color: #0f0702;
-        display: inline-block;
-      }
-
-      /* -----------------------------------------
+    /* -----------------------------------------
      手書き風（左からインクが伸びる）アニメーション
   ----------------------------------------- */
-      .write-effect {
+    .write-effect {
+      opacity: 0;
+      clip-path: inset(0 100% 0 0);
+    }
+
+    .is-animated .write-effect {
+      animation: writeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes writeIn {
+      0% {
         opacity: 0;
         clip-path: inset(0 100% 0 0);
       }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+      }
+    }
 
-      .is-animated .write-effect {
-        animation: writeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-      }
+    /* 順次発火用ディレイ */
+    .is-animated .delay-1 {
+      animation-delay: 0.1s;
+    }
+    .is-animated .delay-2 {
+      animation-delay: 0.4s;
+    }
+    .is-animated .delay-3 {
+      animation-delay: 0.7s;
+    }
+    .is-animated .delay-4 {
+      animation-delay: 1s;
+    }
+    .is-animated .delay-5 {
+      animation-delay: 1.3s;
+    }
+    .is-animated .delay-6 {
+      animation-delay: 1.6s;
+    }
+    .is-animated .delay-7 {
+      animation-delay: 1.9s;
+    }
+    .is-animated .delay-8 {
+      animation-delay: 2.2s;
+    }
 
-      @keyframes writeIn {
-        0% {
-          opacity: 0;
-          clip-path: inset(0 100% 0 0);
-        }
-        10% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 1;
-          clip-path: inset(0 0 0 0);
-        }
-      }
-
-      /* 順次発火用ディレイ */
-      .is-animated .delay-1 {
-        animation-delay: 0.1s;
-      }
-      .is-animated .delay-2 {
-        animation-delay: 0.4s;
-      }
-      .is-animated .delay-3 {
-        animation-delay: 0.7s;
-      }
-      .is-animated .delay-4 {
-        animation-delay: 1s;
-      }
-      .is-animated .delay-5 {
-        animation-delay: 1.3s;
-      }
-      .is-animated .delay-6 {
-        animation-delay: 1.6s;
-      }
-      .is-animated .delay-7 {
-        animation-delay: 1.9s;
-      }
-      .is-animated .delay-8 {
-        animation-delay: 2.2s;
-      }
-
-      /* -----------------------------------------
+    /* -----------------------------------------
      カウントダウンエリア
   ----------------------------------------- */
-      .countdown-wrapper {
-        text-align: center;
-        display: flex;
+    .countdown-wrapper {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .countdown-title {
+      font-family: "Shippori Mincho", serif;
+      font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid #2c1a0e;
+      padding-bottom: 0.2rem;
+      color: #0f0702;
+    }
+
+    /* カウントダウン数字 */
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: clamp(0.8rem, 2vw, 1.8rem);
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+      font-weight: 700;
+      color: #0f0702;
+      line-height: 1; /* 修正箇所 */
+    }
+
+    .time-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 1px dashed rgba(44, 26, 14, 0.3);
+      padding: 0 0.2rem 0.2rem;
+    }
+
+    .time-label {
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(0.95rem, 1.2vw, 1.25rem);
+      font-weight: 700;
+      margin-top: 0.2rem;
+      opacity: 0.85;
+    }
+
+    /* 開催中・終了後のステータス文字 */
+    .event-status-text {
+      display: none;
+      font-family: "Shippori Mincho", serif;
+      font-size: clamp(1.8rem, 3.2vw, 3rem);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #0f0702;
+      border-bottom: 2px solid #2c1a0e;
+      padding-bottom: 0.4rem;
+    }
+
+    /* -----------------------------------------
+     スマホ用レスポンシブ（画像を90度回転＆縦開き化）
+  ----------------------------------------- */
+    /* スマホ表示時の最適化（768px以下） */
+    @media (max-width: 768px) {
+      .section-label {
+        top: 1.5rem;
+        left: 1.5rem;
+        font-size: 4.5rem;
+      }
+
+      .captains-log-section {
+        padding: 4.5rem 0.8rem 2.5rem;
+      }
+
+      /* 本のベース：縦幅をさらに伸ばして縦長化（比率 1 : 1.75） */
+      .log-paper {
+        width: 90%;
+        max-width: 420px;
+        aspect-ratio: 1 / 2; /* 1:1.5から1:1.75へ伸ばし余白を拡張 */
+        background-size: 0 0 !important;
+      }
+
+      /* 背景画像を縦長比率に合わせて90度回転・フィット */
+      .log-paper::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200%;
+        height: 57.14%;
+        transform: translate(-50%, -50%) rotate(90deg);
+        background-image: inherit;
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* コンテンツ配置：縦方向にゆとりを持たせる調整 */
+      .log-container {
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        padding: 10% 8.5%;
+        gap: 1.8rem;
         height: 100%;
+        justify-content: space-around;
+      }
+
+      .log-page {
+        padding: 0;
+      }
+
+      .log-title {
+        font-size: 2.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .log-entry p {
+        font-size: 1.05rem;
+        margin: 0.25rem 0;
+        padding-bottom: 0.15rem;
       }
 
       .countdown-title {
-        font-family: "Shippori Mincho", serif;
-        font-size: clamp(1.4rem, 2.2vw, 2.2rem);
-        font-weight: 800;
-        letter-spacing: 0.1em;
-        margin-bottom: 1.2rem;
-        border-bottom: 2px solid #2c1a0e;
-        padding-bottom: 0.2rem;
-        color: #0f0702;
+        font-size: 1.35rem;
+        margin-bottom: 0.8rem;
       }
 
-      /* カウントダウン数字 */
       .countdown-timer {
-        display: flex;
-        justify-content: center;
-        gap: clamp(0.8rem, 2vw, 1.8rem);
-        font-family: "Bebas Neue", cursive;
-        font-size: clamp(2.8rem, 4.5vw, 4.5rem);
-        font-weight: 700;
-        color: #0f0702;
-        line-height: 1; /* 修正箇所 */
+        font-size: 2.7rem;
+        gap: 0.6rem;
       }
-
-      .time-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-bottom: 1px dashed rgba(44, 26, 14, 0.3);
-        padding: 0 0.2rem 0.2rem;
-      }
-
-      .time-label {
-        font-family: "Bebas Neue", cursive;
-        font-size: clamp(0.95rem, 1.2vw, 1.25rem);
-        font-weight: 700;
-        margin-top: 0.2rem;
-        opacity: 0.85;
-      }
-
-      /* 開催中・終了後のステータス文字 */
-      .event-status-text {
-        display: none;
-        font-family: "Shippori Mincho", serif;
-        font-size: clamp(1.8rem, 3.2vw, 3rem);
-        font-weight: 800;
-        letter-spacing: 0.1em;
-        color: #0f0702;
-        border-bottom: 2px solid #2c1a0e;
-        padding-bottom: 0.4rem;
-      }
-
-      /* -----------------------------------------
-     スマホ用レスポンシブ（画像を90度回転＆縦開き化）
-  ----------------------------------------- */
-      /* スマホ表示時の最適化（768px以下） */
-      @media (max-width: 768px) {
-        .section-label {
-          top: 1.5rem;
-          left: 1.5rem;
-          font-size: 4.5rem;
-        }
-
-        .captains-log-section {
-          padding: 4.5rem 0.8rem 2.5rem;
-        }
-
-        /* 本のベース：縦幅をさらに伸ばして縦長化（比率 1 : 1.75） */
-        .log-paper {
-          width: 90%;
-          max-width: 420px;
-          aspect-ratio: 1 / 2; /* 1:1.5から1:1.75へ伸ばし余白を拡張 */
-          background-size: 0 0 !important;
-        }
-
-        /* 背景画像を縦長比率に合わせて90度回転・フィット */
-        .log-paper::before {
-          content: "";
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 200%;
-          height: 57.14%;
-          transform: translate(-50%, -50%) rotate(90deg);
-          background-image: inherit;
-          background-size: 100% 100%;
-          background-position: center;
-          background-repeat: no-repeat;
-          z-index: 0;
-          pointer-events: none;
-        }
-
-        /* コンテンツ配置：縦方向にゆとりを持たせる調整 */
-        .log-container {
-          flex-direction: column;
-          padding: 10% 8.5%;
-          gap: 1.8rem;
-          height: 100%;
-          justify-content: space-around;
-        }
-
-        .log-page {
-          padding: 0;
-        }
-
-        .log-title {
-          font-size: 2.3rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .log-entry p {
-          font-size: 1.05rem;
-          margin: 0.25rem 0;
-          padding-bottom: 0.15rem;
-        }
-
-        .countdown-title {
-          font-size: 1.35rem;
-          margin-bottom: 0.8rem;
-        }
-
-        .countdown-timer {
-          font-size: 2.7rem;
-          gap: 0.6rem;
-        }
-      }
-      /* ========================================
+    }
+    /* ========================================
      ACCESS セクション (位置ズレ＆デザイン修正版)
      ======================================== */
+    .access-section {
+      padding: 80px 0;
+      position: relative;
+      z-index: 10; /* 前面に配置 */
+      background-color: #ffffff; /* 透明だと透けるので白などで塗りつぶす */
+    }
+
+    .access-inner {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .access-header {
+      margin-bottom: 40px;
+    }
+
+    .access-label-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* タイトルのフォントサイズもEXHIBITIONSに合わせる */
+    .access-title {
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 800;
+      margin: 0;
+      padding: 0;
+      color: #060906;
+      font-family: "Bebas Neue", cursive;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
+
+    .access-subtitle {
+      margin: 6px 0 0;
+      font-size: 1.3rem;
+      color: #111;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* コンテンツのレイアウト */
+    .access-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 60px;
+      align-items: stretch;
+    }
+
+    /* --- 左側：情報エリア --- */
+    .access-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* ▼ お気に入りの縦棒をここ全体に適用し、キレイに揃える */
+      border-left: 3px solid #222;
+      padding-left: 24px;
+    }
+
+    .access-address-box {
+      margin-bottom: 40px;
+    }
+
+    .access-school-name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.05em;
+      color: #111;
+    }
+
+    .access-address-text {
+      font-size: 1rem;
+      color: #444;
+      margin: 0;
+    }
+
+    /* ルート（電車）リスト：AIっぽい枠を廃止し「地べた」に貼り付け */
+    .route-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .route-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      /* 背景色・枠線・影をすべて削除 */
+      background: transparent;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+    }
+
+    .route-icon-wrapper {
+      background-color: transparent;
+      color: #1e2229;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .train-icon {
+      width: 100%;
+      height: 100%;
+    }
+
+    .route-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .line-name {
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 700;
+    }
+
+    .station-name {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #111;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    /* 徒歩時間の枠も廃止し、シンプルなテキストに */
+    .walk-time {
+      font-size: 0.9rem;
+      color: #555;
+      font-weight: 700;
+      background: transparent;
+      padding: 0;
+    }
+
+    /* 注意書き */
+    .access-notice {
+      padding-left: 0;
+      border-left: none; /* 親要素で線を引いたのでここは削除 */
+    }
+
+    .access-notice p {
+      font-size: 0.85rem;
+      color: #666;
+      margin: 0 0 6px 0;
+      line-height: 1.5;
+    }
+
+    /* --- 右側：Googleマップ --- */
+    .access-map-wrapper {
+      flex: 1;
+      width: 100%;
+      max-width: 600px;
+      min-height: 400px;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .access-map-mobile {
+      display: none;
+    }
+
+    .access-map-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: filter 0.3s ease;
+    }
+
+    .map-overlay-frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      box-shadow: outset 0 0 40px rgba(0, 20, 40, 0.2);
+    }
+
+    @media screen and (max-width: 768px) {
       .access-section {
-        padding: 80px 0;
-        position: relative;
-        z-index: 10; /* 前面に配置 */
-        background-color: #ffffff; /* 透明だと透けるので白などで塗りつぶす */
-
+        padding: 60px 0;
       }
-
-      .access-inner {
-        max-width: 1500px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-      }
-
       .access-header {
-        margin-bottom: 40px;
+        margin-bottom: 24px;
       }
-
-      .access-label-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
-
-      /* タイトルのフォントサイズもEXHIBITIONSに合わせる */
       .access-title {
-        font-size: clamp(3.5rem, 9vw, 9rem);
-        font-weight: 800;
-        margin: 0;
-        padding: 0;
-        color: #060906;
-        font-family: "Bebas Neue", cursive;
-        line-height: 1.1;
-        letter-spacing: 0.05em;
-        display: inline-block;
+        font-size: 3.5rem;
       }
-
       .access-subtitle {
-        margin: 6px 0 0;
-        font-size: 1.3rem;
-        color: #111;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-      }
-
-      /* コンテンツのレイアウト */
-      .access-content {
-        display: flex;
-        justify-content: space-between;
-        gap: 60px;
-        align-items: stretch;
-      }
-
-      /* --- 左側：情報エリア --- */
-      .access-info {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        /* ▼ お気に入りの縦棒をここ全体に適用し、キレイに揃える */
-        border-left: 3px solid #222;
-        padding-left: 24px;
-      }
-
-      .access-address-box {
-        margin-bottom: 40px;
-      }
-
-      .access-school-name {
-        font-size: 1.4rem;
-        font-weight: 900;
-        margin: 0 0 8px 0;
-        letter-spacing: 0.05em;
-        color: #111;
-      }
-
-      .access-address-text {
         font-size: 1rem;
-        color: #444;
-        margin: 0;
       }
-
-      /* ルート（電車）リスト：AIっぽい枠を廃止し「地べた」に貼り付け */
-      .route-list {
-        display: flex;
+      .access-content {
         flex-direction: column;
-        gap: 24px;
-        margin-bottom: 40px;
+        gap: 40px;
+        margin-top: 24px;
       }
-
-      .route-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 16px;
-        /* 背景色・枠線・影をすべて削除 */
-        background: transparent;
-        padding: 0;
-        border: none;
-        box-shadow: none;
-      }
-
-      .route-icon-wrapper {
-        background-color: transparent;
-        color: #1e2229;
-        width: 28px;
-        height: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        margin-top: 2px;
-      }
-
-      .train-icon {
-        width: 100%;
-        height: 100%;
-      }
-
-      .route-details {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .line-name {
-        font-size: 0.85rem;
-        color: #666;
-        font-weight: 700;
-      }
-
-      .station-name {
-        font-size: 1.1rem;
-        font-weight: 900;
-        color: #111;
-        display: flex;
-        align-items: baseline;
-        gap: 12px;
-      }
-
-      /* 徒歩時間の枠も廃止し、シンプルなテキストに */
-      .walk-time {
-        font-size: 0.9rem;
-        color: #555;
-        font-weight: 700;
-        background: transparent;
-        padding: 0;
-      }
-
-      /* 注意書き */
-      .access-notice {
-        padding-left: 0;
-        border-left: none; /* 親要素で線を引いたのでここは削除 */
-      }
-
-      .access-notice p {
-        font-size: 0.85rem;
-        color: #666;
-        margin: 0 0 6px 0;
-        line-height: 1.5;
-      }
-
-      /* --- 右側：Googleマップ --- */
       .access-map-wrapper {
-        flex: 1;
-        width: 100%;
-        max-width: 600px;
-        min-height: 400px;
-        position: relative;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        max-width: 100%;
+        height: 350px;
+        min-height: auto;
+      }
+
+      .access-content > .access-map-wrapper:not(.access-map-mobile) {
+        display: none;
       }
 
       .access-map-mobile {
-        display: none;
-      }
-
-      .access-map-wrapper iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: filter 0.3s ease;
-      }
-
-      .map-overlay-frame {
-        position: absolute;
-        top: 0;
-        left: 0;
+        display: block !important;
+        flex: none;
         width: 100%;
-        height: 100%;
-        pointer-events: none;
-        box-shadow: outset 0 0 40px rgba(0, 20, 40, 0.2);
+        height: 350px;
+        min-height: 350px;
+        margin: 32px 0;
       }
+    }
 
-      @media screen and (max-width: 768px) {
-        .access-section {
-          padding: 60px 0;
-        }
-        .access-header {
-          margin-bottom: 24px;
-        }
-        .access-title {
-          font-size: 3.5rem;
-        }
-        .access-subtitle {
-          font-size: 1rem;
-        }
-        .access-content {
-          flex-direction: column;
-          gap: 40px;
-          margin-top: 24px;
-        }
-        .access-map-wrapper {
-          max-width: 100%;
-          height: 350px;
-          min-height: auto;
-        }
-
-        .access-content > .access-map-wrapper:not(.access-map-mobile) {
-          display: none;
-        }
-
-        .access-map-mobile {
-          display: block !important;
-          flex: none;
-          width: 100%;
-          height: 350px;
-          min-height: 350px;
-          margin: 32px 0;
-        }
-      }
-
-      /* ========================================
+    /* ========================================
      船長の公開日誌 / COUNTDOWN
      ======================================== */
+    .captains-log-section {
+      position: relative;
+      overflow: hidden;
+      padding: 5px 1rem;
+      color: #e9e0bf;
+      background:
+        radial-gradient(
+          ellipse at 88% 10%,
+          rgba(55, 98, 112, 0.46),
+          transparent 36%
+        ),
+        radial-gradient(
+          ellipse at 8% 95%,
+          rgba(112, 76, 37, 0.4),
+          transparent 34%
+        ),
+        #092631;
+    }
+
+    .captains-log-section::before {
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(225, 205, 149, 0.36);
+      content: "";
+      pointer-events: none;
+    }
+
+    .captains-log-section::after {
+      position: absolute;
+      top: -130px;
+      right: -80px;
+      width: 330px;
+      height: 330px;
+      border: 1px dashed rgba(226, 207, 154, 0.45);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .captains-log-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem);
+      border-left: 3px solid #d6b66d;
+      background: rgba(1, 22, 30, 0.42);
+      box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .log-heading {
+      text-align: center;
+    }
+    .log-kicker,
+    .log-date,
+    .countdown-status {
+      margin: 0;
+      color: #d4bb7e;
+      font-family: "Bebas Neue", cursive;
+      letter-spacing: 0.2em;
+    }
+    .log-kicker {
+      font-size: 1rem;
+    }
+    .log-heading h2 {
+      margin: 0.45rem 0;
+      color: #fbf2d1;
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: clamp(2rem, 4.2vw, 3.2rem);
+      letter-spacing: 0.12em;
+    }
+    .log-date {
+      font-size: 0.78rem;
+    }
+
+    .log-details {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 1.3rem 0;
+      border-top: 1px solid rgba(225, 205, 149, 0.42);
+      border-bottom: 1px solid rgba(225, 205, 149, 0.42);
+    }
+    .log-details dl {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin: 0;
+    }
+    .log-details div {
+      min-width: 0;
+    }
+    .log-details dt {
+      margin-bottom: 0.45rem;
+      color: #d4bb7e;
+      font-family: "Bebas Neue", cursive;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+    }
+    .log-details dd {
+      margin: 0;
+      color: #f4edcf;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: clamp(0.35rem, 1.3vw, 1rem);
+    }
+    .countdown-unit {
+      display: grid;
+      min-width: clamp(58px, 10vw, 108px);
+      text-align: center;
+    }
+    .countdown-unit > span {
+      color: #fff4ce;
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(3.3rem, 8vw, 6.2rem);
+      line-height: 0.85;
+      letter-spacing: 0.02em;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.36);
+    }
+    .countdown-unit small {
+      margin-top: 0.8rem;
+      color: #d4bb7e;
+      font-family: "Bebas Neue", cursive;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+    }
+    .countdown-separator {
+      padding-top: 0.02em;
+      color: #d4bb7e;
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 0.8;
+    }
+    .countdown-status {
+      margin-top: 1.6rem;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    @media screen and (max-width: 768px) {
       .captains-log-section {
-        position: relative;
-        overflow: hidden;
-        padding: 5px 1rem;
-        color: #e9e0bf;
-        background:
-          radial-gradient(
-            ellipse at 88% 10%,
-            rgba(55, 98, 112, 0.46),
-            transparent 36%
-          ),
-          radial-gradient(
-            ellipse at 8% 95%,
-            rgba(112, 76, 37, 0.4),
-            transparent 34%
-          ),
-          #092631;
+        padding: 58px 1rem;
       }
-
       .captains-log-section::before {
-        position: absolute;
-        inset: 16px;
-        border: 1px solid rgba(225, 205, 149, 0.36);
-        content: "";
-        pointer-events: none;
+        inset: 9px;
       }
-
-      .captains-log-section::after {
-        position: absolute;
-        top: -130px;
-        right: -80px;
-        width: 330px;
-        height: 330px;
-        border: 1px dashed rgba(226, 207, 154, 0.45);
-        border-radius: 50%;
-        content: "";
-      }
-
       .captains-log-inner {
-        position: relative;
-        z-index: 1;
-        max-width: 1120px;
-        margin: 0 auto;
-        padding: clamp(2rem, 5vw, 4rem);
-        border-left: 3px solid #d6b66d;
-        background: rgba(1, 22, 30, 0.42);
-        box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.28);
+        padding: 2.2rem 1.1rem;
       }
-
-      .log-heading {
-        text-align: center;
-      }
-      .log-kicker,
-      .log-date,
-      .countdown-status {
-        margin: 0;
-        color: #d4bb7e;
-        font-family: "Bebas Neue", cursive;
-        letter-spacing: 0.2em;
-      }
-      .log-kicker {
-        font-size: 1rem;
-      }
-      .log-heading h2 {
-        margin: 0.45rem 0;
-        color: #fbf2d1;
-        font-family: "Noto Sans JP", sans-serif;
-        font-size: clamp(2rem, 4.2vw, 3.2rem);
-        letter-spacing: 0.12em;
-      }
-      .log-date {
-        font-size: 0.78rem;
-      }
-
       .log-details {
-        max-width: 760px;
-        margin: 2.5rem auto;
-        padding: 1.3rem 0;
-        border-top: 1px solid rgba(225, 205, 149, 0.42);
-        border-bottom: 1px solid rgba(225, 205, 149, 0.42);
+        margin: 1.8rem 0;
       }
       .log-details dl {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-        margin: 0;
+        grid-template-columns: 1fr;
+        gap: 1rem;
       }
       .log-details div {
-        min-width: 0;
+        display: grid;
+        grid-template-columns: 105px 1fr;
+        gap: 0.5rem;
       }
       .log-details dt {
-        margin-bottom: 0.45rem;
-        color: #d4bb7e;
-        font-family: "Bebas Neue", cursive;
-        font-size: 0.9rem;
-        letter-spacing: 0.15em;
-      }
-      .log-details dd {
         margin: 0;
-        color: #f4edcf;
-        font-size: 0.82rem;
-        font-weight: 700;
-        line-height: 1.7;
       }
-
       .countdown {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        gap: clamp(0.35rem, 1.3vw, 1rem);
+        gap: 0.2rem;
       }
       .countdown-unit {
-        display: grid;
-        min-width: clamp(58px, 10vw, 108px);
-        text-align: center;
-      }
-      .countdown-unit > span {
-        color: #fff4ce;
-        font-family: "Bebas Neue", cursive;
-        font-size: clamp(3.3rem, 8vw, 6.2rem);
-        line-height: 0.85;
-        letter-spacing: 0.02em;
-        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.36);
-      }
-      .countdown-unit small {
-        margin-top: 0.8rem;
-        color: #d4bb7e;
-        font-family: "Bebas Neue", cursive;
-        font-size: 0.7rem;
-        letter-spacing: 0.16em;
-      }
-      .countdown-separator {
-        padding-top: 0.02em;
-        color: #d4bb7e;
-        font-family: "Bebas Neue", cursive;
-        font-size: clamp(2.4rem, 5vw, 4.3rem);
-        line-height: 0.8;
-      }
-      .countdown-status {
-        margin-top: 1.6rem;
-        text-align: center;
-        font-size: 0.85rem;
-      }
-
-      @media screen and (max-width: 768px) {
-        .captains-log-section {
-          padding: 58px 1rem;
-        }
-        .captains-log-section::before {
-          inset: 9px;
-        }
-        .captains-log-inner {
-          padding: 2.2rem 1.1rem;
-        }
-        .log-details {
-          margin: 1.8rem 0;
-        }
-        .log-details dl {
-          grid-template-columns: 1fr;
-          gap: 1rem;
-        }
-        .log-details div {
-          display: grid;
-          grid-template-columns: 105px 1fr;
-          gap: 0.5rem;
-        }
-        .log-details dt {
-          margin: 0;
-        }
-        .countdown {
-          gap: 0.2rem;
-        }
-        .countdown-unit {
-          min-width: 0;
-          flex: 1;
-        }
-        .countdown-unit > span {
-          font-size: clamp(2.5rem, 13vw, 3.4rem);
-        }
-        .countdown-unit small {
-          font-size: 0.53rem;
-          letter-spacing: 0.08em;
-        }
-        .countdown-separator {
-          font-size: 2.3rem;
-        }
-      }
-
-      /* ========================================
-     EXHIBITION セクション (アップデート内容)
-     ======================================== */
-      .exhibition-section {
-        padding: 40px 0;
-        background-color: #ffffff;
-        position: relative;
-      }
-
-      .exhibition-header {
-        max-width: 1500px;
-        margin: 0 auto 30px;
-        padding: 0 1.5rem;
-      }
-
-      .exhibition-label-wrapper {
-        display: flex;
-        align-items: center;
-      }
-
-      /* ラベル風のタイトルデザイン＆フォントサイズ拡大 */
-      .exhibition-title {
-        font-size: clamp(3.5rem, 9vw, 9rem);
-        font-weight: 800;
-        margin: 0;
-        color: #060906;
-        font-family: "Bebas Neue", cursive;
-        line-height: 1.1;
-        letter-spacing: 0.05em;
-        display: inline-block;
-      }
-
-      /* サブタイトルは黒で統一 */
-      .exhibition-subtitle {
-        margin: 6px 0 0;
-        font-size: 1.3rem;
-        color: #111;
-        font-weight: 700;
-      }
-
-      .exhibition-carousel-wrapper {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        background-color: #1e2229; /* フォールバックカラー */
-        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
-        opacity: 0;
-      }
-
-      .exhibition-track {
-        display: flex;
-        align-items: center;
-        width: max-content;
-        height: 92%;
-        padding-left: 45px;
-        position: relative;
-        z-index: 1;
-      }
-
-      /* clip-pathを維持したまま影をつけるためのラッパー */
-      :global(.exhibition-card-wrapper) {
-        position: relative;
-        width: 300px;
-        height: 100%;
-        flex-shrink: 0;
-        margin-left: -45px;
-        /* 重なっている部分にドロップシャドウを適用 */
-        filter: drop-shadow(-5px 5px 10px rgba(0, 0, 0, 0.5));
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-      }
-
-      /* ホバー時は少しだけ上に浮く仕様（画像は暗くならない） */
-      :global(.exhibition-card-wrapper:hover) {
-        transform: translateY(-4px);
-        z-index: 5;
-      }
-
-      /* 実際のカード（切り抜き設定） */
-      :global(.exhibition-card) {
-        display: block;
-        width: 100%;
-        height: 100%;
-        clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
-        background-color: #222;
-        overflow: hidden;
-      }
-
-      /* 画像本体（フィルターなしで通常の色を表示） */
-      :global(.exhibition-card-img) {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        display: block;
-      }
-
-      .btn-exhibition-floating {
-        position: absolute;
-        right: 5%;
-        bottom: 24px;
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px 32px;
-
-        background: rgba(117, 120, 122, 0.726);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-
-        color: #fff;
-        text-decoration: none;
-        font-weight: 700;
-        border-radius: 50px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        z-index: 10;
-        transition:
-          background 0.3s ease,
-          transform 0.3s ease;
-      }
-
-      .btn-exhibition-floating:hover {
-        background: rgba(33, 35, 37, 0.8);
-        transform: translateY(-2px);
-      }
-
-      @media screen and (max-width: 768px) {
-        .exhibition-section {
-          padding: 40px 0;
-        }
-        .exhibition-title {
-          font-size: 4rem;
-        }
-        .exhibition-subtitle {
-          font-size: 1rem;
-        }
-        .exhibition-carousel-wrapper {
-          height: 200px;
-        }
-        .exhibition-track {
-          padding-left: 30px;
-        }
-        /* スマホ時のカード幅調整 */
-        :global(.exhibition-card-wrapper) {
-          width: 200px;
-          margin-left: -30px;
-        }
-        .btn-exhibition-floating {
-          right: 50%;
-          transform: translateX(50%);
-          bottom: 12px;
-          padding: 12px 24px;
-          font-size: 0.6rem;
-          width: max-content;
-          white-space: nowrap;
-        }
-        .btn-exhibition-floating:hover {
-          transform: translateX(50%) translateY(-2px);
-        }
-      }
-
-      /* ========================================
-   SNS セクション
-   ======================================== */
-      .sns-section {
-        padding: 80px 0;
-        background-color: #ffffff;
-        position: relative;
-        z-index: 5;
-        position: relative; /* 絶対配置の基準にするため追加 */
-        overflow: hidden; /* 斜め画像がセクション外にはみ出すのを防ぐ */
-        background-color: #ffffff; /* 既存の背景色 */
-      }
-
-      .sns-inner {
-        max-width: 1500px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        z-index: 10;
-      }
-
-      .sns-header {
-        margin-bottom: 40px;
-      }
-
-      .sns-label-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
-
-      /* タイトルフォントをACCESSセクションと同一にする */
-      .sns-title {
-        font-size: clamp(3.5rem, 9vw, 9rem);
-        font-weight: 800;
-        margin: 0;
-        padding: 0;
-        color: #060906;
-        font-family: "Bebas Neue", cursive;
-        line-height: 1.1;
-        letter-spacing: 0.05em;
-        display: inline-block;
-      }
-
-      .sns-subtitle {
-        margin: 6px 0 0;
-        font-size: 1.3rem;
-        color: #111;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-      }
-
-      /* --- コンテンツレイアウト（3カラムグリッド） --- */
-      .sns-content {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-      }
-
-      /* --- SNSカード共通スタイル --- */
-      .sns-card {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        text-decoration: none;
-        color: #111;
-        background-color: #f9fafb;
-        border-radius: 24px;
-        padding: 28px 24px;
-      }
-
-      /* ホバー時のふわっと浮くアニメーション */
-      .sns-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-        background-color: #ffffff;
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease,
-          background-color 0.25s ease;
-      }
-
-      .sns-card-left {
-        display: flex;
-        align-items: flex-start;
-        gap: 16px;
+        min-width: 0;
         flex: 1;
       }
+      .countdown-unit > span {
+        font-size: clamp(2.5rem, 13vw, 3.4rem);
+      }
+      .countdown-unit small {
+        font-size: 0.53rem;
+        letter-spacing: 0.08em;
+      }
+      .countdown-separator {
+        font-size: 2.3rem;
+      }
+    }
 
-      /* SNSアイコンの親枠 */
+    /* ========================================
+     EXHIBITION セクション (アップデート内容)
+     ======================================== */
+    .exhibition-section {
+      padding: 40px 0;
+      background-color: #ffffff;
+      position: relative;
+    }
+
+    .exhibition-header {
+      max-width: 1500px;
+      margin: 0 auto 30px;
+      padding: 0 1.5rem;
+    }
+
+    .exhibition-label-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    /* ラベル風のタイトルデザイン＆フォントサイズ拡大 */
+    .exhibition-title {
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 800;
+      margin: 0;
+      color: #060906;
+      font-family: "Bebas Neue", cursive;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
+
+    /* サブタイトルは黒で統一 */
+    .exhibition-subtitle {
+      margin: 6px 0 0;
+      font-size: 1.3rem;
+      color: #111;
+      font-weight: 700;
+    }
+
+    .exhibition-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      background-color: #1e2229; /* フォールバックカラー */
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+    }
+
+    .exhibition-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      height: 92%;
+      padding-left: 45px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* clip-pathを維持したまま影をつけるためのラッパー */
+    :global(.exhibition-card-wrapper) {
+      position: relative;
+      width: 300px;
+      height: 100%;
+      flex-shrink: 0;
+      margin-left: -45px;
+      /* 重なっている部分にドロップシャドウを適用 */
+      filter: drop-shadow(-5px 5px 10px rgba(0, 0, 0, 0.5));
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ホバー時は少しだけ上に浮く仕様（画像は暗くならない） */
+    :global(.exhibition-card-wrapper:hover) {
+      transform: translateY(-4px);
+      z-index: 5;
+    }
+
+    /* 実際のカード（切り抜き設定） */
+    :global(.exhibition-card) {
+      display: block;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+      background-color: #222;
+      overflow: hidden;
+    }
+
+    /* 画像本体（フィルターなしで通常の色を表示） */
+    :global(.exhibition-card-img) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .btn-exhibition-floating {
+      position: absolute;
+      right: 5%;
+      bottom: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+
+      background: rgba(117, 120, 122, 0.726);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+      transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .btn-exhibition-floating:hover {
+      background: rgba(33, 35, 37, 0.8);
+      transform: translateY(-2px);
+    }
+
+    @media screen and (max-width: 768px) {
+      .exhibition-section {
+        padding: 40px 0;
+      }
+      .exhibition-title {
+        font-size: 4rem;
+      }
+      .exhibition-subtitle {
+        font-size: 1rem;
+      }
+      .exhibition-carousel-wrapper {
+        height: 200px;
+      }
+      .exhibition-track {
+        padding-left: 30px;
+      }
+      /* スマホ時のカード幅調整 */
+      :global(.exhibition-card-wrapper) {
+        width: 200px;
+        margin-left: -30px;
+      }
+      .btn-exhibition-floating {
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 12px;
+        padding: 12px 24px;
+        font-size: 0.6rem;
+        width: max-content;
+        white-space: nowrap;
+      }
+      .btn-exhibition-floating:hover {
+        transform: translateX(50%) translateY(-2px);
+      }
+    }
+
+    /* ========================================
+   SNS セクション
+   ======================================== */
+    .sns-section {
+      padding: 80px 0;
+      background-color: #ffffff;
+      position: relative;
+      z-index: 5;
+      position: relative; /* 絶対配置の基準にするため追加 */
+      overflow: hidden; /* 斜め画像がセクション外にはみ出すのを防ぐ */
+      background-color: #ffffff; /* 既存の背景色 */
+    }
+
+    .sns-inner {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      z-index: 10;
+    }
+
+    .sns-header {
+      margin-bottom: 40px;
+    }
+
+    .sns-label-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* タイトルフォントをACCESSセクションと同一にする */
+    .sns-title {
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 800;
+      margin: 0;
+      padding: 0;
+      color: #060906;
+      font-family: "Bebas Neue", cursive;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
+
+    .sns-subtitle {
+      margin: 6px 0 0;
+      font-size: 1.3rem;
+      color: #111;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* --- コンテンツレイアウト（3カラムグリッド） --- */
+    .sns-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* --- SNSカード共通スタイル --- */
+    .sns-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #111;
+      background-color: #f9fafb;
+      border-radius: 24px;
+      padding: 28px 24px;
+    }
+
+    /* ホバー時のふわっと浮くアニメーション */
+    .sns-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+      background-color: #ffffff;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+    }
+
+    .sns-card-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      flex: 1;
+    }
+
+    /* SNSアイコンの親枠 */
+    .sns-icon-wrapper {
+      width: 44px;
+      height: 44px;
+      border-radius: 80%;
+      background-color: #111;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+
+    .sns-card:hover .sns-icon-wrapper {
+      transform: scale(1.08);
+    }
+
+    /* 各ブランドの色に合わせたい場合（お好みで調整可能） */
+    .sns-card.x-twitter:hover .sns-icon-wrapper {
+      background-color: #000000;
+    }
+    .sns-card.instagram:hover .sns-icon-wrapper {
+      background-color: #d9304f;
+    }
+    .sns-card.youtube:hover .sns-icon-wrapper {
+      background-color: #ff0000;
+    }
+
+    .sns-card.x-twitter {
+      border-left-color: #000000;
+    }
+    .sns-card.instagram {
+      border-left-color: #e4405f;
+    }
+    .sns-card.youtube {
+      border-left-color: #ff0000;
+    }
+
+    .sns-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-right: 12px;
+    }
+
+    .sns-name-group {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sns-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .sns-id {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    .sns-description {
+      margin: 4px 0 0 0;
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    /* 右側矢印アイコン */
+    .sns-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .sns-card:hover .sns-arrow {
+      color: #111;
+      transform: translateX(4px);
+    }
+
+    /* ========================================
+   レスポンシブ対応（スマホ・タブレット）
+   ======================================== */
+    @media screen and (max-width: 1024px) {
+      .sns-content {
+        grid-template-columns: 1fr; /* スマホ・タブレットは縦1列に */
+        gap: 16px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .sns-section {
+        padding: 60px 0;
+      }
+
+      .sns-card {
+        padding: 20px 18px;
+        border-radius: 24px;
+      }
+
       .sns-icon-wrapper {
-        width: 44px;
-        height: 44px;
-        border-radius: 80%;
-        background-color: #111;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        transition: transform 0.25s ease;
+        width: 38px;
+        height: 38px;
       }
 
-      .sns-card:hover .sns-icon-wrapper {
-        transform: scale(1.08);
-      }
-
-      /* 各ブランドの色に合わせたい場合（お好みで調整可能） */
-      .sns-card.x-twitter:hover .sns-icon-wrapper {
-        background-color: #000000;
-      }
-      .sns-card.instagram:hover .sns-icon-wrapper {
-        background-color: #d9304f;
-      }
-      .sns-card.youtube:hover .sns-icon-wrapper {
-        background-color: #ff0000;
-      }
-
-      .sns-card.x-twitter {
-        border-left-color: #000000;
-      }
-      .sns-card.instagram {
-        border-left-color: #e4405f;
-      }
-      .sns-card.youtube {
-        border-left-color: #ff0000;
-      }
-
-      .sns-info {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        padding-right: 12px;
-      }
-
-      .sns-name-group {
-        display: flex;
-        align-items: baseline;
-        gap: 8px;
-        flex-wrap: wrap;
+      .sns-icon-wrapper svg {
+        width: 20px;
+        height: 20px;
       }
 
       .sns-name {
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: #111;
-      }
-
-      .sns-id {
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #6b7280;
+        font-size: 1.05rem;
       }
 
       .sns-description {
-        margin: 4px 0 0 0;
-        font-size: 0.9rem;
-        color: #4b5563;
-        line-height: 1.5;
+        font-size: 0.825rem;
       }
+      .sns-image-bg {
+        width: 100%;
+        height: 40%; /* スマホでは下側の40%を覆うような形に */
+        top: auto;
+        bottom: 0;
 
-      /* 右側矢印アイコン */
-      .sns-arrow {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #9ca3af;
-        transition:
-          transform 0.25s ease,
-          color 0.25s ease;
-        flex-shrink: 0;
+        /* スマホ用に切り抜き方向を変更（左上から右下へ斜めライン） */
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
       }
+    }
 
-      .sns-card:hover .sns-arrow {
-        color: #111;
-        transform: translateX(4px);
-      }
-
-      /* ========================================
-   レスポンシブ対応（スマホ・タブレット）
-   ======================================== */
-      @media screen and (max-width: 1024px) {
-        .sns-content {
-          grid-template-columns: 1fr; /* スマホ・タブレットは縦1列に */
-          gap: 16px;
-        }
-      }
-
-      @media screen and (max-width: 768px) {
-        .sns-section {
-          padding: 60px 0;
-        }
-
-        .sns-card {
-          padding: 20px 18px;
-          border-radius: 24px;
-        }
-
-        .sns-icon-wrapper {
-          width: 38px;
-          height: 38px;
-        }
-
-        .sns-icon-wrapper svg {
-          width: 20px;
-          height: 20px;
-        }
-
-        .sns-name {
-          font-size: 1.05rem;
-        }
-
-        .sns-description {
-          font-size: 0.825rem;
-        }
-        .sns-image-bg {
-          width: 100%;
-          height: 40%; /* スマホでは下側の40%を覆うような形に */
-          top: auto;
-          bottom: 0;
-
-          /* スマホ用に切り抜き方向を変更（左上から右下へ斜めライン） */
-          clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
-        }
-      }
-
-      /* ========================================
+    /* ========================================
      FOOTER
      ======================================== */
-      .footer {
-        background-color: #1a1b1f; /* 少し画像に近い暗い色調に */
-        color: #f6f9f6;
-        padding: 70px 0 20px;
-        font-family: "Noto Sans JP", sans-serif;
-      }
+    .footer {
+      background-color: #1a1b1f; /* 少し画像に近い暗い色調に */
+      color: #f6f9f6;
+      padding: 70px 0 20px;
+      font-family: "Noto Sans JP", sans-serif;
+    }
 
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    /* --- 左側：情報エリア --- */
+    .footer-info {
+      flex: 1;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-brand:hover {
+      opacity: 0.7;
+    }
+
+    /* filterを使ってSVGを白色に反転させています */
+    .footer-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-typo {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .school-name {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin: 0 0 20px 0;
+    }
+
+    .school-details p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin: 0 0 8px 0;
+      color: #ccc;
+    }
+
+    .school-details strong {
+      color: #f6f9f6;
+      font-weight: 500;
+    }
+
+    .access-info {
+      margin-top: 12px !important;
+      padding-left: 10px;
+      border-left: 2px solid #555;
+    }
+
+    /* --- 右側：ナビゲーションエリア --- */
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* ブロック内の要素を左揃えにする */
+    }
+
+    .sitemap {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 50px; /* 列同士の間隔 */
+      row-gap: 16px;
+      text-align: left; /* 文字を左揃えに */
+    }
+
+    .sitemap a {
+      color: #f6f9f6;
+      text-decoration: none;
+      font-family: "Bebas Neue", cursive;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      display: inline-block; /* transformを有効化 */
+      transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .sitemap a:hover {
+      color: #aaa;
+      transform: translateX(4px); /* 左揃えなので右側にスライドさせる */
+    }
+
+    .footer-sns {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-sns-icon {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .footer-sns-icon:hover {
+      transform: scale(1.15);
+      opacity: 0.7;
+    }
+
+    /* --- ボトム：コピーライト --- */
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #b3b1b1;
+      letter-spacing: 0.05em;
+    }
+    /* --- スマホ対応 --- */
+    @media screen and (max-width: 768px) {
       .footer-inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 40px;
-      }
-
-      /* --- 左側：情報エリア --- */
-      .footer-info {
-        flex: 1;
-      }
-
-      .footer-brand {
-        display: inline-flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        margin-bottom: 24px;
-        transition: opacity 0.2s ease;
-      }
-
-      .footer-brand:hover {
-        opacity: 0.7;
-      }
-
-      /* filterを使ってSVGを白色に反転させています */
-      .footer-logo {
-        height: 40px;
-        width: auto;
-        object-fit: contain;
-        filter: brightness(0) invert(1);
-      }
-
-      .footer-typo {
-        height: 20px;
-        width: auto;
-        object-fit: contain;
-        filter: brightness(0) invert(1);
-      }
-
-      .school-name {
-        font-size: 1.3rem;
-        font-weight: 500;
-        margin: 0 0 20px 0;
-      }
-
-      .school-details p {
-        font-size: 0.85rem;
-        line-height: 1.6;
-        margin: 0 0 8px 0;
-        color: #ccc;
-      }
-
-      .school-details strong {
-        color: #f6f9f6;
-        font-weight: 500;
-      }
-
-      .access-info {
-        margin-top: 12px !important;
-        padding-left: 10px;
-        border-left: 2px solid #555;
-      }
-
-      /* --- 右側：ナビゲーションエリア --- */
-      .footer-nav {
-        display: flex;
         flex-direction: column;
-        align-items: flex-start; /* ブロック内の要素を左揃えにする */
+        gap: 50px;
       }
-
+      .school-name {
+        font-size: 4.5vw;
+      }
       .sitemap {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 30px 0;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 50px; /* 列同士の間隔 */
-        row-gap: 16px;
-        text-align: left; /* 文字を左揃えに */
+        column-gap: 20px;
+        width: 100%;
       }
-
-      .sitemap a {
-        color: #f6f9f6;
-        text-decoration: none;
-        font-family: "Bebas Neue", cursive;
-        font-size: 1.1rem;
-        letter-spacing: 0.1em;
-        display: inline-block; /* transformを有効化 */
-        transition:
-          color 0.2s ease,
-          transform 0.2s ease;
-      }
-
-      .sitemap a:hover {
-        color: #aaa;
-        transform: translateX(4px); /* 左揃えなので右側にスライドさせる */
-      }
-
-      .footer-sns {
-        display: flex;
-        gap: 24px;
-      }
-
-      .footer-sns-icon {
-        width: 22px;
-        height: 22px;
-        object-fit: contain;
-        transition:
-          transform 0.2s ease,
-          opacity 0.2s ease;
-      }
-
-      .footer-sns-icon:hover {
-        transform: scale(1.15);
-        opacity: 0.7;
-      }
-
-      /* --- ボトム：コピーライト --- */
-      .footer-bottom {
-        text-align: center;
-        margin-top: 30px;
-        padding-top: 20px;
-      }
-
-      .footer-bottom p {
-        margin: 0;
-        font-size: 0.75rem;
-        color: #b3b1b1;
-        letter-spacing: 0.05em;
-      }
-      /* --- スマホ対応 --- */
-      @media screen and (max-width: 768px) {
-        .footer-inner {
-          flex-direction: column;
-          gap: 50px;
-        }
-        .school-name {
-          font-size: 4.5vw;
-        }
-        .sitemap {
-          column-gap: 20px;
-          width: 100%;
-        }
-      }
-    </style>
-  </body>
+    }
+  </style>
 </html>
