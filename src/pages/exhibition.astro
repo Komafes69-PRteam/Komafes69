@@ -89,13 +89,7 @@ const pageDescription =
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src={instagramIcon}
-            alt=""
-            format="svg"
-            quality={100}
-            class="sns-icon"
-          />
+          <img src={instagramIcon.src} alt="" class="sns-icon" />
           <span>Instagram</span>
         </a>
         <a
@@ -104,13 +98,7 @@ const pageDescription =
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src={youtubeIcon}
-            alt=""
-            format="svg"
-            quality={100}
-            class="sns-icon"
-          />
+          <img src={youtubeIcon.src} alt="" class="sns-icon" />
           <span>YouTube</span>
         </a>
         <a
@@ -119,13 +107,7 @@ const pageDescription =
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src={xIcon}
-            alt=""
-            format="svg"
-            quality={100}
-            class="sns-icon"
-          />
+          <img src={xIcon.src} alt="" class="sns-icon" />
           <span>X</span>
         </a>
       </div>
@@ -138,20 +120,8 @@ const pageDescription =
       <div class="sticky-header-inner">
         <!-- 左側: ロゴとタイポ -->
         <a href="/" class="header-brand">
-          <Image
-            src={logoImg}
-            alt="Komafes69 Logo"
-            format="svg"
-            quality={85}
-            class="header-logo"
-          />
-          <Image
-            src={typoImg}
-            alt="SAIL BEYOND"
-            format="svg"
-            quality={85}
-            class="header-typo"
-          />
+          <img src={logoImg.src} alt="Komafes69 Logo" class="header-logo" />
+          <img src={typoImg.src} alt="SAIL BEYOND" class="header-typo" />
         </a>
 
         <!-- 右側: PCナビゲーション ＆ スマホハンバーガー -->
@@ -301,20 +271,8 @@ const pageDescription =
           <p class="school-name">駒場東邦中学校・高等学校 第69代 文化祭</p>
           <!-- SVGロゴを使用 -->
           <a href="/" class="footer-brand">
-            <Image
-              src={logoImg}
-              alt="Komafes69 Logo"
-              format="svg"
-              quality={85}
-              class="footer-logo"
-            />
-            <Image
-              src={typoImg}
-              alt="SAIL BEYOND"
-              format="svg"
-              quality={85}
-              class="footer-typo"
-            />
+            <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
+            <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
           </a>
 
           <div class="school-details">
@@ -346,10 +304,9 @@ const pageDescription =
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image
-                src={instagramIcon}
+              <img
+                src={instagramIcon.src}
                 alt="Instagram"
-                format="svg"
                 class="footer-sns-icon"
               />
             </a>
@@ -359,10 +316,9 @@ const pageDescription =
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image
-                src={youtubeIcon}
+              <img
+                src={youtubeIcon.src}
                 alt="YouTube"
-                format="svg"
                 class="footer-sns-icon"
               />
             </a>
@@ -372,7 +328,7 @@ const pageDescription =
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src={xIcon} alt="X" format="svg" class="footer-sns-icon" />
+              <img src={xIcon.src} alt="X" class="footer-sns-icon" />
             </a>
           </div>
         </div>
@@ -468,7 +424,9 @@ const pageDescription =
           hamburger.setAttribute("aria-expanded", String(isOpen));
           document.body.classList.toggle("no-scroll", isOpen);
         });
-        mobileLinks.forEach((link) => link.addEventListener("click", closeMobileNav));
+        mobileLinks.forEach((link) =>
+          link.addEventListener("click", closeMobileNav),
+        );
 
         const handleHeaderScroll = () => {
           if (!headerTrigger) return;
@@ -478,7 +436,9 @@ const pageDescription =
           hamburger?.classList.toggle("is-black", shouldShow);
         };
 
-        window.addEventListener("scroll", handleHeaderScroll, { passive: true });
+        window.addEventListener("scroll", handleHeaderScroll, {
+          passive: true,
+        });
         handleHeaderScroll();
 
         let currentFloor = "ALL";
@@ -742,7 +702,7 @@ const pageDescription =
     overflow: hidden;
   }
 
- /* (ヘッダーやHero等の既存スタイル) */
+  /* (ヘッダーやHero等の既存スタイル) */
   .sticky-header {
     position: fixed;
     top: 0;
