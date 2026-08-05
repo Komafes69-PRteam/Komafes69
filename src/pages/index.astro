@@ -1183,15 +1183,14 @@ const pageDescription =
         window.addEventListener("scroll", handleScroll);
         handleScroll();
       };
-
+      import rawExhibitions from "../pages/data/exhibitions.json";
       // --- 6. EXHIBITION セクションのデータ取得と無限スクロール・出現アニメーション ---
       const initExhibition = async () => {
         const track = document.getElementById("exhibitionTrack");
         if (!track) return;
 
         try {
-          const response = await fetch("public/data/exhibitions.json");
-          const exhibitions = await response.json();
+          const exhibitions = rawExhibitions;
           if (!exhibitions || exhibitions.length === 0) return;
 
           const shuffled = [...exhibitions]
