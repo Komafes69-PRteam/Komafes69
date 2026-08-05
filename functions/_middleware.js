@@ -1,40 +1,23 @@
+// functions/_middleware.js
 export async function onRequest(context) {
-  const { request } = context;
+  const { request, next } = context;
 
-  // ▼ ここで好きなユーザー名とパスワード（PIN）を設定してください
-  const USERNAME = "komafes";
-  const PASSWORD = "69";
+  const expectedUsername = 'komafes';
+  const expectedPassword = '69';
+  const expectedAuth = `Basic ${btoa(`${expectedUsername}:${expectedPassword}`)}`;
 
-  const authorization = request.headers.get("Authorization");
+  const authHeader = request.headers.get('Authorization');
 
-  // 認証情報がない場合はロック画面を出す
-  if (!authorization) {
-    return new Response("Unauthorized", {
+  // 認証が一致しない場合はポップアップを出す
+  if (authHeader !== expectedAuth) {
+    return new Response('Unauthorized', {
       status: 401,
       headers: {
-        "WWW-Authenticate": 'Basic realm="Test Environment"',
+        'WWW-Authenticate': 'Basic realm="Restricted Area"',
       },
     });
   }
 
-  // 入力された情報をチェックする
-  const [scheme, encoded] = authorization.split(" ");
-  if (scheme !== "Basic" || !encoded) {
-    return new Response("Bad Request", { status: 400 });
-  }
-
-  const decoded = atob(encoded);
-  const [user, pass] = decoded.split(":");
-
-  // 一致したらそのままページを表示、間違っていたら再度ロック画面
-  if (user === USERNAME && pass === PASSWORD) {
-    return context.next();
-  }
-
-  return new Response("Unauthorized", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate": 'Basic realm="Test Environment"',
-    },
-  });
+  // 認証成功時は通常のページを返す
+  return next();
 }
