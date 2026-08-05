@@ -1514,7 +1514,6 @@ const pageDescription =
         margin: 0;
         padding: 0;
         background-color: #000;
-        overflow-x: hidden;
       }
 
       body.no-scroll {
@@ -2386,7 +2385,6 @@ const pageDescription =
       }
 
       .captains-log-section {
-        position: sticky; 
         width: 100%;
         min-height: 100vh;
         display: flex;
@@ -2398,8 +2396,9 @@ const pageDescription =
         background-position: center;
         background-repeat: no-repeat;
         overflow: hidden;
-        top: 0; /* 画面上部で固定 */
-        z-index: 1; /* 下のレイヤーにする */
+        position: sticky; /* 画面の定位置でピタッと止まる */
+        top: 0; /* 一番上で止まる */
+        z-index: 1; /* 背面に配置 */
       }
 
       /* 左上のタイトル */
@@ -2685,15 +2684,10 @@ const pageDescription =
      ======================================== */
       .access-section {
         padding: 80px 0;
-        background-color: #ffffff;
         position: relative;
-        z-index: 5;
-        position: relative;
-        z-index: 10; /* logセクションより上のレイヤーにする */
-        background-color: #ffffff; /* ※必須：透過しないように背景色を必ず設定する */
+        z-index: 10; /* 前面に配置 */
+        background-color: #ffffff; /* 透明だと透けるので白などで塗りつぶす */
 
-        /* オプション：覆い被さる境目に少し影をつけると立体感が出ます */
-        box-shadow: 0 -15px 30px rgba(0, 0, 0, 0.15);
       }
 
       .access-inner {
