@@ -1190,7 +1190,7 @@ const pageDescription =
         if (!track) return;
 
         try {
-          const response = await fetch("/src/pages/data/exhibitions.json");
+          const response = await fetch("public/data/exhibitions.json");
           const exhibitions = await response.json();
           if (!exhibitions || exhibitions.length === 0) return;
 
