@@ -71,7 +71,6 @@ const pageDescription =
     <!-- ========================================
          スマホ用 メニュー (中身)
          ======================================== -->
-    <!-- ※ボタンは移動しますが、nav本体はここに残します -->
     <nav id="mobile-menu" class="mobile-nav">
       <ul>
         <li><a href="/">TOP</a></li>
@@ -2297,7 +2296,7 @@ const pageDescription =
     /* 左上のタイトル */
     .section-label {
       position: absolute;
-      top: 2rem;
+      top: 1rem;
       left: 2rem;
       font-family: "Bebas Neue", cursive;
       font-size: clamp(1.5rem, 6vw, 9rem);
@@ -2326,7 +2325,7 @@ const pageDescription =
       display: flex;
       width: 100%;
       height: 100%;
-      padding: 6.5% 8.5%;
+      padding: 6% 8.5%;
       box-sizing: border-box;
       position: relative;
       z-index: 1;
@@ -2346,7 +2345,7 @@ const pageDescription =
       font-family: "Pinyon Script", cursive;
       font-size: clamp(2.4rem, 3.8vw, 3.8rem);
       text-align: center;
-      margin-bottom: 0.8rem;
+      margin-top: -0.8rem;
       border-bottom: 2px solid #2c1a0e;
       padding-bottom: 0.1rem;
       color: #0f0702;
@@ -2445,6 +2444,7 @@ const pageDescription =
       justify-content: center;
       align-items: center;
       height: 100%;
+      margin-top: -5rem;
     }
 
     .countdown-title {
@@ -2452,7 +2452,7 @@ const pageDescription =
       font-size: clamp(1.4rem, 2.2vw, 2.2rem);
       font-weight: 800;
       letter-spacing: 0.1em;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
       border-bottom: 2px solid #2c1a0e;
       padding-bottom: 0.2rem;
       color: #0f0702;
@@ -2541,8 +2541,8 @@ const pageDescription =
       /* コンテンツ配置：縦方向にゆとりを持たせる調整 */
       .log-container {
         flex-direction: column;
-        padding: 10% 8.5%;
-        gap: 1.8rem;
+        padding: 20% 8.5%;
+        gap: 1.3rem;
         height: 100%;
         justify-content: space-around;
       }
@@ -2552,12 +2552,12 @@ const pageDescription =
       }
 
       .log-title {
-        font-size: 2.3rem;
+        font-size: 2.1rem;
         margin-bottom: 0.5rem;
       }
 
       .log-entry p {
-        font-size: 1.05rem;
+        font-size: 1.0rem;
         margin: 0.25rem 0;
         padding-bottom: 0.15rem;
       }
