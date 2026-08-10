@@ -1,46 +1,35 @@
-name: Deploy to GitHub Pages
+name: Deploy Astro to Sakura
 
 on:
   push:
-    branches: [main]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+    branches: [main] 
 
 jobs:
-  build:
+  web-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 22.12.0
+          node-version: 20
           cache: npm
 
-      - run: npm ci
+      - name: Install Dependencies
+        run: npm ci
 
-      - run: npm run build
+      - name: Build Astro Project
+        run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: FTP Deploy to Sakura
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          path: ./dist
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/          # Astroがビルドしてできるフォルダ
+          server-dir: /www/69.komafes.jp/  # さくらのアップロード先フォルダ

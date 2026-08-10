@@ -1,15 +1,12 @@
-// @ts-check
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import {passthroughImageService } from 'astro/config';
 
 export default defineConfig({
-  base: '/',
-
+  site: 'https://69.komafes.jp',
+  
+  // Cloudflareのアダプター設定(adapter: cloudflare()など)があればすべて削除
   vite: {
-    plugins: [tailwindcss()]
-  },
-  image: {
-    service: passthroughImageService(),
+    plugins: [tailwindcss()],
   },
 });
