@@ -32,4 +32,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/          # Astroがビルドしてできるフォルダ
-          server-dir: /www/69.komafes.jp/  # さくらのアップロード先フォルダ
+          server-dir: /home/komafes/www/69.komafes.jp/ # さくらのアップロード先フォルダ
