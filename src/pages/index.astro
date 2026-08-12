@@ -68,6 +68,12 @@ const pageDescription =
     <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body id="top">
+    <div id="loading-screen">
+      <div class="loader-logo-container">
+        <img src={mainLogoImg.src} alt="Loading..." class="loader-logo-img" />
+        <p class="loader-text">Loading...</p>
+      </div>
+    </div>
     <!-- ========================================
          スマホ用 メニュー (中身)
          ======================================== -->
@@ -799,88 +805,56 @@ const pageDescription =
     </footer>
   </body>
 
-  <!-- ========================================
-         JavaScript 統合処理
-         ======================================== -->
   <script>
     import { gsap } from "gsap";
 
-    const initApp = () => {
-      // --- 1. スクロール検知で手書きアニメーション発火 ---
-      const logBook = document.getElementById("log-book-content");
-      if (logBook) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                logBook.classList.add("is-animated");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.2 },
-        );
+    // --- 1. 舵の無限回転アニメーション ---
+    const wheelRotation = gsap.to(".loader-logo-img", {
+      rotation: "+=360",
+      duration: 2,
+      repeat: -1,
+      ease: "power1.inOut",
+    });
 
-        observer.observe(logBook);
+    // --- 2. 最低表示時間（デバッグ用）のタイマー設定 ---
+    const MIN_LOADING_TIME = 1000;
+    const minWaitPromise = new Promise<void>((resolve) =>
+      setTimeout(resolve, MIN_LOADING_TIME),
+    );
+
+    // --- 3. ページ全体の読み込み完了判定 ---
+    const pageLoadPromise = new Promise<void>((resolve) => {
+      if (document.readyState === "complete") {
+        resolve();
+      } else {
+        window.addEventListener("load", () => resolve(), { once: true });
       }
+    });
 
-      // --- 2. カウントダウン & イベント状態自動判定 ---
-      const startDate = new Date("2026-09-19T09:00:00+09:00").getTime();
-      const endDate = new Date("2026-09-20T17:00:00+09:00").getTime();
+    // --- 4. 「最低1秒経過」と「読み込み完了」の両方が満たされたらローディング解除 ---
+    Promise.all([minWaitPromise, pageLoadPromise]).then(() => {
+      const tl = gsap.timeline();
 
-      const timerEl = document.getElementById("komafes-countdown");
-      const titleEl = document.getElementById("countdown-title");
-      const statusEl = document.getElementById("event-status");
+      tl.to("#loading-screen", {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        onComplete: () => {
+          const loader = document.getElementById("loading-screen");
+          if (loader) loader.style.display = "none";
 
-      const daysEl = document.getElementById("countdown-days");
-      const hoursEl = document.getElementById("countdown-hours");
-      const minutesEl = document.getElementById("countdown-minutes");
-      const secondsEl = document.getElementById("countdown-seconds");
+          wheelRotation.kill(); // ローディング用アニメーションの停止
+        },
+      })
+        // ★ フェードアウト完了(0.6秒)の 0.1秒前（0.5秒経過時）に発火 ★
+        .add(() => {
+          initHeroAnimation();
+          initFlagsAnimation();
+        }, "-=0.6");
+    });
 
-      function updateCountdown() {
-        const now = new Date().getTime();
-
-        if (now < startDate) {
-          // 開催前
-          const distance = startDate - now;
-          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          const hours = Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-          );
-          const minutes = Math.floor(
-            (distance % (1000 * 60 * 60)) / (1000 * 60),
-          );
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-          if (daysEl) daysEl.textContent = String(days).padStart(2, "0");
-          if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
-          if (minutesEl)
-            minutesEl.textContent = String(minutes).padStart(2, "0");
-          if (secondsEl)
-            secondsEl.textContent = String(seconds).padStart(2, "0");
-        } else if (now >= startDate && now <= endDate) {
-          // 開催中
-          if (titleEl) titleEl.style.display = "none";
-          if (timerEl) timerEl.style.display = "none";
-          if (statusEl) {
-            statusEl.style.display = "block";
-            statusEl.textContent = "本日開催中！";
-          }
-        } else {
-          // 終了後
-          if (titleEl) titleEl.style.display = "none";
-          if (timerEl) timerEl.style.display = "none";
-          if (statusEl) {
-            statusEl.style.display = "block";
-            statusEl.textContent = "Komafes69は終了しました";
-          }
-        }
-      }
-
-      updateCountdown();
-      window.setInterval(updateCountdown, 1000);
-
-      // --- 3. GSAP アニメーション (Hero) ---
+    // --- ★ Hero セクション専用 GSAP アニメーション ★ ---
+    const initHeroAnimation = () => {
       gsap.fromTo(
         ".top-logo-img",
         { clipPath: "inset(0 0 100% 0)", opacity: 1 },
@@ -1027,8 +1001,82 @@ const pageDescription =
           });
         }
       }
+    };
 
-      // --- 4. スマホ用ハンバーガーメニュー制御 ---
+    // --- その他のイベント・機能初期化 ---
+    const initApp = () => {
+      // --- 1. スクロール検知で手書きアニメーション発火 ---
+      const logBook = document.getElementById("log-book-content");
+      if (logBook) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                logBook.classList.add("is-animated");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 },
+        );
+
+        observer.observe(logBook);
+      }
+
+      // --- 2. カウントダウン & イベント状態自動判定 ---
+      const startDate = new Date("2026-09-19T09:00:00+09:00").getTime();
+      const endDate = new Date("2026-09-20T17:00:00+09:00").getTime();
+
+      const timerEl = document.getElementById("komafes-countdown");
+      const titleEl = document.getElementById("countdown-title");
+      const statusEl = document.getElementById("event-status");
+
+      const daysEl = document.getElementById("countdown-days");
+      const hoursEl = document.getElementById("countdown-hours");
+      const minutesEl = document.getElementById("countdown-minutes");
+      const secondsEl = document.getElementById("countdown-seconds");
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+
+        if (now < startDate) {
+          const distance = startDate - now;
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+          );
+          const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) / (1000 * 60),
+          );
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          if (daysEl) daysEl.textContent = String(days).padStart(2, "0");
+          if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
+          if (minutesEl)
+            minutesEl.textContent = String(minutes).padStart(2, "0");
+          if (secondsEl)
+            secondsEl.textContent = String(seconds).padStart(2, "0");
+        } else if (now >= startDate && now <= endDate) {
+          if (titleEl) titleEl.style.display = "none";
+          if (timerEl) timerEl.style.display = "none";
+          if (statusEl) {
+            statusEl.style.display = "block";
+            statusEl.textContent = "本日開催中！";
+          }
+        } else {
+          if (titleEl) titleEl.style.display = "none";
+          if (timerEl) timerEl.style.display = "none";
+          if (statusEl) {
+            statusEl.style.display = "block";
+            statusEl.textContent = "Komafes69は終了しました";
+          }
+        }
+      }
+
+      updateCountdown();
+      window.setInterval(updateCountdown, 1000);
+
+      // --- 3. スマホ用ハンバーガーメニュー制御 ---
       const hamburger = document.querySelector(".hamburger");
       const mobileNav = document.querySelector(".mobile-nav");
       const mobileLinks = document.querySelectorAll(".mobile-nav a");
@@ -1059,7 +1107,7 @@ const pageDescription =
         });
       }
 
-      // --- 5. スクロール連動処理 (ヘッダー) ---
+      // --- 4. スクロール連動処理 (ヘッダー) ---
       const stickyHeader = document.querySelector(".sticky-header");
       const heroSection = document.querySelector(".hero");
 
@@ -1079,8 +1127,10 @@ const pageDescription =
       window.addEventListener("scroll", handleScroll);
       handleScroll();
     };
+
     import rawExhibitions from "../pages/data/exhibitions.json";
-    // --- 6. EXHIBITION セクションのデータ取得と無限スクロール・出現アニメーション ---
+
+    // --- EXHIBITION セクション ---
     const initExhibition = async () => {
       const track = document.getElementById("exhibitionTrack");
       if (!track) return;
@@ -1167,26 +1217,23 @@ const pageDescription =
       }
     };
 
-    // --- 7. Captain's Log セクションの出現アニメーション ---
+    // --- Captain's Log セクション ---
     const initCaptainsLogAnimation = () => {
       const logSection = document.querySelector(".captains-log-section");
       if (!logSection) return;
 
-      // 他セクションのタイトルと動きを揃える（clipPathで隠しておく）
       gsap.set(".section-label", { clipPath: "inset(0 100% 0 0)" });
 
       const observer = new IntersectionObserver(
         (entries, obs) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              // タイトルの出現（左から右へ）
               gsap.to(".section-label", {
                 clipPath: "inset(0 0% 0 0)",
                 duration: 0.9,
                 ease: "power3.inOut",
               });
 
-              // 本（.log-paper）全体のフェードアップ
               gsap.fromTo(
                 ".log-paper",
                 { opacity: 0, y: 40 },
@@ -1195,7 +1242,7 @@ const pageDescription =
                   y: 0,
                   duration: 1.0,
                   ease: "power2.out",
-                  delay: 0.3, // タイトルの少し後に出現させる
+                  delay: 0.3,
                 },
               );
 
@@ -1209,7 +1256,7 @@ const pageDescription =
       observer.observe(logSection);
     };
 
-    // --- 8. セクション全体の出現アニメーション (ふわっと表示) ---
+    // --- セクション全体のフェードイン ---
     const initSectionFadeIn = () => {
       const fadeObserver = new IntersectionObserver(
         (entries, obs) => {
@@ -1231,7 +1278,7 @@ const pageDescription =
       });
     };
 
-    // --- 9. ACCESS セクションの出現アニメーション ---
+    // --- ACCESS セクション ---
     const initAccessAnimation = () => {
       const accessSection = document.querySelector(".access-section");
       if (!accessSection) return;
@@ -1277,7 +1324,7 @@ const pageDescription =
       observer.observe(accessSection);
     };
 
-    // --- 10. 万国旗（Flag & Rope）のアニメーション ---
+    // --- 万国旗（Flag & Rope）アニメーション ---
     const initFlagsAnimation = () => {
       const flags = gsap.utils.toArray<HTMLDivElement>(".flag");
       const ropePaths =
@@ -1386,7 +1433,7 @@ const pageDescription =
       initCaptainsLogAnimation();
       initSectionFadeIn();
       initAccessAnimation();
-      initFlagsAnimation();
+      // ※ initHeroAnimation と initFlagsAnimation はローディング完了後に実行されるためここでは呼び出しません
     };
 
     if (document.readyState === "loading") {
@@ -1410,6 +1457,41 @@ const pageDescription =
 
     body.no-scroll {
       overflow: hidden;
+    }
+    /* ローディング画面（全体） */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #101011;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 舵のサイズ（お好みでサイズ調整してください） */
+    .loader-logo-container {
+      width: 140px;
+      height: 140px;
+      max-width: 50vw; /* スマホで大きくなりすぎない保護 */
+      max-height: 50vw;
+    }
+
+    .loader-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .loader-text {
+      color: #fff;
+      font-family: "Bebas Neue", cursive;
+      font-size: 1.4rem;
+      margin-top: 1rem;
+      text-align: center;
     }
 
     /* (ヘッダーやHero等の既存スタイル) */
@@ -2556,7 +2638,7 @@ const pageDescription =
       }
 
       .log-entry p {
-        font-size: 1.0rem;
+        font-size: 1rem;
         margin: 0.25rem 0;
         padding-bottom: 0.15rem;
       }
