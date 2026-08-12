@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://69.komafes.jp/sitemap-0.xml
