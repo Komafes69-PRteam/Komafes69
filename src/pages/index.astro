@@ -31,53 +31,59 @@ const pageDescription =
 ---
 
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{pageTitle}</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
 
-    <meta name="description" content={pageDescription} />
+  <meta name="description" content={pageDescription} />
+  <meta
+    name="keywords"
+    content="駒場東邦,駒場東邦文化祭,文化祭,Komafes,Komafes69,SAIL BEYOND"
+  />
 
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href={mainLogoImg.src} />
-    <meta property="og:image" content="https://69.komafes.jp/ogp.png" />
-    <meta property="og:image:width" content="3406" />
-    <meta property="og:image:height" content="1884" />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700;900&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700;900&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&family=Cinzel:wght@700&display=swap"
-      rel="stylesheet"
-    />
+  <!-- ① URL正規化（http/httpsの統一 & 検索エンジン対策） -->
+  <link rel="canonical" href="https://69.komafes.jp/" />
 
-    <link rel="icon" href="https://69.komafes.jp/favicon.ico" />
-    <link rel="icon" href="https://69.komafes.jp/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" type="image/png" sizes="96x96" href="https://69.komafes.jp/favicon-96x96.png" />
-    <link rel="icon" type="image/svg+xml" href="https://69.komafes.jp/favicon.svg" />
+  <!-- ② OGP設定（SNSシェア・検索結果用） -->
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:url" content="https://69.komafes.jp/" />
+  <meta property="og:image" content="https://69.komafes.jp/ogp.png" />
+  <meta property="og:image:width" content="3406" />
+  <meta property="og:image:height" content="1884" />
+  <meta name="twitter:card" content="summary_large_image" />
 
+  <!-- ③ メイン画像のプリロード（LCP高速化） -->
+  <link rel="preload" as="image" href={mainLogoImg.src} />
 
-    <!-- iOS / WebManifest 用 -->
-    <link rel="apple-touch-icon" sizes="180x180" href="https://69.komafes.jp/apple-touch-icon.png" />
-    <link rel="manifest" href="https://69.komafes.jp/site.webmanifest" />
+  <!-- ④ Google Fonts の最適化（統合＆非同期読み込み） -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@500;700;900&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&display=swap"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@500;700;900&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&display=swap"
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
+  />
 
-    <meta
-      name="keywords"
-      content="駒場東邦,駒場東邦文化祭,文化祭,Komafes,Komafes69,SAIL BEYOND"
-    />
-  </head>
+  <!-- ファビコン設定（重複を排除してスッキリ整理） -->
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <!-- iOS / WebManifest 用 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
+</head>
   <body id="top">
     <div id="loading-screen">
       <div class="loader-logo-container">
