@@ -42,10 +42,8 @@ const pageDescription =
     content="駒場東邦,駒場東邦文化祭,文化祭,Komafes,Komafes69,SAIL BEYOND"
   />
 
-  <!-- ① URL正規化（http/httpsの統一 & 検索エンジン対策） -->
   <link rel="canonical" href="https://69.komafes.jp/" />
 
-  <!-- ② OGP設定（SNSシェア・検索結果用） -->
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={pageDescription} />
   <meta property="og:url" content="https://69.komafes.jp/" />
@@ -54,10 +52,8 @@ const pageDescription =
   <meta property="og:image:height" content="1884" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- ③ メイン画像のプリロード（LCP高速化） -->
   <link rel="preload" as="image" href={mainLogoImg.src} />
 
-  <!-- ④ Google Fonts の最適化（統合＆非同期読み込み） -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -74,10 +70,9 @@ const pageDescription =
     onload="this.media='all'"
   />
 
-  <!-- ファビコン設定（重複を排除してスッキリ整理） -->
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/Favicon-96x96.png" />
+  <link rel="icon" type="image/svg+xml" href="/Favicon.svg" />
+  <link rel="shortcut icon" href="/Favicon.ico" />
   
   <!-- iOS / WebManifest 用 -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
