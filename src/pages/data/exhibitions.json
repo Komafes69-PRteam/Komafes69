@@ -921,5 +921,18 @@
             "スポーツ・アクティビティ"
         ],
         "favorite": false
+    },
+    {
+        "id": 72,
+        "slug": "喫茶邦友",
+        "name": "喫茶邦友",
+        "room": "第一会議室",
+        "floor": "1",
+        "description": "僕達は駒東のOB組織邦友会です! 1 階でドリンクを販売し、第1会議室で 「喫茶邦友」を開きます。ドリンク 等でくつろげるだけでなく、駒東OB による受験相談も行います!",
+        "image": "/images/exhibitions/喫茶邦友.webp",
+        "categories": [
+            "駒東体験・受験相談"
+        ],
+        "favorite": false
     }
 ]
