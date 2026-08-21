@@ -50,9 +50,9 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     />
 
     <!-- ファビコン設定（重複を排除してスッキリ整理） -->
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" href="/icon.ico" />
 
     <!-- iOS / WebManifest 用 -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -74,27 +74,48 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
         <li><a href="/theme">THEME</a></li>
         <li><a href="/exhibition">EXHIBITION</a></li>
         <li>
-          <a href="/favorites" style="display:inline-flex; align-items:center; gap:8px;">
+          <a
+            href="/favorites"
+            style="display:inline-flex; align-items:center; gap:8px;"
+          >
             FAVORITES
           </a>
         </li>
         <li><a href="/articles">ARTICLES</a></li>
         <li><a href="/timetable">TIME TABLE</a></li>
         <li><a href="/map">MAP</a></li>
-        <li><a href="https://archives.komafes.jp/" target="_blank" rel="noopener noreferrer">
-          ARCHIVES
-        </a></li>
+        <li>
+          <a
+            href="https://archives.komafes.jp/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ARCHIVES
+          </a>
+        </li>
       </ul>
       <div class="mobile-sns-links">
-        <a href="https://www.instagram.com/komafes69/" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.instagram.com/komafes69/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src={instagramIcon} alt="" class="sns-icon" />
           <span>Instagram</span>
         </a>
-        <a href="https://www.youtube.com/@komafes69" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.youtube.com/@komafes69"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src={youtubeIcon} alt="YouTube" class="sns-icon" />
           <span>YouTube</span>
         </a>
-        <a href="https://x.com/Komafes69" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://x.com/Komafes69"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src={xIcon} alt="X" class="sns-icon" />
           <span>X</span>
         </a>
@@ -118,15 +139,27 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
               <li><a href="/articles">ARTICLES</a></li>
               <li><a href="/timetable">TIME TABLE</a></li>
               <li><a href="/map">MAP</a></li>
-              <li><a href="https://archives.komafes.jp/" target="_blank" rel="noopener noreferrer">
-                ARCHIVES
-              </a></li>
+              <li>
+                <a
+                  href="https://archives.komafes.jp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ARCHIVES
+                </a>
+              </li>
             </ul>
           </nav>
           <!-- お気に入りページ用のハイライトされたボタン -->
-          <a href="/favorites" class="header-fav-btn" aria-label="お気に入り一覧を見る">
+          <a
+            href="/favorites"
+            class="header-fav-btn"
+            aria-label="お気に入り一覧を見る"
+          >
             <svg viewBox="0 0 24 24" class="heart-svg">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              ></path>
             </svg>
           </a>
         </div>
@@ -134,7 +167,10 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     </header>
 
     <main class="favorites-container">
-      <header class="page-header" style={`background-image: url('${titleBg.src}');`}>
+      <header
+        class="page-header"
+        style={`background-image: url('${titleBg.src}');`}
+      >
         <div class="page-header-inner">
           <h1 class="page-title">FAVORITES</h1>
           <p class="page-subtitle">お気に入り団体</p>
@@ -143,7 +179,17 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
 
       <section class="controls-section">
         <a href="/exhibition" class="back-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-icon"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="back-icon"
+            ><line x1="19" y1="12" x2="5" y2="12"></line><polyline
+              points="12 19 5 12 12 5"></polyline></svg
+          >
           参加団体一覧へ戻る
         </a>
         <div class="result-count">
@@ -159,10 +205,15 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
       <!-- お気に入りがない場合のメッセージ -->
       <div id="no-favorites" class="no-favorites" style="display: none;">
         <svg viewBox="0 0 24 24" class="empty-heart-icon">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          ></path>
         </svg>
         <h2>お気に入りに登録された団体がありません</h2>
-        <p>展示一覧から気になる団体を見つけて、<br/>ハートマークをタップして追加してみましょう！</p>
+        <p>
+          展示一覧から気になる団体を見つけて、<br
+          />ハートマークをタップして追加してみましょう！
+        </p>
         <a href="/exhibition" class="go-exhibition-btn">展示一覧を見る</a>
       </div>
     </main>
@@ -186,21 +237,33 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        const STORAGE_KEY = 'komafes_favorites';
+        const STORAGE_KEY = "komafes_favorites";
         const grid = document.getElementById("favorites-grid") as HTMLElement;
-        const noFavorites = document.getElementById("no-favorites") as HTMLElement;
+        const noFavorites = document.getElementById(
+          "no-favorites",
+        ) as HTMLElement;
         const countNum = document.getElementById("count-num") as HTMLElement;
 
         // GSAP アニメーション
         gsap.fromTo(
           ".page-title",
           { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-          { clipPath: "inset(0 0% 0 0)", duration: 2.5, ease: "power2.out", delay: 0.2 }
+          {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 2.5,
+            ease: "power2.out",
+            delay: 0.2,
+          },
         );
         gsap.fromTo(
           ".page-subtitle",
           { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-          { clipPath: "inset(0 0% 0 0)", duration: 2.5, ease: "power2.out", delay: 0.35 }
+          {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 2.5,
+            ease: "power2.out",
+            delay: 0.35,
+          },
         );
 
         // ヘッダースクロール処理
@@ -228,7 +291,7 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
 
         const getFavorites = (): string[] => {
           try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
           } catch {
             return [];
           }
@@ -240,7 +303,9 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
         const renderFavorites = () => {
           const favoriteSlugs = getFavorites();
           // 保存されたID（slug）に一致するデータのみ抽出
-          const favoriteData = window.exhibitionsData.filter((item) => favoriteSlugs.includes(item.slug));
+          const favoriteData = window.exhibitionsData.filter((item) =>
+            favoriteSlugs.includes(item.slug),
+          );
 
           grid.innerHTML = "";
           countNum.textContent = favoriteData.length.toString();
@@ -256,20 +321,29 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
             const card = document.createElement("a");
             card.href = `/exhibition/${item.slug}`;
             card.className = "exhibition-card";
-            
+
             // 少しずつ表示アニメーション
             const delay = Math.min(index * 0.04, 0.4);
             card.style.animationDelay = `${delay}s`;
 
             const roomText = item.room && item.room !== "NaN" ? item.room : "";
             const rawFloor = item.floor ? String(item.floor) : "";
-            const floorText = rawFloor && rawFloor !== "NaN"
-              ? ["1", "2", "3", "4", "5"].includes(rawFloor) ? `${rawFloor}階` : rawFloor
-              : "";
-            const locationText = [floorText, roomText].filter(Boolean).join(" / ");
-            
-            const categoryBadges = (item.categories || []).map((c: string) => `<span class="cat-badge">${c}</span>`).join("");
-            const hasValidImage = Boolean(item.image && item.image.startsWith("/"));
+            const floorText =
+              rawFloor && rawFloor !== "NaN"
+                ? ["1", "2", "3", "4", "5"].includes(rawFloor)
+                  ? `${rawFloor}階`
+                  : rawFloor
+                : "";
+            const locationText = [floorText, roomText]
+              .filter(Boolean)
+              .join(" / ");
+
+            const categoryBadges = (item.categories || [])
+              .map((c: string) => `<span class="cat-badge">${c}</span>`)
+              .join("");
+            const hasValidImage = Boolean(
+              item.image && item.image.startsWith("/"),
+            );
 
             let rawDesc = item.description || "";
             if (rawDesc.length > 120) {
@@ -305,21 +379,21 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
         };
 
         // お気に入り解除処理（イベント委譲）
-        grid.addEventListener('click', (e) => {
-          const btn = (e.target as Element).closest('.favorite-toggle-btn');
+        grid.addEventListener("click", (e) => {
+          const btn = (e.target as Element).closest(".favorite-toggle-btn");
           if (!btn) return;
-          
+
           e.preventDefault();
           e.stopPropagation();
 
-          const slug = btn.getAttribute('data-id');
+          const slug = btn.getAttribute("data-id");
           if (!slug) return;
-          
+
           let currentFavorites = getFavorites();
           // 解除のみ行う（このページにある＝必ずお気に入り状態なので）
-          currentFavorites = currentFavorites.filter(id => id !== slug);
+          currentFavorites = currentFavorites.filter((id) => id !== slug);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFavorites));
-          
+
           // その場で再描画してリストから消す
           renderFavorites();
         });
@@ -334,7 +408,11 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
 <style is:global>
   /* 基本設定 (Exhibitionページと共通) */
   body {
-    font-family: "Noto Sans JP", system-ui, -apple-system, sans-serif;
+    font-family:
+      "Noto Sans JP",
+      system-ui,
+      -apple-system,
+      sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f6f8;
@@ -375,9 +453,16 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     gap: 1rem;
     text-decoration: none;
   }
-  .header-logo { height: 32px; width: auto; }
-  .header-typo { height: 18px; width: auto; }
-  .header-logo, .header-typo {
+  .header-logo {
+    height: 32px;
+    width: auto;
+  }
+  .header-typo {
+    height: 18px;
+    width: auto;
+  }
+  .header-logo,
+  .header-typo {
     filter: brightness(0) invert(1);
     transition: filter 0.3s ease;
   }
@@ -404,12 +489,16 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     font-family: "Bebas Neue", cursive;
     font-size: clamp(0.95rem, 1.2vw, 1.15rem);
     letter-spacing: 0.12em;
-    transition: color 0.3s, opacity 0.2s;
+    transition:
+      color 0.3s,
+      opacity 0.2s;
   }
   .sticky-header.is-scrolled .header-nav a {
     color: #111111;
   }
-  .header-nav a:hover { opacity: 0.5; }
+  .header-nav a:hover {
+    opacity: 0.5;
+  }
 
   .header-fav-btn {
     display: flex;
@@ -423,7 +512,8 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     transition: all 0.2s ease;
     text-decoration: none;
   }
-  .header-fav-btn.is-active, .header-fav-btn:hover {
+  .header-fav-btn.is-active,
+  .header-fav-btn:hover {
     background-color: #fff0f0;
   }
   .header-fav-btn .heart-svg {
@@ -432,11 +522,17 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     fill: #ff4b4b;
   }
 
-  .hamburger { display: none; }
-  .mobile-nav { display: none; }
+  .hamburger {
+    display: none;
+  }
+  .mobile-nav {
+    display: none;
+  }
 
   @media screen and (max-width: 768px) {
-    .sticky-header { display: none !important; }
+    .sticky-header {
+      display: none !important;
+    }
     .hamburger {
       display: flex;
       flex-direction: column;
@@ -453,30 +549,75 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
       padding: 0;
     }
     .hamburger-line {
-      display: block; width: 100%; height: 2px;
-      background-color: #111111; border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s;
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #111111;
+      border-radius: 2px;
+      transition:
+        transform 0.3s,
+        opacity 0.3s;
     }
-    .hamburger.is-active .hamburger-line { background-color: #ffffff; }
-    .hamburger.is-active .hamburger-line:nth-child(1) { transform: translateY(10px) rotate(45deg); }
-    .hamburger.is-active .hamburger-line:nth-child(2) { opacity: 0; }
-    .hamburger.is-active .hamburger-line:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+    .hamburger.is-active .hamburger-line {
+      background-color: #ffffff;
+    }
+    .hamburger.is-active .hamburger-line:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.is-active .hamburger-line:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
 
     .mobile-nav {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: rgba(17, 17, 17, 0.96); z-index: 999;
-      flex-direction: column; justify-content: center; align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(17, 17, 17, 0.96);
+      z-index: 999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
-    .mobile-nav.is-active { display: flex; }
-    .mobile-nav ul { list-style: none; padding: 0; margin: 0; text-align: center; }
-    .mobile-nav li { margin: 1.5rem 0; }
+    .mobile-nav.is-active {
+      display: flex;
+    }
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+    .mobile-nav li {
+      margin: 1.5rem 0;
+    }
     .mobile-nav a {
-      color: #ffffff; text-decoration: none; font-size: 1.8rem;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.8rem;
       font-family: "Bebas Neue", cursive;
     }
-    .mobile-sns-links { display: flex; gap: 2rem; margin-top: 2rem; }
-    .mobile-sns-links a { display: flex; flex-direction: column; align-items: center; color: #fff; font-size: 0.8rem; text-decoration: none; }
-    .sns-icon { width: 24px; height: 24px; }
+    .mobile-sns-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .mobile-sns-links a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      font-size: 0.8rem;
+      text-decoration: none;
+    }
+    .sns-icon {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   /* ページヘッダー */
@@ -486,36 +627,67 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     padding: 0 1.5rem 60px;
   }
   .page-header {
-    position: relative; width: 100vw; left: 50%; right: 50%;
-    margin-left: -50vw; margin-right: -50vw; margin-bottom: 0;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-bottom: 0;
     padding: 5.5rem 0 4.5rem 0;
-    background-size: cover; background-position: center;
-    overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
   .page-header-inner {
-    position: relative; z-index: 2; max-width: 1200px;
-    margin: 0 auto; padding: 0 2rem; text-align: left;
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: left;
   }
   .page-title {
     font-family: "Bebas Neue", cursive;
     font-size: clamp(2rem, 18vw, 8rem);
-    letter-spacing: 0.04em; margin-top: 10px; color: #ffffff;
-    line-height: 0.85; font-weight: 900;
+    letter-spacing: 0.04em;
+    margin-top: 10px;
+    color: #ffffff;
+    line-height: 0.85;
+    font-weight: 900;
   }
   .page-subtitle {
-    margin-top: -50px; margin-bottom: 30px; color: #ffffff;
-    font-size: clamp(1.25rem, 3vw, 30px); font-weight: 700;
+    margin-top: -50px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    font-size: clamp(1.25rem, 3vw, 30px);
+    font-weight: 700;
     letter-spacing: 0.05em;
   }
   .page-header::after {
-    content: ""; position: absolute; top: -50%; bottom: -50%; right: 14%;
-    width: 65px; background-color: #ffffff; transform: skewX(-20deg);
-    z-index: 1; pointer-events: none;
+    content: "";
+    position: absolute;
+    top: -50%;
+    bottom: -50%;
+    right: 14%;
+    width: 65px;
+    background-color: #ffffff;
+    transform: skewX(-20deg);
+    z-index: 1;
+    pointer-events: none;
   }
   @media screen and (max-width: 768px) {
-    .page-header { padding: 3.5rem 0 2.2rem 0; }
-    .page-header-inner { padding: 0 1.2rem; }
-    .page-header::after { right: 8%; width: 32px; }
+    .page-header {
+      padding: 3.5rem 0 2.2rem 0;
+    }
+    .page-header-inner {
+      padding: 0 1.2rem;
+    }
+    .page-header::after {
+      right: 8%;
+      width: 32px;
+    }
   }
 
   /* コントロール周り（戻るボタンなど） */
@@ -558,25 +730,45 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     gap: 2rem;
   }
   @media screen and (max-width: 960px) {
-    .exhibition-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .exhibition-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
   }
   @media screen and (max-width: 580px) {
-    .exhibition-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+    .exhibition-grid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
   }
 
   @keyframes cardFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .exhibition-card {
     position: relative;
-    background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;
-    overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    display: flex; flex-direction: column;
-    text-decoration: none !important; color: inherit !important;
-    transition: transform 0.25s, box-shadow 0.25s;
-    opacity: 0; animation: cardFadeIn 0.4s ease-out forwards;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+    color: inherit !important;
+    transition:
+      transform 0.25s,
+      box-shadow 0.25s;
+    opacity: 0;
+    animation: cardFadeIn 0.4s ease-out forwards;
   }
   .exhibition-card:hover {
     transform: translateY(-6px);
@@ -586,44 +778,108 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
 
   /* お気に入り解除ボタン */
   .favorite-toggle-btn {
-    position: absolute; top: 12px; right: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
     background: rgba(255, 255, 255, 0.95);
-    border: none; width: 36px; height: 36px; border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    z-index: 10; transition: transform 0.2s ease;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    transition: transform 0.2s ease;
   }
   .favorite-toggle-btn:hover {
     transform: scale(1.1);
   }
   .favorite-toggle-btn .heart-svg {
-    width: 18px; height: 18px;
+    width: 18px;
+    height: 18px;
     fill: #ff4b4b; /* Favoritesページでは初期状態がアクティブ */
     stroke: #ff4b4b;
     stroke-width: 2px;
   }
 
   .location-chip {
-    position: absolute; bottom: 12px; left: 12px;
-    background: rgba(255, 255, 255, 0.85); color: #060709 !important;
-    font-size: 0.75rem; font-weight: 500; padding: 0.35rem 0.75rem;
-    border-radius: 20px; backdrop-filter: blur(6px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); z-index: 2;
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #060709 !important;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    z-index: 2;
   }
   .card-image-wrapper {
-    position: relative; width: 100%; aspect-ratio: 16/9;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
     background: linear-gradient(135deg, #edf2f7, #e2e8f0);
-    display: flex; align-items: center; justify-content: center; overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
-  .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-  .exhibition-card:hover .card-img:not(.fallback) { transform: scale(1.04); }
-  .card-img.fallback { width: 48px; height: 48px; object-fit: contain; opacity: 0.5; }
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .exhibition-card:hover .card-img:not(.fallback) {
+    transform: scale(1.04);
+  }
+  .card-img.fallback {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    opacity: 0.5;
+  }
 
-  .card-body { padding: 1.4rem; display: flex; flex-direction: column; flex-grow: 1; }
-  .card-title { font-size: 1.2rem; font-weight: 700; margin: 0 0 0.5rem 0; line-height: 1.4; }
-  .card-categories { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
-  .cat-badge { background-color: #edf2f7; color: #4a5568; font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 4px; }
-  .card-description { font-size: 0.88rem; line-height: 1.65; color: #4a5568; margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-body {
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+  }
+  .card-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+  }
+  .cat-badge {
+    background-color: #edf2f7;
+    color: #4a5568;
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+  .card-description {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #4a5568;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   /* お気に入りがない場合のデザイン */
   .no-favorites {
@@ -635,7 +891,7 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     text-align: center;
     background-color: #fff;
     border-radius: 16px;
-    border: 1px  #cbd5e0;
+    border: 1px #cbd5e0;
     margin-top: 2rem;
   }
   .empty-heart-icon {
@@ -663,7 +919,9 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     padding: 0.8rem 2rem;
     border-radius: 30px;
     font-weight: 700;
-    transition: background-color 0.2s, transform 0.2s;
+    transition:
+      background-color 0.2s,
+      transform 0.2s;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
   }
   .go-exhibition-btn:hover {
