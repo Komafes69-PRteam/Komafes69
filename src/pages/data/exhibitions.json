@@ -934,5 +934,18 @@
             "駒東体験・受験相談"
         ],
         "favorite": false
+    },
+    {
+        "id": 73,
+        "slug": "駒句会",
+        "name": "駒句会",
+        "room": "職員室前",
+        "floor": "2",
+        "description": "子どもの駒東入学をきっかけに俳句を始めた保護者のサークルです。我が子の成長や日々の暮らし、季節の風景を詠んだ句を展示します。四季の一句をぜひご覧ください。",
+        "image": "/images/exhibitions/駒句会.webp",
+        "categories": [
+            "社会・研究・展示"
+        ],
+        "favorite": false
     }
 ]
