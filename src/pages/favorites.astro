@@ -2,13 +2,15 @@
 import { Image } from "astro:assets";
 import rawExhibitions from "../pages/data/exhibitions.json";
 
-import instagramIcon from "../pages/assets/Instagram.svg";
-import youtubeIcon from "../pages/assets/youtube.svg";
-import xIcon from "../pages/assets/X.svg";
 // 背景画像やロゴ類（exhibitionページと同じパス構成）
 import titleBg from "../pages/assets/TitleBackground.webp";
-import logoImg from "../pages/assets/logo.svg";
-import typoImg from "../pages/assets/typo.svg";
+
+import youtubeIcon from "./assets/youtube.svg";
+import xIcon from "./assets/X.svg";
+import logoImg from "./assets/logo.svg";
+import typoImg from "./assets/typo.svg";
+import titleBackgroundBlack from "../pages/assets/TitleBackgroundBlack.jpg";
+import instagramIcon from "./assets/Instagram.svg";
 
 // --- TypeScript 型定義 ---
 export interface Exhibition {
@@ -218,10 +220,83 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
       </div>
     </main>
 
-    <footer>
-      <p>&copy; 2026 Komafes69</p>
-    </footer>
+    <footer
+      class="footer"
+      style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}
+    >
+      <div class="footer-inner">
+        <!-- 左側：学校情報・アクセス -->
+        <div class="footer-info">
+          <p class="school-name">駒場東邦中学校・高等学校 第69回 文化祭</p>
+          <!-- SVGロゴを使用 -->
+          <a href="/" class="footer-brand">
+            <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
+            <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
+          </a>
 
+          <div class="school-details">
+            <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜16:30</p>
+            <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
+            <p class="access-info">
+              東急田園都市線「池尻大橋」駅より徒歩10分<br />
+              京王井の頭線「駒場東大前」駅より徒歩10分
+            </p>
+          </div>
+        </div>
+
+        <!-- 右側：ミニサイトマップとSNS -->
+        <div class="footer-nav">
+          <ul class="sitemap">
+            <li><a href="/">TOP</a></li>
+            <li><a href="/theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="/articles">ARTICLES</a></li>
+            <li><a href="/timetable">TIME TABLE</a></li>
+            <li><a href="/map">MAP</a></li>
+            <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+          </ul>
+
+          <div class="footer-sns">
+            <a
+              href="https://www.instagram.com/komafes69/"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={instagramIcon.src}
+                alt="Instagram"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/@komafes69"
+              aria-label="YouTube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={youtubeIcon.src}
+                alt="YouTube"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://x.com/Komafes69"
+              aria-label="X"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={xIcon.src} alt="X" class="footer-sns-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
+      </div>
+    </footer>
     <!-- クライアントに全展示データを渡す -->
     <script is:inline define:vars={{ exhibitions }}>
       window.exhibitionsData = exhibitions;
@@ -929,13 +1004,166 @@ const pageDescription = "お気に入りに登録した展示・参加団体の�
     transform: translateY(-2px);
   }
 
-  footer {
-    text-align: center;
-    padding: 2.5rem 0;
-    background-color: #ffffff;
-    border-top: 1px solid #e2e8f0;
+  /* ========================================
+     FOOTER
+     ======================================== */
+  .footer {
+    background-color: #1a1b1f; /* 少し画像に近い暗い色調に */
+    color: #f6f9f6;
+    padding: 70px 0 20px;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  /* --- 左側：情報エリア --- */
+  .footer-info {
+    flex: 1;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-brand:hover {
+    opacity: 0.7;
+  }
+
+  /* filterを使ってSVGを白色に反転させています */
+  .footer-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer-typo {
+    height: 20px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .school-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+  }
+
+  .school-details p {
     font-size: 0.85rem;
-    color: #000b1b;
-    margin-top: 4rem;
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+    color: #ccc;
+  }
+
+  .school-details strong {
+    color: #f6f9f6;
+    font-weight: 500;
+  }
+
+  .access-info {
+    margin-top: 12px !important;
+    padding-left: 10px;
+    border-left: 2px solid #555;
+  }
+
+  /* --- 右側：ナビゲーションエリア --- */
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ブロック内の要素を左揃えにする */
+  }
+
+  .sitemap {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px; /* 列同士の間隔 */
+    row-gap: 16px;
+    text-align: left; /* 文字を左揃えに */
+  }
+
+  .sitemap a {
+    color: #f6f9f6;
+    text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    display: inline-block; /* transformを有効化 */
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .sitemap a:hover {
+    color: #aaa;
+    transform: translateX(4px); /* 左揃えなので右側にスライドさせる */
+  }
+
+  .footer-sns {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-sns-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .footer-sns-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+
+  /* --- ボトム：コピーライト --- */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #b3b1b1;
+    letter-spacing: 0.05em;
+  }
+
+  /* --- スマホ対応 --- */
+  @media screen and (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 50px;
+    }
+    .school-name {
+      font-size: 4.5vw;
+    }
+
+    .sitemap {
+      column-gap: 20px;
+      width: 100%;
+    }
   }
 </style>

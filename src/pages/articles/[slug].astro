@@ -1,0 +1,841 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+// ↓階層に合わせて "../../" に修正
+import rawExhibitions from "../data/exhibitions.json";
+import titleBgImage from "../assets/TitleBackground.webp";
+
+// ↓階層に合わせて "../../" に修正
+import instagramIcon from "../assets/Instagram.svg";
+import youtubeIcon from "../assets/youtube.svg";
+import xIcon from "../assets/X.svg";
+import logoImg from "../assets/logo.svg";
+import typoImg from "../assets/typo.svg";
+import titleBackgroundBlack from "../../pages/assets/TitleBackgroundBlack.jpg";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  return articles.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"articles">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// 紐づく展示情報の検索 (date, pubDate の型エラーを回避するため、個別に取得)
+const { title, heroImage, exhibitionSlug, exhibitionId } = entry.data;
+
+const matchedExhibition = (rawExhibitions as any[]).find(
+  (ex) => ex.slug === exhibitionSlug || ex.id === exhibitionId,
+);
+
+// 投稿日の整形 (型エラー回避のため as any を使用)
+const rawDate = (entry.data as any).date || (entry.data as any).pubDate;
+const formattedDate = rawDate
+  ? new Date(rawDate)
+      .toLocaleDateString("ja-JP", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .replace(/\//g, ".")
+  : "";
+
+// サムネイル画像（記事専用 -> 展示データ画像 -> フォールバック）
+const rawImage = heroImage || matchedExhibition?.image || "";
+const hasValidImage = Boolean(rawImage && rawImage.startsWith("/"));
+const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a0aec0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`;
+
+const pageTitle = `${title} | 駒場東邦 第69回 文化祭 | SAIL BEYOND`;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ファビコン設定 -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
+  </head>
+  <body>
+    <!-- 固定ヘッダー -->
+    <header class="top-nav">
+      <div class="nav-inner">
+        <a href="/testarticle" class="back-link">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg
+          >
+          <span class="back-text">記事一覧へ戻る</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="article-detail">
+      <!-- ヒーローバナー画像 -->
+      <section class="hero-banner">
+        <img
+          src={hasValidImage ? rawImage : fallbackSvg}
+          alt={title}
+          class={`hero-img ${!hasValidImage ? "fallback" : ""}`}
+        />
+        <div class="hero-overlay"></div>
+      </section>
+
+      <!-- コンテンツエリア -->
+      <section class="content-container">
+        <!-- ヘッダー情報 -->
+        <div class="content-header">
+          <div class="title-area">
+            <div class="main-title-wrapper">
+              <img src={titleBgImage.src} alt="" class="title-bg" />
+              <h1 class="main-title">{title}</h1>
+            </div>
+
+            <!-- タイトル右下に投稿日を表示 -->
+            {
+              formattedDate && (
+                <div class="date-container">
+                  <time datetime={String(rawDate)} class="published-date">
+                    投稿日: {formattedDate}
+                  </time>
+                </div>
+              )
+            }
+            <button
+              class="action-btn share-btn"
+              id="share-btn"
+              data-title={title}
+              aria-label="共有する"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon-svg"
+              >
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"
+                ></path><polyline points="16 6 12 2 8 6"></polyline><line
+                  x1="12"
+                  y1="2"
+                  x2="12"
+                  y2="15"></line>
+              </svg>
+              <span>共有</span>
+            </button>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Markdown本文 -->
+        <article class="prose">
+          <Content />
+        </article>
+
+        <!-- 団体紹介リンクカード -->
+        {
+          matchedExhibition && (
+            <section class="exhibition-link-section">
+              <h3 class="exhibition-link-title">
+                この企画の展示・公演情報もチェック！
+              </h3>
+              <a
+                href={`/exhibition/${matchedExhibition.slug}`}
+                class="exhibition-card"
+              >
+                <div class="card-image-wrapper">
+                  <img
+                    src={matchedExhibition.image || fallbackSvg}
+                    alt={matchedExhibition.name}
+                    class="card-img"
+                  />
+                </div>
+                <div class="card-body">
+                  <h4 class="card-name">{matchedExhibition.name}</h4>
+
+                  {/* 説明文を追加 */}
+                  {matchedExhibition.description && (
+                    <p class="card-description">
+                      {matchedExhibition.description}
+                    </p>
+                  )}
+
+                  <div class="card-action">
+                    <span>展示詳細を見る</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m9 18 6-6-6-6" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </section>
+          )
+        }
+      </section>
+    </main>
+
+    <!-- フッター -->
+    <footer
+      class="footer"
+      style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}
+    >
+      <div class="footer-inner">
+        <!-- 左側：学校情報・アクセス -->
+        <div class="footer-info">
+          <p class="school-name">駒場東邦中学校・高等学校 第69回 文化祭</p>
+          <!-- SVGロゴを使用 -->
+          <a href="/" class="footer-brand">
+            <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
+            <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
+          </a>
+
+          <div class="school-details">
+            <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜16:30</p>
+            <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
+            <p class="access-info">
+              東急田園都市線「池尻大橋」駅より徒歩10分<br />
+              京王井の頭線「駒場東大前」駅より徒歩10分
+            </p>
+          </div>
+        </div>
+
+        <!-- 右側：ミニサイトマップとSNS -->
+        <div class="footer-nav">
+          <ul class="sitemap">
+            <li><a href="/">TOP</a></li>
+            <li><a href="/theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="/articles">ARTICLES</a></li>
+            <li><a href="/timetable">TIME TABLE</a></li>
+            <li><a href="/map">MAP</a></li>
+            <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+          </ul>
+
+          <div class="footer-sns">
+            <a
+              href="https://www.instagram.com/komafes69/"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={instagramIcon.src}
+                alt="Instagram"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/@komafes69"
+              aria-label="YouTube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={youtubeIcon.src}
+                alt="YouTube"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://x.com/Komafes69"
+              aria-label="X"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={xIcon.src} alt="X" class="footer-sns-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- 共有機能 ---
+        const shareBtn = document.getElementById("share-btn");
+        if (shareBtn) {
+          shareBtn.addEventListener("click", async () => {
+            const articleTitle =
+              shareBtn.getAttribute("data-title") || "Komafes69";
+            const url = window.location.href;
+
+            const shareData = {
+              title: `${articleTitle} | Komafes69`,
+              text: `Komafes69の記事「${articleTitle}」です！`,
+              url: url,
+            };
+
+            if (navigator.share) {
+              try {
+                await navigator.share(shareData);
+              } catch (err) {
+                console.log("Share canceled or failed", err);
+              }
+            } else {
+              navigator.clipboard
+                .writeText(url)
+                .then(() => alert("URLをクリップボードにコピーしました！"))
+                .catch(() => alert("URLのコピーに失敗しました。"));
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  body {
+    font-family:
+      "Noto Sans JP",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #1a202c;
+  }
+
+  /* --- トップナビゲーション --- */
+  .top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 900;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    transition: 0.3s;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
+  }
+  .back-link:hover {
+    transform: translateX(-4px);
+    opacity: 0.8;
+  }
+  @media screen and (max-width: 640px) {
+    .nav-inner {
+      padding: 1rem 1.2rem;
+    }
+    .back-text {
+      display: none;
+    }
+  }
+
+  /* --- ヒーローバナー --- */
+  .hero-banner {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 380px;
+    max-height: 650px;
+    background: #edf2f7;
+    overflow: hidden;
+  }
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-img.fallback {
+    object-fit: contain;
+    padding: 4rem;
+    opacity: 0.3;
+  }
+  .hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* --- コンテンツエリア --- */
+  .content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+  @media screen and (max-width: 640px) {
+    .content-container {
+      padding: 2rem 1.5rem 4rem;
+    }
+  }
+
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .title-area {
+    flex: 1 1 min-width;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* --- タイトル装飾 --- */
+  .main-title-wrapper {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    padding: 0.5rem 1.5rem 0.5rem 1rem;
+    margin-left: -1rem;
+    border-radius: 4px;
+    z-index: 1;
+  }
+
+  .title-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    border-radius: 4px;
+    transform-origin: left;
+    animation: revealBg 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes revealBg {
+    0% {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+
+  .main-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    margin: 0;
+    line-height: 1.25;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeInTitle 0.6s ease forwards 0.3s;
+  }
+
+  @keyframes fadeInTitle {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* --- タイトル右下の投稿日 --- */
+  .date-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.8rem;
+  }
+  .published-date {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #092b5a;
+    letter-spacing: 0.03em;
+  }
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8f9fa;
+    border: 2px solid #e9eaee;
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #0f0101;
+    font-weight: 700;
+    font-size: 0.95rem;
+    width: 110px;
+  }
+  .action-btn:hover {
+    background: #2563eb;
+    border-color: #cbd5e0;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+  .icon-svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 2px solid #e2e8f0;
+    margin: 2rem 0 2.5rem;
+  }
+
+  /* --- Markdown（prose）装飾 --- */
+  .prose {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #0f172a;
+    margin-bottom: 4rem;
+  }
+
+  .prose :global(h2) {
+    font-size: 1.35rem;
+    color: #0f172a;
+    margin: 2.5rem 0 1.25rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .prose :global(h2)::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 1.35rem;
+    background: #2563eb;
+    border-radius: 4px;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin: 2rem 0 1rem;
+    font-weight: 700;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.4rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  /* --- 団体紹介リンクカードUI --- */
+  .exhibition-link-section {
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 2px #e2e8f0;
+  }
+  .exhibition-link-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 1.2rem;
+  }
+  .exhibition-card {
+    display: flex;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      border-color 0.3s ease;
+  }
+  .exhibition-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+    border-color: #e2e2e3;
+  }
+  .card-image-wrapper {
+    width: 35%;
+    min-width: 140px;
+    background: #f1f5f9;
+    position: relative;
+  }
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card-body {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .card-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 1rem 0;
+    line-height: 1.4;
+  }
+  .card-description {
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+    
+    /* 指定行数で切り捨てるための設定 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* ここで表示する最大行数を指定（変更可能） */
+    overflow: hidden;
+  }
+  .card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin-top: auto;
+  }
+
+  @media screen and (max-width: 640px) {
+    .exhibition-card {
+      flex-direction: column;
+    }
+    .card-image-wrapper {
+      width: 100%;
+      height: 180px;
+    }
+    .card-body {
+      padding: 1.2rem;
+    }
+  }
+
+  /* ========================================
+     FOOTER
+     ======================================== */
+  .footer {
+    background-color: #1a1b1f; /* 少し画像に近い暗い色調に */
+    color: #f6f9f6;
+    padding: 70px 0 20px;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  /* --- 左側：情報エリア --- */
+  .footer-info {
+    flex: 1;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-brand:hover {
+    opacity: 0.7;
+  }
+
+  /* filterを使ってSVGを白色に反転させています */
+  .footer-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer-typo {
+    height: 20px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .school-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+  }
+
+  .school-details p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+    color: #ccc;
+  }
+
+  .school-details strong {
+    color: #f6f9f6;
+    font-weight: 500;
+  }
+
+  .access-info {
+    margin-top: 12px !important;
+    padding-left: 10px;
+    border-left: 2px solid #555;
+  }
+
+  /* --- 右側：ナビゲーションエリア --- */
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ブロック内の要素を左揃えにする */
+  }
+
+  .sitemap {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px; /* 列同士の間隔 */
+    row-gap: 16px;
+    text-align: left; /* 文字を左揃えに */
+  }
+
+  .sitemap a {
+    color: #f6f9f6;
+    text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    display: inline-block; /* transformを有効化 */
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .sitemap a:hover {
+    color: #aaa;
+    transform: translateX(4px); /* 左揃えなので右側にスライドさせる */
+  }
+
+  .footer-sns {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-sns-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .footer-sns-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+
+  /* --- ボトム：コピーライト --- */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #b3b1b1;
+    letter-spacing: 0.05em;
+  }
+
+  /* --- スマホ対応 --- */
+  @media screen and (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 50px;
+    }
+    .school-name {
+      font-size: 4.5vw;
+    }
+
+    .sitemap {
+      column-gap: 20px;
+      width: 100%;
+    }
+  }
+</style>

@@ -1,8 +1,13 @@
 ---
 import rawExhibitions from "../data/exhibitions.json";
 // 背景画像をインポート
-import titleBgImage from '../assets/TitleBackground.webp';
-
+import titleBgImage from "../assets/TitleBackground.webp";
+import instagramIcon from "../assets/Instagram.svg";
+import youtubeIcon from "../assets/youtube.svg";
+import xIcon from "../assets/X.svg";
+import logoImg from "../assets/logo.svg";
+import typoImg from "../assets/typo.svg";
+import titleBackgroundBlack from "../../pages/assets/TitleBackgroundBlack.jpg";
 
 // --- TypeScript 型定義 ---
 export interface Exhibition {
@@ -20,7 +25,7 @@ export interface Exhibition {
 // --- 1. 静的ページの事前生成 (getStaticPaths) ---
 export async function getStaticPaths() {
   const exhibitions: Exhibition[] = (rawExhibitions as any[]).filter(
-    (item): item is Exhibition => Boolean(item && item.slug)
+    (item): item is Exhibition => Boolean(item && item.slug),
   );
 
   return exhibitions.map((item) => ({
@@ -33,19 +38,27 @@ export async function getStaticPaths() {
 const { exhibition } = Astro.props;
 
 // 場所情報の整形
-const roomText = (exhibition.room && exhibition.room !== 'NaN') ? exhibition.room : '';
-const rawFloor = exhibition.floor ? String(exhibition.floor) : '';
-const floorText = (rawFloor && rawFloor !== 'NaN') 
-  ? (['1','2','3','4','5'].includes(rawFloor) ? `${rawFloor}階` : rawFloor)
-  : '';
-const locationText = [floorText, roomText].filter(Boolean).join(' / ');
+const roomText =
+  exhibition.room && exhibition.room !== "NaN" ? exhibition.room : "";
+const rawFloor = exhibition.floor ? String(exhibition.floor) : "";
+const floorText =
+  rawFloor && rawFloor !== "NaN"
+    ? ["1", "2", "3", "4", "5"].includes(rawFloor)
+      ? `${rawFloor}階`
+      : rawFloor
+    : "";
+const locationText = [floorText, roomText].filter(Boolean).join(" / ");
 
 // 画像パスチェック
-const hasValidImage = Boolean(exhibition.image && exhibition.image.startsWith('/'));
+const hasValidImage = Boolean(
+  exhibition.image && exhibition.image.startsWith("/"),
+);
 const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a0aec0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`;
 
 const pageTitle = `${exhibition.name} | 駒場東邦 第69回 文化祭 | SAIL BEYOND`;
-const formattedDesc = exhibition.description ? exhibition.description.replace(/\n/g, '<br>') : '説明文はありません。';
+const formattedDesc = exhibition.description
+  ? exhibition.description.replace(/\n/g, "<br>")
+  : "説明文はありません。";
 ---
 
 <html lang="ja">
@@ -53,14 +66,17 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- ファビコン設定（重複を排除してスッキリ整理） -->
-  <link rel="icon" type="image/png"  href="/icon.png" />
-  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-  <link rel="icon" href="/icon.ico" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" href="/icon.ico" />
 
     <!-- iOS / WebManifest 用 -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -68,71 +84,118 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
     <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
   </head>
   <body>
-
     <!-- 固定ヘッダー（戻るボタン） -->
     <header class="top-nav">
       <div class="nav-inner">
         <a href="/exhibition" class="back-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg
+          >
           <span class="back-text">一覧へ戻る</span>
         </a>
       </div>
     </header>
 
     <main class="exhibition-detail">
-      
       <!-- 大胆なヒーローバナー画像 -->
       <section class="hero-banner">
-        <img 
-          src={hasValidImage ? exhibition.image : fallbackSvg} 
+        <img
+          src={hasValidImage ? exhibition.image : fallbackSvg}
           alt={exhibition.name}
-          class={`hero-img ${!hasValidImage ? 'fallback' : ''}`}
+          class={`hero-img ${!hasValidImage ? "fallback" : ""}`}
         />
         <!-- グラデーションオーバーレイ -->
         <div class="hero-overlay"></div>
-        
-        {locationText && (
-          <div class="hero-location">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            {locationText}
-          </div>
-        )}
+
+        {
+          locationText && (
+            <div class="hero-location">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <>
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </>
+              </svg>
+              {locationText}
+            </div>
+          )
+        }
       </section>
 
       <!-- コンテンツエリア -->
       <section class="content-container">
-        
         <!-- ヘッダー情報 (カテゴリー、タイトル、アクションボタン) -->
         <div class="content-header">
           <div class="title-area">
-            {exhibition.categories && exhibition.categories.length > 0 && (
-              <div class="category-list">
-                {exhibition.categories.map((cat: string) => (
-                  <span class="cat-badge">{cat}</span>
-                ))}
-              </div>
-            )}
-            
+            {
+              exhibition.categories && exhibition.categories.length > 0 && (
+                <div class="category-list">
+                  {exhibition.categories.map((cat: string) => (
+                    <span class="cat-badge">{cat}</span>
+                  ))}
+                </div>
+              )
+            }
+
             <!-- 【変更】importした画像を使用 -->
             <div class="main-title-wrapper">
               <img src={titleBgImage.src} alt="" class="title-bg" />
               <h1 class="main-title">{exhibition.name}</h1>
             </div>
-
           </div>
 
           <!-- いいね & シェアボタン -->
           <div class="action-area">
-            <button class="action-btn fav-btn" id="fav-btn" data-slug={exhibition.slug} aria-label="お気に入りに追加">
+            <button
+              class="action-btn fav-btn"
+              id="fav-btn"
+              data-slug={exhibition.slug}
+              aria-label="お気に入りに追加"
+            >
               <svg viewBox="0 0 24 24" class="icon-svg heart-icon">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                ></path>
               </svg>
               <span>いいね</span>
             </button>
 
-            <button class="action-btn share-btn" id="share-btn" data-name={exhibition.name} aria-label="共有する">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line>
+            <button
+              class="action-btn share-btn"
+              id="share-btn"
+              data-name={exhibition.name}
+              aria-label="共有する"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon-svg"
+              >
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"
+                ></path><polyline points="16 6 12 2 8 6"></polyline><line
+                  x1="12"
+                  y1="2"
+                  x2="12"
+                  y2="15"></line>
               </svg>
               <span>共有</span>
             </button>
@@ -144,19 +207,92 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
           <h2 class="section-label">展示・公演紹介</h2>
           <p class="description-text" set:html={formattedDesc} />
         </div>
-
       </section>
     </main>
 
-    <footer>
-      <p>&copy; 2026 Komafes69</p>
+    <footer
+      class="footer"
+      style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}
+    >
+      <div class="footer-inner">
+        <!-- 左側：学校情報・アクセス -->
+        <div class="footer-info">
+          <p class="school-name">駒場東邦中学校・高等学校 第69回 文化祭</p>
+          <!-- SVGロゴを使用 -->
+          <a href="/" class="footer-brand">
+            <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
+            <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
+          </a>
+
+          <div class="school-details">
+            <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜16:30</p>
+            <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
+            <p class="access-info">
+              東急田園都市線「池尻大橋」駅より徒歩10分<br />
+              京王井の頭線「駒場東大前」駅より徒歩10分
+            </p>
+          </div>
+        </div>
+
+        <!-- 右側：ミニサイトマップとSNS -->
+        <div class="footer-nav">
+          <ul class="sitemap">
+            <li><a href="/">TOP</a></li>
+            <li><a href="/theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="/articles">ARTICLES</a></li>
+            <li><a href="/timetable">TIME TABLE</a></li>
+            <li><a href="/map">MAP</a></li>
+            <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+          </ul>
+
+          <div class="footer-sns">
+            <a
+              href="https://www.instagram.com/komafes69/"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={instagramIcon.src}
+                alt="Instagram"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/@komafes69"
+              aria-label="YouTube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={youtubeIcon.src}
+                alt="YouTube"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://x.com/Komafes69"
+              aria-label="X"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={xIcon.src} alt="X" class="footer-sns-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
+      </div>
     </footer>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // --- いいね（お気に入り）機能 ---
         const favBtn = document.getElementById("fav-btn");
-        const STORAGE_KEY = 'komafes_favorites';
+        const STORAGE_KEY = "komafes_favorites";
 
         if (favBtn) {
           const slug = favBtn.getAttribute("data-slug");
@@ -165,9 +301,9 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
           // 初期状態の反映
           let favs = [];
           try {
-            favs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            favs = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
           } catch (e) {}
-          
+
           if (favs.includes(slug)) {
             favBtn.classList.add("is-active");
           }
@@ -176,7 +312,9 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
           favBtn.addEventListener("click", () => {
             let currentFavs = [];
             try {
-              currentFavs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+              currentFavs = JSON.parse(
+                localStorage.getItem(STORAGE_KEY) || "[]",
+              );
             } catch (e) {}
 
             if (currentFavs.includes(slug)) {
@@ -202,22 +340,25 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
             const shareData = {
               title: `${name} | Komafes69`,
               text: `Komafes69の${name}の展示情報です！`,
-              url: url
+              url: url,
             };
 
             if (navigator.share) {
               try {
                 await navigator.share(shareData);
               } catch (err) {
-                console.log('Share canceled or failed', err);
+                console.log("Share canceled or failed", err);
               }
             } else {
               // Web Share API非対応時
-              navigator.clipboard.writeText(url).then(() => {
-                alert("URLをクリップボードにコピーしました！");
-              }).catch(() => {
-                alert("URLのコピーに失敗しました。");
-              });
+              navigator.clipboard
+                .writeText(url)
+                .then(() => {
+                  alert("URLをクリップボードにコピーしました！");
+                })
+                .catch(() => {
+                  alert("URLのコピーに失敗しました。");
+                });
             }
           });
         }
@@ -228,7 +369,11 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
 
 <style>
   body {
-    font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+    font-family:
+      "Noto Sans JP",
+      system-ui,
+      -apple-system,
+      sans-serif;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
@@ -238,9 +383,15 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
   /* --- トップナビゲーション（戻るボタン） --- */
   .top-nav {
     position: fixed;
-    top: 0; left: 0; width: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 900;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
     transition: 0.3s;
   }
   .nav-inner {
@@ -256,16 +407,22 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    transition: transform 0.2s, opacity 0.2s;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
   }
   .back-link:hover {
     transform: translateX(-4px);
     opacity: 0.8;
   }
   @media screen and (max-width: 640px) {
-    .nav-inner { padding: 1rem 1.2rem; }
-    .back-text { display: none; } /* スマホではアイコンのみにしてスッキリさせる */
+    .nav-inner {
+      padding: 1rem 1.2rem;
+    }
+    .back-text {
+      display: none;
+    } /* スマホではアイコンのみにしてスッキリさせる */
   }
 
   /* --- ヒーローバナー --- */
@@ -290,8 +447,15 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
   }
   .hero-overlay {
     position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 50%;
-    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
     pointer-events: none;
   }
   .hero-location {
@@ -309,13 +473,16 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
     font-weight: 700;
     padding: 0.5rem 1rem;
     border-radius: 30px;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
   .hero-location svg {
-    width: 18px; height: 18px;
+    width: 18px;
+    height: 18px;
   }
   @media screen and (max-width: 1040px) {
-    .hero-location { left: 2rem; }
+    .hero-location {
+      left: 2rem;
+    }
   }
 
   /* --- コンテンツエリア --- */
@@ -325,7 +492,9 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
     padding: 3rem 2rem 5rem;
   }
   @media screen and (max-width: 640px) {
-    .content-container { padding: 2rem 1.5rem 4rem; }
+    .content-container {
+      padding: 2rem 1.5rem 4rem;
+    }
   }
 
   .content-header {
@@ -359,7 +528,7 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
     position: relative;
     display: inline-block;
     width: fit-content;
-    padding: 0.5rem 1.5rem 0.5rem 1rem; 
+    padding: 0.5rem 1.5rem 0.5rem 1rem;
     margin-left: -1rem;
     border-radius: 4px;
     z-index: 1;
@@ -367,7 +536,10 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
 
   .title-bg {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     z-index: -1;
     border-radius: 4px;
@@ -376,8 +548,14 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
   }
 
   @keyframes revealBg {
-    0% { transform: scaleX(0); opacity: 0; }
-    100% { transform: scaleX(1); opacity: 1; }
+    0% {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
   }
 
   .main-title {
@@ -392,8 +570,14 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
   }
 
   @keyframes fadeInTitle {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* --- アクションボタン --- */
@@ -417,13 +601,14 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
     font-size: 0.95rem;
   }
   .action-btn:hover {
-    background: #2563EB;
+    background: #2563eb;
     border-color: #cbd5e0;
     color: #ffffff;
     transform: translateY(-2px);
   }
   .icon-svg {
-    width: 20px; height: 20px;
+    width: 20px;
+    height: 20px;
   }
 
   /* いいねボタンの状態 */
@@ -478,14 +663,166 @@ const formattedDesc = exhibition.description ? exhibition.description.replace(/\
     color: #01070f;
     margin: 0;
   }
+  /* ========================================
+     FOOTER
+     ======================================== */
+  .footer {
+    background-color: #1a1b1f; /* 少し画像に近い暗い色調に */
+    color: #f6f9f6;
+    padding: 70px 0 20px;
+    font-family: "Noto Sans JP", sans-serif;
+  }
 
-  footer {
-    text-align: center;
-    padding: 3rem 0;
-    background-color: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-    color: #64748b;
-    font-size: 0.9rem;
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  /* --- 左側：情報エリア --- */
+  .footer-info {
+    flex: 1;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-brand:hover {
+    opacity: 0.7;
+  }
+
+  /* filterを使ってSVGを白色に反転させています */
+  .footer-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer-typo {
+    height: 20px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .school-name {
+    font-size: 1.3rem;
     font-weight: 500;
+    margin: 0 0 20px 0;
+  }
+
+  .school-details p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+    color: #ccc;
+  }
+
+  .school-details strong {
+    color: #f6f9f6;
+    font-weight: 500;
+  }
+
+  .access-info {
+    margin-top: 12px !important;
+    padding-left: 10px;
+    border-left: 2px solid #555;
+  }
+
+  /* --- 右側：ナビゲーションエリア --- */
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ブロック内の要素を左揃えにする */
+  }
+
+  .sitemap {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px; /* 列同士の間隔 */
+    row-gap: 16px;
+    text-align: left; /* 文字を左揃えに */
+  }
+
+  .sitemap a {
+    color: #f6f9f6;
+    text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    display: inline-block; /* transformを有効化 */
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .sitemap a:hover {
+    color: #aaa;
+    transform: translateX(4px); /* 左揃えなので右側にスライドさせる */
+  }
+
+  .footer-sns {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-sns-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .footer-sns-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+
+  /* --- ボトム：コピーライト --- */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #b3b1b1;
+    letter-spacing: 0.05em;
+  }
+
+  /* --- スマホ対応 --- */
+  @media screen and (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 50px;
+    }
+    .school-name {
+      font-size: 4.5vw;
+    }
+
+    .sitemap {
+      column-gap: 20px;
+      width: 100%;
+    }
   }
 </style>
