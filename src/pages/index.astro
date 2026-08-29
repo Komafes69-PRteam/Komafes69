@@ -28,57 +28,74 @@ import OceanImage from "../pages/assets/Ocean.webp";
 const pageTitle = "トップページ | 第69回 駒場東邦文化祭 | SAIL BEYOND";
 const pageDescription =
   "駒場東邦中学高等学校 第69回文化祭「SAIL BEYOND」の公式サイトです。開催日時：2026年 9月19日(土)・20日(日) 9:00〜16:30。テーマや各展示、タイムテーブル、マップなどの最新情報を掲載しています。";
+
+const newPosts = [
+  {
+    isComingSoon: false,
+    image:
+      "https://scontent-nrt1-1.cdninstagram.com/v/t51.82787-15/780139887_18082130885439121_7966042809974724654_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ig_cache_key=Mzk2ODM2ODA0MTgwOTUxMTcyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTgwMC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=9hj3DGI8HUQQ7kNvwFRiKMz&_nc_oc=Ado3gCDiyh_3r56EcIrpmB1fCD01VfAGdJzowPYW5x3bVIKdHtkfWfcdTis7nxuOP5Y&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-nrt1-1.cdninstagram.com&_nc_gid=ginjIgGBg-Thv56fHyGNCw&_nc_ss=7a22e&oh=00_AQITkb35T7F0v-CY5aMrlIOso082bvAyeuKpQSnYof4FUw&oe=6A9840A8",
+    url: "https://www.instagram.com/p/DcSebVuEYUt/",
+    text: "第69回駒場東邦文化祭は9/19,20に開催！今年のテーマは'Sail Beyond'！そんなテーマを元に、文化祭まであと1ヶ月を記念してデザインを作りました！HPや装飾などもデザインにこだわって準備しています。参加団体の紹介や最新の情報など、こちらのアカウントで発信していきます。文化祭当日まで、ぜひお楽しみに！",
+    date: "2026.08.21",
+    source: "Instagram",
+  },
+  {
+    isComingSoon: true,
+  },
+  { isComingSoon: true },
+  { isComingSoon: true },
+];
 ---
 
 <html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{pageTitle}</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
 
-  <meta name="description" content={pageDescription} />
-  <meta
-    name="keywords"
-    content="駒場東邦,駒場東邦文化祭,駒東文化祭,2026年,Komafes69,SAIL BEYOND"
-  />
+    <meta name="description" content={pageDescription} />
+    <meta
+      name="keywords"
+      content="駒場東邦,駒場東邦文化祭,駒東文化祭,2026年,Komafes69,SAIL BEYOND"
+    />
 
-  <link rel="canonical" href="https://69.komafes.jp/" />
+    <link rel="canonical" href="https://69.komafes.jp/" />
 
-  <meta property="og:title" content={pageTitle} />
-  <meta property="og:description" content={pageDescription} />
-  <meta property="og:url" content="https://69.komafes.jp/" />
-  <meta property="og:image" content="https://69.komafes.jp/ogp.png" />
-  <meta property="og:image:width" content="3406" />
-  <meta property="og:image:height" content="1884" />
-  <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content="https://69.komafes.jp/" />
+    <meta property="og:image" content="https://69.komafes.jp/ogp.png" />
+    <meta property="og:image:width" content="3406" />
+    <meta property="og:image:height" content="1884" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="preload" as="image" href={mainLogoImg.src} />
+    <link rel="preload" as="image" href={mainLogoImg.src} />
 
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="preload"
-    as="style"
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@500;700;900&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&display=swap"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@500;700;900&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&display=swap"
-    rel="stylesheet"
-    media="print"
-    onload="this.media='all'"
-  />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@500;700;900&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@500;700;900&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
 
-  <link rel="icon" type="image/png"  href="/icon.png" />
-  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-  <link rel="icon" href="/icon.ico" />
-  
-  <!-- iOS / WebManifest 用 -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
-</head>
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" href="/icon.ico" />
+
+    <!-- iOS / WebManifest 用 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
+  </head>
   <body id="top">
     <div id="loading-screen">
       <div class="loader-logo-container">
@@ -329,7 +346,9 @@ const pageDescription =
           </a>
         </div>
       </nav>
-      <h1 class="under-title-text" >2026年 駒場東邦中学校・高等学校 第69回 文化祭</h1>
+      <h1 class="under-title-text">
+        2026年 駒場東邦中学校・高等学校 第69回 文化祭
+      </h1>
     </section>
 
     <div
@@ -737,6 +756,51 @@ const pageDescription =
           </a>
         </div>
       </div>
+      <div class="new-post-section">
+        <h3 class="new-post-title">New Post</h3>
+
+        <div class="new-post-grid" id="new-post-grid">
+          {
+            newPosts.map((post) =>
+              post.isComingSoon ? (
+                <div class="post-card">
+                  <div class="card-visual coming-soon-bg">
+                    <span class="coming-soon-text">Coming Soon</span>
+                  </div>
+                  <div class="post-info">
+                    <p class="post-text">&nbsp;</p>
+                    <span class="post-date">&nbsp;</span>
+                  </div>
+                </div>
+              ) : (
+                <div class="post-card">
+                  {/* 画像部分のみをInstagramへのリンクにする */}
+                  <a
+                    href={post.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="card-visual-link"
+                  >
+                    <div class="card-visual">
+                      <img src={post.image} alt={post.text} loading="lazy" />
+                    </div>
+                  </a>
+                  <div class="post-info">
+                    {/* テキスト部分にクリック用のクラスを追加 */}
+                    <p
+                      class="post-text js-expand-text"
+                      title="クリックで全文表示"
+                    >
+                      {post.text}
+                    </p>
+                    <span class="post-date">{post.source}　{post.date}</span>
+                  </div>
+                </div>
+              ),
+            )
+          }
+        </div>
+      </div>
     </section>
 
     <footer
@@ -820,6 +884,11 @@ const pageDescription =
 
   <script>
     import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import rawExhibitions from "../pages/data/exhibitions.json";
+
+    // プラグインの登録
+    gsap.registerPlugin(ScrollTrigger);
 
     // --- 1. 舵の無限回転アニメーション ---
     const wheelRotation = gsap.to(".loader-logo-img", {
@@ -856,14 +925,13 @@ const pageDescription =
           const loader = document.getElementById("loading-screen");
           if (loader) loader.style.display = "none";
 
-          wheelRotation.kill(); // ローディング用アニメーションの停止
+          wheelRotation.kill();
         },
-      })
-        // ★ フェードアウト完了(0.6秒)の 0.1秒前（0.5秒経過時）に発火 ★
-        .add(() => {
-          initHeroAnimation();
-          initFlagsAnimation();
-        }, "-=0.6");
+      }).add(() => {
+        initHeroAnimation();
+        initFlagsAnimation();
+        initNewPostsAnimation();
+      }, "-=0.6");
     });
 
     // --- ★ Hero セクション専用 GSAP アニメーション ★ ---
@@ -1018,7 +1086,6 @@ const pageDescription =
 
     // --- その他のイベント・機能初期化 ---
     const initApp = () => {
-      // --- 1. スクロール検知で手書きアニメーション発火 ---
       const logBook = document.getElementById("log-book-content");
       if (logBook) {
         const observer = new IntersectionObserver(
@@ -1032,11 +1099,9 @@ const pageDescription =
           },
           { threshold: 0.2 },
         );
-
         observer.observe(logBook);
       }
 
-      // --- 2. カウントダウン & イベント状態自動判定 ---
       const startDate = new Date("2026-09-19T09:00:00+09:00").getTime();
       const endDate = new Date("2026-09-20T17:00:00+09:00").getTime();
 
@@ -1089,7 +1154,6 @@ const pageDescription =
       updateCountdown();
       window.setInterval(updateCountdown, 1000);
 
-      // --- 3. スマホ用ハンバーガーメニュー制御 ---
       const hamburger = document.querySelector(".hamburger");
       const mobileNav = document.querySelector(".mobile-nav");
       const mobileLinks = document.querySelectorAll(".mobile-nav a");
@@ -1120,7 +1184,6 @@ const pageDescription =
         });
       }
 
-      // --- 4. スクロール連動処理 (ヘッダー) ---
       const stickyHeader = document.querySelector(".sticky-header");
       const heroSection = document.querySelector(".hero");
 
@@ -1139,9 +1202,42 @@ const pageDescription =
 
       window.addEventListener("scroll", handleScroll);
       handleScroll();
+
+      // --- New Post テキスト展開処理 ---
+      const expandTexts =
+        document.querySelectorAll<HTMLElement>(".js-expand-text");
+      expandTexts.forEach((text) => {
+        text.addEventListener("click", () => {
+          text.classList.toggle("is-expanded");
+        });
+      });
     };
 
-    import rawExhibitions from "../pages/data/exhibitions.json";
+    // --- New Post セクション用アニメーション ---
+    const initNewPostsAnimation = () => {
+      gsap.from(".new-post-title", {
+        scrollTrigger: {
+          trigger: ".new-post-section",
+          start: "top 80%",
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      gsap.from(".post-card", {
+        scrollTrigger: {
+          trigger: ".new-post-grid",
+          start: "top 85%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+      });
+    };
 
     // --- EXHIBITION セクション ---
     const initExhibition = async () => {
@@ -1159,12 +1255,12 @@ const pageDescription =
         const cardHtml = shuffled
           .map(
             (item) => `
-    <div class="exhibition-card-wrapper">
-      <a href="/exhibition" class="exhibition-card">
-        <img src="${item.image}" alt="展示画像" class="exhibition-card-img" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'" />
-      </a>
-    </div>
-  `,
+  <div class="exhibition-card-wrapper">
+    <a href="/exhibition" class="exhibition-card">
+      <img src="${item.image}" alt="展示画像" class="exhibition-card-img" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'" />
+    </a>
+  </div>
+`,
           )
           .join("");
 
@@ -1339,7 +1435,7 @@ const pageDescription =
 
     // --- 万国旗（Flag & Rope）アニメーション ---
     const initFlagsAnimation = () => {
-      const flags = gsap.utils.toArray<HTMLDivElement>(".flag");
+      const flags = gsap.utils.toArray(".flag") as HTMLElement[];
       const ropePaths =
         document.querySelectorAll<SVGPathElement>(".rope-svg path");
 
@@ -1446,7 +1542,6 @@ const pageDescription =
       initCaptainsLogAnimation();
       initSectionFadeIn();
       initAccessAnimation();
-      // ※ initHeroAnimation と initFlagsAnimation はローディング完了後に実行されるためここでは呼び出しません
     };
 
     if (document.readyState === "loading") {
@@ -3086,9 +3181,7 @@ const pageDescription =
       background-color: #ffffff;
       position: relative;
       z-index: 5;
-      position: relative; /* 絶対配置の基準にするため追加 */
       overflow: hidden; /* 斜め画像がセクション外にはみ出すのを防ぐ */
-      background-color: #ffffff; /* 既存の背景色 */
     }
 
     .sns-inner {
@@ -3108,7 +3201,6 @@ const pageDescription =
       justify-content: flex-start;
     }
 
-    /* タイトルフォントをACCESSセクションと同一にする */
     .sns-title {
       font-size: clamp(3.5rem, 9vw, 9rem);
       font-weight: 800;
@@ -3146,17 +3238,17 @@ const pageDescription =
       background-color: #f9fafb;
       border-radius: 24px;
       padding: 28px 24px;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease,
+        border-color 0.25s ease;
     }
 
-    /* ホバー時のふわっと浮くアニメーション */
     .sns-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
       background-color: #ffffff;
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background-color 0.25s ease;
     }
 
     .sns-card-left {
@@ -3177,14 +3269,15 @@ const pageDescription =
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: transform 0.25s ease;
+      transition:
+        transform 0.25s ease,
+        background-color 0.25s ease;
     }
 
     .sns-card:hover .sns-icon-wrapper {
       transform: scale(1.08);
     }
 
-    /* 各ブランドの色に合わせたい場合（お好みで調整可能） */
     .sns-card.x-twitter:hover .sns-icon-wrapper {
       background-color: #000000;
     }
@@ -3256,11 +3349,134 @@ const pageDescription =
     }
 
     /* ========================================
+   New Post セクション
+   ======================================== */
+    .new-post-section {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .new-post-title {
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: -20px;
+    }
+
+    .new-post-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 90px;
+      align-items: start; 
+    }
+
+    .post-card {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      justify-content: flex-start; /* ★追加：カード内の要素を上から順に詰める */
+      will-change: transform;
+    }
+
+    .post-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card-visual-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    .card-visual {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      flex-shrink: 0;
+    }
+
+    .card-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card-visual-link:hover .card-visual img {
+      transform: scale(1.05);
+    }
+
+    .coming-soon-bg {
+      background-color: #031638;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .coming-soon-text {
+      color: #ffffff;
+      font-family: "Bebas Neue", cursive;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+    }
+
+    .post-info {
+      display: flex;
+      /* ★横並びから縦並びに変更し、順番を逆（日付が上）にする */
+      flex-direction: column; 
+      gap: 6px; /* 日付とテキストの余白 */
+      margin-top: 16px;
+      padding: 0 4px;
+    }
+
+    .post-date {
+      font-size: 11px;
+      font-weight: 700;
+      color: #718096;
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
+      align-self: flex-end; /* ★日付だけ右寄せに配置 */
+    }
+
+    .post-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #000000;
+      margin: 0;
+      line-height: 1.4;
+      width: 100%; /* ★テキストを全幅に広げる */
+      display: -webkit-box;
+      -webkit-line-clamp: 4; 
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      cursor: pointer; 
+      transition: color 0.2s;
+    }
+
+
+
+    .post-text:hover {
+      color: #555555;
+    }
+
+    .post-text.is-expanded {
+      -webkit-line-clamp: unset;
+    }
+    /* ========================================
    レスポンシブ対応（スマホ・タブレット）
    ======================================== */
     @media screen and (max-width: 1024px) {
+      .new-post-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 90px;
+      }
       .sns-content {
-        grid-template-columns: 1fr; /* スマホ・タブレットは縦1列に */
+        grid-template-columns: 1fr;
         gap: 16px;
       }
     }
@@ -3269,40 +3485,39 @@ const pageDescription =
       .sns-section {
         padding: 60px 0;
       }
-
       .sns-card {
         padding: 20px 18px;
         border-radius: 24px;
       }
-
       .sns-icon-wrapper {
         width: 38px;
         height: 38px;
       }
-
       .sns-icon-wrapper svg {
         width: 20px;
         height: 20px;
       }
-
       .sns-name {
         font-size: 1.05rem;
       }
-
       .sns-description {
         font-size: 0.825rem;
       }
       .sns-image-bg {
         width: 100%;
-        height: 40%; /* スマホでは下側の40%を覆うような形に */
+        height: 40%;
         top: auto;
         bottom: 0;
-
-        /* スマホ用に切り抜き方向を変更（左上から右下へ斜めライン） */
         clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
       }
     }
 
+    @media (max-width: 600px) {
+      .new-post-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
     /* ========================================
      FOOTER
      ======================================== */
