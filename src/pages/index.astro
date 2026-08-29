@@ -793,7 +793,9 @@ const newPosts = [
                     >
                       {post.text}
                     </p>
-                    <span class="post-date">{post.source}　{post.date}</span>
+                    <span class="post-date">
+                      {post.source}　{post.date}
+                    </span>
                   </div>
                 </div>
               ),
@@ -3354,7 +3356,7 @@ const newPosts = [
     .new-post-section {
       max-width: 1500px;
       margin: 0 auto;
-      padding: 0;
+      padding: 0 1.5rem;
     }
 
     .new-post-title {
@@ -3369,7 +3371,7 @@ const newPosts = [
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 90px;
-      align-items: start; 
+      align-items: start;
     }
 
     .post-card {
@@ -3427,7 +3429,7 @@ const newPosts = [
     .post-info {
       display: flex;
       /* ★横並びから縦並びに変更し、順番を逆（日付が上）にする */
-      flex-direction: column; 
+      flex-direction: column;
       gap: 6px; /* 日付とテキストの余白 */
       margin-top: 16px;
       padding: 0 4px;
@@ -3451,14 +3453,12 @@ const newPosts = [
       line-height: 1.4;
       width: 100%; /* ★テキストを全幅に広げる */
       display: -webkit-box;
-      -webkit-line-clamp: 4; 
+      -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      cursor: pointer; 
+      cursor: pointer;
       transition: color 0.2s;
     }
-
-
 
     .post-text:hover {
       color: #555555;
@@ -3473,7 +3473,7 @@ const newPosts = [
     @media screen and (max-width: 1024px) {
       .new-post-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 90px;
+        gap: 32px; /* 90pxは広すぎるため、自然な間隔に調整 */
       }
       .sns-content {
         grid-template-columns: 1fr;
@@ -3482,26 +3482,43 @@ const newPosts = [
     }
 
     @media screen and (max-width: 768px) {
+      /* New Post スマホ用調整 */
+
+
+      .new-post-title {
+        font-size: 2rem
+      }
+      .post-info {
+        margin-top: 10px;
+      }
+      .post-text{
+        font-size: 1rem;
+      }
+
+      /* SNS スマホ用調整 */
       .sns-section {
-        padding: 60px 0;
+        padding: 50px 0;
       }
       .sns-card {
-        padding: 20px 18px;
-        border-radius: 24px;
+        padding: 16px 14px;
+        border-radius: 20px;
       }
       .sns-icon-wrapper {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
       }
       .sns-icon-wrapper svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
       }
       .sns-name {
-        font-size: 1.05rem;
+        font-size: 1rem;
+      }
+      .sns-id {
+        font-size: 0.8rem;
       }
       .sns-description {
-        font-size: 0.825rem;
+        font-size: 0.8rem;
       }
       .sns-image-bg {
         width: 100%;
@@ -3514,8 +3531,15 @@ const newPosts = [
 
     @media (max-width: 600px) {
       .new-post-grid {
-        grid-template-columns: 1fr;
+        /* スマホで1列にすると画像が縦に巨大化するため、2列表示のまま隙間を詰める */
+        grid-template-columns: repeat(2, 1fr);
         gap: 40px;
+      }
+      .post-text {
+        font-size: 13px; /* 領域が狭くなるためフォントサイズを微調整 */
+      }
+      .post-date {
+        font-size: 10px;
       }
     }
     /* ========================================
