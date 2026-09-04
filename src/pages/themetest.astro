@@ -1,0 +1,154 @@
+---
+// フロントマター：必要に応じてレイアウトコンポーネントなどをインポート
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>3D Book Animation</title>
+    <style>
+      /* 1. スクロール領域の確保（5画面分の高さ） */
+      .scroll-container {
+        height: 500vh;
+        position: relative;
+      }
+
+      /* 2. Three.jsキャンバスを画面全体に固定 */
+      #webgl-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        pointer-events: none; /* 前面のコンテンツのクリックを妨げない */
+      }
+
+      /* スクロール目安のテキスト（確認用） */
+      .scroll-guide {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scroll-container">
+      <div class="scroll-guide">下にスクロールしてページをめくる</div>
+    </div>
+
+    <canvas id="webgl-canvas"></canvas>
+
+    <script>
+      import * as THREE from "three";
+      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("webgl-canvas");
+        if (!canvas) return;
+
+        // --- 1. 基本セットアップ ---
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf4f6f8); // 背景色
+
+        const sizes = {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+
+        const camera = new THREE.PerspectiveCamera(
+          45,
+          sizes.width / sizes.height,
+          0.1,
+          100,
+        );
+        camera.position.set(0, 0.8, 0); // 本を見下ろす位置に調整
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          antialias: true,
+        });
+        renderer.setSize(sizes.width, sizes.height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // --- 2. 照明の設定 ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        directionalLight.position.set(5, 10, 5);
+        scene.add(directionalLight);
+
+        // --- 3. モデルとアニメーションの読み込み ---
+        const loader = new GLTFLoader();
+        let mixer: THREE.AnimationMixer | null = null;
+        let clipDuration = 0;
+
+        loader.load("/models/book.glb", (gltf) => {
+          const model = gltf.scene;
+
+          // 本の向きを90度回転
+          model.rotation.y = Math.PI / 2;
+          scene.add(model);
+
+          if (gltf.animations && gltf.animations.length > 0) {
+            mixer = new THREE.AnimationMixer(model);
+
+            // 【変更点】すべてのアニメーションクリップをループして登録
+            gltf.animations.forEach((clip) => {
+              const action = mixer!.clipAction(clip);
+              action.play();
+              action.paused = true; // スクロール連動のために一時停止
+
+              // アニメーション全体の長さ（一番長いクリップの秒数）を取得
+              if (clip.duration > clipDuration) {
+                clipDuration = clip.duration;
+              }
+            });
+          }
+        });
+
+        // --- 4. スクロール連動処理（慣性付き） ---
+        let targetTime = 0;
+        let currentTime = 0;
+
+        window.addEventListener("scroll", () => {
+          if (!mixer) return;
+          const maxScroll =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const scrollProgress = window.scrollY / maxScroll; // 0.0 〜 1.0
+
+          // 目標のアニメーション時間を計算
+          targetTime = scrollProgress * clipDuration;
+        });
+
+        // --- 5. 描画ループ ---
+        const tick = () => {
+          if (mixer) {
+            // 線形補間(Lerp)で滑らかに目標時間へ近づける（慣性の表現）
+            currentTime += (targetTime - currentTime) * 0.08;
+            mixer.setTime(currentTime);
+          }
+
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        };
+        tick();
+
+        // --- 6. リサイズ対応 ---
+        window.addEventListener("resize", () => {
+          sizes.width = window.innerWidth;
+          sizes.height = window.innerHeight;
+          camera.aspect = sizes.width / sizes.height;
+          camera.updateProjectionMatrix();
+          renderer.setSize(sizes.width, sizes.height);
+        });
+      });
+    </script>
+  </body>
+</html>
