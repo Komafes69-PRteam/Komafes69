@@ -32,8 +32,7 @@ const pageDescription =
 const newPosts = [
   {
     isComingSoon: false,
-    image:
-      "images/sns/sail_beyond3.webp",
+    image: "images/sns/sail_beyond3.webp",
     url: "https://www.instagram.com/p/DcSebVuEYUt/",
     text: "第69回駒場東邦文化祭は9/19,20に開催！今年のテーマは'Sail Beyond'！そんなテーマを元に、文化祭まであと1ヶ月を記念してデザインを作りました！HPや装飾などもデザインにこだわって準備しています。参加団体の紹介や最新の情報など、こちらのアカウントで発信していきます。文化祭当日まで、ぜひお楽しみに！",
     date: "2026.08.21",
@@ -41,22 +40,23 @@ const newPosts = [
   },
   {
     isComingSoon: false,
-    image:
-      "images/sns/postersns.webp",
+    image: "images/sns/postersns.webp",
     url: "https://www.instagram.com/p/Dc54vTJGHNS/?img_index=1",
     text: "文化祭まであと二週間！！  ポスターのデザインが完成したので、ぜひご覧ください！  9/19,20日、駒場東邦でお待ちしています！！",
     date: "2026.09.05",
     source: "Instagram",
   },
-  { isComingSoon: false,
-    image:"images/sns/14days.webp",
+  {
+    isComingSoon: false,
+    image: "images/sns/14days.webp",
     url: "https://www.instagram.com/p/Dc57oRamJu2/",
     text: "第69回駒場東邦文化祭まであと14日！！ 今日から二週間、文化祭当日まで毎日、カウントダウンを投稿します！ このアカウントでは、当日まで様々な紹介をしていく予定です。 ぜひ毎日投稿をチェックしてみてください！",
     date: "2026.09.05",
     source: "Instagram",
   },
-  { isComingSoon: false,
-    image:"images/sns/0906.webp",
+  {
+    isComingSoon: false,
+    image: "images/sns/0906.webp",
     url: "https://www.instagram.com/p/Dc57oRamJu2/",
     text: "第69回駒場東邦文【オンラインコンテンツを投稿しました！】文化祭公式ホームページの「ARTICLES」ページに新着記事を投稿しました！ 今回の記事は、「リアルライフゲーム―駒東の3年間を体験してみよう！」です 記事はこちらから！ https://69.komafes.jp/articles/real-life-game/ 今後も、さまざまな参加団体の記事を投稿していきますので、ぜひチェックしてください！！化祭の公式アカウントを開設しました！  文化祭までの情報や、当日の様子などを発信していく予定です。  ぜひフォローして、文化祭当日までお楽しみください！",
     date: "2026.09.06",
@@ -365,7 +365,8 @@ const newPosts = [
         </div>
       </nav>
       <h1 class="under-title-text">
-        2026年 駒場東邦中学校・高等学校 第69回 文化祭 （駒東 文化祭）が 2026年9月19日（土）9月20日（日）に開催されます！！　是非ご来場ください！
+        2026年 駒場東邦中学校・高等学校 第69回 文化祭 （駒東 文化祭）が
+        2026年9月19日（土）9月20日（日）に開催されます！！　是非ご来場ください！
       </h1>
     </section>
 
@@ -3396,8 +3397,9 @@ const newPosts = [
       display: flex;
       flex-direction: column;
       transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      justify-content: flex-start; /* ★追加：カード内の要素を上から順に詰める */
+      justify-content: flex-start;
       will-change: transform;
+      min-width: 0; /* ★追加：中身の要素によるグリッドの崩れを防止 */
     }
 
     .post-card:hover {
@@ -3459,8 +3461,9 @@ const newPosts = [
       color: #718096;
       margin: 0;
       padding: 0;
-      white-space: nowrap;
-      align-self: flex-end; /* ★日付だけ右寄せに配置 */
+      /* ★ white-space: nowrap; を削除するか、以下のように上書き */
+      word-break: break-word;
+      align-self: flex-end;
     }
 
     .post-text {
@@ -3502,14 +3505,13 @@ const newPosts = [
     @media screen and (max-width: 768px) {
       /* New Post スマホ用調整 */
 
-
       .new-post-title {
-        font-size: 2rem
+        font-size: 2rem;
       }
       .post-info {
         margin-top: 10px;
       }
-      .post-text{
+      .post-text {
         font-size: 1rem;
       }
 
