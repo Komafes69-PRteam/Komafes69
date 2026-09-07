@@ -1,154 +1,771 @@
 ---
-// フロントマター：必要に応じてレイアウトコンポーネントなどをインポート
+import { Image } from "astro:assets";
+import heroImage from "../pages/assets/hero.webp";
+import heroImageSp from "../pages/assets/hero-sp.webp";
+import heroImageTb from "../pages/assets/hero-tb.webp";
+
+import titleTextImg from "../pages/assets/title-text.webp";
+import komafesLabel from "../pages/assets/komafesLabel.webp";
+import topLogoImg from "../pages/assets/topLogo.webp";
+import mainLogoImg from "../pages/assets/Komafes69Logo.webp";
+import hatImg from "../pages/assets/hat.webp";
+import maintypoImg from "../pages/assets/typo.webp";
+
+import instagramIcon from "../pages/assets/Instagram.svg";
+import youtubeIcon from "../pages/assets/youtube.svg";
+import xIcon from "../pages/assets/X.svg";
+
+import scrollIcon from "../pages/assets/scroll.svg";
+
+import logoImg from "../pages/assets/logo.svg";
+import typoImg from "../pages/assets/typo.svg";
+import titleBackgroundDark from "../pages/assets/TitleBackgroundDark.webp";
+import titleBackgroundBlack from "../pages/assets/TitleBackgroundBlack.jpg";
+
+import LogImage from "../pages/assets/Log.webp";
+import OceanImage from "../pages/assets/Ocean.webp";
+
+const pageTitle = "トップページ | 第69回 駒場東邦文化祭 | SAIL BEYOND";
+const pageDescription =
+  "2026 駒場東邦中学高等学校 第69回文化祭「SAIL BEYOND」の公式サイトです。開催日時：2026年 9月19日(土)・20日(日) 9:00〜16:30。テーマや各展示、タイムテーブル、マップなどの最新情報を掲載しています。";
 ---
 
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <title>3D Book Animation</title>
-    <style>
-      /* 1. スクロール領域の確保（5画面分の高さ） */
-      .scroll-container {
-        height: 500vh;
-        position: relative;
-      }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
 
-      /* 2. Three.jsキャンバスを画面全体に固定 */
-      #webgl-canvas {
+    <meta name="description" content={pageDescription} />
+    <meta
+      name="keywords"
+      content="駒場東邦,駒場東邦文化祭,駒東,駒東文化祭,2026年,Komafes69,SAIL BEYOND"
+    />
+
+    <link rel="canonical" href="https://69.komafes.jp/" />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content="https://69.komafes.jp/" />
+    <meta property="og:image" content="https://69.komafes.jp/ogp.png" />
+    <meta property="og:image:width" content="3406" />
+    <meta property="og:image:height" content="1884" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" as="image" href={mainLogoImg.src} />
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@500;700;900&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@500;700;900&family=Pinyon+Script&family=Shippori+Mincho:wght@600;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" href="/icon.ico" />
+
+    <!-- iOS / WebManifest 用 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
+  </head>
+
+  <body id="top">
+    <div id="loading-screen">
+      <div class="loader-logo-container">
+        <img src={mainLogoImg.src} alt="Loading..." class="loader-logo-img" />
+        <p class="loader-text">Loading...</p>
+      </div>
+    </div>
+    <!-- ========================================
+         スマホ用 メニュー (中身)
+         ======================================== -->
+    <nav id="mobile-menu" class="mobile-nav">
+      <ul>
+        <li><a href="/">TOP</a></li>
+        <li><a href="/theme">THEME</a></li>
+        <li><a href="/exhibition">EXHIBITION</a></li>
+        <li><a href="/articles">ARTICLES</a></li>
+        <li><a href="/timetable">TIME TABLE</a></li>
+        <li><a href="/map">MAP</a></li>
+        <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+      </ul>
+      <div class="mobile-sns-links">
+        <a
+          href="https://www.instagram.com/komafes69/"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={instagramIcon.src} alt="" class="sns-icon" />
+          <span>Instagram</span>
+        </a>
+        <a
+          href="https://www.youtube.com/@komafes69"
+          aria-label="YouTube"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={youtubeIcon.src} alt="" class="sns-icon" />
+          <span>YouTube</span>
+        </a>
+        <a
+          href="https://x.com/Komafes69"
+          aria-label="X"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={xIcon.src} alt="" class="sns-icon" />
+          <span>X</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ========================================
+         PC・タブレット・スマホ兼用 ヘッダー
+         ======================================== -->
+    <header class="sticky-header">
+      <div class="sticky-header-inner">
+        <!-- 左側: ロゴとタイポ -->
+        <a href="/" class="header-brand">
+          <img src={logoImg.src} alt="Komafes69 Logo" class="header-logo" />
+          <img src={typoImg.src} alt="SAIL BEYOND" class="header-typo" />
+        </a>
+
+        <!-- 右側: PCナビゲーション ＆ スマホハンバーガー -->
+        <div class="header-right">
+          <nav class="header-nav">
+            <ul>
+              <li><a href="/">TOP</a></li>
+              <li><a href="/theme">THEME</a></li>
+              <li><a href="/exhibition">EXHIBITION</a></li>
+              <li><a href="/articles">ARTICLES</a></li>
+              <li><a href="/timetable">TIME TABLE</a></li>
+              <li><a href="/map">MAP</a></li>
+              <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+            </ul>
+          </nav>
+
+          <!-- ハンバーガーボタンをヘッダー内に移動 -->
+          <button
+            class="hamburger"
+            aria-label="メニューを開く"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="theme-wrapper">
+      <!-- 背景画像（後で差し替えてください） -->
+      <div class="theme-bg"></div>
+
+      <div class="theme-layout">
+        <!-- 左側：船の線画（スクロール中も固定表示） -->
+        <div class="theme-left">
+          <div class="ship-svg-placeholder">
+            <!-- ※ここに船のSVGを配置します -->
+            <div style="width: 100%; height: 400px; border: 2px dashed #8b7355; display: flex; align-items: center; justify-content: center; color: #8b7355; font-size: 1.2rem;">
+              船の線画SVGエリア<br>（後日アニメーション追加）
+            </div>
+          </div>
+        </div>
+
+        <!-- 右側：テキストエリア（スクロールに合わせて一塊ずつ出現） -->
+        <div class="theme-right">
+          <div class="theme-header js-fade-chunk">
+            <h2 class="theme-title">THEME</h2>
+            <div class="theme-subtitle">SHIP ORIZZONTE</div>
+          </div>
+
+          <div class="text-chunk js-fade-chunk">
+            古い航海記録には、時折こんな記述が残されている。<br>
+            「地平線の彼方から現れ、次の瞬間、再び地平線の向こうへと消えていく船」
+          </div>
+          <div class="text-chunk js-fade-chunk">
+            その船の名は、オリゾンテ号。<br>
+            いつ、どこで造られたのか。<br>
+            誰が最初の船長だったのか。<br>
+            今となっては、それを知る者はいない。
+          </div>
+          <div class="text-chunk js-fade-chunk">
+            ただ、この港がまだ小さな寄港地だった頃から、幾度となくこの地に姿を現していたという。<br>
+            やがて、その姿を追う船たちが現れた。
+          </div>
+          <div class="text-chunk js-fade-chunk">
+            しかし、航海は決して穏やかなものではなかった。<br>
+            激しい嵐や深い霧の中で、多くの船がその航跡を見失っていった。<br>
+            それでも、水平線の向こうにあるまだ見ぬ世界を信じ、夢と希望を見失わなかった船たちは、オリゾンテ号を追い続けた。
+          </div>
+          <div class="text-chunk js-fade-chunk">
+            そして彼らが辿り着いたのが、この港だった。
+          </div>
+          <div class="text-chunk js-fade-chunk">
+            夢と希望を帆に受けて、水平線を越え、その先へ。<br>
+            <br>
+            <strong>Sail Beyond.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger"; // ← 追加
+
+    gsap.registerPlugin(ScrollTrigger); // ← 追加
+
+    // ==========================================
+    // 1. ローディング画面の処理 (既存のまま)
+    // ==========================================
+    const wheelRotation = gsap.to(".loader-logo-img", { rotation: "+=360", duration: 2, repeat: -1, ease: "power1.inOut" });
+    const MIN_LOADING_TIME = 1000;
+    const minWaitPromise = new Promise<void>((resolve) => setTimeout(resolve, MIN_LOADING_TIME));
+    const pageLoadPromise = new Promise<void>((resolve) => {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", () => resolve(), { once: true });
+    });
+
+    Promise.all([minWaitPromise, pageLoadPromise]).then(() => {
+      const tl = gsap.timeline();
+      tl.to("#loading-screen", {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        onComplete: () => {
+          const loader = document.getElementById("loading-screen");
+          if (loader) loader.style.display = "none";
+          wheelRotation.kill();
+          initThemeAnimation(); // ローディング完了後にスクロールアニメーションを初期化
+        },
+      });
+    });
+
+    // ==========================================
+    // 2. ヘッダー関連の処理 (既存のまま)
+    // ==========================================
+    const initHeader = () => {
+      // (中略：既存のハンバーガーメニュー・スティッキーヘッダーのコードをそのまま配置してください)
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHeader);
+    } else {
+      initHeader();
+    }
+
+    // ==========================================
+    // 3. Themeページのスクロールアニメーション
+    // ==========================================
+    const initThemeAnimation = () => {
+      const chunks = gsap.utils.toArray(".js-fade-chunk");
+      
+      chunks.forEach((chunk: any) => {
+        gsap.to(chunk, {
+          scrollTrigger: {
+            trigger: chunk,
+            start: "top 85%", // 画面上部から85%の位置に要素が来たら発火
+            toggleActions: "play none none reverse", // スクロール戻り時にも消えるようにする
+          },
+          opacity: 1,
+          y: 0, // 下から上へフワッと
+          duration: 1.2,
+          ease: "power2.out",
+        });
+      });
+    };
+  </script>
+  <style>
+    body {
+      font-family:
+        "Noto Sans JP",
+        system-ui,
+        -apple-system,
+        sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+    }
+
+    body.no-scroll {
+      overflow: hidden;
+    }
+    /* ローディング画面（全体） */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #101011;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 舵のサイズ（お好みでサイズ調整してください） */
+    .loader-logo-container {
+      width: 140px;
+      height: 140px;
+      max-width: 50vw; /* スマホで大きくなりすぎない保護 */
+      max-height: 50vw;
+    }
+
+    .loader-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .loader-text {
+      color: #fff;
+      font-family: "Bebas Neue", cursive;
+      font-size: 1.4rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* (ヘッダーやHero等の既存スタイル) */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000; /* メニューより手前に表示するため 900 -> 1000 に変更 */
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      padding: 0.8rem 0;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+        background-color 0.3s ease;
+    }
+
+    .sticky-header.is-show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sticky-header,
+    .sticky-header-inner {
+      box-sizing: border-box; /* paddingを含めた幅をきっちり100%に収める */
+    }
+
+    .sticky-header-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-brand:hover {
+      opacity: 0.7;
+    }
+
+    .header-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0);
+    }
+
+    .header-typo {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0);
+    }
+
+    .header-nav ul {
+      display: flex;
+      gap: clamp(1rem, 2vw, 2.5rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header-nav a {
+      color: #111111;
+      text-decoration: none;
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+      letter-spacing: 0.12em;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .header-nav a:hover {
+      opacity: 0.6;
+      transform: translateY(-1px);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .hamburger,
+    .mobile-nav {
+      display: none;
+    }
+    .hamburger,
+    .mobile-nav {
+      display: none;
+    }
+
+    /* PC用のナビゲーションリンクは表示 */
+    .header-nav {
+      display: block;
+    }
+
+    @media screen and (max-width: 768px) {
+      /* ========================================
+       モバイルナビゲーション画面 (スマホ用メニュー本体)
+       ======================================== */
+      .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
-        z-index: -1;
-        pointer-events: none; /* 前面のコンテンツのクリックを妨げない */
+        height: 100dvh;
+        background-color: rgba(0, 0, 0, 0.92);
+        z-index: 999; /* ヘッダー(1000)の下に潜り込ませる */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
       }
 
-      /* スクロール目安のテキスト（確認用） */
-      .scroll-guide {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 2rem;
-        font-weight: bold;
-        color: #333;
+      .mobile-nav.is-active {
+        opacity: 1;
+        pointer-events: auto;
       }
-    </style>
-  </head>
-  <body>
-    <div class="scroll-container">
-      <div class="scroll-guide">下にスクロールしてページをめくる</div>
-    </div>
 
-    <canvas id="webgl-canvas"></canvas>
+      .mobile-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+      }
 
-    <script>
-      import * as THREE from "three";
-      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+      .mobile-nav li {
+        margin: 1.5rem 0;
+      }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const canvas = document.getElementById("webgl-canvas");
-        if (!canvas) return;
+      .mobile-nav a {
+        color: #f6f9f6;
+        text-decoration: none;
+        font-size: 1.8rem;
+        font-family: "Bebas Neue", cursive;
+        letter-spacing: 0.15em;
+      }
 
-        // --- 1. 基本セットアップ ---
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xf4f6f8); // 背景色
+      .mobile-sns-links {
+        display: flex;
+        gap: 2rem;
+        margin-top: 3rem;
+        transform: translateX(-20px);
+      }
 
-        const sizes = {
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
+      .mobile-sns-links a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-family: "Noto Sans JP", sans-serif;
+      }
 
-        const camera = new THREE.PerspectiveCamera(
-          45,
-          sizes.width / sizes.height,
-          0.1,
-          100,
-        );
-        camera.position.set(0, 0.8, 0); // 本を見下ろす位置に調整
-        camera.lookAt(0, 0, 0);
+      .mobile-sns-links .sns-icon {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+      }
 
-        const renderer = new THREE.WebGLRenderer({
-          canvas: canvas,
-          antialias: true,
-        });
-        renderer.setSize(sizes.width, sizes.height);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      /* ========================================
+       ミニヘッダー (スマホ用)
+       ======================================== */
+      .sticky-header {
+        display: block !important;
+        opacity: 1;
+        pointer-events: auto;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: none;
+        box-shadow: none;
+      }
 
-        // --- 2. 照明の設定 ---
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-        scene.add(ambientLight);
+      /* スクロール時の背景白化 */
+      .sticky-header.is-show {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      }
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
-        directionalLight.position.set(5, 10, 5);
-        scene.add(directionalLight);
+      .header-logo {
+        height: 24px;
+      }
 
-        // --- 3. モデルとアニメーションの読み込み ---
-        const loader = new GLTFLoader();
-        let mixer: THREE.AnimationMixer | null = null;
-        let clipDuration = 0;
+      .header-typo {
+        height: 12px;
+      }
 
-        loader.load("/models/book.glb", (gltf) => {
-          const model = gltf.scene;
+      .header-brand {
+        gap: 8px;
+        opacity: 0; /* 透明にする */
+        visibility: hidden; /* クリック判定もなくす */
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
 
-          // 本の向きを90度回転
-          model.rotation.y = Math.PI / 2;
-          scene.add(model);
+      .sticky-header.is-show .header-brand {
+        opacity: 1;
+        visibility: visible;
+      }
 
-          if (gltf.animations && gltf.animations.length > 0) {
-            mixer = new THREE.AnimationMixer(model);
+      .mobile-nav.is-active ~ .sticky-header .header-brand,
+      body:has(.hamburger.is-active) .header-brand {
+        opacity: 1;
+        visibility: visible;
+      }
 
-            // 【変更点】すべてのアニメーションクリップをループして登録
-            gltf.animations.forEach((clip) => {
-              const action = mixer!.clipAction(clip);
-              action.play();
-              action.paused = true; // スクロール連動のために一時停止
+      /* 初期状態(暗い背景上)はロゴを白くする */
+      .header-logo,
+      .header-typo {
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
 
-              // アニメーション全体の長さ（一番長いクリップの秒数）を取得
-              if (clip.duration > clipDuration) {
-                clipDuration = clip.duration;
-              }
-            });
-          }
-        });
+      /* スクロールして白背景になったら、ロゴを黒に戻す */
+      .sticky-header.is-show .header-logo,
+      .sticky-header.is-show .header-typo {
+        filter: brightness(0);
+      }
 
-        // --- 4. スクロール連動処理（慣性付き） ---
-        let targetTime = 0;
-        let currentTime = 0;
+      /* メニューオープン時は強制的にロゴを白に戻す(黒背景になるため) */
+      .mobile-nav.is-active ~ .sticky-header .header-logo,
+      .mobile-nav.is-active ~ .sticky-header .header-typo,
+      body:has(.hamburger.is-active) .header-logo,
+      body:has(.hamburger.is-active) .header-typo {
+        filter: brightness(0) invert(1) !important;
+      }
 
-        window.addEventListener("scroll", () => {
-          if (!mixer) return;
-          const maxScroll =
-            document.documentElement.scrollHeight - window.innerHeight;
-          const scrollProgress = window.scrollY / maxScroll; // 0.0 〜 1.0
+      /* PC用ナビゲーションは隠す */
+      .header-nav {
+        display: none;
+      }
 
-          // 目標のアニメーション時間を計算
-          targetTime = scrollProgress * clipDuration;
-        });
+      /* ========================================
+       ハンバーガーボタン (ミニヘッダー内)
+       ======================================== */
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 28px;
+        height: 20px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        position: relative;
+        top: auto;
+        right: auto;
+        z-index: 1000;
+      }
 
-        // --- 5. 描画ループ ---
-        const tick = () => {
-          if (mixer) {
-            // 線形補間(Lerp)で滑らかに目標時間へ近づける（慣性の表現）
-            currentTime += (targetTime - currentTime) * 0.08;
-            mixer.setTime(currentTime);
-          }
+      .hamburger-line {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #ffffff;
+        border-radius: 2px;
+        transition:
+          background-color 0.3s ease,
+          transform 0.3s ease,
+          opacity 0.3s ease;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+      }
 
-          renderer.render(scene, camera);
-          requestAnimationFrame(tick);
-        };
-        tick();
+      /* スクロール時 (is-black) は黒 */
+      .hamburger.is-black .hamburger-line {
+        background-color: #000000;
+        filter: none;
+      }
 
-        // --- 6. リサイズ対応 ---
-        window.addEventListener("resize", () => {
-          sizes.width = window.innerWidth;
-          sizes.height = window.innerHeight;
-          camera.aspect = sizes.width / sizes.height;
-          camera.updateProjectionMatrix();
-          renderer.setSize(sizes.width, sizes.height);
-        });
-      });
-    </script>
-  </body>
+      /* メニュー展開時は強制的に白（バツ印） */
+      .hamburger.is-active .hamburger-line {
+        background-color: #ffffff !important;
+        filter: none;
+      }
+
+      /* バツ印になるアニメーション */
+      .hamburger.is-active .hamburger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      .hamburger.is-active .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.is-active .hamburger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+
+      .sticky-header:has(.hamburger.is-active) {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+    }
+
+    /* ...既存のヘッダーなどのスタイル... */
+
+    @import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap");
+
+    .theme-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      color: #3e3124; /* 古文書のインク風の色 */
+      font-family: "Shippori Mincho", serif;
+      overflow: hidden;
+    }
+
+    /* 背景画像（ご用意いただいた画像を設定してください） */
+    .theme-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background-color: #f4ebd4; /* 画像がない場合の仮背景色 */
+      /* background-image: url('../pages/assets/your-background.jpg'); */
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+    }
+
+    /* 左右2カラムレイアウト */
+    .theme-layout {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 2rem 4rem; /* ヘッダー分の余白を確保 */
+      gap: 4rem;
+    }
+
+    /* 左側：船の線画エリア（スティッキーで画面内に留まる） */
+    .theme-left {
+      flex: 1;
+      position: sticky;
+      top: 150px;
+      height: calc(100vh - 200px);
+      display: flex;
+      align-items: center;
+    }
+
+    /* 右側：テキストエリア */
+    .theme-right {
+      flex: 1.2;
+      padding-bottom: 20vh; /* スクロール余白 */
+    }
+
+    .theme-header {
+      margin-bottom: 4rem;
+      border-bottom: 2px solid #8b7355;
+      padding-bottom: 1rem;
+    }
+
+    .theme-title {
+      font-family: "Cinzel", serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
+    .theme-subtitle {
+      font-family: "Cinzel", serif;
+      font-size: 1.5rem;
+      color: #8b7355;
+      margin-top: 0.5rem;
+    }
+
+    /* 一塊ずつのテキストブロック */
+    .text-chunk {
+      font-size: 1.2rem;
+      line-height: 2.2;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 3.5rem;
+      /* GSAPアニメーションの初期状態 */
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    /* スマホ表示時の調整（縦積みレイアウトに変更） */
+    @media screen and (max-width: 768px) {
+      .theme-layout {
+        flex-direction: column;
+        padding-top: 100px;
+        gap: 2rem;
+      }
+      .theme-left {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
+      .theme-title {
+        font-size: 2.5rem;
+      }
+      .text-chunk {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+      }
+    }
+  </style>
 </html>
