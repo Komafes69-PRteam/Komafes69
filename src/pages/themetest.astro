@@ -12,6 +12,12 @@ import typoImg from "../pages/assets/typo.svg";
 import vintageback from "../pages/assets/vintageback.webp";
 import shipImg from "../pages/assets/ship.webp";
 
+// === 追加：装飾画像のインポート ===
+import lifebuoyImg from "../pages/assets/lifebuoy.webp"; // 浮き輪
+import ribbonImg from "../pages/assets/ship_orizzonte_ribbon.webp"; // SHIP ORIZZONTE 看板
+import anchorImg from "../pages/assets/anchor.webp"; // 錨
+import textDecorImg from "../pages/assets/text_decor.webp"; // 右側テキスト上の装飾
+
 const pageTitle = "テーマ紹介 | 第69回 駒場東邦文化祭 | SAIL BEYOND";
 const pageDescription =
   "2026 駒場東邦中学高等学校 第69回文化祭「SAIL BEYOND」の公式サイトです。開催日時：2026年 9月19日(土)・20日(日) 9:00〜16:30。今年の文化祭のテーマについて紹介します。";
@@ -163,7 +169,22 @@ const pageDescription =
         <!-- 左側：船（スクロール時画面固定） -->
         <div class="theme-left">
           <div class="ship-container">
+            <!-- 追加：装飾パーツ -->
+            <img
+              src={lifebuoyImg.src}
+              alt=""
+              class="decor-item decor-lifebuoy"
+            />
+            <img
+              src={ribbonImg.src}
+              alt="SHIP ORIZZONTE"
+              class="decor-item decor-ribbon"
+            />
+
             <img src={shipImg.src} alt="オリゾンテ号" class="ship-img" />
+
+            <!-- 追加：装飾パーツ -->
+            <img src={anchorImg.src} alt="" class="decor-item decor-anchor" />
           </div>
         </div>
 
@@ -171,7 +192,6 @@ const pageDescription =
         <div class="theme-right">
           <div class="theme-header js-fade-chunk">
             <h2 class="theme-title">THEME</h2>
-            <div class="theme-subtitle">SHIP ORIZZONTE</div>
           </div>
 
           <div class="text-chunk">
@@ -238,652 +258,831 @@ const pageDescription =
           <div class="text-chunk">
             <p
               class="typewriter-text"
-              data-text="夢と希望を帆に受けて、水平線を越え、その先へ。"
+              data-text="そこへやって来た船たちは、それぞれ異なる海、異なる世界から来ていた。"
             >
             </p>
-            <br />
+          </div>
+          <div class="text-chunk">
+            <p
+              class="typewriter-text"
+              data-text="船の形も、歩んできた航路も違う。"
+            >
+            </p>
+            <p
+              class="typewriter-text"
+              data-text="それぞれが、自らの文化や知識、技術、経験をこの地へ持ち寄った。"
+            >
+            </p>
+          </div>
+          <div class="text-chunk">
+            <p
+              class="typewriter-text"
+              data-text="新たな船がやって来るたび、新たな建物が生まれ、新たな技術や物語が加わっていく。"
+            >
+            </p>
+            <p
+              class="typewriter-text"
+              data-text="そうしてこの場所は、いつしか一つの世界だけでは語ることのできない、様々な世界観が集まり、共存する不思議な港へと姿を変えていった。"
+            >
+            </p>
+          </div>
+          <div class="text-chunk">
+            <p
+              class="typewriter-text"
+              data-text="港では、人々が互いの航海について語り合う。"
+            >
+            </p>
+            <p class="typewriter-text" data-text="ある者の知識が誰かを助け、">
+            </p>
+            <p
+              class="typewriter-text"
+              data-text="ある船の経験が、別の船の次の航海への道しるべとなる。"
+            >
+            </p>
+          </div>
+          <div class="text-chunk">
+            <p
+              class="typewriter-text"
+              data-text="そして人々は、この港で得たものを携え、再びそれぞれの海へと旅立っていく。"
+            >
+            </p>
+            <p
+              class="typewriter-text"
+              data-text="まだ見たことのない景色を求めて。"
+            >
+            </p>
+            <p
+              class="typewriter-text"
+              data-text="まだ知らない世界と出会うために。"
+            >
+            </p>
+          </div>
+          <div class="text-chunk">
+            <p
+              class="typewriter-text"
+              data-text="目の前に広がる水平線は、世界の終わりではない。"
+            >
+            </p>
+            <p
+              class="typewriter-text"
+              data-text="その向こうには、まだ見ぬ海が続いている。"
+            >
+            </p>
+          </div>
+          <div class="text-chunk">
+            <p class="typewriter-text" data-text="夢と希望を帆に受けて、"></p>
+            <p class="typewriter-text" data-text="水平線を越え、その先へ。"></p>
             <p class="typewriter-text fw-bold" data-text="Sail Beyond."></p>
           </div>
         </div>
       </div>
     </div>
+  </body>
 
-    <script>
-      import { gsap } from "gsap";
-      import { ScrollTrigger } from "gsap/ScrollTrigger";
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-      gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
-      // ==========================================
-      // 1. ローディング画面の処理
-      // ==========================================
-      const wheelRotation = gsap.to(".loader-logo-img", {
-        rotation: "+=360",
-        duration: 2,
-        repeat: -1,
-        ease: "power1.inOut",
+    // ==========================================
+    // 1. ローディング画面の処理
+    // ==========================================
+    const wheelRotation = gsap.to(".loader-logo-img", {
+      rotation: "+=360",
+      duration: 2,
+      repeat: -1,
+      ease: "power1.inOut",
+    });
+    const MIN_LOADING_TIME = 1000;
+    const minWaitPromise = new Promise<void>((resolve) =>
+      setTimeout(resolve, MIN_LOADING_TIME),
+    );
+    const pageLoadPromise = new Promise<void>((resolve) => {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", () => resolve(), { once: true });
+    });
+
+    Promise.all([minWaitPromise, pageLoadPromise]).then(() => {
+      const tl = gsap.timeline();
+      tl.to("#loading-screen", {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        onComplete: () => {
+          const loader = document.getElementById("loading-screen");
+          if (loader) loader.style.display = "none";
+          wheelRotation.kill();
+          initThemeAnimation();
+        },
       });
-      const MIN_LOADING_TIME = 1000;
-      const minWaitPromise = new Promise<void>((resolve) =>
-        setTimeout(resolve, MIN_LOADING_TIME),
-      );
-      const pageLoadPromise = new Promise<void>((resolve) => {
-        if (document.readyState === "complete") resolve();
-        else window.addEventListener("load", () => resolve(), { once: true });
-      });
+    });
 
-      Promise.all([minWaitPromise, pageLoadPromise]).then(() => {
-        const tl = gsap.timeline();
-        tl.to("#loading-screen", {
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-          onComplete: () => {
-            const loader = document.getElementById("loading-screen");
-            if (loader) loader.style.display = "none";
-            wheelRotation.kill();
-            initThemeAnimation();
-          },
+    // ==========================================
+    // 2. ヘッダー関連の処理
+    // ==========================================
+    const initHeader = () => {
+      const hamburger = document.querySelector(".hamburger");
+      const mobileNav = document.querySelector(".mobile-nav");
+      const stickyHeader = document.querySelector(".sticky-header");
+
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener("click", () => {
+          const isActive = hamburger.classList.toggle("is-active");
+          mobileNav.classList.toggle("is-active", isActive);
+          document.body.classList.toggle("no-scroll", isActive);
+          hamburger.setAttribute("aria-expanded", isActive ? "true" : "false");
         });
-      });
-
-      // ==========================================
-      // 2. ヘッダー関連の処理
-      // ==========================================
-      const initHeader = () => {
-        const hamburger = document.querySelector(".hamburger");
-        const mobileNav = document.querySelector(".mobile-nav");
-        const stickyHeader = document.querySelector(".sticky-header");
-
-        if (hamburger && mobileNav) {
-          hamburger.addEventListener("click", () => {
-            const isActive = hamburger.classList.toggle("is-active");
-            mobileNav.classList.toggle("is-active", isActive);
-            document.body.classList.toggle("no-scroll", isActive);
-            hamburger.setAttribute(
-              "aria-expanded",
-              isActive ? "true" : "false",
-            );
-          });
-        }
-
-        const handleScroll = () => {
-          if (window.scrollY > 100) {
-            stickyHeader?.classList.add("is-show");
-            hamburger?.classList.add("is-black");
-          } else {
-            stickyHeader?.classList.remove("is-show");
-            hamburger?.classList.remove("is-black");
-          }
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll();
-      };
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initHeader);
-      } else {
-        initHeader();
       }
 
-      // ==========================================
-      // 3. Themeページのスクロール ＆ 各種アニメーション
-      // ==========================================
-      const initThemeAnimation = () => {
-        // --- A. 左側：船の画像出現アニメーション ---
-        gsap.to(".ship-img", {
-          scrollTrigger: {
-            trigger: ".theme-left",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
+      const handleScroll = () => {
+        if (window.scrollY > 100) {
+          stickyHeader?.classList.add("is-show");
+          hamburger?.classList.add("is-black");
+        } else {
+          stickyHeader?.classList.remove("is-show");
+          hamburger?.classList.remove("is-black");
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHeader);
+    } else {
+      initHeader();
+    }
+
+    // ==========================================
+    // 3. Themeページのスクロール ＆ 各種アニメーション
+    // ==========================================
+    const initThemeAnimation = () => {
+      // --- A. 左側：船の画像と装飾パーツのタイムラインアニメーション ---
+      const shipTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".theme-left",
+          start: "top 80%",
+          once: true,
+        },
+      });
+
+      // 船本体の出現
+      shipTl
+        .to(".ship-img", {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
           opacity: 1,
           scale: 1,
-          duration: 1.8,
+          duration: 1.5,
           ease: "power2.out",
-        });
-
-        // --- B. 右側：ヘッダー見出しのフェードイン ---
-        const fadeChunks = gsap.utils.toArray(".js-fade-chunk");
-        fadeChunks.forEach((chunk: any) => {
-          gsap.to(chunk, {
-            scrollTrigger: {
-              trigger: chunk,
-              start: "top 85%",
-            },
+        })
+        // 装飾パーツ（浮き輪・看板・錨）が順番にフワッと現れる
+        .to(
+          ".decor-item",
+          {
             opacity: 1,
             y: 0,
-            duration: 1.2,
-            ease: "power2.out",
-          });
-        });
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.15, // 0.15秒ずらして順番に出現
+            ease: "back.out(1.5)", // 少し跳ねるようなイージング
+          },
+          "-=0.5",
+        ); // 船のアニメーション完了の0.5秒前から被せて開始
 
-        // --- C. 右側：タイプライター演出 ---
-        const typeText = (element: HTMLElement) => {
-          if (element.classList.contains("typed")) return;
-
-          element.classList.add("typed");
-          element.classList.add("cursor");
-
-          const fullText = element.getAttribute("data-text") || "";
-          let currentIndex = 0;
-          element.textContent = "";
-
-          const interval = setInterval(() => {
-            if (currentIndex < fullText.length) {
-              element.textContent += fullText[currentIndex];
-              currentIndex++;
-            } else {
-              clearInterval(interval);
-              element.classList.remove("cursor");
-            }
-          }, 40);
-        };
-
-        const typeChunks = gsap.utils.toArray(".typewriter-text");
-        typeChunks.forEach((chunk: any) => {
-          ScrollTrigger.create({
+      // --- B. 右側：ヘッダー見出し・装飾のフェードイン ---
+      const fadeChunks = gsap.utils.toArray(".js-fade-chunk");
+      fadeChunks.forEach((chunk: any) => {
+        gsap.to(chunk, {
+          scrollTrigger: {
             trigger: chunk,
             start: "top 85%",
-            onEnter: () => typeText(chunk as HTMLElement),
-          });
+            once: true,
+          },
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power2.out",
         });
+      });
+
+      // --- C. 右側：タイプライター演出 ---
+      const typeText = (element: HTMLElement) => {
+        if (element.classList.contains("typed")) return;
+
+        element.classList.add("typed");
+        element.classList.add("cursor");
+
+        const fullText = element.getAttribute("data-text") || "";
+        let currentIndex = 0;
+        element.textContent = "";
+
+        const interval = setInterval(() => {
+          if (currentIndex < fullText.length) {
+            element.textContent += fullText[currentIndex];
+            currentIndex++;
+          } else {
+            clearInterval(interval);
+            element.classList.remove("cursor");
+          }
+        }, 40);
       };
-    </script>
 
-    <style>
+      const typeChunks = gsap.utils.toArray(".typewriter-text");
+      typeChunks.forEach((chunk: any) => {
+        ScrollTrigger.create({
+          trigger: chunk,
+          start: "top 60%",
+          once: true,
+          onEnter: () => typeText(chunk as HTMLElement),
+        });
+      });
+    };
+  </script>
+
+<style>
+    body {
+      font-family:
+        "Noto Sans JP",
+        system-ui,
+        -apple-system,
+        sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+    }
+
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    /* ローディング画面 */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #101011;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader-logo-container {
+      width: 140px;
+      height: 140px;
+      max-width: 50vw;
+      max-height: 50vw;
+    }
+
+    .loader-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .loader-text {
+      color: #fff;
+      font-family: "Bebas Neue", cursive;
+      font-size: 1.4rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* スティッキーヘッダー */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.634);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      padding: 0.8rem 0;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+        background-color 0.3s ease;
+    }
+
+    .sticky-header.is-show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sticky-header,
+    .sticky-header-inner {
+      box-sizing: border-box;
+    }
+
+    .sticky-header-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-brand:hover {
+      opacity: 0.7;
+    }
+
+    .header-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0);
+    }
+
+    .header-typo {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0);
+    }
+
+    .header-nav ul {
+      display: flex;
+      gap: clamp(1rem, 2vw, 2.5rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header-nav a {
+      color: #111111;
+      text-decoration: none;
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+      letter-spacing: 0.12em;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .header-nav a:hover {
+      opacity: 0.6;
+      transform: translateY(-1px);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .hamburger,
+    .mobile-nav {
+      display: none;
+    }
+
+    .header-nav {
+      display: block;
+    }
+
+    /* テーマページ構造 */
+    .theme-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      color: #3e3124;
+      font-family: "Shippori Mincho", serif;
+    }
+
+    .theme-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      background-color: #f4ebd4;
+      pointer-events: none;
+    }
+
+    .theme-layout {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 2rem 4rem;
+      gap: 5rem;
+      align-items: flex-start;
+      box-sizing: border-box;
+    }
+
+    /* 左側：スクロール追従エリア（PC固定） */
+    .theme-left {
+      position: sticky;
+      top: 100px;
+      height: calc(100vh - 100px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* 船・装飾パーツの設定（PC最適化） */
+    .ship-container {
+      position: relative;
+      width: 120%;
+      max-width: 700px; /* テキストと被らないベストサイズ */
+      margin: 0 auto;
+      transform: translateX(-160px); /* 画面左側にスッキリ配置 */
+    }
+
+    /* 船画像 */
+    .ship-img {
+      width: 120%;
+      height: auto;
+      display: block;
+      opacity: 0;
+      transform: scale(0.95);
+      clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
+      will-change: clip-path, opacity, transform;
+    }
+
+    /* 装飾アイテム共通 */
+    .decor-item {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      will-change: transform, opacity;
+    }
+
+    /* 1. 浮き輪（左上） */
+    .decor-lifebuoy {
+      top: -4%;
+      left: -2%;
+      width: 25%;
+    }
+
+    /* 2. SHIP ORIZZONTE 看板（右上：テキストに被らない位置） */
+    .decor-ribbon {
+      top: 2%;
+      right: -12%;
+      width: 46%;
+    }
+
+    /* 3. 錨（右下） */
+    .decor-anchor {
+      bottom: 2%;
+      right: 2%;
+      width: 16%;
+    }
+
+    /* 右側：スクロールテキストエリア */
+    .theme-right {
+      flex: 1.2;
+      padding-bottom: 20vh;
+      width: 100%;
+      box-sizing: border-box;
+      min-width: 0;
+    }
+
+    .theme-header {
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #8b7355;
+      padding-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .theme-title {
+      font-family: "Shippori Mincho", serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
+    /* 右側テキスト上部の装飾 */
+    .text-decor-container {
+      text-align: center;
+      opacity: 0;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .text-decor-img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .text-chunk {
+      font-size: 1.2rem;
+      line-height: 2.2;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 25rem;
+    }
+
+    /* タイプライター用のテキスト調整 */
+    .typewriter-text {
+      margin: 0 0 0.5rem 0;
+      min-height: 1.8em;
+      word-break: break-word;
+    }
+
+    .typewriter-text.fw-bold {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    /* 点滅カーソル */
+    .cursor::after {
+      content: "|";
+      display: inline-block;
+      animation: blink 0.8s infinite;
+      color: #8b7355;
+    }
+
+    @keyframes blink {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* ==========================================
+       スマートフォン向けレスポンシブスタイル
+       ========================================== */
+    @media screen and (max-width: 768px) {
       body {
-        font-family:
-          "Noto Sans JP",
-          system-ui,
-          -apple-system,
-          sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #000;
+        overflow-x: hidden; /* スマホのみはみ出し防止 */
       }
 
-      body.no-scroll {
-        overflow: hidden;
-      }
-
-      /* ローディング画面 */
-      #loading-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #101011;
-        z-index: 9999;
+      .mobile-nav {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-      }
-
-      .loader-logo-container {
-        width: 140px;
-        height: 140px;
-        max-width: 50vw;
-        max-height: 50vw;
-      }
-
-      .loader-logo-img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
-      .loader-text {
-        color: #fff;
-        font-family: "Bebas Neue", cursive;
-        font-size: 1.4rem;
-        margin-top: 1rem;
-        text-align: center;
-      }
-
-      /* スティッキーヘッダー */
-      .sticky-header {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        padding: 0.8rem 0;
+        height: 100vh;
+        height: 100dvh;
+        background-color: rgba(0, 0, 0, 0.92);
+        z-index: 999;
         opacity: 0;
         pointer-events: none;
-        transition:
-          opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-          background-color 0.3s ease;
+        transition: opacity 0.3s ease;
       }
 
-      .sticky-header.is-show {
+      .mobile-nav.is-active {
         opacity: 1;
         pointer-events: auto;
       }
 
-      .sticky-header,
-      .sticky-header-inner {
-        box-sizing: border-box;
+      .mobile-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
       }
 
-      .sticky-header-inner {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 1.5rem;
+      .mobile-nav li {
+        margin: 1.5rem 0;
       }
 
-      .header-brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+      .mobile-nav a {
+        color: #f6f9f6;
         text-decoration: none;
-        transition: opacity 0.2s ease;
+        font-size: 1.8rem;
+        font-family: "Bebas Neue", cursive;
+        letter-spacing: 0.15em;
       }
 
-      .header-brand:hover {
-        opacity: 0.7;
+      .mobile-sns-links {
+        display: flex;
+        gap: 2rem;
+        margin-top: 3rem;
+        transform: translateX(0);
+      }
+
+      .mobile-sns-links a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-family: "Noto Sans JP", sans-serif;
+      }
+
+      .mobile-sns-links .sns-icon {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+      }
+
+      .sticky-header {
+        display: block !important;
+        opacity: 1;
+        pointer-events: auto;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: none;
+        box-shadow: none;
+      }
+
+      .sticky-header.is-show {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
       }
 
       .header-logo {
-        height: 40px;
-        width: auto;
-        object-fit: contain;
-        filter: brightness(0);
+        height: 24px;
       }
 
       .header-typo {
-        height: 20px;
-        width: auto;
-        object-fit: contain;
+        height: 12px;
+      }
+
+      .header-brand {
+        gap: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+
+      .sticky-header.is-show .header-brand {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-nav.is-active ~ .sticky-header .header-brand,
+      body:has(.hamburger.is-active) .header-brand {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .header-logo,
+      .header-typo {
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      .sticky-header.is-show .header-logo,
+      .sticky-header.is-show .header-typo {
         filter: brightness(0);
       }
 
-      .header-nav ul {
-        display: flex;
-        gap: clamp(1rem, 2vw, 2.5rem);
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .header-nav a {
-        color: #111111;
-        text-decoration: none;
-        font-family: "Bebas Neue", cursive;
-        font-size: clamp(0.95rem, 1.2vw, 1.15rem);
-        letter-spacing: 0.12em;
-        transition:
-          opacity 0.2s ease,
-          transform 0.2s ease;
-      }
-
-      .header-nav a:hover {
-        opacity: 0.6;
-        transform: translateY(-1px);
-      }
-
-      .header-right {
-        display: flex;
-        align-items: center;
-      }
-
-      .hamburger,
-      .mobile-nav {
-        display: none;
+      .mobile-nav.is-active ~ .sticky-header .header-logo,
+      .mobile-nav.is-active ~ .sticky-header .header-typo,
+      body:has(.hamburger.is-active) .header-logo,
+      body:has(.hamburger.is-active) .header-typo {
+        filter: brightness(0) invert(1) !important;
       }
 
       .header-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 28px;
+        height: 20px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        position: relative;
+        z-index: 1000;
+      }
+
+      .hamburger-line {
         display: block;
-      }
-
-      @media screen and (max-width: 768px) {
-        .mobile-nav {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100vh;
-          height: 100dvh;
-          background-color: rgba(0, 0, 0, 0.92);
-          z-index: 999;
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.3s ease;
-        }
-
-        .mobile-nav.is-active {
-          opacity: 1;
-          pointer-events: auto;
-        }
-
-        .mobile-nav ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          text-align: center;
-        }
-
-        .mobile-nav li {
-          margin: 1.5rem 0;
-        }
-
-        .mobile-nav a {
-          color: #f6f9f6;
-          text-decoration: none;
-          font-size: 1.8rem;
-          font-family: "Bebas Neue", cursive;
-          letter-spacing: 0.15em;
-        }
-
-        .mobile-sns-links {
-          display: flex;
-          gap: 2rem;
-          margin-top: 3rem;
-          transform: translateX(-20px);
-        }
-
-        .mobile-sns-links a {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 0.5rem;
-          color: #ffffff;
-          text-decoration: none;
-          font-size: 0.8rem;
-          font-family: "Noto Sans JP", sans-serif;
-        }
-
-        .mobile-sns-links .sns-icon {
-          width: 28px;
-          height: 28px;
-          object-fit: contain;
-        }
-
-        .sticky-header {
-          display: block !important;
-          opacity: 1;
-          pointer-events: auto;
-          background: transparent;
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-          border-bottom: none;
-          box-shadow: none;
-        }
-
-        .sticky-header.is-show {
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        }
-
-        .header-logo {
-          height: 24px;
-        }
-
-        .header-typo {
-          height: 12px;
-        }
-
-        .header-brand {
-          gap: 8px;
-          opacity: 0;
-          visibility: hidden;
-          transition:
-            opacity 0.3s ease,
-            visibility 0.3s ease;
-        }
-
-        .sticky-header.is-show .header-brand {
-          opacity: 1;
-          visibility: visible;
-        }
-
-        .mobile-nav.is-active ~ .sticky-header .header-brand,
-        body:has(.hamburger.is-active) .header-brand {
-          opacity: 1;
-          visibility: visible;
-        }
-
-        .header-logo,
-        .header-typo {
-          filter: brightness(0) invert(1);
-          transition: filter 0.3s ease;
-        }
-
-        .sticky-header.is-show .header-logo,
-        .sticky-header.is-show .header-typo {
-          filter: brightness(0);
-        }
-
-        .mobile-nav.is-active ~ .sticky-header .header-logo,
-        .mobile-nav.is-active ~ .sticky-header .header-typo,
-        body:has(.hamburger.is-active) .header-logo,
-        body:has(.hamburger.is-active) .header-typo {
-          filter: brightness(0) invert(1) !important;
-        }
-
-        .header-nav {
-          display: none;
-        }
-
-        .hamburger {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          width: 28px;
-          height: 20px;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          padding: 0;
-          position: relative;
-          top: auto;
-          right: auto;
-          z-index: 1000;
-        }
-
-        .hamburger-line {
-          display: block;
-          width: 100%;
-          height: 2px;
-          background-color: #ffffff;
-          border-radius: 2px;
-          transition:
-            background-color 0.3s ease,
-            transform 0.3s ease,
-            opacity 0.3s ease;
-          filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
-        }
-
-        .hamburger.is-black .hamburger-line {
-          background-color: #000000;
-          filter: none;
-        }
-
-        .hamburger.is-active .hamburger-line {
-          background-color: #ffffff !important;
-          filter: none;
-        }
-
-        .hamburger.is-active .hamburger-line:nth-child(1) {
-          transform: translateY(9px) rotate(45deg);
-        }
-        .hamburger.is-active .hamburger-line:nth-child(2) {
-          opacity: 0;
-        }
-        .hamburger.is-active .hamburger-line:nth-child(3) {
-          transform: translateY(-9px) rotate(-45deg);
-        }
-
-        .sticky-header:has(.hamburger.is-active) {
-          background: transparent !important;
-          backdrop-filter: none !important;
-          -webkit-backdrop-filter: none !important;
-          border-bottom: none !important;
-          box-shadow: none !important;
-        }
-      }
-
-      /* テーマページ構造 */
-      .theme-wrapper {
-        position: relative;
         width: 100%;
-        min-height: 100vh;
-        color: #3e3124;
-        font-family: "Shippori Mincho", serif;
+        height: 2px;
+        background-color: #ffffff;
+        border-radius: 2px;
+        transition:
+          background-color 0.3s ease,
+          transform 0.3s ease,
+          opacity 0.3s ease;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
       }
 
-      .theme-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-        z-index: -1;
-        background-color: #f4ebd4;
-        pointer-events: none;
+      .hamburger.is-black .hamburger-line {
+        background-color: #000000;
+        filter: none;
       }
 
+      .hamburger.is-active .hamburger-line {
+        background-color: #ffffff !important;
+        filter: none;
+      }
+
+      .hamburger.is-active .hamburger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      .hamburger.is-active .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.is-active .hamburger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+
+      .sticky-header:has(.hamburger.is-active) {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+
+      /* レイアウト調整 */
       .theme-layout {
-        display: flex;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 120px 2rem 4rem;
-        gap: 4rem;
-        align-items: flex-start;
+        flex-direction: column;
+        padding: 80px 1.25rem 3rem;
+        gap: 2.5rem;
       }
 
-      /* 左側：スクロール追従エリア */
       .theme-left {
-        position: sticky;
-        top: 100px; /* 画面上部からどの位置で止めるか指定（ヘッダーの高さを考慮） */
-        height: calc(100vh - 100px); /* 画面の高さいっぱいに広げる */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .ship-container {
         position: relative;
+        top: 0;
+        height: auto;
         width: 100%;
-        max-width: 600px;
       }
 
-      /* 船画像：初期状態は非表示（clip-pathで対角線上から展開） */
+      /* スマホ表示時の船と装飾の配置 */
+      .ship-container {
+        transform: translateX(0);
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
       .ship-img {
         width: 100%;
-        height: auto;
-        display: block;
-        opacity: 0;
-        transform: scale(0.95);
-        clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
-        will-change: clip-path, opacity, transform;
       }
 
-      /* 右側：スクロールテキストエリア */
+      .decor-lifebuoy {
+        top: -5%;
+        left: -2%;
+        width: 24%;
+      }
+
+      .decor-ribbon {
+        top: -2%;
+        right: -8%;
+        width: 48%;
+      }
+
+      .decor-anchor {
+        bottom: -2%;
+        right: -2%;
+        width: 18%;
+      }
+
       .theme-right {
-        flex: 1.2;
-        padding-bottom: 20vh;
-      }
-
-      .theme-header {
-        margin-bottom: 4rem;
-        border-bottom: 2px solid #8b7355;
-        padding-bottom: 1rem;
-        opacity: 0;
-        transform: translateY(30px);
+        padding-bottom: 4rem;
       }
 
       .theme-title {
-        font-family: "Cinzel", serif;
-        font-size: 3.5rem;
-        font-weight: 700;
-        margin: 0;
-        letter-spacing: 0.1em;
-      }
-
-      .theme-subtitle {
-        font-family: "Cinzel", serif;
-        font-size: 1.5rem;
-        color: #8b7355;
-        margin-top: 0.5rem;
+        font-size: 2.2rem;
       }
 
       .text-chunk {
-        font-size: 1.2rem;
-        line-height: 2.2;
-        letter-spacing: 0.08em;
-        font-weight: 600;
-        margin-bottom: 3.5rem;
+        font-size: 0.95rem;
+        line-height: 2;
+        margin-bottom: 4rem;
       }
-
-      /* タイプライター用のテキスト調整 */
-      .typewriter-text {
-        margin: 0 0 0.5rem 0;
-        min-height: 1.8em;
-      }
-
-      .typewriter-text.fw-bold {
-        font-weight: bold;
-        font-size: 1.2em;
-      }
-
-      /* 点滅カーソル */
-      .cursor::after {
-        content: "|";
-        display: inline-block;
-        animation: blink 0.8s infinite;
-        color: #8b7355;
-      }
-
-      @keyframes blink {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0;
-        }
-      }
-
-      @media screen and (max-width: 768px) {
-        .theme-layout {
-          flex-direction: column;
-          padding-top: 100px;
-          gap: 2rem;
-        }
-        .theme-left {
-          position: sticky;
-          top: 0;
-          height: auto;
-        }
-        .theme-title {
-          font-size: 2.5rem;
-        }
-        .text-chunk {
-          font-size: 1rem;
-          margin-bottom: 2.5rem;
-        }
-      }
-    </style>
-  </body>
+    }
+  </style>
 </html>
