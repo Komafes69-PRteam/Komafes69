@@ -12,11 +12,13 @@ import typoImg from "../pages/assets/typo.svg";
 import vintageback from "../pages/assets/vintageback.webp";
 import shipImg from "../pages/assets/ship.webp";
 
-// === 追加：装飾画像のインポート ===
+// === 装飾画像のインポート ===
 import lifebuoyImg from "../pages/assets/lifebuoy.webp"; // 浮き輪
 import ribbonImg from "../pages/assets/ship_orizzonte_ribbon.webp"; // SHIP ORIZZONTE 看板
 import anchorImg from "../pages/assets/anchor.webp"; // 錨
 import textDecorImg from "../pages/assets/text_decor.webp"; // 右側テキスト上の装飾
+import titleBackgroundDark from "../pages/assets/TitleBackgroundDark.webp";
+import titleBackgroundBlack from "../pages/assets/TitleBackgroundBlack.jpg";
 
 const pageTitle = "テーマ紹介 | 第69回 駒場東邦文化祭 | SAIL BEYOND";
 const pageDescription =
@@ -128,7 +130,7 @@ const pageDescription =
     </nav>
 
     <!-- ヘッダー -->
-    <header class="sticky-header">
+    <header class="sticky-header is-show">
       <div class="sticky-header-inner">
         <a href="/" class="header-brand">
           <img src={logoImg.src} alt="Komafes69 Logo" class="header-logo" />
@@ -149,7 +151,7 @@ const pageDescription =
           </nav>
 
           <button
-            class="hamburger"
+            class="hamburger is-black"
             aria-label="メニューを開く"
             aria-expanded="false"
             aria-controls="mobile-menu"
@@ -169,7 +171,7 @@ const pageDescription =
         <!-- 左側：船（スクロール時画面固定） -->
         <div class="theme-left">
           <div class="ship-container">
-            <!-- 追加：装飾パーツ -->
+            <!-- 装飾パーツ -->
             <img
               src={lifebuoyImg.src}
               alt=""
@@ -183,7 +185,7 @@ const pageDescription =
 
             <img src={shipImg.src} alt="オリゾンテ号" class="ship-img" />
 
-            <!-- 追加：装飾パーツ -->
+            <!-- 装飾パーツ -->
             <img src={anchorImg.src} alt="" class="decor-item decor-anchor" />
           </div>
         </div>
@@ -303,6 +305,18 @@ const pageDescription =
           <div class="text-chunk">
             <p
               class="typewriter-text"
+              data-text="書籍や記憶、日々の言葉が集まり、"
+            >
+            </p>
+            <p
+              class="typewriter-text"
+              data-text="新たな地平線を目指すための力となっていく。"
+            >
+            </p>
+          </div>
+          <div class="text-chunk">
+            <p
+              class="typewriter-text"
               data-text="そして人々は、この港で得たものを携え、再びそれぞれの海へと旅立っていく。"
             >
             </p>
@@ -329,7 +343,7 @@ const pageDescription =
             >
             </p>
           </div>
-          <div class="text-chunk">
+          <div class="text-chunk-last">
             <p class="typewriter-text" data-text="夢と希望を帆に受けて、"></p>
             <p class="typewriter-text" data-text="水平線を越え、その先へ。"></p>
             <p class="typewriter-text fw-bold" data-text="Sail Beyond."></p>
@@ -337,6 +351,83 @@ const pageDescription =
         </div>
       </div>
     </div>
+    <footer
+      class="footer"
+      style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}
+    >
+      <div class="footer-inner">
+        <!-- 左側：学校情報・アクセス -->
+        <div class="footer-info">
+          <p class="school-name">駒場東邦中学校・高等学校 第69回 文化祭</p>
+          <!-- SVGロゴを使用 -->
+          <a href="/" class="footer-brand">
+            <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
+            <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
+          </a>
+
+          <div class="school-details">
+            <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜16:30</p>
+            <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
+            <p class="access-info">
+              東急田園都市線「池尻大橋」駅より徒歩10分<br />
+              京王井の頭線「駒場東大前」駅より徒歩10分
+            </p>
+          </div>
+        </div>
+
+        <!-- 右側：ミニサイトマップとSNS -->
+        <div class="footer-nav">
+          <ul class="sitemap">
+            <li><a href="/">TOP</a></li>
+            <li><a href="/theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="/articles">ARTICLES</a></li>
+            <li><a href="/timetable">TIME TABLE</a></li>
+            <li><a href="/map">MAP</a></li>
+            <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+          </ul>
+
+          <div class="footer-sns">
+            <a
+              href="https://www.instagram.com/komafes69/"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={instagramIcon.src}
+                alt="Instagram"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/@komafes69"
+              aria-label="YouTube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={youtubeIcon.src}
+                alt="YouTube"
+                class="footer-sns-icon"
+              />
+            </a>
+            <a
+              href="https://x.com/Komafes69"
+              aria-label="X"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={xIcon.src} alt="X" class="footer-sns-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
+      </div>
+    </footer>
   </body>
 
   <script>
@@ -384,7 +475,6 @@ const pageDescription =
     const initHeader = () => {
       const hamburger = document.querySelector(".hamburger");
       const mobileNav = document.querySelector(".mobile-nav");
-      const stickyHeader = document.querySelector(".sticky-header");
 
       if (hamburger && mobileNav) {
         hamburger.addEventListener("click", () => {
@@ -394,19 +484,6 @@ const pageDescription =
           hamburger.setAttribute("aria-expanded", isActive ? "true" : "false");
         });
       }
-
-      const handleScroll = () => {
-        if (window.scrollY > 100) {
-          stickyHeader?.classList.add("is-show");
-          hamburger?.classList.add("is-black");
-        } else {
-          stickyHeader?.classList.remove("is-show");
-          hamburger?.classList.remove("is-black");
-        }
-      };
-
-      window.addEventListener("scroll", handleScroll, { passive: true });
-      handleScroll();
     };
 
     if (document.readyState === "loading") {
@@ -437,7 +514,7 @@ const pageDescription =
           duration: 1.5,
           ease: "power2.out",
         })
-        // 装飾パーツ（浮き輪・看板・錨）が順番にフワッと現れる
+        // 装飾パーツ（浮き輪・看板・錨）が順番に出現
         .to(
           ".decor-item",
           {
@@ -445,11 +522,11 @@ const pageDescription =
             y: 0,
             scale: 1,
             duration: 0.8,
-            stagger: 0.15, // 0.15秒ずらして順番に出現
-            ease: "back.out(1.5)", // 少し跳ねるようなイージング
+            stagger: 0.15,
+            ease: "back.out(1.5)",
           },
           "-=0.5",
-        ); // 船のアニメーション完了の0.5秒前から被せて開始
+        );
 
       // --- B. 右側：ヘッダー見出し・装飾のフェードイン ---
       const fadeChunks = gsap.utils.toArray(".js-fade-chunk");
@@ -501,7 +578,7 @@ const pageDescription =
     };
   </script>
 
-<style>
+  <style>
     body {
       font-family:
         "Noto Sans JP",
@@ -559,22 +636,12 @@ const pageDescription =
       left: 0;
       width: 100%;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.634);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
       padding: 0.8rem 0;
-      opacity: 0;
-      pointer-events: none;
+      opacity: 1; /* 初期状態から表示 */
+      pointer-events: auto; /* クリック操作を可能に */
       transition:
         opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
         background-color 0.3s ease;
-    }
-
-    .sticky-header.is-show {
-      opacity: 1;
-      pointer-events: auto;
     }
 
     .sticky-header,
@@ -699,13 +766,13 @@ const pageDescription =
       min-width: 0;
     }
 
-    /* 船・装飾パーツの設定（PC最適化） */
+    /* 船・装飾パーツの設定 */
     .ship-container {
       position: relative;
       width: 120%;
-      max-width: 700px; /* テキストと被らないベストサイズ */
+      max-width: 700px;
       margin: 0 auto;
-      transform: translateX(-160px); /* 画面左側にスッキリ配置 */
+      transform: translateX(-160px);
     }
 
     /* 船画像 */
@@ -736,7 +803,7 @@ const pageDescription =
       width: 25%;
     }
 
-    /* 2. SHIP ORIZZONTE 看板（右上：テキストに被らない位置） */
+    /* 2. SHIP ORIZZONTE 看板 */
     .decor-ribbon {
       top: 2%;
       right: -12%;
@@ -798,6 +865,14 @@ const pageDescription =
       margin-bottom: 25rem;
     }
 
+    .text-chunk-last {
+      font-size: 1.2rem;
+      line-height: 2.2;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: -10rem;
+    }
+
     /* タイプライター用のテキスト調整 */
     .typewriter-text {
       margin: 0 0 0.5rem 0;
@@ -833,7 +908,7 @@ const pageDescription =
        ========================================== */
     @media screen and (max-width: 768px) {
       body {
-        overflow-x: hidden; /* スマホのみはみ出し防止 */
+        overflow-x: hidden;
       }
 
       .mobile-nav {
@@ -906,19 +981,6 @@ const pageDescription =
         display: block !important;
         opacity: 1;
         pointer-events: auto;
-        background: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border-bottom: none;
-        box-shadow: none;
-      }
-
-      .sticky-header.is-show {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
       }
 
       .header-logo {
@@ -931,32 +993,12 @@ const pageDescription =
 
       .header-brand {
         gap: 8px;
-        opacity: 0;
-        visibility: hidden;
-        transition:
-          opacity 0.3s ease,
-          visibility 0.3s ease;
-      }
-
-      .sticky-header.is-show .header-brand {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .mobile-nav.is-active ~ .sticky-header .header-brand,
-      body:has(.hamburger.is-active) .header-brand {
         opacity: 1;
         visibility: visible;
       }
 
       .header-logo,
       .header-typo {
-        filter: brightness(0) invert(1);
-        transition: filter 0.3s ease;
-      }
-
-      .sticky-header.is-show .header-logo,
-      .sticky-header.is-show .header-typo {
         filter: brightness(0);
       }
 
@@ -989,23 +1031,16 @@ const pageDescription =
         display: block;
         width: 100%;
         height: 2px;
-        background-color: #ffffff;
+        background-color: #000000;
         border-radius: 2px;
         transition:
           background-color 0.3s ease,
           transform 0.3s ease,
           opacity 0.3s ease;
-        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
-      }
-
-      .hamburger.is-black .hamburger-line {
-        background-color: #000000;
-        filter: none;
       }
 
       .hamburger.is-active .hamburger-line {
         background-color: #ffffff !important;
-        filter: none;
       }
 
       .hamburger.is-active .hamburger-line:nth-child(1) {
@@ -1082,6 +1117,167 @@ const pageDescription =
         font-size: 0.95rem;
         line-height: 2;
         margin-bottom: 4rem;
+      }
+    }
+
+    /* ========================================
+     FOOTER
+     ======================================== */
+    .footer {
+      background-color: #1a1b1f; /* 少し画像に近い暗い色調に */
+      color: #f6f9f6;
+      padding: 70px 0 20px;
+      font-family: "Noto Sans JP", sans-serif;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    /* --- 左側：情報エリア --- */
+    .footer-info {
+      flex: 1;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-brand:hover {
+      opacity: 0.7;
+    }
+
+    /* filterを使ってSVGを白色に反転させています */
+    .footer-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-typo {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .school-name {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin: 0 0 20px 0;
+    }
+
+    .school-details p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin: 0 0 8px 0;
+      color: #ccc;
+    }
+
+    .school-details strong {
+      color: #f6f9f6;
+      font-weight: 500;
+    }
+
+    .access-info {
+      margin-top: 12px !important;
+      padding-left: 10px;
+      border-left: 2px solid #555;
+    }
+
+    /* --- 右側：ナビゲーションエリア --- */
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* ブロック内の要素を左揃えにする */
+    }
+
+    .sitemap {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 50px; /* 列同士の間隔 */
+      row-gap: 16px;
+      text-align: left; /* 文字を左揃えに */
+    }
+
+    .sitemap a {
+      color: #f6f9f6;
+      text-decoration: none;
+      font-family: "Bebas Neue", cursive;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      display: inline-block; /* transformを有効化 */
+      transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .sitemap a:hover {
+      color: #aaa;
+      transform: translateX(4px); /* 左揃えなので右側にスライドさせる */
+    }
+
+    .footer-sns {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-sns-icon {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .footer-sns-icon:hover {
+      transform: scale(1.15);
+      opacity: 0.7;
+    }
+
+    /* --- ボトム：コピーライト --- */
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #b3b1b1;
+      letter-spacing: 0.05em;
+    }
+    /* --- スマホ対応 --- */
+    @media screen and (max-width: 768px) {
+      .footer-inner {
+        flex-direction: column;
+        gap: 50px;
+      }
+      .school-name {
+        font-size: 4.5vw;
+      }
+      .sitemap {
+        column-gap: 20px;
+        width: 100%;
       }
     }
   </style>
