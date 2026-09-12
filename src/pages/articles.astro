@@ -16,15 +16,31 @@ const rawArticles = await getCollection("articles");
 // 記事データの取得
 const articlesData = rawArticles.map((article: CollectionEntry<"articles">) => {
   const data = article.data as any;
-  const { title, heroImage, exhibitionSlug, exhibitionId, date, pubDate, description, excerpt } = data;
+  const {
+    title,
+    heroImage,
+    exhibitionSlug,
+    exhibitionId,
+    date,
+    pubDate,
+    description,
+    excerpt,
+  } = data;
 
   // 1. JSONから対象の展示データを検索
   const matchedExhibition = exhibitions.find(
-    (ex: any) => ex.slug === exhibitionSlug || ex.id === exhibitionId
+    (ex: any) => ex.slug === exhibitionSlug || ex.id === exhibitionId,
   );
 
   // 2. 記事専用サムネ(heroImage) -> 展示データ画像(image) -> 空文字（クライアント側でSVGフォールバック）の優先順位で採用
-  const finalImage = heroImage || matchedExhibition?.image || "";
+  const heroImgSrc =
+    typeof heroImage === "object" && heroImage !== null
+      ? heroImage.src
+      : heroImage;
+
+  const exhibitionImgSrc = matchedExhibition?.image;
+
+  const finalImage = heroImgSrc || exhibitionImgSrc || "";
 
   // 3. 本文からMarkdown記号を取り除き、冒頭のテキストを抽出（descriptionがない場合の対策）
   const plainTextBody = (article.body || "")

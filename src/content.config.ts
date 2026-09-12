@@ -3,15 +3,16 @@ import { glob } from "astro/loaders";
 
 const articlesCollection = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/articles" }),
-  schema: z.object({
-    title: z.string(),
-    exhibitionSlug: z.string().optional(),
-    exhibitionId: z.number().optional(),
-    heroImage: z.string().optional(),
-    description: z.string().optional(),
-    category: z.string().optional(),
-    date: z.string().or(z.date()).optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      exhibitionSlug: z.string().optional(),
+      exhibitionId: z.number().optional(),
+      heroImage: image().optional(), // z.string() から image() に変更
+      description: z.string().optional(),
+      category: z.string().optional(),
+      date: z.string().or(z.date()).optional(),
+    }),
 });
 
 export const collections = {
