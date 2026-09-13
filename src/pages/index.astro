@@ -63,6 +63,43 @@ const newPosts = [
     source: "Instagram",
   },
 ];
+import { getCollection, type CollectionEntry } from "astro:content";
+
+//newsコレクションから記事を取得
+const allNews = await getCollection("news");
+
+// --- 修正箇所：ソート用日付取得ヘルパー関数を追加 ---
+const getTimestamp = (d?: string | Date) => {
+  if (!d) return 0;
+  if (d instanceof Date) return d.valueOf();
+  // 文字列からDateオブジェクトを生成できない場合は0を返す
+  const parsedDate = new Date(d);
+  return isNaN(parsedDate.getTime()) ? 0 : parsedDate.valueOf();
+};
+
+const latestNews = allNews
+  .sort((a, b) => {
+    const dateB = getTimestamp(b.data.date);
+    const dateA = getTimestamp(a.data.date);
+    return dateB - dateA;
+  })
+  .slice(0, 4);
+
+const formatDate = (date: string | Date | undefined | null) => {
+  if (!date) return "";
+  // 入力が文字列かDateオブジェクトかにかかわらずDateオブジェクトに統一
+  const d = date instanceof Date ? date : new Date(date);
+  // Dateオブジェクトが無効な場合は空文字を返す
+  if (isNaN(d.getTime())) return "";
+
+  return d
+    .toLocaleDateString("ja-JP", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .replace(/\//g, ".");
+};
 ---
 
 <html lang="ja">
@@ -233,141 +270,143 @@ const newPosts = [
         class="hero-bg tb-bg"
       />
 
-      <div class="top-logo">
-        <img src={topLogoImg.src} alt="Komafes69" class="top-logo-img" />
-      </div>
-
-      <div class="signal-flags">
-        <!-- PC用ロープ -->
-        <svg
-          class="rope-svg pc-rope"
-          viewBox="0 0 420 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M 100 -10 Q 150 110 430 100"
-            fill="none"
-            stroke="#fff"
-            stroke-width="2.5"></path>
-        </svg>
-        <!-- スマホ用ロープ（右上の空きスペースにコンパクトに収める） -->
-        <svg
-          class="rope-svg sp-rope"
-          viewBox="0 0 240 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M 80 0 Q 170 200 400 150"
-            fill="none"
-            stroke="#fff"
-            stroke-width="1.5"></path>
-        </svg>
-
-        <div class="flags-container">
-          <div class="flag"><img src="/flags/K.svg" alt="K" /></div>
-          <div class="flag"><img src="/flags/O.svg" alt="O" /></div>
-          <div class="flag"><img src="/flags/M.svg" alt="M" /></div>
-          <div class="flag"><img src="/flags/A.svg" alt="A" /></div>
-          <div class="flag"><img src="/flags/F.svg" alt="F" /></div>
-          <div class="flag"><img src="/flags/E.svg" alt="E" /></div>
-          <div class="flag"><img src="/flags/S.svg" alt="S" /></div>
+      <div class="hero-inner">
+        <div class="top-logo">
+          <img src={topLogoImg.src} alt="Komafes69" class="top-logo-img" />
         </div>
-      </div>
-      <div class="main-logo-container">
-        <img
-          src={mainLogoImg.src}
-          alt="Komafes 69 SAIL BEYOND"
-          class="main-logo-img"
-        />
-        <div class="hat-container">
-          <img src={hatImg.src} alt="Komafes 帽子" class="hat-img" />
-        </div>
-      </div>
 
-      <div class="typo-container">
-        <img src={maintypoImg.src} alt="SAIL BEYOND" class="typo-img" />
-      </div>
-
-      <div class="hero-title-container">
-        <img
-          src={titleTextImg.src}
-          alt="駒場東邦 第69回 文化祭"
-          class="hero-title-img"
-        />
-      </div>
-
-      <div class="komafesLabel">
-        <img
-          src={komafesLabel.src}
-          alt="Komafes69ラベル"
-          class="komafes-label-img"
-        />
-      </div>
-
-      <div class="date-info">
-        <div class="date-row">
-          <span class="num">9.19</span><span class="day">(SAT.)</span>
-        </div>
-        <div class="date-row separator">
-          <span class="dash">—</span>
-          <span class="num">9.20</span><span class="day">(SUN.)</span>
-        </div>
-        <div class="time-row">
-          <span class="time">[ 9:00 - 16:30 ]</span>
-        </div>
-      </div>
-
-      <div class="scroll-animation">
-        <span class="scroll-text">SCROLL</span>
-        <div class="scroll-line"></div>
-        <img src={scrollIcon.src} alt="Scroll Animation" class="scroll-icon" />
-      </div>
-
-      <nav class="right-nav">
-        <ul>
-          <li><a href="/">TOP</a></li>
-          <li><a href="/theme">THEME</a></li>
-          <li><a href="/exhibition">EXHIBITION</a></li>
-          <li><a href="/articles">ARTICLES</a></li>
-          <li><a href="/timetable">TIME TABLE</a></li>
-          <li><a href="/map">MAP</a></li>
-          <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
-        </ul>
-
-        <div class="sns-links">
-          <a
-            href="https://www.instagram.com/komafes69/"
-            aria-label="Instagram"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div class="signal-flags">
+          <!-- PC用ロープ -->
+          <svg
+            class="rope-svg pc-rope"
+            viewBox="0 0 420 120"
+            preserveAspectRatio="none"
           >
-            <img src={instagramIcon.src} alt="" class="sns-icon" />
-            <span>Instagram</span>
-          </a>
-          <a
-            href="https://www.youtube.com/@komafes69"
-            aria-label="YouTube"
-            target="_blank"
-            rel="noopener noreferrer"
+            <path
+              d="M 100 -10 Q 150 110 430 100"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2.5"></path>
+          </svg>
+          <!-- スマホ用ロープ（右上の空きスペースにコンパクトに収める） -->
+          <svg
+            class="rope-svg sp-rope"
+            viewBox="0 0 240 120"
+            preserveAspectRatio="none"
           >
-            <img src={youtubeIcon.src} alt="" class="sns-icon" />
-            <span>YouTube</span>
-          </a>
-          <a
-            href="https://x.com/Komafes69"
-            aria-label="X"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={xIcon.src} alt="" class="sns-icon" />
-            <span>X</span>
-          </a>
+            <path
+              d="M 80 0 Q 170 200 400 150"
+              fill="none"
+              stroke="#fff"
+              stroke-width="1.5"></path>
+          </svg>
+
+          <div class="flags-container">
+            <div class="flag"><img src="/flags/K.svg" alt="K" /></div>
+            <div class="flag"><img src="/flags/O.svg" alt="O" /></div>
+            <div class="flag"><img src="/flags/M.svg" alt="M" /></div>
+            <div class="flag"><img src="/flags/A.svg" alt="A" /></div>
+            <div class="flag"><img src="/flags/F.svg" alt="F" /></div>
+            <div class="flag"><img src="/flags/E.svg" alt="E" /></div>
+            <div class="flag"><img src="/flags/S.svg" alt="S" /></div>
+          </div>
         </div>
-      </nav>
-      <h1 class="under-title-text">
-        2026年 駒場東邦中学校・高等学校 第69回 文化祭 （駒東 文化祭）が
-        2026年9月19日（土）9月20日（日）に開催されます！！　是非ご来場ください！
-      </h1>
+        <div class="main-logo-container">
+          <img
+            src={mainLogoImg.src}
+            alt="Komafes 69 SAIL BEYOND"
+            class="main-logo-img"
+          />
+          <div class="hat-container">
+            <img src={hatImg.src} alt="Komafes 帽子" class="hat-img" />
+          </div>
+        </div>
+
+        <div class="typo-container">
+          <img src={maintypoImg.src} alt="SAIL BEYOND" class="typo-img" />
+        </div>
+
+        <div class="hero-title-container">
+          <img
+            src={titleTextImg.src}
+            alt="駒場東邦 第69回 文化祭"
+            class="hero-title-img"
+          />
+        </div>
+
+        <div class="komafesLabel">
+          <img
+            src={komafesLabel.src}
+            alt="Komafes69ラベル"
+            class="komafes-label-img"
+          />
+        </div>
+
+        <div class="date-info">
+          <div class="date-row">
+            <span class="num">9.19</span><span class="day">(SAT.)</span>
+          </div>
+          <div class="date-row separator">
+            <span class="dash">—</span>
+            <span class="num">9.20</span><span class="day">(SUN.)</span>
+          </div>
+          <div class="time-row">
+            <span class="time">[ 9:00 - 16:30 ]</span>
+          </div>
+        </div>
+
+        <div class="scroll-animation">
+          <span class="scroll-text">SCROLL</span>
+          <div class="scroll-line"></div>
+          <img
+            src={scrollIcon.src}
+            alt="Scroll Animation"
+            class="scroll-icon"
+          />
+        </div>
+
+        <nav class="right-nav">
+          <ul>
+            <li><a href="/">TOP</a></li>
+            <li><a href="/theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="/articles">ARTICLES</a></li>
+            <li><a href="/timetable">TIME TABLE</a></li>
+            <li><a href="/map">MAP</a></li>
+            <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+          </ul>
+
+          <div class="sns-links">
+            <a
+              href="https://www.instagram.com/komafes69/"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={instagramIcon.src} alt="" class="sns-icon" />
+              <span>Instagram</span>
+            </a>
+            <a
+              href="https://www.youtube.com/@komafes69"
+              aria-label="YouTube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={youtubeIcon.src} alt="" class="sns-icon" />
+              <span>YouTube</span>
+            </a>
+            <a
+              href="https://x.com/Komafes69"
+              aria-label="X"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={xIcon.src} alt="" class="sns-icon" />
+              <span>X</span>
+            </a>
+          </div>
+        </nav>
+      </div>
     </section>
 
     <div
@@ -452,6 +491,37 @@ const newPosts = [
               <div class="event-status-text" id="event-status"></div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+ NEWS セクション
+======================================== -->
+    <section class="news-section">
+      <div class="news-inner">
+        <div class="news-header">
+          <div class="news-label-wrapper">
+            <h2 class="news-title">NEWS</h2>
+          </div>
+          <p class="news-subtitle">お知らせ</p>
+        </div>
+
+        <div class="news-content">
+          <ul class="news-list">
+            {
+              latestNews.map((news) => (
+                <li class="news-item">
+                  {/* リンク先を /news/ に変更 */}
+                  <a href={`/news/${news.id}`} class="news-link">
+                    <span class="news-date">{formatDate(news.data.date)}</span>
+                    <h3 class="news-item-title">{news.data.title}</h3>
+                    <span class="news-arrow">→</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </section>
@@ -1943,14 +2013,25 @@ const newPosts = [
     }
 
     .hero {
-      min-height: 100vh;
-      contain: layout; /* レイアウト計算を隔離してシフトを防ぐ */
+      position: relative;
+      width: 100%;
+      height: 100vh; /* 基本の画面高さ */
+      height: 100dvh; /* スマホのアドレスバーなどを考慮した最新の高さ指定 */
+      overflow: hidden; /* はみ出しを隠す */
     }
 
-    .hero-bg {
+    /* 2. 背景画像クラスをまとめて絶対配置 ＋ object-fit: cover に変更 */
+    .hero-bg,
+    .pc-bg,
+    .tb-bg,
+    .sp-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%; /* auto から 100% に変更 */
+      object-fit: cover; /* 縦横比を保ったまま隙間なく全画面を覆う */
+      z-index: -1; /* 他の要素より背面に配置 */
     }
 
     .pc-bg {
@@ -1979,7 +2060,7 @@ const newPosts = [
 
     .main-logo-container {
       position: absolute;
-      top: 9%;
+      top: 9.7%;
       left: 50%;
       transform: translateX(-50%);
       width: 27%;
@@ -1997,7 +2078,7 @@ const newPosts = [
 
     .hat-container {
       position: absolute;
-      top: 10%;
+      top: 10.5%;
       right: 6%;
       width: 45%;
       pointer-events: none;
@@ -2012,7 +2093,7 @@ const newPosts = [
 
     .typo-container {
       position: absolute;
-      top: 55%;
+      top: 63%;
       left: 50%;
       transform: translateX(-50%);
       width: 35%;
@@ -2024,6 +2105,18 @@ const newPosts = [
       height: auto;
       display: block;
       will-change: transform, opacity;
+    }
+    .hero-inner {
+      position: absolute;
+      top: 0; /* 50% から 0 に変更して上端に固定 */
+      left: 50%;
+      transform: translateX(
+        -50%
+      ); /* Y軸の中央寄せ(-50%)を削除し、左右中央のみに */
+      width: 100%;
+      height: auto;
+      max-width: 1920px;
+      aspect-ratio: 16 / 9; /* PC向けの美しい縦横比 */
     }
 
     .hero-title-container {
@@ -2041,7 +2134,7 @@ const newPosts = [
 
     .komafesLabel {
       position: absolute;
-      top: 34%;
+      top: 38%;
       left: 4%;
       width: 10%;
       max-width: 300px;
@@ -2068,7 +2161,7 @@ const newPosts = [
 
     .date-info {
       position: absolute;
-      top: 41%;
+      top: 47%;
       left: 4%;
       color: #f6f9f6;
       font-family: "Noto Sans JP", sans-serif;
@@ -2104,7 +2197,7 @@ const newPosts = [
 
     .scroll-animation {
       position: absolute;
-      top: 65%;
+      top: 70%;
       left: 7%;
       display: flex;
       flex-direction: column;
@@ -2134,7 +2227,7 @@ const newPosts = [
 
     .right-nav {
       position: absolute;
-      top: 18%;
+      top: 20%;
       right: 3%;
       text-align: left;
       font-family: "Bebas Neue", cursive;
@@ -2342,34 +2435,42 @@ const newPosts = [
     }
 
     @media screen and (max-width: 1024px) {
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 50vh; /* 基本の画面高さ */
+        min-height: 700px; /* タブレットでの最低高さを確保 */
+        overflow: hidden; /* はみ出しを隠す */
+      }
+
       .main-logo-container {
-        top: 13%;
+        top: 14%;
         width: 35%;
       }
       .typo-container {
-        top: 53%;
-        width: 50%;
+        top: 80%;
+        width: 40%;
       }
       .top-logo {
         top: 4%;
         width: 10%;
       }
       .hero-title-container {
-        top: 4%;
+        top: 6%;
         width: 21%;
         left: 5%;
       }
       .komafesLabel {
-        top: 30%;
+        top: 48%;
         width: 14%;
         left: 5%;
       }
       .date-info {
-        top: 37%;
+        top: 58%;
         left: 5%;
       }
       .scroll-animation {
-        top: 63%;
+        top: 85%;
         left: 8%;
       }
       .right-nav {
@@ -2389,22 +2490,32 @@ const newPosts = [
       }
       .tb-bg {
         display: block;
-        width: 100%;
-        height: auto;
       }
       .sp-bg {
         display: none;
       }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* 基本の画面高さ */
+        height: 100dvh; /* スマホのアドレスバーなどを考慮した最新の高さ指定 */
+        min-height: 800px; /* スマホでの最低高さを確保 */
+        overflow: hidden; /* はみ出しを隠す */
+      }
+      .hero-inner {
+        width: 100%;
+        max-height: none; /* 画面の高さに依存する制限を解除 */
+        aspect-ratio: 9 / 18; /* 枠の縦横比を固定（必要に応じて 9/17 や 9/19 に微調整） */
+      }
+
       .pc-bg {
         display: none;
       }
       .sp-bg {
         display: block;
-        width: 100%;
-        height: auto;
       }
       .tb-bg {
         display: none;
@@ -2416,43 +2527,49 @@ const newPosts = [
       .top-logo {
         opacity: 0;
       }
-      .main-logo-container {
-        top: 37%;
-        width: 62%;
-      }
-      .typo-container {
-        top: 70%;
-        width: 75%;
-      }
+
+      /* --- タイトル周り --- */
       .hero-title-container {
-        top: 4%;
+        top: 4%; /* 少しだけ下げて上部の余白を確保 */
         width: 45%;
         left: 6%;
       }
+      .date-info {
+        top: 23%;
+        left: 45%; /* 中央寄りに寄せてスッキリさせる */
+      }
       .komafesLabel {
-        top: 28%;
-        width: 34%;
+        top: 31%; /* タイトルに少し近づける */
+        width: 32%;
         left: 6%;
       }
 
-      .date-info {
-        top: 21%;
-        left: 52%;
+      /* --- メインビジュアル（コンパスとテキスト） --- */
+      .main-logo-container {
+        top: 40%; /* 少し下げて中央に配置 */
+        width: 65%;
       }
+      .typo-container {
+        top: 75%; /* コンパスとの隙間を縮めるために上げる */
+        width: 80%; /* 文字を少し大きめに調整 */
+      }
+
+      /* --- スクロール表示 --- */
+      .scroll-animation {
+        top: 96%;
+        left: 50%;
+        transform: translateX(-50%); /* 画面中央に確実へ配置 */
+        height: 10%;
+      }
+
+      /* スクロールのフォントサイズ微調整 */
       .date-row {
         font-size: clamp(0.8rem, 5vw, 1.6rem);
       }
       .time-row {
         font-size: clamp(0.6rem, 4vw, 1.2rem);
       }
-
-      .scroll-animation {
-        top: 88%;
-        left: 45%;
-        height: 12%;
-      }
     }
-
     /* ========================================
      マーキー装飾 (Heroの下)
      ======================================== */
@@ -2495,7 +2612,7 @@ const newPosts = [
       }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
       .marquee-text {
         -webkit-text-stroke: 0.5px #ffffff; /* スマホ時は線を少し細く */
       }
@@ -2796,11 +2913,147 @@ const newPosts = [
         gap: 0.6rem;
       }
     }
+
+    /* ========================================
+   NEWS セクション
+   ======================================== */
+    .news-section {
+      padding: 80px 0 40px; /* 下部余白はACCESSとの間隔を見て調整 */
+      position: relative;
+      z-index: 10;
+      background-color: #ffffff;
+    }
+
+    .news-inner {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .news-header {
+      margin-bottom: 40px;
+    }
+
+    .news-label-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .news-title {
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 800;
+      margin: 0;
+      padding: 0;
+      color: #060906;
+      font-family: "Bebas Neue", cursive;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
+
+    .news-subtitle {
+      margin: 6px 0 0;
+      font-size: 1.3rem;
+      color: #111;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* リストレイアウト */
+    .news-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 3px solid #222; /* ACCESSの縦棒と太さを揃える */
+    }
+
+    .news-item {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .news-link {
+      display: flex;
+      align-items: center;
+      padding: 24px 16px;
+      text-decoration: none;
+      color: #111;
+      transition: background-color 0.2s ease;
+    }
+
+    .news-link:hover {
+      background-color: #f7f9f7;
+    }
+
+    .news-date {
+      font-family: "Bebas Neue", cursive, sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      width: 140px;
+      flex-shrink: 0;
+      letter-spacing: 0.05em;
+      color: #444;
+    }
+
+    .news-item-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0;
+      flex-grow: 1;
+      line-height: 1.5;
+    }
+
+    .news-arrow {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #888;
+      transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .news-link:hover .news-arrow {
+      transform: translateX(4px);
+      color: #111;
+    }
+
+    /* スマホ対応 */
+    @media screen and (max-width: 768px) {
+      .news-section {
+        padding: 60px 0 20px;
+      }
+      .news-header {
+        margin-bottom: 24px;
+      }
+      .news-title {
+        font-size: 3.5rem;
+      }
+      .news-subtitle {
+        font-size: 1rem;
+      }
+      .news-link {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 8px;
+        gap: 12px;
+      }
+      .news-date {
+        font-size: 1rem;
+        width: auto;
+      }
+      .news-item-title {
+        font-size: 1rem;
+      }
+      .news-arrow {
+        display: none;
+      }
+    }
+
     /* ========================================
      ACCESS セクション (位置ズレ＆デザイン修正版)
      ======================================== */
     .access-section {
-      padding: 80px 0;
+      padding: 32px 0 80px;
       position: relative;
       z-index: 10; /* 前面に配置 */
       background-color: #ffffff; /* 透明だと透けるので白などで塗りつぶす */
