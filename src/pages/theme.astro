@@ -835,8 +835,8 @@ const pageDescription =
     }
 
     .theme-title {
-      font-family: "Shippori Mincho", serif;
-      font-size: 3.5rem;
+      font-family: "Bebas Neue", cursive;
+      font-size: 4rem;
       font-weight: 700;
       margin: 0;
       letter-spacing: 0.1em;
@@ -906,9 +906,17 @@ const pageDescription =
     /* ==========================================
        スマートフォン向けレスポンシブスタイル
        ========================================== */
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
       body {
         overflow-x: hidden;
+      }
+
+      .text-chunk-last {
+        font-size: 1.2rem;
+        line-height: 2.2;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+        margin-bottom: -4rem;
       }
 
       .mobile-nav {
