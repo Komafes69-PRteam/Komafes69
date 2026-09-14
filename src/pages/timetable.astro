@@ -1,0 +1,1224 @@
+---
+import timetable from "./data/timetable.json";
+import instagramIcon from "./assets/Instagram.svg";
+import youtubeIcon from "./assets/youtube.svg";
+import xIcon from "./assets/X.svg";
+import titleBg from "./assets/TitleBackground.webp";
+import titleBackgroundBlack from "./assets/TitleBackgroundBlack.jpg";
+import logoImg from "./assets/logo.svg";
+import typoImg from "./assets/typo.svg";
+
+type Schedule = {
+  id: string;
+  day: "1" | "2";
+  startTime: string;
+  endTime: string;
+  location: string;
+  title: string;
+  groupName?: string;
+  description?: string;
+};
+
+const schedules = timetable as Schedule[];
+const locations = Array.from(new Set(schedules.map((item) => item.location)));
+const dayLabels = { "1": "9.19 SAT", "2": "9.20 SUN" };
+
+// タイムライン位置計算用（9:00 〜 18:00 = 540分間）
+const START_HOUR = 9;
+const END_HOUR = 18;
+const START_MINUTES = START_HOUR * 60; // 540分
+const TOTAL_MINUTES = (END_HOUR - START_HOUR) * 60; // 540分
+
+const timeHours = Array.from({ length: END_HOUR - START_HOUR + 1 }, (_, i) => START_HOUR + i);
+
+const timeToMinutes = (timeStr: string) => {
+  const [h, m] = timeStr.split(":").map(Number);
+  return h * 60 + m;
+};
+
+const getTimelinePosition = (startTime: string, endTime: string) => {
+  const start = timeToMinutes(startTime);
+  const end = timeToMinutes(endTime);
+  const topPercent = ((start - START_MINUTES) / TOTAL_MINUTES) * 100;
+  const heightPercent = ((end - start) / TOTAL_MINUTES) * 100;
+  return {
+    top: `${Math.max(0, topPercent)}%`,
+    height: `${Math.max(1.8, heightPercent)}%`,
+  };
+};
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>タイムテーブル | 第69回 駒場東邦文化祭 | SAIL BEYOND</title>
+    <meta
+      name="description"
+      content="第69回駒場東邦文化祭のステージ・講堂・体育館・校庭のタイムテーブルです。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body>
+    <nav id="mobile-menu" class="mobile-nav" aria-label="モバイルメニュー">
+      <ul>
+        <li><a href="/">TOP</a></li>
+        <li><a href="/theme">THEME</a></li>
+        <li><a href="/exhibition">EXHIBITION</a></li>
+        <li><a href="/articles">ARTICLES</a></li>
+        <li><a href="/timetable">TIME TABLE</a></li>
+        <li><a href="/map">MAP</a></li>
+        <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+      </ul>
+      <div class="mobile-sns-links">
+        <a href="https://www.instagram.com/komafes69/" target="_blank" rel="noopener noreferrer">
+          <img src={instagramIcon.src} alt="" />Instagram
+        </a>
+        <a href="https://www.youtube.com/@komafes69" target="_blank" rel="noopener noreferrer">
+          <img src={youtubeIcon.src} alt="" />YouTube
+        </a>
+        <a href="https://x.com/Komafes69" target="_blank" rel="noopener noreferrer">
+          <img src={xIcon.src} alt="" />X
+        </a>
+      </div>
+    </nav>
+
+    <header class="sticky-header">
+      <div class="sticky-header-inner">
+        <a href="/" class="header-brand">
+          <img src={logoImg.src} alt="Komafes69" class="header-logo" />
+          <img src={typoImg.src} alt="SAIL BEYOND" class="header-typo" />
+        </a>
+        <div class="header-right">
+          <nav class="header-nav" aria-label="メインメニュー">
+            <ul>
+              <li><a href="/">TOP</a></li>
+              <li><a href="/theme">THEME</a></li>
+              <li><a href="/exhibition">EXHIBITION</a></li>
+              <li><a href="/articles">ARTICLES</a></li>
+              <li><a href="/timetable" aria-current="page">TIME TABLE</a></li>
+              <li><a href="/map">MAP</a></li>
+              <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+            </ul>
+          </nav>
+          <button
+            class="hamburger"
+            aria-label="メニューを開く"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="timetable-container">
+      <header
+        class="page-header"
+        style={`background-image: url('${titleBg.src}');`}
+      >
+        <div class="page-header-inner">
+          <h1 class="page-title">TIME TABLE</h1>
+          <p class="page-subtitle">タイムテーブル</p>
+        </div>
+      </header>
+
+      <section class="schedule-intro" aria-labelledby="schedule-heading">
+        <p class="eyebrow">SAIL BEYOND</p>
+        <h2 id="schedule-heading" class="schedule-title">イベントスケジュール</h2>
+        <p class="schedule-description">見たい企画を見つけて、文化祭をもっと楽しもう。</p>
+      </section>
+
+      <section class="schedule-section" aria-label="日別タイムテーブル">
+        <!-- Day Select Controls & View Switcher -->
+        <div class="controls-wrapper">
+          <div class="day-tabs" role="tablist" aria-label="開催日">
+            <button
+              class="day-tab is-active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="day-1"
+              id="tab-1"
+              data-day="1"
+            >
+              <span>DAY 1</span>{dayLabels["1"]}
+            </button>
+            <button
+              class="day-tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="day-2"
+              id="tab-2"
+              data-day="2"
+            >
+              <span>DAY 2</span>{dayLabels["2"]}
+            </button>
+          </div>
+
+          <!-- 表示モード切り替えボタン -->
+          <div class="view-switcher" role="radiogroup" aria-label="表示形式切り替え">
+            <button
+              type="button"
+              class="view-btn is-active"
+              data-view="timeline"
+              aria-checked="true"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+              タイムライン
+            </button>
+            <button
+              type="button"
+              class="view-btn"
+              data-view="list"
+              aria-checked="false"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              リスト
+            </button>
+          </div>
+        </div>
+
+        {
+          (["1", "2"] as const).map((day) => (
+            <div
+              class:list={["day-panel", "view-timeline", { "is-active": day === "1" }]}
+              id={`day-${day}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${day}`}
+              hidden={day !== "1"}
+            >
+              <div class="day-heading">
+                <span>DAY {day}</span>
+                <h3>{day === "1" ? "9月19日（土）" : "9月20日（日）"}</h3>
+              </div>
+
+              <!-- 1. タイムライン表示ビュー -->
+              <div class="timeline-view">
+                <div class="timeline-scroll-container">
+                  <div class="timeline-wrapper">
+                    <!-- 時間軸ラベル（左側固定） -->
+                    <div class="time-axis">
+                      {timeHours.map((hour) => (
+                        <div class="time-label" style={`top: ${((hour * 60 - START_MINUTES) / TOTAL_MINUTES) * 100}%`}>
+                          <span>{hour}:00</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <!-- メインコンテンツ領域 -->
+                    <div class="timeline-grid">
+                      <!-- 背景の1時間ごとの水平罫線 -->
+                      <div class="grid-lines">
+                        {timeHours.map((hour) => (
+                          <div class="grid-line" style={`top: ${((hour * 60 - START_MINUTES) / TOTAL_MINUTES) * 100}%`}></div>
+                        ))}
+                      </div>
+
+                      <!-- 各場所のカラム -->
+                      <div class="location-columns">
+                        {locations.map((loc) => {
+                          const events = schedules.filter(
+                            (item) => item.day === day && item.location === loc
+                          );
+                          return (
+                            <div class="timeline-col" data-location={loc}>
+                              <div class="col-header">
+                                <span>{loc}</span>
+                              </div>
+                              <div class="col-content">
+                                {events.map((event) => {
+                                  const pos = getTimelinePosition(event.startTime, event.endTime);
+                                  return (
+                                    <button
+                                      type="button"
+                                      class:list={[
+                                        "timeline-card",
+                                        { "has-detail": !!event.description }
+                                      ]}
+                                      style={`top: ${pos.top}; height: ${pos.height};`}
+                                      data-event-title={event.title}
+                                      data-event-time={`${event.startTime} – ${event.endTime}`}
+                                      data-event-location={event.location}
+                                      data-event-description={event.description || ""}
+                                    >
+                                      <span class="card-time">{event.startTime} - {event.endTime}</span>
+                                      <strong class="card-title">{event.title}</strong>
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. リスト表示ビュー -->
+              <div class="list-view">
+                <div class="schedule-grid">
+                  {locations.map((location) => {
+                    const events = schedules.filter(
+                      (item) => item.day === day && item.location === location
+                    );
+                    return (
+                      <article class="location-column">
+                        <h4>{location}</h4>
+                        <div class="event-list">
+                          {events.map((event) =>
+                            event.description ? (
+                              <button
+                                type="button"
+                                class="event-card is-detail"
+                                data-event-title={event.title}
+                                data-event-time={`${event.startTime} – ${event.endTime}`}
+                                data-event-location={event.location}
+                                data-event-description={event.description}
+                                aria-haspopup="dialog"
+                              >
+                                <time>{event.startTime}<span>–</span>{event.endTime}</time>
+                                <span class="event-content">
+                                  <strong>{event.title}</strong>
+                                  {event.groupName && event.groupName !== event.title && <small>{event.groupName}</small>}
+                                  <em>詳細を見る</em>
+                                </span>
+                              </button>
+                            ) : (
+                              <div class="event-card">
+                                <time>{event.startTime}<span>–</span>{event.endTime}</time>
+                                <div class="event-content">
+                                  <strong>{event.title}</strong>
+                                  {event.groupName && event.groupName !== event.title && <small>{event.groupName}</small>}
+                                </div>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
+          ))
+        }
+      </section>
+    </main>
+
+    <!-- モダンなダイアログポップアップ -->
+    <dialog class="event-modal" aria-labelledby="modal-title">
+      <div class="modal-inner">
+        <button type="button" class="modal-close" aria-label="閉じる">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        
+        <div class="modal-badges">
+          <span class="modal-badge-location" id="modal-location"></span>
+          <span class="modal-badge-time" id="modal-time"></span>
+        </div>
+
+        <h2 id="modal-title"></h2>
+        <div class="modal-divider"></div>
+        <p class="modal-description" id="modal-description"></p>
+      </div>
+    </dialog>
+
+    <footer
+      class="footer"
+      style={`background-image: url('${titleBackgroundBlack.src}');`}
+    >
+      <div class="footer-inner">
+        <div class="footer-info">
+          <p class="school-name">駒場東邦中学校・高等学校 第69回 文化祭</p>
+          <a href="/" class="footer-brand">
+            <img src={logoImg.src} alt="Komafes69 Logo" />
+            <img src={typoImg.src} alt="SAIL BEYOND" />
+          </a>
+          <div class="school-details">
+            <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜16:30</p>
+            <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
+            <p class="access-info">
+              東急田園都市線「池尻大橋」駅より徒歩10分<br />
+              京王井の頭線「駒場東大前」駅より徒歩10分
+            </p>
+          </div>
+        </div>
+        <div class="footer-nav">
+          <ul class="sitemap">
+            <li><a href="/">TOP</a></li>
+            <li><a href="/theme">THEME</a></li>
+            <li><a href="/exhibition">EXHIBITION</a></li>
+            <li><a href="/articles">ARTICLES</a></li>
+            <li><a href="/timetable">TIME TABLE</a></li>
+            <li><a href="/map">MAP</a></li>
+            <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+          </ul>
+          <div class="footer-sns">
+            <a href="https://www.instagram.com/komafes69/" target="_blank" rel="noopener noreferrer">
+              <img src={instagramIcon.src} alt="Instagram" />
+            </a>
+            <a href="https://www.youtube.com/@komafes69" target="_blank" rel="noopener noreferrer">
+              <img src={youtubeIcon.src} alt="YouTube" />
+            </a>
+            <a href="https://x.com/Komafes69" target="_blank" rel="noopener noreferrer">
+              <img src={xIcon.src} alt="X" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Komafes69 All Rights Reserved.
+      </div>
+    </footer>
+
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+      const header = document.querySelector(".sticky-header");
+      const headerTrigger = document.querySelector(".page-header");
+      const hamburger = document.querySelector(".hamburger");
+      const menu = document.querySelector(".mobile-nav");
+      const mobileLinks = document.querySelectorAll(".mobile-nav a");
+      const modal = document.querySelector(".event-modal") as HTMLDialogElement | null;
+      const modalTitle = document.getElementById("modal-title");
+      const modalLocation = document.getElementById("modal-location");
+      const modalTime = document.getElementById("modal-time");
+      const modalDescription = document.getElementById("modal-description");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const closeMobileNav = () => {
+        hamburger?.classList.remove("is-active", "is-black");
+        menu?.classList.remove("is-active");
+        hamburger?.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("no-scroll");
+      };
+
+      const updateHeader = () => {
+        const shouldShow = (headerTrigger?.getBoundingClientRect().bottom ?? 0) <= 80;
+        header?.classList.toggle("is-show", shouldShow);
+        hamburger?.classList.toggle("is-black", shouldShow);
+      };
+      updateHeader();
+      window.addEventListener("scroll", updateHeader, { passive: true });
+
+      hamburger?.addEventListener("click", () => {
+        const active = hamburger.classList.toggle("is-active");
+        menu?.classList.toggle("is-active", active);
+        hamburger.setAttribute("aria-expanded", String(active));
+        document.body.classList.toggle("no-scroll", active);
+      });
+      mobileLinks.forEach((link) => link.addEventListener("click", closeMobileNav));
+
+      // タブ・ビュー切替アニメーション
+      const animatePanel = (panel: Element) => {
+        if (reduceMotion) return;
+        gsap.fromTo(
+          panel.querySelector(".day-heading"),
+          { autoAlpha: 0, x: -20 },
+          { autoAlpha: 1, x: 0, duration: 0.35, ease: "power2.out" }
+        );
+      };
+
+      if (!reduceMotion) {
+        gsap.fromTo(
+          ".page-title",
+          { clipPath: "inset(0 100% 0 0)" },
+          { clipPath: "inset(0 0% 0 0)", duration: 1.5, ease: "power2.out", delay: 0.2 }
+        );
+        gsap.fromTo(
+          ".page-subtitle",
+          { clipPath: "inset(0 100% 0 0)" },
+          { clipPath: "inset(0 0% 0 0)", duration: 1.3, ease: "power2.out", delay: 0.42 }
+        );
+        gsap.fromTo(
+          ".schedule-intro > *",
+          { autoAlpha: 0, y: 22 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.55,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: { trigger: ".schedule-intro", start: "top 78%" },
+          }
+        );
+      }
+
+      // Day 切替
+      document.querySelectorAll(".day-tab").forEach((tab) =>
+        tab.addEventListener("click", () => {
+          const day = (tab as HTMLElement).dataset.day;
+          document.querySelectorAll(".day-tab").forEach((button) => {
+            const selected = button === tab;
+            button.classList.toggle("is-active", selected);
+            button.setAttribute("aria-selected", String(selected));
+          });
+          document.querySelectorAll(".day-panel").forEach((panel) => {
+            const selected = panel.id === `day-${day}`;
+            panel.classList.toggle("is-active", selected);
+            panel.toggleAttribute("hidden", !selected);
+            if (selected) animatePanel(panel);
+          });
+        })
+      );
+
+      // 表示モード切替 (タイムライン ⇄ リスト)
+      document.querySelectorAll(".view-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const view = (btn as HTMLElement).dataset.view;
+          document.querySelectorAll(".view-btn").forEach((b) => {
+            const active = b === btn;
+            b.classList.toggle("is-active", active);
+            b.setAttribute("aria-checked", String(active));
+          });
+
+          document.querySelectorAll(".day-panel").forEach((panel) => {
+            panel.classList.toggle("view-timeline", view === "timeline");
+            panel.classList.toggle("view-list", view === "list");
+          });
+        });
+      });
+
+      // モーダル表示イベントハンドラー
+      const openModal = (card: HTMLElement) => {
+        if (!modal) return;
+        modalTitle!.textContent = card.dataset.eventTitle || "";
+        modalLocation!.textContent = card.dataset.eventLocation || "";
+        modalTime!.textContent = card.dataset.eventTime || "";
+        modalDescription!.textContent = card.dataset.eventDescription || "";
+        modal.showModal();
+      };
+
+      // リスト形式・タイムライン形式両方のクリックイベントを設定
+      document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        const card = target.closest<HTMLElement>(".event-card.is-detail, .timeline-card.has-detail");
+        if (card) {
+          openModal(card);
+        }
+      });
+
+      document.querySelector(".modal-close")?.addEventListener("click", () => modal?.close());
+      modal?.addEventListener("click", (event) => {
+        if (event.target === modal) modal.close();
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color: #082957;
+    background: #f4f6f8;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+  }
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  /* Sticky Header */
+  .sticky-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 10;
+    padding: 0.8rem 0;
+    transition: 0.25s;
+  }
+  .sticky-header.is-show {
+    background: #fffffff0;
+    box-shadow: 0 2px 14px #001b4012;
+    backdrop-filter: blur(12px);
+  }
+  .sticky-header-inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-brand,
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+  .header-logo {
+    height: 40px;
+    filter: brightness(0) invert(1);
+  }
+  .header-typo {
+    height: 20px;
+    filter: brightness(0) invert(1);
+  }
+  .is-show .header-logo,
+  .is-show .header-typo {
+    filter: brightness(0);
+  }
+  .header-nav ul,
+  .mobile-nav ul,
+  .sitemap {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .header-nav ul {
+    display: flex;
+    gap: clamp(1rem, 2vw, 2.4rem);
+  }
+  .header-nav a,
+  .mobile-nav a,
+  .sitemap a {
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.11em;
+    text-decoration: none;
+  }
+  .header-nav a {
+    color: #fff;
+    font-size: 1.08rem;
+  }
+  .is-show .header-nav a {
+    color: #111;
+  }
+  .header-nav a[aria-current] {
+    opacity: 0.6;
+  }
+  .hamburger,
+  .mobile-nav {
+    display: none;
+  }
+
+  /* Layout Container */
+  .timetable-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1.5rem 6rem;
+  }
+  .page-header {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 5.5rem 0 4.5rem;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    color: white;
+  }
+  .page-header::after {
+    content: "";
+    position: absolute;
+    top: -40%;
+    right: 14%;
+    width: 65px;
+    height: 180%;
+    background: #fff;
+    transform: skewX(-20deg);
+  }
+  .page-header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    padding: 0 2rem;
+    margin: auto;
+  }
+  .page-header h1 {
+    margin: 10px 0 0;
+    font: 900 clamp(3.4rem, 13vw, 8rem)/0.85 "Bebas Neue";
+    letter-spacing: 0.04em;
+  }
+  .page-header p {
+    margin: -5px 0 0;
+    font-weight: 700;
+    font-size: clamp(1.1rem, 3vw, 1.75rem);
+  }
+  .schedule-intro {
+    text-align: center;
+    padding: 4.5rem 0 2rem;
+  }
+  .eyebrow {
+    font: 1.05rem "Bebas Neue";
+    color: #ec4d3f;
+    letter-spacing: 0.18em;
+    margin: 0;
+  }
+  .schedule-intro h2 {
+    margin: 0.2rem 0 0.6rem;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+  }
+  .schedule-intro p:last-child {
+    margin: 0;
+    color: #536274;
+  }
+  .schedule-section {
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  /* Controls & View Switcher Bar */
+  .controls-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .day-tabs {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    min-width: 280px;
+  }
+  .day-tab {
+    flex: 1;
+    border: 1px solid #0b376d;
+    background: transparent;
+    padding: 0.75rem 1rem;
+    color: #0b376d;
+    font: 1.1rem "Bebas Neue";
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+  }
+  .day-tab span {
+    display: block;
+    font-size: 0.8rem;
+  }
+  .day-tab.is-active,
+  .day-tab:hover {
+    background: #0b376d;
+    color: #fff;
+  }
+
+  /* Modern View Switcher Switch */
+  .view-switcher {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 8px;
+    gap: 2px;
+  }
+  .view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    background: transparent;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #64748b;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .view-btn.is-active {
+    background: #ffffff;
+    color: #082957;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .day-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #0b376d;
+  }
+  .day-heading span {
+    color: #ed5847;
+    font: 1.1rem "Bebas Neue";
+    letter-spacing: 0.12em;
+  }
+  .day-heading h3 {
+    margin: 0 0 0.65rem;
+    font-size: 1.4rem;
+  }
+
+  /* ビュー切り替えロジック */
+  .day-panel.view-timeline .timeline-view { display: block; }
+  .day-panel.view-timeline .list-view { display: none; }
+  .day-panel.view-list .timeline-view { display: none; }
+  .day-panel.view-list .list-view { display: block; }
+
+  /* ==================== タイムライン形式デザイン ==================== */
+  .timeline-view {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(8, 41, 87, 0.06);
+    padding: 1.5rem 1.5rem 2rem;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+  }
+  .timeline-scroll-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .timeline-wrapper {
+    display: flex;
+    min-width: 720px; /* スマートフォンでも横スクロールで綺麗に保つ */
+    position: relative;
+    height: 820px; /* 縦方向の全体スケール */
+    padding-top: 40px; /* ヘッダー分 */
+  }
+
+  /* 時間軸（左固定） */
+  .time-axis {
+    width: 60px;
+    position: relative;
+    flex-shrink: 0;
+    border-right: 1px solid #e2e8f0;
+  }
+  .time-label {
+    position: absolute;
+    transform: translateY(-50%);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.05rem;
+    color: #64748b;
+    letter-spacing: 0.05em;
+  }
+
+  /* グリッド領域 */
+  .timeline-grid {
+    flex: 1;
+    position: relative;
+  }
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .grid-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed #e2e8f0;
+  }
+
+  /* カラム（場所別） */
+  .location-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-col {
+    position: relative;
+    border-right: 1px solid #f1f5f9;
+  }
+  .timeline-col:last-child {
+    border-right: none;
+  }
+  
+  /* 各場所ごとのカラーアクセント（画像のデザインに準拠） */
+  .timeline-col[data-location="ステージ"] .col-header { color: #0284c7; border-bottom: 2px solid #0284c7; }
+  .timeline-col[data-location="講堂"] .col-header { color: #d97706; border-bottom: 2px solid #d97706; }
+  .timeline-col[data-location="体育館"] .col-header { color: #16a34a; border-bottom: 2px solid #16a34a; }
+  .timeline-col[data-location="校庭"] .col-header { color: #059669; border-bottom: 2px solid #059669; }
+
+  .col-header {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .col-content {
+    position: relative;
+    height: 100%;
+    margin: 0 6px;
+  }
+
+  /* タイムラインカード */
+  .timeline-card {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-left: 3px solid #0b376d;
+    border-radius: 6px;
+    padding: 0.35rem 0.5rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    cursor: default;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+  .timeline-card.has-detail {
+    cursor: pointer;
+    background: #ffffff;
+  }
+  .timeline-card.has-detail:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(8, 41, 87, 0.12);
+    border-color: #0b376d;
+    z-index: 5;
+  }
+  .card-time {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 0.75rem;
+    color: #64748b;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .card-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 色分け線の個別指定 */
+  .timeline-col[data-location="ステージ"] .timeline-card { border-left-color: #0284c7; }
+  .timeline-col[data-location="講堂"] .timeline-card { border-left-color: #d97706; }
+  .timeline-col[data-location="体育館"] .timeline-card { border-left-color: #16a34a; }
+  .timeline-col[data-location="校庭"] .timeline-card { border-left-color: #059669; }
+
+  /* ==================== リスト形式デザイン ==================== */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+  .location-column {
+    border: 1px solid #ced9e5;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .location-column h4 {
+    background: #082957;
+    color: #fff;
+    text-align: center;
+    padding: 0.75rem;
+    margin: 0;
+    letter-spacing: 0.1em;
+  }
+  .event-list {
+    padding: 0.25rem 1rem;
+  }
+  .event-card {
+    display: grid;
+    grid-template-columns: 8.8rem 1fr;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e3e8ed;
+    width: 100%;
+    text-align: left;
+  }
+  button.event-card {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+  }
+  .event-card.is-detail {
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .event-card.is-detail:hover,
+  .event-card.is-detail:focus-visible {
+    background: #eef5fb;
+    outline: none;
+  }
+  .event-card:last-child {
+    border: 0;
+  }
+  .event-card time {
+    color: #e04e40;
+    font: 1.12rem "Bebas Neue";
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .event-card time span {
+    color: #8290a2;
+    padding: 0 0.28rem;
+  }
+  .event-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+  .event-content strong {
+    font-weight: 700;
+    line-height: 1.45;
+  }
+  .event-card small {
+    color: #6d7b8b;
+    font-size: 0.75rem;
+  }
+  .event-card em {
+    color: #e04e40;
+    font-size: 0.72rem;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* ==================== 洗練されたモダンなモーダル ==================== */
+  .event-modal {
+    width: min(90vw, 520px);
+    border: 0;
+    border-radius: 16px;
+    padding: 0;
+    color: #0f172a;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: #ffffff;
+    overflow: hidden;
+  }
+  .event-modal::backdrop {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+  }
+  .modal-inner {
+    position: relative;
+    padding: 2.2rem 2rem 2rem;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    border: 0;
+    background: #f1f5f9;
+    color: #64748b;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .modal-close:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+  
+  /* モーダルバッジ（タグ風） */
+  .modal-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.8rem;
+  }
+  .modal-badge-location {
+    background: #082957;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .modal-badge-time {
+    background: #f1f5f9;
+    color: #475569;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 0.95rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .event-modal h2 {
+    margin: 0.2rem 0 1rem;
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
+    line-height: 1.35;
+    font-weight: 900;
+    color: #082957;
+  }
+  .modal-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin-bottom: 1.2rem;
+  }
+  .modal-description {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: #334155;
+    white-space: pre-wrap;
+  }
+
+  /* Footer */
+  .footer {
+    background-color: #1a1b1f;
+    background-size: cover;
+    background-position: center;
+    color: #f6f9f6;
+    padding: 70px 0 20px;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .footer-info {
+    flex: 1;
+  }
+  .school-name {
+    font-size: 1.3rem;
+    margin: 0 0 20px;
+  }
+  .footer-brand {
+    margin-bottom: 24px;
+  }
+  .footer-brand img:first-child {
+    height: 40px;
+    filter: brightness(0) invert(1);
+  }
+  .footer-brand img:last-child {
+    height: 20px;
+    filter: brightness(0) invert(1);
+  }
+  .school-details p {
+    color: #ccc;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    margin: 0.1rem 0;
+  }
+  .school-details strong {
+    color: #fff;
+  }
+  .access-info {
+    margin-top: 0.8rem !important;
+    padding-left: 10px;
+    border-left: 2px solid #555;
+  }
+  .sitemap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
+    row-gap: 16px;
+    margin-bottom: 30px;
+  }
+  .sitemap a {
+    color: #fff;
+    font-size: 1.1rem;
+  }
+  .footer-sns {
+    display: flex;
+    gap: 24px;
+  }
+  .footer-sns img {
+    width: 22px;
+    height: 22px;
+  }
+  .footer-bottom {
+    color: #b3b1b1;
+    text-align: center;
+    font-size: 0.75rem;
+    margin-top: 30px;
+    padding-top: 20px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .header-nav { display: none; }
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      border: 0;
+      padding: 0;
+      background: none;
+      z-index: 12;
+    }
+    .hamburger span {
+      height: 2px;
+      background: #fff;
+      transition: 0.2s;
+    }
+    .is-show .hamburger span { background: #111; }
+    .hamburger.is-active span { background: #fff !important; }
+    .hamburger.is-active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .hamburger.is-active span:nth-child(2) { opacity: 0; }
+    .hamburger.is-active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 11;
+      background: #051a37ee;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.2s;
+    }
+    .mobile-nav.is-active {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-nav li { margin: 1.1rem; text-align: center; }
+    .mobile-nav a { color: #fff; font-size: 1.65rem; }
+    .mobile-sns-links { display: flex; gap: 1.4rem; margin-top: 2rem; }
+    .mobile-sns-links a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: #fff;
+      font: 0.75rem "Noto Sans JP";
+    }
+    .mobile-sns-links img { width: 25px; height: 25px; }
+
+    .page-header { padding: 4rem 0 2.8rem; }
+    .page-header::after { right: 8%; width: 31px; }
+    .page-header-inner { padding: 0 1.2rem; }
+    .schedule-intro { padding: 3.3rem 0 2rem; }
+
+    .controls-wrapper { flex-direction: column; align-items: stretch; }
+    .view-switcher { justify-content: center; }
+
+    .schedule-grid { grid-template-columns: 1fr; }
+    .event-card { grid-template-columns: 7.7rem 1fr; padding: 0.85rem 0; }
+    .event-card time { font-size: 1rem; }
+
+    .footer-inner { flex-direction: column; gap: 45px; }
+    .sitemap { column-gap: 30px; width: 100%; }
+  }
+</style>

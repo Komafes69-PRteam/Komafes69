@@ -554,6 +554,13 @@ const pageTitle = `${title} | 駒場東邦 第69回 文化祭 | SAIL BEYOND`;
     color: #0f172a;
     margin-bottom: 4rem;
   }
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* お好みで角丸に */
+    margin: 1.5rem auto; /* 上下に余白を持たせる */
+    display: block; /* 中央揃え等の調整がしやすくなります */
+  }
 
   .prose :global(h2) {
     font-size: 1.35rem;
