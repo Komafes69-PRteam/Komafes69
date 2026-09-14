@@ -13,52 +13,58 @@ import exhibitions from "../pages/data/exhibitions.json";
 
 const rawArticles = await getCollection("articles");
 
-// 記事データの取得
-const articlesData = rawArticles.map((article: CollectionEntry<"articles">) => {
-  const data = article.data as any;
-  const {
-    title,
-    heroImage,
-    exhibitionSlug,
-    exhibitionId,
-    date,
-    pubDate,
-    description,
-    excerpt,
-  } = data;
+// 記事データの取得と並び替え
+const articlesData = rawArticles
+  .map((article: CollectionEntry<"articles">) => {
+    const data = article.data as any;
+    const {
+      title,
+      heroImage,
+      exhibitionSlug,
+      exhibitionId,
+      date,
+      pubDate,
+      description,
+      excerpt,
+    } = data;
 
-  // 1. JSONから対象の展示データを検索
-  const matchedExhibition = exhibitions.find(
-    (ex: any) => ex.slug === exhibitionSlug || ex.id === exhibitionId,
-  );
+    // 1. JSONから対象の展示データを検索
+    const matchedExhibition = exhibitions.find(
+      (ex: any) => ex.slug === exhibitionSlug || ex.id === exhibitionId,
+    );
 
-  // 2. 記事専用サムネ(heroImage) -> 展示データ画像(image) -> 空文字（クライアント側でSVGフォールバック）の優先順位で採用
-  const heroImgSrc =
-    typeof heroImage === "object" && heroImage !== null
-      ? heroImage.src
-      : heroImage;
+    // 2. 記事専用サムネ(heroImage) -> 展示データ画像(image) -> 空文字
+    const heroImgSrc =
+      typeof heroImage === "object" && heroImage !== null
+        ? heroImage.src
+        : heroImage;
 
-  const exhibitionImgSrc = matchedExhibition?.image;
+    const exhibitionImgSrc = matchedExhibition?.image;
 
-  const finalImage = heroImgSrc || exhibitionImgSrc || "";
+    const finalImage = heroImgSrc || exhibitionImgSrc || "";
 
-  // 3. 本文からMarkdown記号を取り除き、冒頭のテキストを抽出（descriptionがない場合の対策）
-  const plainTextBody = (article.body || "")
-    .replace(/[#*`_~>\[\]\(\)]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-  const fallbackDescription =
-    plainTextBody.slice(0, 80) + (plainTextBody.length > 80 ? "..." : "");
+    // 3. 本文からMarkdown記号を取り除き、冒頭のテキストを抽出
+    const plainTextBody = (article.body || "")
+      .replace(/[#*`_~>\[\]\(\)]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const fallbackDescription =
+      plainTextBody.slice(0, 80) + (plainTextBody.length > 80 ? "..." : "");
 
-  return {
-    title: title || "",
-    slug: article.id || article.id,
-    image: finalImage,
-    date: date || pubDate || "",
-    description: description || excerpt || fallbackDescription,
-  };
-});
-
+    return {
+      title: title || "",
+      slug: article.id || article.id,
+      image: finalImage,
+      date: date || pubDate || "",
+      description: description || excerpt || fallbackDescription,
+    };
+  })
+  // 日付順に並び替え
+  .sort((a, b) => {
+    const timeA = a.date ? new Date(a.date).getTime() : 0;
+    const timeB = b.date ? new Date(b.date).getTime() : 0;
+    return timeB - timeA; // 新しい順（降順）
+  });
 const pageTitle = "記事一覧 | 第69回 駒場東邦文化祭 | SAIL BEYOND";
 const pageDescription =
   "2026 駒場東邦中学高等学校 第69回文化祭「SAIL BEYOND」のオンライン記事一覧ページです。";
