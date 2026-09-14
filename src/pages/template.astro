@@ -11,12 +11,18 @@ import logoImg from "./assets/logo.svg";
 import typoImg from "./assets/typo.svg";
 import instagramIcon from "./assets/Instagram.svg";
 
+interface Props {
+  title?: string;
+  description?: string;
+  pageTitleEn?: string; // 例: "ABOUT", "NEWS"
+  pageTitleJa?: string; // 例: "概要", "お知らせ"
+}
 
 const {
-  title = "MAPS | 第69回 駒場東邦文化祭 | SAIL BEYOND",
-  description = "駒場東邦中学校・高等学校 第69回 文化祭公式ウェブサイトです。便利なオンラインマップを提供しています。",
-  pageTitleEn = "MAP",
-  pageTitleJa = "マップ",
+  title = "駒場東邦 第69回 文化祭 | SAIL BEYOND",
+  description = "駒場東邦中学校・高等学校 第69回 文化祭公式ウェブサイトです。",
+  pageTitleEn = "PAGE TITLE",
+  pageTitleJa = "ページタイトル",
 } = Astro.props;
 ---
 
@@ -147,7 +153,7 @@ const {
 
       <!-- ページ固有コンテンツ挿入エリア -->
       <section class="page-content">
-        MAPの公開まで少々お待ちください。
+        <slot />
       </section>
     </main>
 
