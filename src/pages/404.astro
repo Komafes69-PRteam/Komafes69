@@ -34,6 +34,14 @@ const pageDescription = "お探しのページは見つかりませんでした�
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
     <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- 404.astro の <head> 内に追加 -->
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
   </head>
   <body>
     <!-- ========================================
@@ -318,6 +326,19 @@ const pageDescription = "お探しのページは見つかりませんでした�
           link.addEventListener("click", closeMobileNav),
         );
       });
+
+      // キャッシュを無視して現在のURLにリクエストを飛ばす
+      fetch(window.location.href, { cache: "no-store", method: "HEAD" })
+        .then((response) => {
+          // 404ではなく、正常（200番台）にページが存在している場合
+          if (response.ok) {
+            // キャッシュを無視してページを強制リロード
+            window.location.reload();
+          }
+        })
+        .catch(() => {
+          // ネットワークエラー時などは何もしない
+        });
     </script>
   </body>
 </html>
