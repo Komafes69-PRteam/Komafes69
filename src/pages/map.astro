@@ -11,13 +11,19 @@ import logoImg from "./assets/logo.svg";
 import typoImg from "./assets/typo.svg";
 import instagramIcon from "./assets/Instagram.svg";
 
-
 const {
   title = "MAPS | 第69回 駒場東邦文化祭 | SAIL BEYOND",
   description = "駒場東邦中学校・高等学校 第69回 文化祭公式ウェブサイトです。便利なオンラインマップを提供しています。",
   pageTitleEn = "MAP",
   pageTitleJa = "マップ",
 } = Astro.props;
+
+
+import map1f from "./assets/map1f.png";
+import map2f from "./assets/map2f.png";
+import map3f from "./assets/map3f.png";
+import map4f from "./assets/map4f.png";
+import map5f from "./assets/map5f.png";
 ---
 
 <html lang="ja">
@@ -145,141 +151,166 @@ const {
         </div>
       </header>
 
-      <!-- ページ固有コンテンツ挿入エリア -->
-      <section class="page-content">
-        MAPの公開まで少々お待ちください。
-      </section>
+      <p class="notice-msg">
+        現在、MAP画像のみ公開中です。正式版MAPの公開まで少々お待ちください。
+      </p>
+
+      <!-- １階のMAP -->
+      <div class="map-section">
+        <p>1階</p>
+        <img src={map1f.src} alt="1階のMAP" class="map-image" />
+      </div>
+
+      <!-- ２階のMAP -->
+      <div class="map-section">
+        <p>2階</p>
+        <!-- ※画像のパス(/map2f.webpなど)は実際のファイル名に合わせて変更してください -->
+        <img src={map2f.src} alt="2階のMAP" class="map-image" />
+      </div>
+
+      <!-- ３階のMAP -->
+      <div class="map-section">
+        <p>3階</p>
+        <img src={map3f.src} alt="3階のMAP" class="map-image" />
+      </div>
+
+      <!-- ４階のMAP -->
+      <div class="map-section">
+        <p>4階</p>
+        <img src={map4f.src} alt="4階のMAP" class="map-image" />
+      </div>
+      <!-- ５階のMAP -->
+      <div class="map-section">
+        <p>5階</p>
+        <img src={map5f.src} alt="5階のMAP" class="map-image" />
+      </div>  
     </main>
-
-    <!-- フッター -->
-    <footer
-      class="footer"
-      style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}
-    >
-      <div class="footer-inner">
-        <!-- 左側：学校情報・アクセス -->
-        <div class="footer-info">
-          <p class="school-name">駒場東邦中学校・高等学校 第69回 文化祭</p>
-          <a href="/" class="footer-brand">
-            <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
-            <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
-          </a>
-
-          <div class="school-details">
-            <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜16:30</p>
-            <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
-            <p class="access-info">
-              東急田園都市線「池尻大橋」駅より徒歩10分<br />
-              京王井の頭線「駒場東大前」駅より徒歩10分
-            </p>
-          </div>
-        </div>
-
-        <!-- 右側：ミニサイトマップとSNS -->
-        <div class="footer-nav">
-          <ul class="sitemap">
-            <li><a href="/">TOP</a></li>
-            <li><a href="/theme">THEME</a></li>
-            <li><a href="/exhibition">EXHIBITION</a></li>
-            <li><a href="/articles">ARTICLES</a></li>
-            <li><a href="/timetable">TIME TABLE</a></li>
-            <li><a href="/map">MAP</a></li>
-            <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
-          </ul>
-
-          <div class="footer-sns">
-            <a
-              href="https://www.instagram.com/komafes69/"
-              aria-label="Instagram"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={instagramIcon.src}
-                alt="Instagram"
-                class="footer-sns-icon"
-              />
-            </a>
-            <a
-              href="https://www.youtube.com/@komafes69"
-              aria-label="YouTube"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={youtubeIcon.src}
-                alt="YouTube"
-                class="footer-sns-icon"
-              />
-            </a>
-            <a
-              href="https://x.com/Komafes69"
-              aria-label="X"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={xIcon.src} alt="X" class="footer-sns-icon" />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
-      </div>
-    </footer>
-
-    <script>
-      import { gsap } from "gsap";
-
-      document.addEventListener("DOMContentLoaded", () => {
-        // --- GSAP タイトルアニメーション ---
-        gsap.fromTo(
-          ".page-title",
-          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-          {
-            clipPath: "inset(0 0% 0 0)",
-            duration: 2.5,
-            ease: "power2.out",
-            delay: 0.2,
-          },
-        );
-        gsap.fromTo(
-          ".page-subtitle",
-          { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-          {
-            clipPath: "inset(0 0% 0 0)",
-            duration: 2.5,
-            ease: "power2.out",
-            delay: 0.35,
-          },
-        );
-
-        // --- ヘッダースクロール処理 ---
-        const stickyHeader = document.querySelector(".sticky-header");
-        if (stickyHeader) {
-          window.addEventListener("scroll", () => {
-            if (window.scrollY > 50) {
-              stickyHeader.classList.add("is-scrolled");
-            } else {
-              stickyHeader.classList.remove("is-scrolled");
-            }
-          });
-        }
-
-        // --- ハンバーガーメニュー制御 ---
-        const hamburger = document.querySelector(".hamburger");
-        const mobileNav = document.querySelector(".mobile-nav");
-        if (hamburger && mobileNav) {
-          hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("is-active");
-            mobileNav.classList.toggle("is-active");
-            document.body.classList.toggle("no-scroll");
-          });
-        }
-      });
-    </script>
   </body>
+
+  <!-- フッター -->
+  <footer
+    class="footer"
+    style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}
+  >
+    <div class="footer-inner">
+      <!-- 左側：学校情報・アクセス -->
+      <div class="footer-info">
+        <p class="school-name">駒場東邦中学校・高等学校 第69回 文化祭</p>
+        <a href="/" class="footer-brand">
+          <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
+          <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
+        </a>
+
+        <div class="school-details">
+          <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜16:30</p>
+          <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
+          <p class="access-info">
+            東急田園都市線「池尻大橋」駅より徒歩10分<br />
+            京王井の頭線「駒場東大前」駅より徒歩10分
+          </p>
+        </div>
+      </div>
+
+      <!-- 右側：ミニサイトマップとSNS -->
+      <div class="footer-nav">
+        <ul class="sitemap">
+          <li><a href="/">TOP</a></li>
+          <li><a href="/theme">THEME</a></li>
+          <li><a href="/exhibition">EXHIBITION</a></li>
+          <li><a href="/articles">ARTICLES</a></li>
+          <li><a href="/timetable">TIME TABLE</a></li>
+          <li><a href="/map">MAP</a></li>
+          <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
+        </ul>
+
+        <div class="footer-sns">
+          <a
+            href="https://www.instagram.com/komafes69/"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={instagramIcon.src}
+              alt="Instagram"
+              class="footer-sns-icon"
+            />
+          </a>
+          <a
+            href="https://www.youtube.com/@komafes69"
+            aria-label="YouTube"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={youtubeIcon.src} alt="YouTube" class="footer-sns-icon" />
+          </a>
+          <a
+            href="https://x.com/Komafes69"
+            aria-label="X"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={xIcon.src} alt="X" class="footer-sns-icon" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- GSAP タイトルアニメーション ---
+      gsap.fromTo(
+        ".page-title",
+        { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+        {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 2.5,
+          ease: "power2.out",
+          delay: 0.2,
+        },
+      );
+      gsap.fromTo(
+        ".page-subtitle",
+        { clipPath: "inset(0 100% 0 0)", opacity: 1 },
+        {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 2.5,
+          ease: "power2.out",
+          delay: 0.35,
+        },
+      );
+
+      // --- ヘッダースクロール処理 ---
+      const stickyHeader = document.querySelector(".sticky-header");
+      if (stickyHeader) {
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            stickyHeader.classList.add("is-scrolled");
+          } else {
+            stickyHeader.classList.remove("is-scrolled");
+          }
+        });
+      }
+
+      // --- ハンバーガーメニュー制御 ---
+      const hamburger = document.querySelector(".hamburger");
+      const mobileNav = document.querySelector(".mobile-nav");
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener("click", () => {
+          hamburger.classList.toggle("is-active");
+          mobileNav.classList.toggle("is-active");
+          document.body.classList.toggle("no-scroll");
+        });
+      }
+    });
+  </script>
 </html>
 
 <style is:global>
@@ -551,6 +582,45 @@ const {
     margin-top: 2rem;
   }
 
+  /* 応急措置用MAPのスタイル */
+  .page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center; /* 全体を中央揃え */
+  }
+
+  .notice-msg {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ea580c; /* 注意を引くオレンジ色 */
+    margin-bottom: 40px;
+  }
+
+  .map-section {
+    margin-bottom: 60px; /* 各階のMAPの間隔を広めにとる */
+  }
+
+  .map-section p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #cbd5e1;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  .map-image {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 少し影をつけて見やすく */
+    display: block;
+    margin: 0 auto;
+  }
   /* --- FOOTER --- */
   .footer {
     background-color: #1a1b1f;

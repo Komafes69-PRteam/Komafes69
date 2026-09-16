@@ -1,0 +1,481 @@
+---
+import exhibitionsData from './data/exhibitions.json';
+import facilitiesData from './data/facilities.json';
+
+type Exhibition = { slug: string; name: string; room: string };
+const exhibitions = exhibitionsData as Exhibition[];
+
+type Facility = { slug: string; name: string };
+const facilities = facilitiesData as Facility[];
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>マップデータ作成ツール</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      background-color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #sidebar {
+      width: 400px;
+      padding: 20px;
+      background: #ffffff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    #map-container { position: relative; cursor: crosshair; overflow: auto; flex-grow: 1; background-color: #cbd5e1; }
+    #map-wrapper { position: relative; display: inline-block; }
+    #map-image { display: block; }
+    #svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+    .placeholder-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #64748b; font-weight: bold; pointer-events: none; }
+    
+    :global(.node-dot) { position: absolute; width: 14px; height: 14px; background-color: #3b82f6; border: 2px solid white; border-radius: 50%; transform: translate(-50%, -50%); cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 5; }
+    :global(.node-dot.selected) { background-color: #ef4444; border-color: #fca5a5; transform: translate(-50%, -50%) scale(1.3); z-index: 10; }
+    :global(.node-dot.edge-source) { background-color: #f59e0b; }
+
+    button { padding: 10px; background-color: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    button:hover { background-color: #059669; }
+    .danger-btn { background-color: #ef4444; }
+    .danger-btn:hover { background-color: #dc2626; }
+
+    .editor-panel { background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 10px; }
+    .mode-selector { display: flex; gap: 5px; }
+    .mode-btn { flex: 1; background-color: #94a3b8; font-size: 13px; }
+    .mode-btn.active { background-color: #2563eb; }
+    label { font-size: 13px; font-weight: bold; display: block; margin-bottom: 4px; }
+    .input-group { background: #f1f5f9; padding: 10px; border-radius: 6px; }
+    select, input[type="file"], input[type="number"], input[type="text"] { width: 100%; padding: 6px; box-sizing: border-box; cursor: pointer; border: 1px solid #cbd5e1; border-radius: 4px;}
+    .checkbox-label { display: flex; align-items: center; gap: 5px; font-weight: normal; cursor: pointer; font-size: 12px;}
+    
+    /* スクロール可能なチェックボックスリスト */
+    .checkbox-list { max-height: 120px; overflow-y: auto; border: 1px solid #cbd5e1; padding: 8px; border-radius: 4px; background: #fff; }
+    pre { background: #f1f5f9; padding: 10px; font-size: 11px; border-radius: 4px; overflow-x: auto; max-height: 150px; }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar">
+    <h2>マップエディタ</h2>
+
+    <div class="input-group" style="background: #e0f2fe;">
+      <label>現在の階 (作業フロア):</label>
+      <select id="current-floor">
+        <option value="1">1F</option>
+        <option value="2">2F</option>
+        <option value="3">3F</option>
+        <option value="4">4F</option>
+      </select>
+    </div>
+    
+    <div class="input-group">
+      <label>操作モード:</label>
+      <div class="mode-selector">
+        <button id="mode-node" class="mode-btn active">ノード追加</button>
+        <button id="mode-edge" class="mode-btn">エッジ(線)作成</button>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>マップ画像読込 (PNG/JPG)</label>
+      <input type="file" id="import-image-btn" accept="image/*" />
+    </div>
+    <div class="input-group">
+      <label>データ読込 (JSON)</label>
+      <input type="file" id="import-json-btn" accept=".json" />
+    </div>
+
+    <!-- ノード編集パネル -->
+    <div id="node-editor" class="editor-panel" style="display: none;">
+      <h3 style="margin: 0; color: #2563eb;">ノード編集</h3>
+      <p style="margin:0; font-size:12px; color:#64748b;">ID: <span id="edit-node-id"></span></p>
+      
+      <label>表示名 (階段・トイレなど用):
+        <input type="text" id="edit-node-name" placeholder="展示団体がある場合は空欄でOK" />
+      </label>
+
+<label>種類:
+        <select id="edit-node-type">
+          <option value="corridor">通路 (Corridor)</option>
+          <option value="room">展示教室 (Room)</option>
+          <option value="facility">特別施設 (Facility)</option>
+          <option value="stair">階段 (Stair)</option>
+          <option value="elevator">エレベーター (Elevator)</option>
+          
+          <!-- トイレを細分化 -->
+          <option value="mens_toilet">男子トイレ (Men's Toilet)</option>
+          <option value="womens_toilet">女子トイレ (Women's Toilet)</option>
+          <option value="multipurpose_toilet">多目的・だれでもトイレ</option>
+          
+          <option value="exit">出入口 (Exit)</option>
+        </select>
+      </label>
+
+      <label>展示団体 (複数選択可):
+        <div class="checkbox-list">
+          {exhibitions.map((ex) => (
+            <label class="checkbox-label">
+              <input type="checkbox" name="edit-exhibitions" value={ex.slug} /> {ex.name} ({ex.room})
+            </label>
+          ))}
+        </div>
+      </label>
+
+      <label>施設 (facilityの場合):
+        <select id="edit-facility">
+          <option value="">-- なし --</option>
+          {facilities.map((fac) => (
+            <option value={fac.slug}>{fac.name}</option>
+          ))}
+        </select>
+      </label>
+
+      <label>カスタムタグ (カンマ区切り):
+        <input type="text" id="edit-node-tags" placeholder="例: 飲食可, 屋外" />
+      </label>
+
+      <div style="display: flex; gap: 10px; margin-top: 5px;">
+        <label class="checkbox-label" style="font-weight:bold;">
+          <input type="checkbox" id="edit-is-searchable" /> 検索候補に出す
+        </label>
+        <label class="checkbox-label" style="font-weight:bold;">
+          <input type="checkbox" id="edit-is-accessible" /> バリアフリー
+        </label>
+      </div>
+
+      <div style="border-top: 1px dashed #cbd5e1; pt: 10px; mt: 5px;">
+        <label>他階への接続 (階段・EV用):</label>
+        <input type="text" id="target-node-id" placeholder="接続先ノードID (例: node_15)" />
+        <button id="connect-interfloor-btn" style="background:#8b5cf6; margin-top:5px; width:100%;">他階ノードと繋ぐ</button>
+      </div>
+
+      <button id="save-node-btn" style="margin-top:10px;">ノードを更新</button>
+      <button id="delete-node-btn" class="danger-btn">ノードを削除</button>
+    </div>
+
+    <!-- エッジ編集パネル -->
+    <div id="edge-editor" class="editor-panel" style="display: none;">
+      <h3 style="margin: 0; color: #ea580c;">エッジ(線)編集</h3>
+      <p style="margin:0; font-size:12px; color:#64748b;">ID: <span id="edit-edge-id"></span></p>
+      <p style="margin:0; font-size:13px;">距離: <span id="edit-edge-distance" style="font-weight:bold;"></span> px</p>
+      <label>移動コスト倍率 (Weight):
+        <input type="number" id="edit-edge-weight" step="0.1" min="0.1" />
+      </label>
+      <button id="save-edge-btn" style="margin-top:10px; background-color:#ea580c;">エッジを更新</button>
+      <button id="delete-edge-btn" class="danger-btn">エッジを削除</button>
+    </div>
+
+    <button id="export-btn" style="background-color: #3b82f6;">データを保存 (JSON Export)</button>
+    
+    <h4>プレビュー</h4>
+    <pre id="output"></pre>
+  </div>
+
+  <div id="map-container">
+    <div id="placeholder" class="placeholder-text">マップ画像を読み込んでください</div>
+    <div id="map-wrapper" style="display: none;">
+      <img id="map-image" src="" alt="">
+      <svg id="svg-layer"></svg>
+    </div>
+  </div>
+
+  <script>
+    interface MapNode {
+      id: string;
+      x: number;
+      y: number;
+      floor: number;
+      type: string;
+      name?: string;
+      exhibitionSlugs?: string[]; // 単一文字列から配列に変更
+      facilitySlug?: string;
+      tags?: string[]; // 追加：カスタムタグ用配列
+      isSearchable?: boolean;
+      isAccessible?: boolean;
+    }
+
+    interface MapEdge {
+      id: string;
+      source: string;
+      target: string;
+      distance: number;
+      weight: number;
+    }
+
+    // Elements
+    const mapWrapper = document.getElementById('map-wrapper');
+    const mapImage = document.getElementById('map-image') as HTMLImageElement;
+    const svgLayer = document.getElementById('svg-layer') as unknown as SVGElement;
+    const placeholder = document.getElementById('placeholder');
+    const output = document.getElementById('output');
+    const currentFloorSelect = document.getElementById('current-floor') as HTMLSelectElement;
+    
+    // Panel Elements
+    const nodeEditor = document.getElementById('node-editor');
+    const edgeEditor = document.getElementById('edge-editor');
+    
+    // State
+    let nodes: MapNode[] = [];
+    let edges: MapEdge[] = [];
+    let nodeIdCounter = 1;
+    let edgeIdCounter = 1;
+    let currentFloor = 1;
+    let mode: 'node' | 'edge' = 'node';
+    
+    let selectedNodeId: string | null = null;
+    let selectedEdgeId: string | null = null;
+    let edgeSourceNodeId: string | null = null;
+
+    function setMode(newMode: 'node' | 'edge') {
+      mode = newMode;
+      edgeSourceNodeId = null;
+      document.getElementById('mode-node')?.classList.toggle('active', mode === 'node');
+      document.getElementById('mode-edge')?.classList.toggle('active', mode === 'edge');
+      renderAll();
+    }
+    document.getElementById('mode-node')?.addEventListener('click', () => setMode('node'));
+    document.getElementById('mode-edge')?.addEventListener('click', () => setMode('edge'));
+
+    currentFloorSelect?.addEventListener('change', () => {
+      currentFloor = parseInt(currentFloorSelect.value, 10);
+      selectedNodeId = null; selectedEdgeId = null; edgeSourceNodeId = null;
+      if(nodeEditor) nodeEditor.style.display = 'none';
+      if(edgeEditor) edgeEditor.style.display = 'none';
+      renderAll();
+    });
+
+    function renderAll() {
+      document.querySelectorAll('.node-dot').forEach(el => el.remove());
+      if (svgLayer) svgLayer.innerHTML = '';
+
+      const currentFloorNodes = nodes.filter(n => n.floor === currentFloor);
+      if (mapImage && svgLayer) {
+        svgLayer.setAttribute('width', mapImage.width.toString());
+        svgLayer.setAttribute('height', mapImage.height.toString());
+      }
+
+      edges.forEach(edge => {
+        const sourceNode = nodes.find(n => n.id === edge.source);
+        const targetNode = nodes.find(n => n.id === edge.target);
+
+        if (sourceNode && targetNode && sourceNode.floor === currentFloor && targetNode.floor === currentFloor) {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', sourceNode.x.toString());
+          line.setAttribute('y1', sourceNode.y.toString());
+          line.setAttribute('x2', targetNode.x.toString());
+          line.setAttribute('y2', targetNode.y.toString());
+          
+          let color = '#ef4444';
+          if (edge.id === selectedEdgeId) color = '#f97316';
+          else if (edge.weight > 1.0) color = '#8b5cf6';
+          
+          line.setAttribute('stroke', color);
+          line.setAttribute('stroke-width', edge.id === selectedEdgeId ? '8' : '5');
+          line.style.cursor = 'pointer';
+          line.style.pointerEvents = 'auto';
+          
+          line.addEventListener('click', (e) => { e.stopPropagation(); selectEdge(edge.id); });
+          svgLayer?.appendChild(line);
+        }
+      });
+
+      currentFloorNodes.forEach(node => {
+        const dot = document.createElement('div');
+        let classes = 'node-dot';
+        if (node.id === selectedNodeId) classes += ' selected';
+        if (node.id === edgeSourceNodeId) classes += ' edge-source';
+        
+        dot.className = classes;
+        dot.style.left = `${node.x}px`;
+        dot.style.top = `${node.y}px`;
+
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (mode === 'node') selectNode(node.id);
+          else if (mode === 'edge') handleEdgeCreationClick(node.id);
+        });
+        mapWrapper?.appendChild(dot);
+      });
+      updatePreview();
+    }
+
+    function handleEdgeCreationClick(clickedId: string) {
+      if (!edgeSourceNodeId) {
+        edgeSourceNodeId = clickedId;
+      } else if (edgeSourceNodeId === clickedId) {
+        edgeSourceNodeId = null;
+      } else {
+        const source = nodes.find(n => n.id === edgeSourceNodeId);
+        const target = nodes.find(n => n.id === clickedId);
+        if (source && target) {
+          const dist = Math.round(Math.hypot(target.x - source.x, target.y - source.y));
+          const isStair = source.type === 'stair' && target.type === 'stair';
+          edges.push({ id: `edge_${edgeIdCounter++}`, source: source.id, target: target.id, distance: dist, weight: isStair ? 3.0 : 1.0 });
+        }
+        edgeSourceNodeId = null;
+      }
+      renderAll();
+    }
+
+    function selectNode(id: string) {
+      selectedNodeId = id; selectedEdgeId = null;
+      if (edgeEditor) edgeEditor.style.display = 'none';
+      renderAll();
+
+      const node = nodes.find(n => n.id === id);
+      if (node && nodeEditor) {
+        nodeEditor.style.display = 'flex';
+        document.getElementById('edit-node-id')!.textContent = `${node.id} (${node.floor}F)`;
+        (document.getElementById('edit-node-name') as HTMLInputElement).value = node.name || '';
+        (document.getElementById('edit-node-type') as HTMLSelectElement).value = node.type || 'corridor';
+        (document.getElementById('edit-facility') as HTMLSelectElement).value = node.facilitySlug || '';
+        
+        // 複数選択されたexhibitionsのチェックボックス復元
+        const checkboxes = document.querySelectorAll('input[name="edit-exhibitions"]');
+        checkboxes.forEach((cb) => {
+          (cb as HTMLInputElement).checked = node.exhibitionSlugs ? node.exhibitionSlugs.includes((cb as HTMLInputElement).value) : false;
+        });
+
+        // タグの復元（配列をカンマ区切りの文字列に）
+        (document.getElementById('edit-node-tags') as HTMLInputElement).value = node.tags ? node.tags.join(', ') : '';
+
+        (document.getElementById('edit-is-searchable') as HTMLInputElement).checked = !!node.isSearchable;
+        (document.getElementById('edit-is-accessible') as HTMLInputElement).checked = !!node.isAccessible;
+      }
+    }
+
+    function selectEdge(id: string) {
+      selectedEdgeId = id; selectedNodeId = null;
+      if (nodeEditor) nodeEditor.style.display = 'none';
+      renderAll();
+
+      const edge = edges.find(e => e.id === id);
+      if (edge && edgeEditor) {
+        edgeEditor.style.display = 'flex';
+        document.getElementById('edit-edge-id')!.textContent = edge.id;
+        document.getElementById('edit-edge-distance')!.textContent = edge.distance.toString();
+        (document.getElementById('edit-edge-weight') as HTMLInputElement).value = edge.weight.toString();
+      }
+    }
+
+    document.getElementById('save-node-btn')?.addEventListener('click', () => {
+      if (!selectedNodeId) return;
+      const n = nodes.find(n => n.id === selectedNodeId);
+      if (n) {
+        n.name = (document.getElementById('edit-node-name') as HTMLInputElement).value || undefined;
+        n.type = (document.getElementById('edit-node-type') as HTMLSelectElement).value;
+        n.facilitySlug = (document.getElementById('edit-facility') as HTMLSelectElement).value || undefined;
+        
+        // チェックされたexhibitionSlugを配列として保存
+        const checkedExhibitions = Array.from(document.querySelectorAll('input[name="edit-exhibitions"]:checked')).map(cb => (cb as HTMLInputElement).value);
+        n.exhibitionSlugs = checkedExhibitions.length > 0 ? checkedExhibitions : undefined;
+
+        // タグをカンマで分割して配列として保存
+        const tagsInput = (document.getElementById('edit-node-tags') as HTMLInputElement).value;
+        const parsedTags = tagsInput.split(',').map(t => t.trim()).filter(t => t !== '');
+        n.tags = parsedTags.length > 0 ? parsedTags : undefined;
+
+        n.isSearchable = (document.getElementById('edit-is-searchable') as HTMLInputElement).checked;
+        n.isAccessible = (document.getElementById('edit-is-accessible') as HTMLInputElement).checked;
+        renderAll();
+        alert('ノードを更新しました');
+      }
+    });
+
+    document.getElementById('delete-node-btn')?.addEventListener('click', () => {
+      if (!selectedNodeId) return;
+      edges = edges.filter(e => e.source !== selectedNodeId && e.target !== selectedNodeId);
+      nodes = nodes.filter(n => n.id !== selectedNodeId);
+      selectedNodeId = null;
+      if(nodeEditor) nodeEditor.style.display = 'none';
+      renderAll();
+    });
+
+    document.getElementById('save-edge-btn')?.addEventListener('click', () => {
+      if (!selectedEdgeId) return;
+      const e = edges.find(e => e.id === selectedEdgeId);
+      if (e) {
+        e.weight = parseFloat((document.getElementById('edit-edge-weight') as HTMLInputElement).value) || 1.0;
+        renderAll();
+      }
+    });
+
+    document.getElementById('delete-edge-btn')?.addEventListener('click', () => {
+      if (!selectedEdgeId) return;
+      edges = edges.filter(e => e.id !== selectedEdgeId);
+      selectedEdgeId = null;
+      if(edgeEditor) edgeEditor.style.display = 'none';
+      renderAll();
+    });
+
+    document.getElementById('connect-interfloor-btn')?.addEventListener('click', () => {
+      if (!selectedNodeId) return;
+      const targetId = (document.getElementById('target-node-id') as HTMLInputElement).value.trim();
+      const targetNode = nodes.find(n => n.id === targetId);
+      if (!targetNode) return alert('指定されたIDが存在しません');
+
+      edges.push({ id: `edge_${edgeIdCounter++}`, source: selectedNodeId, target: targetNode.id, distance: 50, weight: 3.0 });
+      (document.getElementById('target-node-id') as HTMLInputElement).value = '';
+      alert(`${selectedNodeId} と ${targetId} を繋ぎました！`);
+    });
+
+    if (mapImage) {
+      mapImage.addEventListener('click', (e) => {
+        if (mode !== 'node' || !mapImage.getAttribute('src')) return;
+        const rect = mapImage.getBoundingClientRect();
+        nodes.push({ id: `node_${nodeIdCounter++}`, x: Math.round(e.clientX - rect.left), y: Math.round(e.clientY - rect.top), floor: currentFloor, type: "corridor" });
+        selectNode(`node_${nodeIdCounter - 1}`);
+      });
+    }
+
+    document.getElementById('import-image-btn')?.addEventListener('change', (e: Event) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      mapImage.src = URL.createObjectURL(file);
+      mapImage.onload = () => renderAll();
+      if(mapWrapper) mapWrapper.style.display = 'inline-block';
+      if(placeholder) placeholder.style.display = 'none';
+    });
+
+    document.getElementById('import-json-btn')?.addEventListener('change', (e: Event) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const data = JSON.parse(event.target?.result as string);
+          if (data.nodes) nodes = data.nodes;
+          if (data.edges) edges = data.edges;
+          nodeIdCounter = Math.max(0, ...nodes.map(n => parseInt(n.id.replace('node_',''))||0)) + 1;
+          edgeIdCounter = Math.max(0, ...edges.map(e => parseInt(e.id.replace('edge_',''))||0)) + 1;
+          renderAll();
+          alert('読み込みました');
+        } catch(err) { alert('JSONパース失敗'); }
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById('export-btn')?.addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify({ nodes, edges }, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'map_data.json';
+      a.click();
+    });
+
+    function updatePreview() {
+      if (output) output.textContent = JSON.stringify({ nodes, edges }, null, 2);
+    }
+  </script>
+</body>
+</html>
