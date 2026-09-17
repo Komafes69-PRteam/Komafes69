@@ -1,0 +1,273 @@
+---
+import Layout from '../template.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { category: 'bodykoma' } },
+    { params: { category: 'utakomafirst' } },
+    { params: { category: 'nightfes' } },
+    { params: { category: 'utakomasecond' } },
+    { params: { category: 'osikoma' } },
+  ];
+}
+
+const { category } = Astro.params;
+
+const categoriesConfig: Record<string, { title: string; candidates: string[] }> = {
+  bodykoma: {
+    title: 'ボディコマ',
+    
+    candidates: ['鈴木たくま(日)', '金森達平', '高橋到吾', '武田光一', '大曽根', '大竹悠理', '松本大地', '生駒', '諸永', '大塚', '大隈']
+  },
+  utakomafirst: { title: '歌コマ (第1部)', candidates: [] },
+  nightfes: { title: '後夜祭', candidates: [] },
+  utakomasecond: { title: '歌コマ (第2部)', candidates: [] },
+  osikoma: {
+    title: '推しコマ',
+    candidates: ['林', '沖', '今村優介', '谷', '宇野', '森園', '田村隆之介', 'ハワード', '田中康', '湊川', '新行寺']
+  }
+};
+
+const currentCategory = categoriesConfig[category as string];
+---
+
+<Layout
+  title={`${currentCategory.title} | 駒場東邦 第69回 文化祭`}
+  description={`駒場東邦 第69回 文化祭「${currentCategory.title}」のオンライン投票ページです。`}
+  pageTitleEn=VOTE
+  pageTitleJa={currentCategory.title}
+>
+  <div class="vote-container" id="app-container" data-category={category}>
+    <div id="loading" class="loading-text">システムに接続中...</div>
+    <div id="alert-box" class="alert"></div>
+
+    <div id="vote-form" class="hidden">
+      <p class="instruction-text">投票したい候補者を選択し、一番下のボタンを押してください。</p>
+      
+      <div class="candidates-grid">
+        {currentCategory.candidates.map((name) => (
+          <button type="button" value={name} class="candidate-btn">
+            {name}
+          </button>
+        ))}
+      </div>
+      
+      {currentCategory.candidates.length === 0 && (
+        <div class="empty-state">現在、候補者は登録されていません。</div>
+      )}
+      
+      {currentCategory.candidates.length > 0 && (
+        <div class="submit-wrapper">
+          <button type="button" id="submit-btn" class="submit-btn" disabled>投票を送信する</button>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <script>
+    import { db } from '../../lib/firebase-client';
+    import { collection, query, where, getDocs, doc, getDoc, addDoc } from 'firebase/firestore';
+
+    async function init() {
+      const container = document.getElementById('app-container');
+      const category = container?.dataset.category;
+      const loading = document.getElementById('loading');
+      const alertBox = document.getElementById('alert-box');
+      const voteForm = document.getElementById('vote-form');
+      const candidateButtons = document.querySelectorAll('.candidate-btn');
+      const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+
+      if (!loading || !alertBox || !voteForm || !category) return;
+
+      let selectedCandidateId: string | null = null;
+
+      try {
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipRes.json();
+        const clientIp = ipData.ip;
+
+        const settingsDoc = await getDoc(doc(db, 'settings', 'global'));
+        const settingsData = settingsDoc.exists() ? settingsDoc.data() : {};
+        const isVotingOpen = settingsData[`status_${category}`] === true;
+
+        loading.style.display = 'none';
+        voteForm.classList.remove('hidden');
+
+        if (!isVotingOpen) {
+          alertBox.textContent = '現在、この企画の投票は受け付けておりません。';
+          alertBox.className = 'alert alert-error alert-visible';
+          candidateButtons.forEach(btn => (btn as HTMLButtonElement).disabled = true);
+          return;
+        }
+
+        const q = query(collection(db, 'votes'), where('ipAddress', '==', clientIp), where('categoryId', '==', category));
+        const previousVotes = await getDocs(q);
+
+        if (!previousVotes.empty) {
+          alertBox.textContent = '既にこの企画には投票済みです。ご協力ありがとうございました。';
+          alertBox.className = 'alert alert-error alert-visible';
+          candidateButtons.forEach(btn => (btn as HTMLButtonElement).disabled = true);
+          return;
+        }
+
+        candidateButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            candidateButtons.forEach(b => b.classList.remove('selected'));
+            const target = e.currentTarget as HTMLButtonElement;
+            target.classList.add('selected');
+            selectedCandidateId = target.value;
+            if (submitBtn) submitBtn.disabled = false;
+          });
+        });
+
+        if (submitBtn) {
+          submitBtn.addEventListener('click', async () => {
+            if (!selectedCandidateId) return;
+            
+            candidateButtons.forEach(b => (b as HTMLButtonElement).disabled = true);
+            submitBtn.disabled = true;
+            submitBtn.textContent = '送信中...';
+
+            try {
+              await addDoc(collection(db, 'votes'), {
+                categoryId: category,
+                candidateId: selectedCandidateId,
+                ipAddress: clientIp,
+                timestamp: new Date()
+              });
+              
+              alertBox.textContent = '投票が完了しました！ご協力ありがとうございます。';
+              alertBox.className = 'alert alert-success alert-visible';
+              submitBtn.style.display = 'none';
+            } catch (error) {
+              console.error(error);
+              alertBox.textContent = 'エラーが発生しました。時間をおいて再試行してください。';
+              alertBox.className = 'alert alert-error alert-visible';
+              candidateButtons.forEach(b => (b as HTMLButtonElement).disabled = false);
+              submitBtn.disabled = false;
+              submitBtn.textContent = '投票を送信する';
+            }
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        loading.style.display = 'none';
+        alertBox.textContent = '通信エラーが発生しました。再読み込みしてください。';
+        alertBox.className = 'alert alert-error alert-visible';
+      }
+    }
+
+    init();
+  </script>
+
+  <style>
+    .vote-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+    .loading-text {
+      text-align: center;
+      color: #64748b;
+      font-weight: 500;
+      margin: 2rem 0;
+    }
+    .instruction-text {
+      text-align: center;
+      color: #475569;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .hidden { display: none !important; }
+    
+    .candidates-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+    
+    .candidate-btn {
+      width: 100%;
+      padding: 18px;
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .candidate-btn:hover:not(:disabled) {
+      border-color: #cbd5e1;
+      background: #f1f5f9;
+      transform: translateY(-2px);
+    }
+    .candidate-btn.selected {
+      background: #1a202c;
+      color: #ffffff;
+      border-color: #1a202c;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .candidate-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-wrapper {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px dashed #e2e8f0;
+    }
+    .submit-btn {
+      width: 100%;
+      max-width: 300px;
+      padding: 16px;
+      background: #2563eb;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    .submit-btn:hover:not(:disabled) {
+      background: #1d4ed8;
+      transform: scale(1.02);
+    }
+    .submit-btn:disabled {
+      background: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #f8fafc;
+      border-radius: 12px;
+      color: #64748b;
+    }
+
+    .alert {
+      display: none;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .alert-visible { display: block; }
+    .alert-error { background: #fee2e2; color: #b91c1c; border: 1px solid #f87171; }
+    .alert-success { background: #dcfce7; color: #15803d; border: 1px solid #4ade80; }
+  </style>
+</Layout>

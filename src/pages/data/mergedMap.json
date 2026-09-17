@@ -1,0 +1,1679 @@
+{
+  "nodes": [
+    {
+      "id": "node_1",
+      "x": 230,
+      "y": 608,
+      "floor": 4,
+      "type": "mens_toilet",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_2",
+      "x": 143,
+      "y": 599,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "みんなの社会科"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_3",
+      "x": 145,
+      "y": 525,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "マスターレッスン",
+        "爆弾時計仕掛けの文化祭"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_4",
+      "x": 143,
+      "y": 456,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "将棋部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_5",
+      "x": 144,
+      "y": 388,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "クイズ研究部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_6",
+      "x": 144,
+      "y": 318,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "奇術同好会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_7",
+      "x": 191,
+      "y": 318,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_8",
+      "x": 190,
+      "y": 388,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_9",
+      "x": 191,
+      "y": 455,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_10",
+      "x": 191,
+      "y": 562,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_11",
+      "x": 226,
+      "y": 542,
+      "floor": 4,
+      "type": "stair",
+      "name": "D階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_12",
+      "x": 191,
+      "y": 260,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_13",
+      "x": 152,
+      "y": 260,
+      "floor": 4,
+      "type": "stair",
+      "name": "C階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_14",
+      "x": 487,
+      "y": 259,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_15",
+      "x": 488,
+      "y": 313,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_16",
+      "x": 489,
+      "y": 383,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_17",
+      "x": 489,
+      "y": 454,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_18",
+      "x": 487,
+      "y": 524,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_19",
+      "x": 489,
+      "y": 594,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_20",
+      "x": 487,
+      "y": 666,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_21",
+      "x": 527,
+      "y": 609,
+      "floor": 4,
+      "type": "womens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_22",
+      "x": 554,
+      "y": 109,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "技術工作研究会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_23",
+      "x": 550,
+      "y": 244,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "美術部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_24",
+      "x": 473,
+      "y": 141,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_25",
+      "x": 445,
+      "y": 97,
+      "floor": 4,
+      "type": "corridor",
+      "name": "B階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_26",
+      "x": 482,
+      "y": 54,
+      "floor": 4,
+      "type": "corridor"
+    },
+    {
+      "id": "node_27",
+      "x": 447,
+      "y": 47,
+      "floor": 4,
+      "type": "mens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_28",
+      "x": 524,
+      "y": 538,
+      "floor": 4,
+      "type": "stair",
+      "name": "A階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_29",
+      "x": 443,
+      "y": 668,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "コマトライアスロン"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_30",
+      "x": 440,
+      "y": 598,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "KTカジノ"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_31",
+      "x": 443,
+      "y": 521,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "東邦アニメーション"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_32",
+      "x": 443,
+      "y": 456,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "志賀博覧会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_33",
+      "x": 440,
+      "y": 388,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "駒東リアルライフゲーム"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_34",
+      "x": 441,
+      "y": 317,
+      "floor": 4,
+      "type": "room",
+      "exhibitionSlugs": [
+        "ぼくらの二日間縁日"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_101",
+      "x": 444,
+      "y": 703,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_102",
+      "x": 395,
+      "y": 702,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "ピタコマスイッチ"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_103",
+      "x": 489,
+      "y": 643,
+      "floor": 5,
+      "type": "womens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_104",
+      "x": 487,
+      "y": 563,
+      "floor": 5,
+      "type": "stair",
+      "isSearchable": false,
+      "isAccessible": false,
+      "name": "A階段"
+    },
+    {
+      "id": "node_105",
+      "x": 396,
+      "y": 627,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "VS駒東中学一年生"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_106",
+      "x": 446,
+      "y": 626,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_107",
+      "x": 444,
+      "y": 559,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_108",
+      "x": 396,
+      "y": 557,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "ゴミで繋がる駒東の世界"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_109",
+      "x": 397,
+      "y": 487,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "縁日"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_110",
+      "x": 396,
+      "y": 415,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "駒東生活受験相談会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_111",
+      "x": 396,
+      "y": 344,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "駒東中一生活体験",
+        "ゴルフ同好会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_112",
+      "x": 446,
+      "y": 489,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_113",
+      "x": 445,
+      "y": 418,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_114",
+      "x": 445,
+      "y": 347,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_115",
+      "x": 447,
+      "y": 256,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_116",
+      "x": 518,
+      "y": 254,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "駒東バンド部屋"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_117",
+      "x": 406,
+      "y": 97,
+      "floor": 5,
+      "type": "stair",
+      "isSearchable": false,
+      "isAccessible": false,
+      "name": "B階段"
+    },
+    {
+      "id": "node_118",
+      "x": 445,
+      "y": 77,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_119",
+      "x": 428,
+      "y": 157,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_120",
+      "x": 381,
+      "y": 130,
+      "floor": 5,
+      "type": "corridor"
+    },
+    {
+      "id": "node_121",
+      "x": 520,
+      "y": 76,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "鉄道研究部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_123",
+      "x": 405,
+      "y": 45,
+      "floor": 5,
+      "type": "mens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_126",
+      "x": 336,
+      "y": 71,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "寄席七十座"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_127",
+      "x": 334,
+      "y": 178,
+      "floor": 5,
+      "type": "room",
+      "exhibitionSlugs": [
+        "剣道部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_128",
+      "x": 360,
+      "y": 321,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "カルロス一家"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_129",
+      "x": 358,
+      "y": 393,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "コマベガス"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_130",
+      "x": 357,
+      "y": 463,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "コマ島からの脱出"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_131",
+      "x": 360,
+      "y": 535,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "ラストサーカス-道化師が足りない-"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_132",
+      "x": 356,
+      "y": 602,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "クラシック音楽部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_133",
+      "x": 356,
+      "y": 674,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "駒東図工"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_134",
+      "x": 409,
+      "y": 677,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_135",
+      "x": 409,
+      "y": 582,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_136",
+      "x": 406,
+      "y": 534,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_137",
+      "x": 403,
+      "y": 463,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_138",
+      "x": 407,
+      "y": 393,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_139",
+      "x": 404,
+      "y": 324,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_140",
+      "x": 390,
+      "y": 200,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_141",
+      "x": 405,
+      "y": 103,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_142",
+      "x": 402,
+      "y": 44,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_143",
+      "x": 380,
+      "y": 258,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_144",
+      "x": 107,
+      "y": 261,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_145",
+      "x": 65,
+      "y": 263,
+      "floor": 3,
+      "type": "stair",
+      "name": "C階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_146",
+      "x": 107,
+      "y": 322,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_147",
+      "x": 105,
+      "y": 393,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_148",
+      "x": 102,
+      "y": 458,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_149",
+      "x": 103,
+      "y": 535,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_150",
+      "x": 101,
+      "y": 587,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_151",
+      "x": 142,
+      "y": 551,
+      "floor": 3,
+      "type": "stair",
+      "name": "D階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_152",
+      "x": 207,
+      "y": 549,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "研究部門"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_153",
+      "x": 205,
+      "y": 616,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "釣り研究会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_154",
+      "x": 145,
+      "y": 620,
+      "floor": 3,
+      "type": "mens_toilet",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_155",
+      "x": 60,
+      "y": 611,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "演劇同好会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_156",
+      "x": 60,
+      "y": 537,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "写真部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_157",
+      "x": 58,
+      "y": 467,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "けん玉同好会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_158",
+      "x": 58,
+      "y": 393,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "折り紙研究会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_159",
+      "x": 57,
+      "y": 329,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "くしまえん"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_160",
+      "x": 528,
+      "y": 56,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "物理部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_163",
+      "x": 528,
+      "y": 253,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "数学研究会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_164",
+      "x": 501,
+      "y": 620,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "パズルの部屋"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_165",
+      "x": 565,
+      "y": 617,
+      "floor": 3,
+      "type": "room",
+      "exhibitionSlugs": [
+        "東邦棋院"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_166",
+      "x": 447,
+      "y": 617,
+      "floor": 3,
+      "type": "mens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_167",
+      "x": 441,
+      "y": 542,
+      "floor": 3,
+      "type": "stair",
+      "name": "A階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_168",
+      "x": 363,
+      "y": 43,
+      "floor": 3,
+      "type": "womens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_169",
+      "x": 364,
+      "y": 101,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_172",
+      "x": 205,
+      "y": 582,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_173",
+      "x": 528,
+      "y": 105,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_174",
+      "x": 525,
+      "y": 200,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_175",
+      "x": 500,
+      "y": 582,
+      "floor": 3,
+      "type": "corridor"
+    },
+    {
+      "id": "node_176",
+      "x": 553,
+      "y": 588,
+      "floor": 3,
+      "type": "corridor"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_1",
+      "source": "node_11",
+      "target": "node_10",
+      "distance": 40,
+      "weight": 1
+    },
+    {
+      "id": "edge_2",
+      "source": "node_10",
+      "target": "node_1",
+      "distance": 60,
+      "weight": 1
+    },
+    {
+      "id": "edge_3",
+      "source": "node_10",
+      "target": "node_2",
+      "distance": 61,
+      "weight": 1
+    },
+    {
+      "id": "edge_4",
+      "source": "node_10",
+      "target": "node_3",
+      "distance": 59,
+      "weight": 1
+    },
+    {
+      "id": "edge_5",
+      "source": "node_10",
+      "target": "node_9",
+      "distance": 107,
+      "weight": 1
+    },
+    {
+      "id": "edge_6",
+      "source": "node_9",
+      "target": "node_4",
+      "distance": 48,
+      "weight": 1
+    },
+    {
+      "id": "edge_7",
+      "source": "node_9",
+      "target": "node_8",
+      "distance": 67,
+      "weight": 1
+    },
+    {
+      "id": "edge_8",
+      "source": "node_8",
+      "target": "node_5",
+      "distance": 46,
+      "weight": 1
+    },
+    {
+      "id": "edge_9",
+      "source": "node_8",
+      "target": "node_7",
+      "distance": 70,
+      "weight": 1
+    },
+    {
+      "id": "edge_10",
+      "source": "node_7",
+      "target": "node_6",
+      "distance": 47,
+      "weight": 1
+    },
+    {
+      "id": "edge_11",
+      "source": "node_13",
+      "target": "node_12",
+      "distance": 39,
+      "weight": 1
+    },
+    {
+      "id": "edge_12",
+      "source": "node_12",
+      "target": "node_7",
+      "distance": 58,
+      "weight": 1
+    },
+    {
+      "id": "edge_13",
+      "source": "node_12",
+      "target": "node_14",
+      "distance": 296,
+      "weight": 1
+    },
+    {
+      "id": "edge_14",
+      "source": "node_14",
+      "target": "node_23",
+      "distance": 65,
+      "weight": 1
+    },
+    {
+      "id": "edge_15",
+      "source": "node_14",
+      "target": "node_24",
+      "distance": 119,
+      "weight": 1
+    },
+    {
+      "id": "edge_16",
+      "source": "node_24",
+      "target": "node_26",
+      "distance": 87,
+      "weight": 1
+    },
+    {
+      "id": "edge_17",
+      "source": "node_24",
+      "target": "node_22",
+      "distance": 87,
+      "weight": 1
+    },
+    {
+      "id": "edge_18",
+      "source": "node_24",
+      "target": "node_25",
+      "distance": 52,
+      "weight": 1
+    },
+    {
+      "id": "edge_19",
+      "source": "node_27",
+      "target": "node_26",
+      "distance": 36,
+      "weight": 1
+    },
+    {
+      "id": "edge_20",
+      "source": "node_14",
+      "target": "node_15",
+      "distance": 54,
+      "weight": 1
+    },
+    {
+      "id": "edge_21",
+      "source": "node_15",
+      "target": "node_16",
+      "distance": 70,
+      "weight": 1
+    },
+    {
+      "id": "edge_22",
+      "source": "node_16",
+      "target": "node_17",
+      "distance": 71,
+      "weight": 1
+    },
+    {
+      "id": "edge_23",
+      "source": "node_17",
+      "target": "node_18",
+      "distance": 70,
+      "weight": 1
+    },
+    {
+      "id": "edge_24",
+      "source": "node_18",
+      "target": "node_19",
+      "distance": 70,
+      "weight": 1
+    },
+    {
+      "id": "edge_25",
+      "source": "node_19",
+      "target": "node_21",
+      "distance": 41,
+      "weight": 1
+    },
+    {
+      "id": "edge_26",
+      "source": "node_19",
+      "target": "node_20",
+      "distance": 72,
+      "weight": 1
+    },
+    {
+      "id": "edge_27",
+      "source": "node_19",
+      "target": "node_28",
+      "distance": 66,
+      "weight": 1
+    },
+    {
+      "id": "edge_28",
+      "source": "node_34",
+      "target": "node_15",
+      "distance": 47,
+      "weight": 1
+    },
+    {
+      "id": "edge_29",
+      "source": "node_33",
+      "target": "node_16",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_30",
+      "source": "node_32",
+      "target": "node_17",
+      "distance": 46,
+      "weight": 1
+    },
+    {
+      "id": "edge_31",
+      "source": "node_31",
+      "target": "node_18",
+      "distance": 44,
+      "weight": 1
+    },
+    {
+      "id": "edge_32",
+      "source": "node_30",
+      "target": "node_19",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_33",
+      "source": "node_29",
+      "target": "node_20",
+      "distance": 44,
+      "weight": 1
+    },
+    {
+      "id": "edge_103",
+      "source": "node_120",
+      "target": "node_117",
+      "distance": 41,
+      "weight": 1
+    },
+    {
+      "id": "edge_104",
+      "source": "node_117",
+      "target": "node_119",
+      "distance": 64,
+      "weight": 1
+    },
+    {
+      "id": "edge_105",
+      "source": "node_119",
+      "target": "node_115",
+      "distance": 101,
+      "weight": 1
+    },
+    {
+      "id": "edge_106",
+      "source": "node_115",
+      "target": "node_116",
+      "distance": 71,
+      "weight": 1
+    },
+    {
+      "id": "edge_107",
+      "source": "node_119",
+      "target": "node_118",
+      "distance": 82,
+      "weight": 1
+    },
+    {
+      "id": "edge_108",
+      "source": "node_118",
+      "target": "node_121",
+      "distance": 75,
+      "weight": 1
+    },
+    {
+      "id": "edge_109",
+      "source": "node_118",
+      "target": "node_123",
+      "distance": 51,
+      "weight": 1
+    },
+    {
+      "id": "edge_110",
+      "source": "node_115",
+      "target": "node_114",
+      "distance": 91,
+      "weight": 1
+    },
+    {
+      "id": "edge_111",
+      "source": "node_114",
+      "target": "node_113",
+      "distance": 71,
+      "weight": 1
+    },
+    {
+      "id": "edge_112",
+      "source": "node_113",
+      "target": "node_112",
+      "distance": 71,
+      "weight": 1
+    },
+    {
+      "id": "edge_113",
+      "source": "node_112",
+      "target": "node_107",
+      "distance": 70,
+      "weight": 1
+    },
+    {
+      "id": "edge_114",
+      "source": "node_107",
+      "target": "node_106",
+      "distance": 67,
+      "weight": 1
+    },
+    {
+      "id": "edge_115",
+      "source": "node_106",
+      "target": "node_101",
+      "distance": 77,
+      "weight": 1
+    },
+    {
+      "id": "edge_116",
+      "source": "node_106",
+      "target": "node_103",
+      "distance": 46,
+      "weight": 1
+    },
+    {
+      "id": "edge_117",
+      "source": "node_106",
+      "target": "node_105",
+      "distance": 50,
+      "weight": 1
+    },
+    {
+      "id": "edge_118",
+      "source": "node_101",
+      "target": "node_102",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_119",
+      "source": "node_107",
+      "target": "node_104",
+      "distance": 43,
+      "weight": 1
+    },
+    {
+      "id": "edge_120",
+      "source": "node_107",
+      "target": "node_108",
+      "distance": 48,
+      "weight": 1
+    },
+    {
+      "id": "edge_121",
+      "source": "node_112",
+      "target": "node_109",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_122",
+      "source": "node_110",
+      "target": "node_113",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_123",
+      "source": "node_114",
+      "target": "node_111",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_124",
+      "source": "node_126",
+      "target": "node_120",
+      "distance": 74,
+      "weight": 1
+    },
+    {
+      "id": "edge_125",
+      "source": "node_127",
+      "target": "node_120",
+      "distance": 67,
+      "weight": 1
+    },
+    {
+      "id": "edge_stair_A",
+      "source": "node_28",
+      "target": "node_104",
+      "distance": 100,
+      "weight": 2
+    },
+    {
+      "id": "edge_stair_B",
+      "source": "node_25",
+      "target": "node_117",
+      "distance": 100,
+      "weight": 2
+    },
+    {
+      "id": "edge_126",
+      "source": "node_145",
+      "target": "node_144",
+      "distance": 42,
+      "weight": 1
+    },
+    {
+      "id": "edge_127",
+      "source": "node_144",
+      "target": "node_146",
+      "distance": 61,
+      "weight": 1
+    },
+    {
+      "id": "edge_128",
+      "source": "node_146",
+      "target": "node_159",
+      "distance": 50,
+      "weight": 1
+    },
+    {
+      "id": "edge_129",
+      "source": "node_158",
+      "target": "node_147",
+      "distance": 47,
+      "weight": 1
+    },
+    {
+      "id": "edge_130",
+      "source": "node_146",
+      "target": "node_147",
+      "distance": 71,
+      "weight": 1
+    },
+    {
+      "id": "edge_131",
+      "source": "node_147",
+      "target": "node_148",
+      "distance": 65,
+      "weight": 1
+    },
+    {
+      "id": "edge_132",
+      "source": "node_148",
+      "target": "node_149",
+      "distance": 77,
+      "weight": 1
+    },
+    {
+      "id": "edge_133",
+      "source": "node_149",
+      "target": "node_150",
+      "distance": 52,
+      "weight": 1
+    },
+    {
+      "id": "edge_134",
+      "source": "node_149",
+      "target": "node_156",
+      "distance": 43,
+      "weight": 1
+    },
+    {
+      "id": "edge_135",
+      "source": "node_150",
+      "target": "node_155",
+      "distance": 48,
+      "weight": 1
+    },
+    {
+      "id": "edge_136",
+      "source": "node_150",
+      "target": "node_154",
+      "distance": 55,
+      "weight": 1
+    },
+    {
+      "id": "edge_137",
+      "source": "node_150",
+      "target": "node_151",
+      "distance": 55,
+      "weight": 1
+    },
+    {
+      "id": "edge_138",
+      "source": "node_150",
+      "target": "node_172",
+      "distance": 104,
+      "weight": 1
+    },
+    {
+      "id": "edge_139",
+      "source": "node_152",
+      "target": "node_172",
+      "distance": 33,
+      "weight": 1
+    },
+    {
+      "id": "edge_140",
+      "source": "node_172",
+      "target": "node_153",
+      "distance": 34,
+      "weight": 1
+    },
+    {
+      "id": "edge_141",
+      "source": "node_134",
+      "target": "node_135",
+      "distance": 95,
+      "weight": 1
+    },
+    {
+      "id": "edge_142",
+      "source": "node_135",
+      "target": "node_136",
+      "distance": 48,
+      "weight": 1
+    },
+    {
+      "id": "edge_143",
+      "source": "node_136",
+      "target": "node_137",
+      "distance": 71,
+      "weight": 1
+    },
+    {
+      "id": "edge_144",
+      "source": "node_137",
+      "target": "node_138",
+      "distance": 70,
+      "weight": 1
+    },
+    {
+      "id": "edge_145",
+      "source": "node_138",
+      "target": "node_139",
+      "distance": 69,
+      "weight": 1
+    },
+    {
+      "id": "edge_146",
+      "source": "node_139",
+      "target": "node_143",
+      "distance": 70,
+      "weight": 1
+    },
+    {
+      "id": "edge_147",
+      "source": "node_143",
+      "target": "node_144",
+      "distance": 273,
+      "weight": 1
+    },
+    {
+      "id": "edge_148",
+      "source": "node_143",
+      "target": "node_140",
+      "distance": 59,
+      "weight": 1
+    },
+    {
+      "id": "edge_149",
+      "source": "node_140",
+      "target": "node_141",
+      "distance": 98,
+      "weight": 1
+    },
+    {
+      "id": "edge_150",
+      "source": "node_141",
+      "target": "node_142",
+      "distance": 59,
+      "weight": 1
+    },
+    {
+      "id": "edge_151",
+      "source": "node_141",
+      "target": "node_169",
+      "distance": 41,
+      "weight": 1
+    },
+    {
+      "id": "edge_152",
+      "source": "node_142",
+      "target": "node_168",
+      "distance": 39,
+      "weight": 1
+    },
+    {
+      "id": "edge_153",
+      "source": "node_173",
+      "target": "node_141",
+      "distance": 123,
+      "weight": 1
+    },
+    {
+      "id": "edge_154",
+      "source": "node_173",
+      "target": "node_160",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_155",
+      "source": "node_140",
+      "target": "node_174",
+      "distance": 135,
+      "weight": 1
+    },
+    {
+      "id": "edge_156",
+      "source": "node_174",
+      "target": "node_163",
+      "distance": 53,
+      "weight": 1
+    },
+    {
+      "id": "edge_157",
+      "source": "node_136",
+      "target": "node_167",
+      "distance": 36,
+      "weight": 1
+    },
+    {
+      "id": "edge_158",
+      "source": "node_135",
+      "target": "node_166",
+      "distance": 52,
+      "weight": 1
+    },
+    {
+      "id": "edge_159",
+      "source": "node_135",
+      "target": "node_175",
+      "distance": 91,
+      "weight": 1
+    },
+    {
+      "id": "edge_160",
+      "source": "node_175",
+      "target": "node_176",
+      "distance": 53,
+      "weight": 1
+    },
+    {
+      "id": "edge_161",
+      "source": "node_176",
+      "target": "node_165",
+      "distance": 31,
+      "weight": 1
+    },
+    {
+      "id": "edge_162",
+      "source": "node_175",
+      "target": "node_164",
+      "distance": 38,
+      "weight": 1
+    },
+    {
+      "id": "edge_163",
+      "source": "node_128",
+      "target": "node_139",
+      "distance": 44,
+      "weight": 1
+    },
+    {
+      "id": "edge_164",
+      "source": "node_129",
+      "target": "node_138",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_165",
+      "source": "node_130",
+      "target": "node_137",
+      "distance": 46,
+      "weight": 1
+    },
+    {
+      "id": "edge_166",
+      "source": "node_131",
+      "target": "node_136",
+      "distance": 46,
+      "weight": 1
+    },
+    {
+      "id": "edge_167",
+      "source": "node_132",
+      "target": "node_135",
+      "distance": 57,
+      "weight": 1
+    },
+    {
+      "id": "edge_168",
+      "source": "node_133",
+      "target": "node_134",
+      "distance": 53,
+      "weight": 1
+    }
+  ]
+}

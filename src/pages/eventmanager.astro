@@ -1,0 +1,363 @@
+---
+import Layout from './template.astro';
+---
+
+<Layout
+  title="投票管理ダッシュボード | 駒場東邦 第69回 文化祭"
+  description="文化祭実行委員用 投票管理ダッシュボード"
+  pageTitleEn="DASHBOARD"
+  pageTitleJa="投票管理ダッシュボード"
+>
+  <div class="admin-container">
+    <!-- ログインセクション -->
+    <div id="login-section" class="admin-card login-card">
+      <h2 class="section-title">管理者ログイン</h2>
+      <div class="input-group">
+        <input type="password" id="admin-pass" class="admin-input" placeholder="パスワードを入力" />
+        <button id="login-btn" class="admin-btn btn-primary">ログイン</button>
+      </div>
+      <p id="login-error" class="error-msg"></p>
+    </div>
+
+    <!-- ダッシュボードセクション -->
+    <div id="admin-section" class="hidden">
+      <div class="dashboard-header">
+        <p class="dashboard-desc">各企画の投票状況の確認と、受付の開始・停止を行えます。</p>
+        <button id="logout-btn" class="logout-btn">ログアウト</button>
+      </div>
+
+      <div id="stats-container" class="stats-grid">
+        <p class="loading-text">データを読み込んでいます...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { db } from '../lib/firebase-client';
+    import { doc, getDoc, updateDoc, collection, getDocs } from 'firebase/firestore';
+
+    const categoryNames: Record<string, string> = {
+      bodykoma: 'ボディコマ',
+      utakomafirst: '歌コマ (第1部)',
+      nightfes: '後夜祭',
+      utakomasecond: '歌コマ (第2部)',
+      osikoma: '推しコマ'
+    };
+
+    const loginSection = document.getElementById('login-section')!;
+    const adminSection = document.getElementById('admin-section')!;
+    const passInput = document.getElementById('admin-pass') as HTMLInputElement;
+    const loginBtn = document.getElementById('login-btn')!;
+    const loginError = document.getElementById('login-error')!;
+    const logoutBtn = document.getElementById('logout-btn')!;
+    const statsContainer = document.getElementById('stats-container')!;
+
+    if (sessionStorage.getItem('admin_logged_in') === 'true') {
+      showAdmin();
+    }
+
+    loginBtn.addEventListener('click', async () => {
+      loginError.textContent = '';
+      const pass = passInput.value;
+      if (!pass) return;
+
+      const btnOriginalText = loginBtn.textContent;
+      loginBtn.textContent = '確認中...';
+      (loginBtn as HTMLButtonElement).disabled = true;
+
+      try {
+        const settingsDoc = await getDoc(doc(db, 'settings', 'global'));
+        if (settingsDoc.exists() && settingsDoc.data().adminPassword === pass) {
+          sessionStorage.setItem('admin_logged_in', 'true');
+          showAdmin();
+        } else {
+          loginError.textContent = 'パスワードが正しくありません。';
+        }
+      } catch (e) {
+        console.error(e);
+        loginError.textContent = 'データベースとの通信に失敗しました。';
+      } finally {
+        loginBtn.textContent = btnOriginalText;
+        (loginBtn as HTMLButtonElement).disabled = false;
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('admin_logged_in');
+      adminSection.classList.add('hidden');
+      loginSection.classList.remove('hidden');
+      passInput.value = '';
+    });
+
+    async function showAdmin() {
+      loginSection.classList.add('hidden');
+      adminSection.classList.remove('hidden');
+      await loadDashboard();
+    }
+
+    async function loadDashboard() {
+      try {
+        const [settingsDoc, votesSnap] = await Promise.all([
+          getDoc(doc(db, 'settings', 'global')),
+          getDocs(collection(db, 'votes'))
+        ]);
+        
+        const settingsData = settingsDoc.exists() ? settingsDoc.data() : {};
+        const categoryStats: Record<string, Record<string, number>> = {};
+
+        votesSnap.forEach(docSnap => {
+          const data = docSnap.data();
+          const cat = data.categoryId || 'other';
+          const cand = data.candidateId || '不明';
+          if (!categoryStats[cat]) categoryStats[cat] = {};
+          categoryStats[cat][cand] = (categoryStats[cat][cand] || 0) + 1;
+        });
+
+        renderStats(categoryStats, settingsData);
+      } catch (error) {
+        console.error(error);
+        statsContainer.innerHTML = '<p class="error-msg">データの読み込みに失敗しました。</p>';
+      }
+    }
+
+    function renderStats(stats: Record<string, Record<string, number>>, settingsData: any) {
+      statsContainer.innerHTML = '';
+
+      Object.keys(categoryNames).forEach(catKey => {
+        const catTitle = categoryNames[catKey];
+        const candVotes = stats[catKey] || {};
+        const isOpen = settingsData[`status_${catKey}`] === true;
+        
+        const sorted = Object.entries(candVotes).sort((a, b) => b[1] - a[1]);
+        const total = sorted.reduce((sum, [_, count]) => sum + count, 0);
+
+        const block = document.createElement('div');
+        block.className = 'admin-card stat-card';
+        
+        const badgeClass = isOpen ? 'status-open' : 'status-closed';
+        const badgeText = isOpen ? '受付中' : '停止中';
+        const btnClass = isOpen ? 'btn-danger' : 'btn-success';
+        const btnText = isOpen ? '受付を停止する' : '受付を開始する';
+
+        let html = `
+          <div class="stat-header">
+            <div class="stat-info">
+              <h3 class="stat-title">${catTitle}</h3>
+              <p class="stat-total">総計 <strong>${total}</strong> 票</p>
+            </div>
+            <div class="status-controls">
+              <span class="status-badge ${badgeClass}">${badgeText}</span>
+              <button class="admin-btn ${btnClass} toggle-status-btn" data-category="${catKey}" data-current="${isOpen}">
+                ${btnText}
+              </button>
+            </div>
+          </div>
+        `;
+
+        if (sorted.length === 0) {
+          html += `<div class="empty-data">まだ投票データがありません。</div>`;
+        } else {
+          html += `<div class="results-list">`;
+          sorted.forEach(([cand, count], index) => {
+            const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+            const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
+            html += `
+              <div class="result-row ${rankClass}">
+                <span class="cand-name">${cand}</span>
+                <span class="cand-score"><strong>${count}</strong> 票 <span class="pct">(${pct}%)</span></span>
+              </div>
+            `;
+          });
+          html += `</div>`;
+        }
+
+        block.innerHTML = html;
+        statsContainer.appendChild(block);
+      });
+
+      document.querySelectorAll('.toggle-status-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const target = e.currentTarget as HTMLButtonElement;
+          const catKey = target.dataset.category!;
+          const isCurrentlyOpen = target.dataset.current === 'true';
+          
+          target.disabled = true;
+          target.textContent = '更新中...';
+
+          try {
+            await updateDoc(doc(db, 'settings', 'global'), {
+              [`status_${catKey}`]: !isCurrentlyOpen
+            });
+            await loadDashboard(); 
+          } catch (error) {
+            alert('ステータスの更新に失敗しました。');
+            target.disabled = false;
+            target.textContent = isCurrentlyOpen ? '受付を停止する' : '受付を開始する';
+          }
+        });
+      });
+    }
+  </script>
+
+  <!-- is:global を付与してJavaScriptで生成されたHTMLにもスタイルを適用 -->
+  <style is:global>
+    .admin-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .hidden { display: none !important; }
+    
+    .admin-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .login-card {
+      max-width: 400px;
+      margin: 4rem auto;
+      text-align: center;
+    }
+    .section-title {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+      color: #1e293b;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .admin-input {
+      padding: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f8fafc;
+      transition: border-color 0.2s;
+    }
+    .admin-input:focus {
+      outline: none;
+      border-color: #2563eb;
+      background: #fff;
+    }
+    
+    .admin-btn {
+      padding: 12px 20px;
+      font-weight: 700;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .admin-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .btn-primary { background: #1a202c; color: white; }
+    .btn-primary:hover:not(:disabled) { background: #334155; }
+    .btn-danger { background: #ef4444; color: white; }
+    .btn-danger:hover:not(:disabled) { background: #dc2626; }
+    .btn-success { background: #10b981; color: white; }
+    .btn-success:hover:not(:disabled) { background: #059669; }
+    
+    .error-msg {
+      color: #dc2626;
+      font-weight: bold;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .dashboard-desc { color: #64748b; margin: 0; font-size: 0.95rem; }
+    .logout-btn {
+      background: transparent;
+      border: 2px solid #cbd5e1;
+      padding: 8px 16px;
+      border-radius: 8px;
+      color: #475569;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .logout-btn:hover { background: #f1f5f9; color: #0f172a; border-color: #94a3b8; }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 600px) {
+      .stat-header { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+      .status-controls { width: 100%; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 12px; border-radius: 8px; box-sizing: border-box; }
+    }
+    .stat-info { display: flex; flex-direction: column; gap: 4px; }
+    .stat-title { margin: 0; font-size: 1.4rem; color: #0f172a; font-weight: 900; }
+    .stat-total { margin: 0; color: #64748b; font-size: 0.95rem; }
+    
+    .status-controls { display: flex; align-items: center; gap: 1rem; }
+    .status-badge {
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .status-open { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .status-closed { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+    
+    .empty-data {
+      text-align: center;
+      color: #94a3b8;
+      padding: 3rem 2rem;
+      background: #f8fafc;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    
+    .results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border-left: 6px solid #cbd5e1;
+      transition: transform 0.2s;
+    }
+    .result-row:hover { transform: translateX(4px); }
+    .rank-1 { border-left-color: #fbbf24; background: #fefce8; }
+    .rank-2 { border-left-color: #94a3b8; }
+    .rank-3 { border-left-color: #b45309; }
+    
+    .cand-name { font-weight: 700; color: #334155; font-size: 1.05rem; }
+    .cand-score { color: #0f172a; font-size: 1.05rem; }
+    .pct { color: #64748b; font-size: 0.85rem; margin-left: 6px; }
+    .loading-text { text-align: center; color: #64748b; padding: 3rem; font-weight: bold; }
+  </style>
+</Layout>
