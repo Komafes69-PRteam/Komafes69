@@ -77,7 +77,6 @@ const currentCategory = categoriesConfig[category as string];
       const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
 
       if (!loading || !alertBox || !voteForm || !category) return;
-
       let selectedCandidateId: string | null = null;
 
       try {
