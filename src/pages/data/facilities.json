@@ -1,4 +1,6 @@
 [
   { "slug": "main-stage", "name": "ステージ" },
-  { "slug": "cafeteria", "name": "食堂" }
+  { "slug": "cafeteria", "name": "食堂" },
+  { "slug": "gym", "name": "体育館" },
+  { "slug": "office", "name": "事務室" }
 ]
