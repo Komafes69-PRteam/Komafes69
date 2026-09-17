@@ -15,15 +15,14 @@ const { category } = Astro.params;
 
 const categoriesConfig: Record<string, { title: string; candidates: string[] }> = {
   bodykoma: {
-    title: 'ボディコマ',
-    
+    title: 'ボディコマ 投票',
     candidates: ['鈴木たくま(日)', '金森達平', '高橋到吾', '武田光一', '大曽根', '大竹悠理', '松本大地', '生駒', '諸永', '大塚', '大隈']
   },
-  utakomafirst: { title: '歌コマ (第1部)', candidates: [] },
-  nightfes: { title: '後夜祭', candidates: [] },
-  utakomasecond: { title: '歌コマ (第2部)', candidates: [] },
+  utakomafirst: { title: '歌コマ (第1部) 投票', candidates: [] },
+  nightfes: { title: '後夜祭 投票', candidates: [] },
+  utakomasecond: { title: '歌コマ (第2部) 投票', candidates: [] },
   osikoma: {
-    title: '推しコマ',
+    title: '推しコマ 投票',
     candidates: ['林', '沖', '今村優介', '谷', '宇野', '森園', '田村隆之介', 'ハワード', '田中康', '湊川', '新行寺']
   }
 };
@@ -203,11 +202,16 @@ const currentCategory = categoriesConfig[category as string];
       transition: all 0.2s ease;
       font-family: inherit;
     }
+    
+    /* === ホバー時のスタイルを分かりやすく改善 === */
     .candidate-btn:hover:not(:disabled) {
-      border-color: #cbd5e1;
-      background: #f1f5f9;
+      border-color: #3b82f6;
+      background: #eff6ff;
+      color: #1d4ed8;
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
     }
+    
     .candidate-btn.selected {
       background: #1a202c;
       color: #ffffff;
@@ -218,6 +222,7 @@ const currentCategory = categoriesConfig[category as string];
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
+      box-shadow: none;
     }
 
     .submit-wrapper {
