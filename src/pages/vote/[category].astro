@@ -13,16 +13,22 @@ export function getStaticPaths() {
 
 const { category } = Astro.params;
 
-const categoriesConfig: Record<string, { title: string; candidates: string[] }> = {
+// 投票設定：ボディコマのみ type を 'grouped' にしてグループ情報を追加
+const categoriesConfig: Record<string, any> = {
   bodykoma: {
     title: 'ボディコマ 投票',
-    candidates: ['鈴木たくま(日)', '金森達平', '高橋到吾', '武田光一', '大曽根', '大竹悠理', '松本大地', '生駒', '諸永', '大塚', '大隈']
+    type: 'grouped',
+    groups: [
+      { id: 'groupA', name: 'A組', maxVotes: 2, candidates: ['金森', '大熊', '諸永', '大塚', '大曽根', '生駒'] },
+      { id: 'groupB', name: 'B組', maxVotes: 2, candidates: ['武田', '高橋', '松本', '鈴木', '林', '大竹'] }
+    ]
   },
-  utakomafirst: { title: '歌コマ (第1部) 投票', candidates: [] },
-  nightfes: { title: '後夜祭 投票', candidates: [] },
-  utakomasecond: { title: '歌コマ (第2部) 投票', candidates: [] },
+  utakomafirst: { title: '歌コマ (第1部) 投票', type: 'single', candidates: [] },
+  nightfes: { title: '後夜祭 投票', type: 'single', candidates: [] },
+  utakomasecond: { title: '歌コマ (第2部) 投票', type: 'single', candidates: [] },
   osikoma: {
     title: '推しコマ 投票',
+    type: 'single',
     candidates: ['林', '沖', '今村優介', '谷', '宇野', '森園', '田村隆之介', 'ハワード', '田中康', '湊川', '新行寺']
   }
 };
@@ -36,26 +42,50 @@ const currentCategory = categoriesConfig[category as string];
   pageTitleEn="VOTE"
   pageTitleJa={currentCategory.title}
 >
-  <div class="vote-container" id="app-container" data-category={category}>
+  <div class="vote-container" id="app-container" data-category={category} data-type={currentCategory.type}>
     <div id="loading" class="loading-text">システムに接続中...</div>
     <div id="alert-box" class="alert"></div>
 
     <div id="vote-form" class="hidden">
-      <p class="instruction-text">投票したい候補者を選択し、一番下のボタンを押してください。</p>
-      
-      <div class="candidates-grid">
-        {currentCategory.candidates.map((name) => (
-          <button type="button" value={name} class="candidate-btn">
-            {name}
-          </button>
-        ))}
-      </div>
-      
-      {currentCategory.candidates.length === 0 && (
-        <div class="empty-state">現在、候補者は登録されていません。</div>
+      {currentCategory.type === 'grouped' ? (
+        <p class="instruction-text">各組から<strong>それぞれ2名ずつ（計4名）</strong>選択し、一番下のボタンを押してください。</p>
+      ) : (
+        <p class="instruction-text">投票したい候補者を選択し、一番下のボタンを押してください。</p>
       )}
       
-      {currentCategory.candidates.length > 0 && (
+      <!-- グループ分けされている場合 (ボディコマ等) -->
+      {currentCategory.type === 'grouped' && (
+        <div class="groups-container">
+          {currentCategory.groups.map((group: any) => (
+            <div class="group-section">
+              <h3 class="group-title">{group.name} <span class="group-limit">（{group.maxVotes}名選択）</span></h3>
+              <div class="candidates-grid">
+                {group.candidates.map((name: string) => (
+                  <button type="button" value={name} class="candidate-btn grouped-btn" data-group={group.id} data-max={group.maxVotes}>
+                    {name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <!-- 単一選択の場合 (推しコマ等) -->
+      {currentCategory.type === 'single' && (
+        <div class="candidates-grid">
+          {currentCategory.candidates.map((name: string) => (
+            <button type="button" value={name} class="candidate-btn single-btn">
+              {name}
+            </button>
+          ))}
+          {currentCategory.candidates.length === 0 && (
+            <div class="empty-state">現在、候補者は登録されていません。</div>
+          )}
+        </div>
+      )}
+      
+      {(currentCategory.type === 'grouped' || currentCategory.candidates.length > 0) && (
         <div class="submit-wrapper">
           <button type="button" id="submit-btn" class="submit-btn" disabled>投票を送信する</button>
         </div>
@@ -65,19 +95,20 @@ const currentCategory = categoriesConfig[category as string];
 
   <script>
     import { db } from '../../lib/firebase-client';
-    import { collection, query, where, getDocs, doc, getDoc, addDoc } from 'firebase/firestore';
+    import { collection, query, where, getDocs, doc, getDoc, writeBatch } from 'firebase/firestore';
 
     async function init() {
       const container = document.getElementById('app-container');
       const category = container?.dataset.category;
+      const voteType = container?.dataset.type; // 'grouped' or 'single'
       const loading = document.getElementById('loading');
       const alertBox = document.getElementById('alert-box');
       const voteForm = document.getElementById('vote-form');
-      const candidateButtons = document.querySelectorAll('.candidate-btn');
+      const groupedBtns = document.querySelectorAll('.grouped-btn');
+      const singleBtns = document.querySelectorAll('.single-btn');
       const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
 
       if (!loading || !alertBox || !voteForm || !category) return;
-      let selectedCandidateId: string | null = null;
 
       try {
         const ipRes = await fetch('https://api.ipify.org?format=json');
@@ -91,48 +122,96 @@ const currentCategory = categoriesConfig[category as string];
         loading.style.display = 'none';
         voteForm.classList.remove('hidden');
 
+        // 受付停止チェック
         if (!isVotingOpen) {
           alertBox.textContent = '現在、この企画の投票は受け付けておりません。';
           alertBox.className = 'alert alert-error alert-visible';
-          candidateButtons.forEach(btn => (btn as HTMLButtonElement).disabled = true);
+          document.querySelectorAll('.candidate-btn').forEach(btn => (btn as HTMLButtonElement).disabled = true);
           return;
         }
 
+        // 投票済みチェック
         const q = query(collection(db, 'votes'), where('ipAddress', '==', clientIp), where('categoryId', '==', category));
         const previousVotes = await getDocs(q);
 
         if (!previousVotes.empty) {
           alertBox.textContent = '既にこの企画には投票済みです。ご協力ありがとうございました。';
           alertBox.className = 'alert alert-error alert-visible';
-          candidateButtons.forEach(btn => (btn as HTMLButtonElement).disabled = true);
+          document.querySelectorAll('.candidate-btn').forEach(btn => (btn as HTMLButtonElement).disabled = true);
           return;
         }
 
-        candidateButtons.forEach(btn => {
+        // 送信ボタンの有効・無効を判定する関数
+        const checkSubmitStatus = () => {
+          if (!submitBtn) return;
+          if (voteType === 'grouped') {
+            const aSelected = document.querySelectorAll('.grouped-btn.selected[data-group="groupA"]').length;
+            const bSelected = document.querySelectorAll('.grouped-btn.selected[data-group="groupB"]').length;
+            // A組・B組それぞれ2名ずつ選択されている場合のみ有効化
+            submitBtn.disabled = !(aSelected === 2 && bSelected === 2);
+          } else {
+            submitBtn.disabled = document.querySelectorAll('.single-btn.selected').length === 0;
+          }
+        };
+
+        // 【グループ選択（ボディコマ等）のイベント】
+        groupedBtns.forEach(btn => {
           btn.addEventListener('click', (e) => {
-            candidateButtons.forEach(b => b.classList.remove('selected'));
             const target = e.currentTarget as HTMLButtonElement;
-            target.classList.add('selected');
-            selectedCandidateId = target.value;
-            if (submitBtn) submitBtn.disabled = false;
+            const groupId = target.dataset.group;
+            const maxVotes = parseInt(target.dataset.max || '2', 10);
+
+            if (target.classList.contains('selected')) {
+              // 選択解除
+              target.classList.remove('selected');
+            } else {
+              // 新規選択（上限に達していないかチェック）
+              const currentSelected = document.querySelectorAll(`.grouped-btn.selected[data-group="${groupId}"]`);
+              if (currentSelected.length < maxVotes) {
+                target.classList.add('selected');
+              } else {
+                alert(`この組からは${maxVotes}名までしか選択できません。別の候補者を選ぶ場合は、先に選択済みの候補者を解除してください。`);
+              }
+            }
+            checkSubmitStatus();
           });
         });
 
+        // 【単一選択（推しコマ等）のイベント】
+        singleBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            singleBtns.forEach(b => b.classList.remove('selected'));
+            (e.currentTarget as HTMLButtonElement).classList.add('selected');
+            checkSubmitStatus();
+          });
+        });
+
+        // 【送信処理】
         if (submitBtn) {
           submitBtn.addEventListener('click', async () => {
-            if (!selectedCandidateId) return;
+            const selectedBtns = document.querySelectorAll('.candidate-btn.selected');
+            if (selectedBtns.length === 0) return;
             
-            candidateButtons.forEach(b => (b as HTMLButtonElement).disabled = true);
+            document.querySelectorAll('.candidate-btn').forEach(b => (b as HTMLButtonElement).disabled = true);
             submitBtn.disabled = true;
             submitBtn.textContent = '送信中...';
 
             try {
-              await addDoc(collection(db, 'votes'), {
-                categoryId: category,
-                candidateId: selectedCandidateId,
-                ipAddress: clientIp,
-                timestamp: new Date()
+              // 複数の投票データを一括で保存（バッチ処理）
+              const batch = writeBatch(db);
+              
+              selectedBtns.forEach(btn => {
+                const candName = (btn as HTMLButtonElement).value;
+                const newRef = doc(collection(db, 'votes'));
+                batch.set(newRef, {
+                  categoryId: category,
+                  candidateId: candName,
+                  ipAddress: clientIp,
+                  timestamp: new Date()
+                });
               });
+
+              await batch.commit();
               
               alertBox.textContent = '投票が完了しました！ご協力ありがとうございます。';
               alertBox.className = 'alert alert-success alert-visible';
@@ -141,7 +220,7 @@ const currentCategory = categoriesConfig[category as string];
               console.error(error);
               alertBox.textContent = 'エラーが発生しました。時間をおいて再試行してください。';
               alertBox.className = 'alert alert-error alert-visible';
-              candidateButtons.forEach(b => (b as HTMLButtonElement).disabled = false);
+              document.querySelectorAll('.candidate-btn').forEach(b => (b as HTMLButtonElement).disabled = false);
               submitBtn.disabled = false;
               submitBtn.textContent = '投票を送信する';
             }
@@ -178,22 +257,50 @@ const currentCategory = categoriesConfig[category as string];
       color: #475569;
       margin-bottom: 2rem;
       font-size: 0.95rem;
+      line-height: 1.5;
     }
     .hidden { display: none !important; }
     
+    /* グループ用スタイル */
+    .groups-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .group-section {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+    .group-title {
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+      color: #0f172a;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .group-limit {
+      font-size: 0.9rem;
+      color: #64748b;
+      font-weight: normal;
+    }
+
     .candidates-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
-      margin-bottom: 2rem;
     }
     
     .candidate-btn {
       width: 100%;
-      padding: 18px;
-      background: #f8fafc;
-      border: 2px solid #e2e8f0;
-      border-radius: 12px;
+      padding: 16px;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
       font-size: 1.1rem;
       font-weight: 700;
       color: #334155;
@@ -202,7 +309,6 @@ const currentCategory = categoriesConfig[category as string];
       font-family: inherit;
     }
     
-    /* === ホバー時のスタイルを分かりやすく改善 === */
     .candidate-btn:hover:not(:disabled) {
       border-color: #3b82f6;
       background: #eff6ff;
@@ -228,7 +334,7 @@ const currentCategory = categoriesConfig[category as string];
       text-align: center;
       margin-top: 2rem;
       padding-top: 2rem;
-      border-top: 1px dashed #e2e8f0;
+      border-top: 1px dashed #cbd5e1;
     }
     .submit-btn {
       width: 100%;
