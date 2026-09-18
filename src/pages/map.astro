@@ -1,759 +1,582 @@
 ---
-import { Image } from "astro:assets";
-
-// 背景画像やロゴ類
-import titleBg from "../pages/assets/TitleBackground.webp";
-import titleBackgroundBlack from "../pages/assets/TitleBackgroundBlack.jpg";
-
-import youtubeIcon from "./assets/youtube.svg";
-import xIcon from "./assets/X.svg";
-import logoImg from "./assets/logo.svg";
-import typoImg from "./assets/typo.svg";
-import instagramIcon from "./assets/Instagram.svg";
-
-const {
-  title = "MAPS | 第69回 駒場東邦文化祭 | SAIL BEYOND",
-  description = "駒場東邦中学校・高等学校 第69回 文化祭公式ウェブサイトです。便利なオンラインマップを提供しています。",
-  pageTitleEn = "MAP",
-  pageTitleJa = "マップ",
-} = Astro.props;
-
-
-import map1f from "./assets/map1f.png";
-import map2f from "./assets/map2f.png";
-import map3f from "./assets/map3f.png";
-import map4f from "./assets/map4f.png";
-import map5f from "./assets/map5f.png";
+import mapData from './data/mergedMap.json';
 ---
 
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>校内マップ - ナビゲーション</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style is:global>
+      :root {
+        --primary-blue: #007AFF;
+        --bg-color: #f8fafc;
+      }
+      body, html {
+        margin: 0; padding: 0; height: 100%; width: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        overflow: hidden;
+      }
+      
+      #map {
+        position: absolute; top: 0; left: 0;
+        width: 100vw; height: 100dvh;
+        background-color: var(--bg-color);
+        z-index: 1;
+      }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
+      /* 施設・教室のみを示す半透明ピン */
+      .map-pin {
+        display: block;
+        width: 18px; height: 18px;
+        background-color: rgba(15, 23, 42, 0.42);
+        border: 2px solid rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.3);
+        transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+      }
+      .map-pin:hover, .map-pin:active {
+        transform: scale(1.2);
+        background-color: rgba(0, 122, 255, 0.72);
+      }
+      .map-pin.is-selected {
+        background-color: #007AFF;
+        box-shadow: 0 0 0 5px rgba(0, 122, 255, 0.2), 0 4px 12px rgba(0, 122, 255, 0.42);
+        transform: scale(1.25);
+      }
 
-    <!-- ファビコン設定 -->
-    <link rel="icon" type="image/png" href="/icon.png" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <link rel="icon" href="/icon.ico" />
+      .ui-layer {
+        position: absolute; top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 1000;
+        display: flex; flex-direction: column; justify-content: space-between;
+      }
 
-    <!-- iOS / WebManifest 用 -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="apple-mobile-web-app-title" content="Sail Beyond" />
+      .top-controls {
+        padding: max(24px, env(safe-area-inset-top)) 16px 10px;
+        pointer-events: auto;
+      }
+      .search-box {
+        background: rgba(255,255,255,0.96); border: 1px solid rgba(148,163,184,0.22); border-radius: 18px;
+        padding: 13px 16px; box-shadow: 0 10px 28px rgba(15,23,42,0.12);
+        display: flex; align-items: center; margin-bottom: 12px;
+      }
+      .search-box input {
+        border: none; outline: none; width: 100%;
+        font-size: 16px; margin-left: 8px;
+      }
+      .chips {
+        display: flex; gap: 8px; overflow-x: auto;
+        padding-bottom: 4px; scrollbar-width: none;
+      }
+      .chips::-webkit-scrollbar { display: none; }
+      .chip {
+        background: rgba(255,255,255,0.92); border: 1px solid #dbe4ef;
+        border-radius: 999px; padding: 8px 12px; font-size: 12px;
+        white-space: nowrap; font-weight: 700; color: #334155;
+        box-shadow: 0 3px 8px rgba(15,23,42,0.08); cursor: pointer;
+        transition: transform .2s ease, background-color .2s ease, color .2s ease;
+      }
+      .chip:hover { transform: translateY(-1px); background: #eff6ff; color: #075dc5; }
+
+      .floor-selector {
+        position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+        background: rgba(255,255,255,0.9); border-radius: 24px;
+        padding: 4px; display: flex; flex-direction: column; gap: 4px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.1); pointer-events: auto;
+        backdrop-filter: blur(4px);
+      }
+      .floor-btn {
+        width: 40px; height: 40px; border-radius: 50%; border: none;
+        background: transparent; font-weight: bold; font-size: 14px;
+        cursor: pointer; color: #555; transition: 0.2s;
+      }
+      .floor-btn.active { background: var(--primary-blue); color: white; }
+
+      .bottom-sheet {
+        background: rgba(255,255,255,0.98); border-radius: 24px 24px 0 0;
+        padding: 14px 20px 30px; box-shadow: 0 -12px 34px rgba(15,23,42,0.16);
+        transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        pointer-events: auto; display: flex; flex-direction: column;
+        max-height: 60vh;
+      }
+      .bottom-sheet.open { transform: translateY(0); }
+      .sheet-handle {
+        width: 40px; height: 5px; background: #ddd; border-radius: 3px;
+        margin: 0 auto 16px; cursor: pointer;
+      }
+
+      /* --- リスト表示モード --- */
+      #sheet-list-view { display: none; flex-direction: column; overflow: hidden; }
+      .list-title { font-size: 17px; font-weight: 800; margin: 0 0 12px 0; color: #0f172a; letter-spacing: -.02em; }
+      .results-container { overflow-y: auto; flex-grow: 1; padding: 2px 0 20px; }
+      .result-item {
+        display: flex; align-items: center; gap: 12px;
+        padding: 13px 4px; border-bottom: 1px solid #e2e8f0; cursor: pointer;
+        transition: background-color .2s ease, transform .2s ease;
+      }
+      .result-item:last-child { border-bottom: none; }
+      .result-item:hover { background: #f8fbff; transform: translateX(2px); }
+      .result-leading { width: 34px; height: 34px; border-radius: 11px; flex: 0 0 auto; display: grid; place-items: center; background: #eff6ff; color: #0874e9; font-size: 16px; }
+      .result-content { min-width: 0; flex: 1; }
+      .result-title { font-size: 15px; font-weight: 800; color: #0f172a; margin: 0 0 7px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      
+      /* リスト内のチップUI群 */
+      .result-meta { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+      .meta-chip {
+        padding: 4px 8px; border-radius: 999px; font-size: 11px; font-weight: 700;
+        background: #f1f5f9; color: #475569; white-space: nowrap;
+      }
+      .meta-divider { width: 1px; height: 14px; background: #cbd5e1; flex: 0 0 auto; }
+      /* 距離によるチップの色分け */
+      .meta-chip.dist-very-near { background: #dcfce7; color: #166534; }
+      .meta-chip.dist-near { background: #fef9c3; color: #854d0e; }
+      .meta-chip.dist-normal { background: #f1f5f9; color: #475569; }
+      .meta-chip.dist-far { background: #fee2e2; color: #991b1b; }
+
+      /* --- 詳細表示モード --- */
+      #sheet-detail-view { display: none; flex-direction: column; gap: 12px; }
+      .status-badge {
+        display: none; width: fit-content;
+        background: #e0f2fe; color: #0284c7;
+        padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;
+      }
+      .status-badge.visible { display: block; }
+      .sheet-title { font-size: 20px; font-weight: bold; margin: 0; }
+      .sheet-subtitle { font-size: 14px; color: #666; margin: 0; }
+      .action-buttons { display: flex; gap: 10px; margin-top: 8px; }
+      .btn {
+        flex: 1; padding: 14px; border-radius: 12px; border: none;
+        font-weight: bold; font-size: 15px; cursor: pointer; text-align: center;
+      }
+      .btn-primary { background: var(--primary-blue); color: white; }
+      .btn-secondary { background: #f1f5f9; color: #333; }
+      
+      .route-status {
+        position: absolute; top: 110px; left: 16px; right: 16px;
+        background: var(--primary-blue); color: white;
+        padding: 12px; border-radius: 12px; font-weight: bold; font-size: 14px;
+        display: none; pointer-events: auto; justify-content: space-between; align-items: center;
+        box-shadow: 0 4px 12px rgba(0,122,255,0.3);
+      }
+      .route-status.active { display: flex; }
+      .clear-route-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 4px 12px; border-radius: 16px; }
+
+      .leaflet-control-zoom { display: none !important; }
+    </style>
   </head>
   <body>
-    <!-- スマホ用ハンバーガーボタン -->
-    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
+    <div id="map"></div>
 
-    <!-- スマホ用スライドメニュー -->
-    <nav class="mobile-nav">
-      <ul>
-        <li><a href="/">TOP</a></li>
-        <li><a href="/theme">THEME</a></li>
-        <li><a href="/exhibition">EXHIBITION</a></li>
-        <li><a href="/favorites">FAVORITES</a></li>
-        <li><a href="/articles">ARTICLES</a></li>
-        <li><a href="/timetable">TIME TABLE</a></li>
-        <li><a href="/map">MAP</a></li>
-        <li>
-          <a
-            href="https://archives.komafes.jp/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ARCHIVES
-          </a>
-        </li>
-      </ul>
-      <div class="mobile-sns-links">
-        <a
-          href="https://www.instagram.com/komafes69/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image src={instagramIcon} alt="Instagram" class="sns-icon" />
-          <span>Instagram</span>
-        </a>
-        <a
-          href="https://www.youtube.com/@komafes69"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image src={youtubeIcon} alt="YouTube" class="sns-icon" />
-          <span>YouTube</span>
-        </a>
-        <a
-          href="https://x.com/Komafes69"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image src={xIcon} alt="X" class="sns-icon" />
-          <span>X</span>
-        </a>
-      </div>
-    </nav>
-
-    <!-- デスクトップ用常時固定ヘッダー -->
-    <header class="sticky-header">
-      <div class="sticky-header-inner">
-        <a href="/" class="header-brand">
-          <img src={logoImg.src} alt="Logo" class="header-logo" />
-          <img src={typoImg.src} alt="SAIL BEYOND" class="header-typo" />
-        </a>
-
-        <div class="header-right-actions">
-          <nav class="header-nav">
-            <ul>
-              <li><a href="/">TOP</a></li>
-              <li><a href="/theme">THEME</a></li>
-              <li><a href="/exhibition">EXHIBITION</a></li>
-              <li><a href="/favorites">FAVORITES</a></li>
-              <li><a href="/articles">ARTICLES</a></li>
-              <li><a href="/timetable">TIME TABLE</a></li>
-              <li><a href="/map">MAP</a></li>
-              <li>
-                <a
-                  href="https://archives.komafes.jp/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ARCHIVES
-                </a>
-              </li>
-            </ul>
-          </nav>
+    <div class="ui-layer">
+      <div>
+        <div class="top-controls">
+          <div class="search-box" id="search-box-container">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="search-input" placeholder="教室・団体名を検索" autocomplete="off" />
+          </div>
+          <div class="chips">
+            <div class="chip" onclick="searchCategory('mens_toilet')">近くの男子トイレ</div>
+            <div class="chip" onclick="searchCategory('womens_toilet')">近くの女子トイレ</div>
+            <div class="chip" onclick="searchCategory('room')">展示・教室</div>
+          </div>
         </div>
-      </div>
-    </header>
-
-    <main class="page-container">
-      <!-- 共通ページヘッダー -->
-      <header
-        class="page-header"
-        style={`background-image: url('${titleBg.src}');`}
-      >
-        <div class="page-header-inner">
-          <h1 class="page-title">{pageTitleEn}</h1>
-          <p class="page-subtitle">{pageTitleJa}</p>
-        </div>
-      </header>
-
-      <p class="notice-msg">
-        現在、MAP画像のみ公開中です。正式版MAPの公開まで少々お待ちください。
-      </p>
-
-      <!-- １階のMAP -->
-      <div class="map-section">
-        <p>1階</p>
-        <img src={map1f.src} alt="1階のMAP" class="map-image" />
-      </div>
-
-      <!-- ２階のMAP -->
-      <div class="map-section">
-        <p>2階</p>
-        <!-- ※画像のパス(/map2f.webpなど)は実際のファイル名に合わせて変更してください -->
-        <img src={map2f.src} alt="2階のMAP" class="map-image" />
-      </div>
-
-      <!-- ３階のMAP -->
-      <div class="map-section">
-        <p>3階</p>
-        <img src={map3f.src} alt="3階のMAP" class="map-image" />
-      </div>
-
-      <!-- ４階のMAP -->
-      <div class="map-section">
-        <p>4階</p>
-        <img src={map4f.src} alt="4階のMAP" class="map-image" />
-      </div>
-      <!-- ５階のMAP -->
-      <div class="map-section">
-        <p>5階</p>
-        <img src={map5f.src} alt="5階のMAP" class="map-image" />
-      </div>  
-    </main>
-  </body>
-
-  <!-- フッター -->
-  <footer
-    class="footer"
-    style={`background-image: url('${titleBackgroundBlack.src}'); background-size: cover; background-position: center;`}
-  >
-    <div class="footer-inner">
-      <!-- 左側：学校情報・アクセス -->
-      <div class="footer-info">
-        <p class="school-name">駒場東邦中学校・高等学校 第69回 文化祭</p>
-        <a href="/" class="footer-brand">
-          <img src={logoImg.src} alt="Komafes69 Logo" class="footer-logo" />
-          <img src={typoImg.src} alt="SAIL BEYOND" class="footer-typo" />
-        </a>
-
-        <div class="school-details">
-          <p><strong>開催日時：</strong>9月19日(土)・20日(日) 9:00〜16:30</p>
-          <p><strong>所在地：</strong>〒154-0001 東京都世田谷区池尻4-5-1</p>
-          <p class="access-info">
-            東急田園都市線「池尻大橋」駅より徒歩10分<br />
-            京王井の頭線「駒場東大前」駅より徒歩10分
-          </p>
+        
+        <div class="route-status" id="route-status">
+          <span id="route-text">経路案内中</span>
+          <button class="clear-route-btn" onclick="clearRoute()">終了</button>
         </div>
       </div>
 
-      <!-- 右側：ミニサイトマップとSNS -->
-      <div class="footer-nav">
-        <ul class="sitemap">
-          <li><a href="/">TOP</a></li>
-          <li><a href="/theme">THEME</a></li>
-          <li><a href="/exhibition">EXHIBITION</a></li>
-          <li><a href="/articles">ARTICLES</a></li>
-          <li><a href="/timetable">TIME TABLE</a></li>
-          <li><a href="/map">MAP</a></li>
-          <li><a href="https://archives.komafes.jp/">ARCHIVES</a></li>
-        </ul>
+      <div class="floor-selector">
+        <button class="floor-btn" data-floor="5">5F</button>
+        <button class="floor-btn" data-floor="4">4F</button>
+        <button class="floor-btn" data-floor="3">3F</button>
+        <button class="floor-btn" data-floor="2">2F</button>
+        <button class="floor-btn" data-floor="1">1F</button>
+      </div>
 
-        <div class="footer-sns">
-          <a
-            href="https://www.instagram.com/komafes69/"
-            aria-label="Instagram"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={instagramIcon.src}
-              alt="Instagram"
-              class="footer-sns-icon"
-            />
-          </a>
-          <a
-            href="https://www.youtube.com/@komafes69"
-            aria-label="YouTube"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={youtubeIcon.src} alt="YouTube" class="footer-sns-icon" />
-          </a>
-          <a
-            href="https://x.com/Komafes69"
-            aria-label="X"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={xIcon.src} alt="X" class="footer-sns-icon" />
-          </a>
+      <div class="bottom-sheet" id="bottom-sheet">
+        <div class="sheet-handle" onclick="closeSheet()"></div>
+        
+        <div id="sheet-list-view">
+          <h3 class="list-title" id="list-title">現在地から近い団体</h3>
+          <div id="results-container" class="results-container"></div>
+        </div>
+
+        <div id="sheet-detail-view">
+          <div class="status-badge" id="sheet-status">目的地に設定中</div>
+          <h2 class="sheet-title" id="sheet-title">団体名</h2>
+          <p class="sheet-subtitle" id="sheet-subtitle">フロア・教室情報</p>
+          <div class="action-buttons">
+            <button class="btn btn-secondary" id="btn-set-start">ここから出発</button>
+            <button class="btn btn-primary" id="btn-set-end">目的地にする</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <p>&copy; 2026 Komafes69 All Rights Reserved.</p>
-    </div>
-  </footer>
+    <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <script>
-    import { gsap } from "gsap";
+    <script is:inline define:vars={{ mapData }}>
+      const floorConfig = {
+        1: { image: '/maps/map1f.png' },
+        2: { image: '/maps/map2f.png' },
+        3: { image: '/maps/map3f.png' },
+        4: { image: '/maps/map4f.png' },
+        5: { image: '/maps/map5f.png' }
+      };
 
-    document.addEventListener("DOMContentLoaded", () => {
-      // --- GSAP タイトルアニメーション ---
-      gsap.fromTo(
-        ".page-title",
-        { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 2.5,
-          ease: "power2.out",
-          delay: 0.2,
-        },
-      );
-      gsap.fromTo(
-        ".page-subtitle",
-        { clipPath: "inset(0 100% 0 0)", opacity: 1 },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 2.5,
-          ease: "power2.out",
-          delay: 0.35,
-        },
-      );
+      let currentFloor = 1;
+      let currentImgHeight = 1000;
+      let startNodeId = null;
+      let endNodeId = null;
+      let currentPathNodes = [];
+      let selectedNode = null;
+      
+      let myLocationNodeId = mapData.nodes.find(n => n.floor === 1)?.id;
 
-      // --- ヘッダースクロール処理 ---
-      const stickyHeader = document.querySelector(".sticky-header");
-      if (stickyHeader) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 50) {
-            stickyHeader.classList.add("is-scrolled");
+      const map = L.map('map', { crs: L.CRS.Simple, minZoom: -2, maxZoom: 2, zoomSnap: 0.5, zoomControl: false });
+      let imageOverlay = null;
+      const markersLayer = L.layerGroup().addTo(map);
+      const routeLayer = L.layerGroup().addTo(map);
+      const pinTypes = new Set(['room', 'stair', 'mens_toilet', 'womens_toilet', 'multipurpose_toilet']);
+      const markerByNodeId = new Map();
+
+      const typeLabels = {
+        room: '教室',
+        stair: '階段',
+        mens_toilet: '男子トイレ',
+        womens_toilet: '女子トイレ',
+        multipurpose_toilet: '多目的トイレ',
+      };
+
+      const typeIcons = {
+        room: '⌂',
+        stair: '↕',
+        mens_toilet: '♂',
+        womens_toilet: '♀',
+        multipurpose_toilet: '♿',
+      };
+
+      function getNodeLabel(node) {
+        const hasExhibition = node.exhibitionSlugs && node.exhibitionSlugs.length > 0;
+        return node.name || (hasExhibition ? node.exhibitionSlugs.join(', ') : (typeLabels[node.type] || '地点'));
+      }
+
+      function createPinIcon(node) {
+        return L.divIcon({
+          className: '',
+          html: '<span class="map-pin" aria-hidden="true"></span>',
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+        });
+      }
+
+      function syncSelectedPin() {
+        markerByNodeId.forEach((marker, nodeId) => {
+          marker.getElement()?.querySelector('.map-pin')?.classList.toggle('is-selected', nodeId === selectedNode?.id);
+        });
+      }
+
+      function selectNode(node) {
+        selectedNode = node;
+        syncSelectedPin();
+      }
+
+      function getImageDimensions(url) {
+        return new Promise((res, rej) => {
+          const img = new Image();
+          img.onload = () => res({ width: img.naturalWidth, height: img.naturalHeight });
+          img.onerror = () => rej();
+          img.src = url;
+        });
+      }
+
+      async function renderFloor(floorNumber) {
+        currentFloor = Number(floorNumber);
+        markersLayer.clearLayers();
+        markerByNodeId.clear();
+        routeLayer.clearLayers();
+        updateFloorSelectorUI();
+
+        const config = floorConfig[currentFloor];
+        if (!config) return;
+
+        try {
+          const { width, height } = await getImageDimensions(config.image);
+          currentImgHeight = height;
+          const bounds = [[0, 0], [height, width]];
+
+          if (imageOverlay) map.removeLayer(imageOverlay);
+          imageOverlay = L.imageOverlay(config.image, bounds).addTo(map);
+          map.fitBounds(bounds);
+
+          const currentNodes = mapData.nodes.filter(n => n.floor === currentFloor && pinTypes.has(n.type));
+          currentNodes.forEach(node => {
+            const latLng = [height - node.y, node.x];
+            const label = getNodeLabel(node);
+            const marker = L.marker(latLng, { icon: createPinIcon(node), keyboard: true, title: label }).on('click', () => {
+              selectNode(node);
+              showDetailView(node, label);
+            });
+            markersLayer.addLayer(marker);
+            markerByNodeId.set(node.id, marker);
+          });
+
+          syncSelectedPin();
+
+          drawRouteForCurrentFloor();
+        } catch (err) { console.error(err); }
+      }
+
+      function updateFloorSelectorUI() {
+        document.querySelectorAll('.floor-btn').forEach(btn => {
+          btn.classList.toggle('active', Number(btn.dataset.floor) === currentFloor);
+        });
+      }
+      document.querySelectorAll('.floor-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => renderFloor(e.target.dataset.floor));
+      });
+
+      function calculateDistancesFrom(startId) {
+        const dist = {};
+        const unvisited = new Set();
+        mapData.nodes.forEach(n => { dist[n.id] = Infinity; unvisited.add(n.id); });
+        dist[startId] = 0;
+
+        const adj = {};
+        mapData.nodes.forEach(n => adj[n.id] = []);
+        mapData.edges.forEach(e => {
+          const d = e.distance || 1;
+          adj[e.source].push({ n: e.target, w: d });
+          adj[e.target].push({ n: e.source, w: d });
+        });
+
+        while (unvisited.size > 0) {
+          let curr = null, minD = Infinity;
+          unvisited.forEach(id => { if (dist[id] < minD) { minD = dist[id]; curr = id; } });
+          if (curr === null || minD === Infinity) break;
+          unvisited.delete(curr);
+
+          adj[curr].forEach(neighbor => {
+            if (unvisited.has(neighbor.n)) {
+              const alt = dist[curr] + neighbor.w;
+              if (alt < dist[neighbor.n]) { dist[neighbor.n] = alt; }
+            }
+          });
+        }
+        return dist;
+      }
+
+      function getDistanceCategory(distance) {
+        if (distance < 300) return { text: 'すごく近い', class: 'dist-very-near' };
+        if (distance < 700) return { text: '近い', class: 'dist-near' };
+        if (distance < 1500) return { text: '普通', class: 'dist-normal' };
+        return { text: '遠い', class: 'dist-far' };
+      }
+
+      function showListView(query = '') {
+        document.getElementById('sheet-detail-view').style.display = 'none';
+        document.getElementById('sheet-list-view').style.display = 'flex';
+        document.getElementById('bottom-sheet').classList.add('open');
+
+        const titleEl = document.getElementById('list-title');
+        const container = document.getElementById('results-container');
+        container.innerHTML = '';
+
+        let targetNodes = mapData.nodes.filter(n =>
+          pinTypes.has(n.type) && (n.name || (n.exhibitionSlugs && n.exhibitionSlugs.length > 0) || typeLabels[n.type])
+        );
+
+        if (query) {
+          titleEl.innerText = `「${query}」の検索結果`;
+          targetNodes = targetNodes.filter(n => 
+            (n.name && n.name.includes(query)) ||
+            (n.exhibitionSlugs && n.exhibitionSlugs.join(' ').includes(query)) ||
+            (typeLabels[n.type] && typeLabels[n.type].includes(query))
+          );
+        } else {
+          titleEl.innerText = '現在地から近い団体';
+        }
+
+        if (targetNodes.length === 0) {
+          container.innerHTML = '<p style="color:#666; font-size:14px;">見つかりませんでした</p>';
+          return;
+        }
+
+        const distances = calculateDistancesFrom(myLocationNodeId);
+        targetNodes.sort((a, b) => (distances[a.id] || Infinity) - (distances[b.id] || Infinity));
+
+        targetNodes.forEach(node => {
+          const distanceVal = distances[node.id];
+          const distInfo = getDistanceCategory(distanceVal);
+          
+          // 表示用の団体名と教室名を整理
+          let title = '';
+          let roomName = node.name || typeLabels[node.type] || '教室不明';
+          if (node.exhibitionSlugs && node.exhibitionSlugs.length > 0) {
+            title = node.exhibitionSlugs.join(', ');
           } else {
-            stickyHeader.classList.remove("is-scrolled");
+            title = getNodeLabel(node);
           }
+          
+          const item = document.createElement('div');
+          item.className = 'result-item';
+          item.innerHTML = `
+            <div class="result-leading" aria-hidden="true">${typeIcons[node.type] || '•'}</div>
+            <div class="result-content">
+              <div class="result-title">${title}</div>
+              <div class="result-meta">
+                <span class="meta-chip">${node.floor}F</span>
+                <span class="meta-divider" aria-hidden="true"></span>
+                <span class="meta-chip">${typeLabels[node.type] || roomName}</span>
+                <span class="meta-divider" aria-hidden="true"></span>
+                <span class="meta-chip ${distInfo.class}">${distInfo.text}</span>
+              </div>
+            </div>
+          `;
+          
+          item.onclick = () => {
+            if (currentFloor !== node.floor) renderFloor(node.floor);
+            showDetailView(node, title);
+          };
+          container.appendChild(item);
         });
       }
 
-      // --- ハンバーガーメニュー制御 ---
-      const hamburger = document.querySelector(".hamburger");
-      const mobileNav = document.querySelector(".mobile-nav");
-      if (hamburger && mobileNav) {
-        hamburger.addEventListener("click", () => {
-          hamburger.classList.toggle("is-active");
-          mobileNav.classList.toggle("is-active");
-          document.body.classList.toggle("no-scroll");
-        });
+      function showDetailView(node, label) {
+        selectNode(node);
+        document.getElementById('sheet-list-view').style.display = 'none';
+        document.getElementById('sheet-detail-view').style.display = 'flex';
+        
+        document.getElementById('sheet-title').innerText = label;
+        // 詳細ビューのサブタイトルにも教室名を表示
+        let roomName = node.name || typeLabels[node.type] || '教室';
+        document.getElementById('sheet-subtitle').innerText = `${node.floor}階 ｜ ${roomName}`;
+        
+        const isDestination = (endNodeId === node.id);
+        document.getElementById('sheet-status').classList.toggle('visible', isDestination);
+
+        document.getElementById('bottom-sheet').classList.add('open');
       }
-    });
-  </script>
+
+      window.closeSheet = function() {
+        document.getElementById('bottom-sheet').classList.remove('open');
+      };
+
+      document.getElementById('search-input').addEventListener('focus', (e) => {
+        showListView(e.target.value.trim());
+      });
+
+      document.getElementById('search-input').addEventListener('input', (e) => {
+        showListView(e.target.value.trim());
+      });
+
+      document.getElementById('btn-set-start').addEventListener('click', () => {
+        startNodeId = selectedNode.id;
+        myLocationNodeId = selectedNode.id;
+        checkAndCalculateRoute();
+        closeSheet();
+      });
+
+      document.getElementById('btn-set-end').addEventListener('click', () => {
+        endNodeId = selectedNode.id;
+        checkAndCalculateRoute();
+        closeSheet();
+      });
+
+      window.searchCategory = function(type) {
+        const found = mapData.nodes.find(n => n.type === type && n.floor === currentFloor);
+        if (found) {
+          let label = type === 'mens_toilet' ? '男子トイレ' : (type === 'womens_toilet' ? '女子トイレ' : '教室');
+          endNodeId = found.id;
+          showDetailView(found, label);
+          checkAndCalculateRoute();
+        } else {
+          alert("この階には見つかりませんでした");
+        }
+      };
+
+      function checkAndCalculateRoute() {
+        if (startNodeId && endNodeId) {
+          if (startNodeId === endNodeId) {
+            alert("出発地と目的地が同じです"); return;
+          }
+          currentPathNodes = solveDijkstra(startNodeId, endNodeId);
+          if (currentPathNodes.length > 0) {
+            const startNode = mapData.nodes.find(n => n.id === startNodeId);
+            const endNode = mapData.nodes.find(n => n.id === endNodeId);
+            document.getElementById('route-text').innerText = `${startNode.floor}F から ${endNode.floor}F へ案内中`;
+            document.getElementById('route-status').classList.add('active');
+            if (currentFloor !== startNode.floor) {
+              renderFloor(startNode.floor);
+            } else {
+              drawRouteForCurrentFloor();
+            }
+          }
+        }
+      }
+
+      window.clearRoute = function() {
+        startNodeId = null; endNodeId = null; currentPathNodes = [];
+        routeLayer.clearLayers();
+        document.getElementById('route-status').classList.remove('active');
+      };
+
+      function drawRouteForCurrentFloor() {
+        if (currentPathNodes.length === 0) return;
+        routeLayer.clearLayers();
+        const nodeMap = new Map(mapData.nodes.map(n => [n.id, n]));
+        const polylinePoints = [];
+        for (let i = 0; i < currentPathNodes.length; i++) {
+          const node = nodeMap.get(currentPathNodes[i]);
+          if (node && node.floor === currentFloor) {
+            polylinePoints.push([currentImgHeight - node.y, node.x]);
+          } else if (polylinePoints.length > 0) {
+            L.polyline(polylinePoints, { color: '#007AFF', weight: 8, opacity: 0.9, lineCap: 'round', lineJoin: 'round' }).addTo(routeLayer);
+            polylinePoints.length = 0;
+          }
+        }
+        if (polylinePoints.length > 0) {
+          L.polyline(polylinePoints, { color: '#007AFF', weight: 8, opacity: 0.9, lineCap: 'round', lineJoin: 'round' }).addTo(routeLayer);
+        }
+      }
+
+      function solveDijkstra(start, target) {
+        const dist = {}, prev = {};
+        const unvisited = new Set();
+        mapData.nodes.forEach(n => { dist[n.id] = Infinity; prev[n.id] = null; unvisited.add(n.id); });
+        dist[start] = 0;
+        const adj = {};
+        mapData.nodes.forEach(n => adj[n.id] = []);
+        mapData.edges.forEach(e => {
+          const d = e.distance || 1;
+          adj[e.source].push({ n: e.target, w: d });
+          adj[e.target].push({ n: e.source, w: d });
+        });
+        while (unvisited.size > 0) {
+          let curr = null, minD = Infinity;
+          unvisited.forEach(id => { if (dist[id] < minD) { minD = dist[id]; curr = id; } });
+          if (curr === null || curr === target) break;
+          unvisited.delete(curr);
+          adj[curr].forEach(neighbor => {
+            if (unvisited.has(neighbor.n)) {
+              const alt = dist[curr] + neighbor.w;
+              if (alt < dist[neighbor.n]) { dist[neighbor.n] = alt; prev[neighbor.n] = curr; }
+            }
+          });
+        }
+        const path = []; let u = target;
+        while (u) { path.unshift(u); u = prev[u]; }
+        return path[0] === start ? path : [];
+      }
+
+      // 初期起動
+      renderFloor(5);
+    </script>
+  </body>
 </html>
-
-<style is:global>
-  /* 基本設定 */
-  body {
-    font-family:
-      "Noto Sans JP",
-      system-ui,
-      -apple-system,
-      sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f6f8;
-    color: #1a202c;
-  }
-  body.no-scroll {
-    overflow: hidden;
-  }
-
-  /* --- ヘッダー周り --- */
-  .sticky-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 900;
-    background: transparent;
-    transition: all 0.3s ease;
-    padding: 1rem 0;
-  }
-  .sticky-header.is-scrolled {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  }
-  .sticky-header-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header-brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-  }
-  .header-logo {
-    height: 32px;
-    width: auto;
-  }
-  .header-typo {
-    height: 18px;
-    width: auto;
-  }
-  .header-logo,
-  .header-typo {
-    filter: brightness(0) invert(1);
-    transition: filter 0.3s ease;
-  }
-  .sticky-header.is-scrolled .header-logo,
-  .sticky-header.is-scrolled .header-typo {
-    filter: brightness(0);
-  }
-
-  .header-right-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  .header-nav ul {
-    display: flex;
-    gap: clamp(1.2rem, 2.8vw, 3rem);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .header-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-family: "Bebas Neue", cursive;
-    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
-    letter-spacing: 0.12em;
-    transition:
-      color 0.3s,
-      opacity 0.2s;
-  }
-  .sticky-header.is-scrolled .header-nav a {
-    color: #111111;
-  }
-  .header-nav a:hover {
-    opacity: 0.5;
-  }
-
-  /* ハンバーガーメニュー */
-  .hamburger {
-    display: none;
-  }
-  .mobile-nav {
-    display: none;
-  }
-
-  @media screen and (max-width: 768px) {
-    .sticky-header {
-      display: none !important;
-    }
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 22px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      padding: 0;
-    }
-    .hamburger-line {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: #111111;
-      border-radius: 2px;
-      transition:
-        transform 0.3s,
-        opacity 0.3s;
-    }
-    .hamburger.is-active .hamburger-line {
-      background-color: #ffffff;
-    }
-    .hamburger.is-active .hamburger-line:nth-child(1) {
-      transform: translateY(10px) rotate(45deg);
-    }
-    .hamburger.is-active .hamburger-line:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.is-active .hamburger-line:nth-child(3) {
-      transform: translateY(-10px) rotate(-45deg);
-    }
-
-    .mobile-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(17, 17, 17, 0.96);
-      z-index: 999;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .mobile-nav.is-active {
-      display: flex;
-    }
-    .mobile-nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      text-align: center;
-    }
-    .mobile-nav li {
-      margin: 1.5rem 0;
-    }
-    .mobile-nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 1.8rem;
-      font-family: "Bebas Neue", cursive;
-    }
-    .mobile-sns-links {
-      display: flex;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .mobile-sns-links a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #fff;
-      font-size: 0.8rem;
-      text-decoration: none;
-    }
-    .sns-icon {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  /* --- ページレイアウト --- */
-  .page-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem 60px;
-  }
-  .page-header {
-    position: relative;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    margin-bottom: 0;
-    padding: 5.5rem 0 4.5rem 0;
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  .page-header-inner {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    text-align: left;
-  }
-  .page-title {
-    font-family: "Bebas Neue", cursive;
-    font-size: clamp(2rem, 18vw, 8rem);
-    letter-spacing: 0.04em;
-    margin-top: 10px;
-    color: #ffffff;
-    line-height: 0.85;
-    font-weight: 900;
-  }
-  .page-subtitle {
-    margin-top: -50px;
-    margin-bottom: 30px;
-    color: #ffffff;
-    font-size: clamp(1.25rem, 3vw, 30px);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-  }
-  .page-header::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    bottom: -50%;
-    right: 14%;
-    width: 65px;
-    background-color: #ffffff;
-    transform: skewX(-20deg);
-    z-index: 1;
-    pointer-events: none;
-  }
-  @media screen and (max-width: 768px) {
-    .page-header {
-      padding: 3.5rem 0 2.2rem 0;
-    }
-    .page-header-inner {
-      padding: 0 1.2rem;
-    }
-    .page-header::after {
-      right: 8%;
-      width: 32px;
-    }
-  }
-
-  /* メインコンテンツ枠 */
-  .page-content {
-    margin-top: 2rem;
-  }
-
-  /* 応急措置用MAPのスタイル */
-  .page-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center; /* 全体を中央揃え */
-  }
-
-  .notice-msg {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #ea580c; /* 注意を引くオレンジ色 */
-    margin-bottom: 40px;
-  }
-
-  .map-section {
-    margin-bottom: 60px; /* 各階のMAPの間隔を広めにとる */
-  }
-
-  .map-section p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #cbd5e1;
-    display: inline-block;
-    padding-bottom: 5px;
-  }
-
-  .map-image {
-    width: 100%;
-    max-width: 1200px;
-    height: auto;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 少し影をつけて見やすく */
-    display: block;
-    margin: 0 auto;
-  }
-  /* --- FOOTER --- */
-  .footer {
-    background-color: #1a1b1f;
-    color: #f6f9f6;
-    padding: 70px 0 20px;
-    font-family: "Noto Sans JP", sans-serif;
-  }
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-  }
-  .footer-info {
-    flex: 1;
-  }
-  .footer-brand {
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    margin-bottom: 24px;
-    transition: opacity 0.2s ease;
-  }
-  .footer-brand:hover {
-    opacity: 0.7;
-  }
-  .footer-logo {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-  }
-  .footer-typo {
-    height: 20px;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-  }
-  .school-name {
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin: 0 0 20px 0;
-  }
-  .school-details p {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    margin: 0 0 8px 0;
-    color: #ccc;
-  }
-  .school-details strong {
-    color: #f6f9f6;
-    font-weight: 500;
-  }
-  .access-info {
-    margin-top: 12px !important;
-    padding-left: 10px;
-    border-left: 2px solid #555;
-  }
-  .footer-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .sitemap {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 30px 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 50px;
-    row-gap: 16px;
-    text-align: left;
-  }
-  .sitemap a {
-    color: #f6f9f6;
-    text-decoration: none;
-    font-family: "Bebas Neue", cursive;
-    font-size: 1.1rem;
-    letter-spacing: 0.1em;
-    display: inline-block;
-    transition:
-      color 0.2s ease,
-      transform 0.2s ease;
-  }
-  .sitemap a:hover {
-    color: #aaa;
-    transform: translateX(4px);
-  }
-  .footer-sns {
-    display: flex;
-    gap: 24px;
-  }
-  .footer-sns-icon {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s ease;
-  }
-  .footer-sns-icon:hover {
-    transform: scale(1.15);
-    opacity: 0.7;
-  }
-  .footer-bottom {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-  }
-  .footer-bottom p {
-    margin: 0;
-    font-size: 0.75rem;
-    color: #b3b1b1;
-    letter-spacing: 0.05em;
-  }
-
-  @media screen and (max-width: 768px) {
-    .footer-inner {
-      flex-direction: column;
-      gap: 50px;
-    }
-    .school-name {
-      font-size: 4.5vw;
-    }
-    .sitemap {
-      column-gap: 20px;
-      width: 100%;
-    }
-  }
-</style>

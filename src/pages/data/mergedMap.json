@@ -965,6 +965,609 @@
       "y": 588,
       "floor": 3,
       "type": "corridor"
+    },
+    {
+      "id": "node_178",
+      "x": 57,
+      "y": 330,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "天文部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_179",
+      "x": 58,
+      "y": 402,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "歴史部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_180",
+      "x": 107,
+      "y": 330,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_181",
+      "x": 107,
+      "y": 402,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_182",
+      "x": 107,
+      "y": 473,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_183",
+      "x": 105,
+      "y": 546,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_184",
+      "x": 104,
+      "y": 596,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_185",
+      "x": 145,
+      "y": 628,
+      "floor": 2,
+      "type": "mens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_186",
+      "x": 143,
+      "y": 558,
+      "floor": 2,
+      "type": "stair",
+      "name": "D階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_187",
+      "x": 338,
+      "y": 594,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_188",
+      "x": 338,
+      "y": 628,
+      "floor": 2,
+      "type": "room",
+      "isSearchable": true,
+      "isAccessible": false,
+      "exhibitionSlugs": [
+        "地学部"
+      ]
+    },
+    {
+      "id": "node_189",
+      "x": 56,
+      "y": 473,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "沈みゆく港街からの脱出",
+        "Royal_Casino"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_190",
+      "x": 57,
+      "y": 542,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "山岳部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_191",
+      "x": 58,
+      "y": 620,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "地理部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_192",
+      "x": 106,
+      "y": 620,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_196",
+      "x": 404,
+      "y": 592,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_197",
+      "x": 454,
+      "y": 556,
+      "floor": 2,
+      "type": "corridor",
+      "name": "A階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_198",
+      "x": 56,
+      "y": 268,
+      "floor": 2,
+      "type": "stair",
+      "name": "C階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_199",
+      "x": 107,
+      "y": 268,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_200",
+      "x": 151,
+      "y": 266,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_201",
+      "x": 266,
+      "y": 265,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_202",
+      "x": 210,
+      "y": 161,
+      "floor": 2,
+      "type": "facility",
+      "facilitySlug": "gym",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_203",
+      "x": 381,
+      "y": 413,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "駒句会"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_204",
+      "x": 403,
+      "y": 266,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_205",
+      "x": 405,
+      "y": 200,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_206",
+      "x": 535,
+      "y": 202,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_207",
+      "x": 538,
+      "y": 253,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "日本之城研究部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_208",
+      "x": 632,
+      "y": 202,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_209",
+      "x": 630,
+      "y": 256,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "生物部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_210",
+      "x": 660,
+      "y": 156,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_211",
+      "x": 633,
+      "y": 107,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_212",
+      "x": 633,
+      "y": 54,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "生物部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_213",
+      "x": 534,
+      "y": 108,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_214",
+      "x": 534,
+      "y": 54,
+      "floor": 2,
+      "type": "room",
+      "exhibitionSlugs": [
+        "生物部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_215",
+      "x": 410,
+      "y": 105,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_216",
+      "x": 368,
+      "y": 98,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_217",
+      "x": 369,
+      "y": 45,
+      "floor": 2,
+      "type": "corridor"
+    },
+    {
+      "id": "node_218",
+      "x": 229,
+      "y": 148,
+      "floor": 1,
+      "type": "room",
+      "exhibitionSlugs": [
+        "MIZUKOMA"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_219",
+      "x": 161,
+      "y": 245,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_220",
+      "x": 86,
+      "y": 249,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_221",
+      "x": 240,
+      "y": 298,
+      "floor": 1,
+      "type": "facility",
+      "facilitySlug": "main-stage",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_222",
+      "x": 171,
+      "y": 501,
+      "floor": 1,
+      "type": "stair",
+      "name": "D階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_223",
+      "x": 448,
+      "y": 499,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_224",
+      "x": 612,
+      "y": 539,
+      "floor": 1,
+      "type": "facility",
+      "facilitySlug": "hall",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_225",
+      "x": 493,
+      "y": 375,
+      "floor": 1,
+      "type": "facility",
+      "facilitySlug": "cafeteria",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_226",
+      "x": 373,
+      "y": 93,
+      "floor": 1,
+      "type": "stair",
+      "name": "B階段",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_227",
+      "x": 521,
+      "y": 57,
+      "floor": 1,
+      "type": "room",
+      "exhibitionSlugs": [
+        "化学部"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_229",
+      "x": 263,
+      "y": 638,
+      "floor": 1,
+      "type": "facility",
+      "facilitySlug": "office",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_230",
+      "x": 172,
+      "y": 569,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_231",
+      "x": 264,
+      "y": 569,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_232",
+      "x": 322,
+      "y": 568,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_233",
+      "x": 412,
+      "y": 564,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_234",
+      "x": 411,
+      "y": 715,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_235",
+      "x": 518,
+      "y": 576,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_236",
+      "x": 517,
+      "y": 512,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_237",
+      "x": 383,
+      "y": 459,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_238",
+      "x": 386,
+      "y": 305,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_239",
+      "x": 386,
+      "y": 249,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_240",
+      "x": 320,
+      "y": 500,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_241",
+      "x": 412,
+      "y": 106,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_242",
+      "x": 521,
+      "y": 102,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_243",
+      "x": 608,
+      "y": 828,
+      "floor": 1,
+      "type": "room",
+      "exhibitionSlugs": [
+        "喫茶邦友"
+      ],
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_244",
+      "x": 634,
+      "y": 751,
+      "floor": 1,
+      "type": "mens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_245",
+      "x": 672,
+      "y": 750,
+      "floor": 1,
+      "type": "womens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_246",
+      "x": 540,
+      "y": 653,
+      "floor": 1,
+      "type": "mens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_247",
+      "x": 539,
+      "y": 617,
+      "floor": 1,
+      "type": "womens_toilet",
+      "isSearchable": false,
+      "isAccessible": false
+    },
+    {
+      "id": "node_248",
+      "x": 372,
+      "y": 49,
+      "floor": 1,
+      "type": "mens_toilet",
+      "isSearchable": true,
+      "isAccessible": false
+    },
+    {
+      "id": "node_249",
+      "x": 505,
+      "y": 633,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_250",
+      "x": 411,
+      "y": 50,
+      "floor": 1,
+      "type": "corridor"
+    },
+    {
+      "id": "node_251",
+      "x": 504,
+      "y": 588,
+      "floor": 1,
+      "type": "corridor"
     }
   ],
   "edges": [
@@ -1673,6 +2276,517 @@
       "source": "node_133",
       "target": "node_134",
       "distance": 53,
+      "weight": 1
+    },
+    {
+      "id": "edge_169",
+      "source": "node_178",
+      "target": "node_180",
+      "distance": 50,
+      "weight": 1
+    },
+    {
+      "id": "edge_170",
+      "source": "node_179",
+      "target": "node_181",
+      "distance": 49,
+      "weight": 1
+    },
+    {
+      "id": "edge_171",
+      "source": "node_180",
+      "target": "node_181",
+      "distance": 72,
+      "weight": 1
+    },
+    {
+      "id": "edge_172",
+      "source": "node_181",
+      "target": "node_182",
+      "distance": 71,
+      "weight": 1
+    },
+    {
+      "id": "edge_173",
+      "source": "node_182",
+      "target": "node_183",
+      "distance": 73,
+      "weight": 1
+    },
+    {
+      "id": "edge_174",
+      "source": "node_183",
+      "target": "node_184",
+      "distance": 50,
+      "weight": 1
+    },
+    {
+      "id": "edge_175",
+      "source": "node_184",
+      "target": "node_186",
+      "distance": 54,
+      "weight": 1
+    },
+    {
+      "id": "edge_176",
+      "source": "node_184",
+      "target": "node_185",
+      "distance": 52,
+      "weight": 1
+    },
+    {
+      "id": "edge_177",
+      "source": "node_184",
+      "target": "node_187",
+      "distance": 234,
+      "weight": 1
+    },
+    {
+      "id": "edge_178",
+      "source": "node_187",
+      "target": "node_188",
+      "distance": 34,
+      "weight": 1
+    },
+    {
+      "id": "edge_179",
+      "source": "node_182",
+      "target": "node_189",
+      "distance": 51,
+      "weight": 1
+    },
+    {
+      "id": "edge_180",
+      "source": "node_183",
+      "target": "node_190",
+      "distance": 48,
+      "weight": 1
+    },
+    {
+      "id": "edge_181",
+      "source": "node_191",
+      "target": "node_192",
+      "distance": 48,
+      "weight": 1
+    },
+    {
+      "id": "edge_182",
+      "source": "node_192",
+      "target": "node_184",
+      "distance": 24,
+      "weight": 1
+    },
+    {
+      "id": "edge_183",
+      "source": "node_187",
+      "target": "node_196",
+      "distance": 66,
+      "weight": 1
+    },
+    {
+      "id": "edge_188",
+      "source": "node_199",
+      "target": "node_200",
+      "distance": 44,
+      "weight": 1
+    },
+    {
+      "id": "edge_189",
+      "source": "node_200",
+      "target": "node_201",
+      "distance": 115,
+      "weight": 1
+    },
+    {
+      "id": "edge_191",
+      "source": "node_199",
+      "target": "node_198",
+      "distance": 51,
+      "weight": 1
+    },
+    {
+      "id": "edge_192",
+      "source": "node_202",
+      "target": "node_200",
+      "distance": 120,
+      "weight": 1
+    },
+    {
+      "id": "edge_193",
+      "source": "node_202",
+      "target": "node_201",
+      "distance": 118,
+      "weight": 1
+    },
+    {
+      "id": "edge_194",
+      "source": "node_197",
+      "target": "node_196",
+      "distance": 62,
+      "weight": 1
+    },
+    {
+      "id": "edge_195",
+      "source": "node_216",
+      "target": "node_215",
+      "distance": 43,
+      "weight": 1
+    },
+    {
+      "id": "edge_196",
+      "source": "node_215",
+      "target": "node_217",
+      "distance": 73,
+      "weight": 1
+    },
+    {
+      "id": "edge_197",
+      "source": "node_215",
+      "target": "node_213",
+      "distance": 124,
+      "weight": 1
+    },
+    {
+      "id": "edge_198",
+      "source": "node_213",
+      "target": "node_214",
+      "distance": 54,
+      "weight": 1
+    },
+    {
+      "id": "edge_199",
+      "source": "node_213",
+      "target": "node_211",
+      "distance": 99,
+      "weight": 1
+    },
+    {
+      "id": "edge_200",
+      "source": "node_211",
+      "target": "node_212",
+      "distance": 53,
+      "weight": 1
+    },
+    {
+      "id": "edge_201",
+      "source": "node_211",
+      "target": "node_210",
+      "distance": 56,
+      "weight": 1
+    },
+    {
+      "id": "edge_202",
+      "source": "node_210",
+      "target": "node_208",
+      "distance": 54,
+      "weight": 1
+    },
+    {
+      "id": "edge_203",
+      "source": "node_208",
+      "target": "node_209",
+      "distance": 54,
+      "weight": 1
+    },
+    {
+      "id": "edge_204",
+      "source": "node_206",
+      "target": "node_208",
+      "distance": 97,
+      "weight": 1
+    },
+    {
+      "id": "edge_205",
+      "source": "node_206",
+      "target": "node_207",
+      "distance": 51,
+      "weight": 1
+    },
+    {
+      "id": "edge_206",
+      "source": "node_205",
+      "target": "node_206",
+      "distance": 130,
+      "weight": 1
+    },
+    {
+      "id": "edge_207",
+      "source": "node_205",
+      "target": "node_204",
+      "distance": 66,
+      "weight": 1
+    },
+    {
+      "id": "edge_208",
+      "source": "node_215",
+      "target": "node_205",
+      "distance": 95,
+      "weight": 1
+    },
+    {
+      "id": "edge_209",
+      "source": "node_201",
+      "target": "node_204",
+      "distance": 137,
+      "weight": 1
+    },
+    {
+      "id": "edge_210",
+      "source": "node_204",
+      "target": "node_203",
+      "distance": 149,
+      "weight": 1
+    },
+    {
+      "id": "edge_211",
+      "source": "node_203",
+      "target": "node_196",
+      "distance": 180,
+      "weight": 1
+    },
+    {
+      "id": "edge_212",
+      "source": "node_230",
+      "target": "node_222",
+      "distance": 68,
+      "weight": 1
+    },
+    {
+      "id": "edge_213",
+      "source": "node_230",
+      "target": "node_231",
+      "distance": 92,
+      "weight": 1
+    },
+    {
+      "id": "edge_214",
+      "source": "node_231",
+      "target": "node_229",
+      "distance": 69,
+      "weight": 1
+    },
+    {
+      "id": "edge_215",
+      "source": "node_231",
+      "target": "node_232",
+      "distance": 58,
+      "weight": 1
+    },
+    {
+      "id": "edge_216",
+      "source": "node_232",
+      "target": "node_233",
+      "distance": 90,
+      "weight": 1
+    },
+    {
+      "id": "edge_217",
+      "source": "node_233",
+      "target": "node_234",
+      "distance": 151,
+      "weight": 1
+    },
+    {
+      "id": "edge_218",
+      "source": "node_233",
+      "target": "node_235",
+      "distance": 107,
+      "weight": 1
+    },
+    {
+      "id": "edge_219",
+      "source": "node_233",
+      "target": "node_236",
+      "distance": 117,
+      "weight": 1
+    },
+    {
+      "id": "edge_220",
+      "source": "node_236",
+      "target": "node_224",
+      "distance": 99,
+      "weight": 1
+    },
+    {
+      "id": "edge_221",
+      "source": "node_224",
+      "target": "node_235",
+      "distance": 101,
+      "weight": 1
+    },
+    {
+      "id": "edge_222",
+      "source": "node_223",
+      "target": "node_233",
+      "distance": 74,
+      "weight": 1
+    },
+    {
+      "id": "edge_223",
+      "source": "node_237",
+      "target": "node_233",
+      "distance": 109,
+      "weight": 1
+    },
+    {
+      "id": "edge_224",
+      "source": "node_237",
+      "target": "node_225",
+      "distance": 138,
+      "weight": 1
+    },
+    {
+      "id": "edge_225",
+      "source": "node_238",
+      "target": "node_225",
+      "distance": 128,
+      "weight": 1
+    },
+    {
+      "id": "edge_226",
+      "source": "node_238",
+      "target": "node_237",
+      "distance": 154,
+      "weight": 1
+    },
+    {
+      "id": "edge_227",
+      "source": "node_220",
+      "target": "node_219",
+      "distance": 75,
+      "weight": 1
+    },
+    {
+      "id": "edge_228",
+      "source": "node_219",
+      "target": "node_218",
+      "distance": 118,
+      "weight": 1
+    },
+    {
+      "id": "edge_229",
+      "source": "node_219",
+      "target": "node_239",
+      "distance": 225,
+      "weight": 1
+    },
+    {
+      "id": "edge_230",
+      "source": "node_239",
+      "target": "node_238",
+      "distance": 56,
+      "weight": 1
+    },
+    {
+      "id": "edge_231",
+      "source": "node_219",
+      "target": "node_221",
+      "distance": 95,
+      "weight": 1
+    },
+    {
+      "id": "edge_232",
+      "source": "node_221",
+      "target": "node_240",
+      "distance": 217,
+      "weight": 1
+    },
+    {
+      "id": "edge_233",
+      "source": "node_240",
+      "target": "node_232",
+      "distance": 68,
+      "weight": 1
+    },
+    {
+      "id": "edge_234",
+      "source": "node_226",
+      "target": "node_241",
+      "distance": 41,
+      "weight": 1
+    },
+    {
+      "id": "edge_235",
+      "source": "node_241",
+      "target": "node_239",
+      "distance": 145,
+      "weight": 1
+    },
+    {
+      "id": "edge_236",
+      "source": "node_227",
+      "target": "node_242",
+      "distance": 45,
+      "weight": 1
+    },
+    {
+      "id": "edge_237",
+      "source": "node_242",
+      "target": "node_241",
+      "distance": 109,
+      "weight": 1
+    },
+    {
+      "id": "edge_238",
+      "source": "node_234",
+      "target": "node_243",
+      "distance": 227,
+      "weight": 1
+    },
+    {
+      "id": "edge_239",
+      "source": "node_248",
+      "target": "node_250",
+      "distance": 39,
+      "weight": 1
+    },
+    {
+      "id": "edge_240",
+      "source": "node_250",
+      "target": "node_241",
+      "distance": 56,
+      "weight": 1
+    },
+    {
+      "id": "edge_241",
+      "source": "node_249",
+      "target": "node_247",
+      "distance": 38,
+      "weight": 1
+    },
+    {
+      "id": "edge_242",
+      "source": "node_246",
+      "target": "node_249",
+      "distance": 40,
+      "weight": 1
+    },
+    {
+      "id": "edge_243",
+      "source": "node_251",
+      "target": "node_249",
+      "distance": 45,
+      "weight": 1
+    },
+    {
+      "id": "edge_244",
+      "source": "node_251",
+      "target": "node_233",
+      "distance": 95,
+      "weight": 1
+    },
+    {
+      "id": "edge_245",
+      "source": "node_244",
+      "target": "node_243",
+      "distance": 81,
+      "weight": 1
+    },
+    {
+      "id": "edge_246",
+      "source": "node_245",
+      "target": "node_243",
+      "distance": 101,
       "weight": 1
     }
   ]
