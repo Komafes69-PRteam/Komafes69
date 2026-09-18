@@ -1,0 +1,398 @@
+---
+import Layout from './template.astro';
+
+// アイコン・ロゴのインポート（パスは環境に合わせて調整してください）
+import youtubeIcon from "./assets/youtube.svg";
+import xIcon from "./assets/X.svg";
+import instagramIcon from "./assets/Instagram.svg";
+import mainLogoImg from "./assets/Komafes69Logo.webp";
+---
+
+<Layout
+  title="Online Contents | 駒場東邦 第69回 文化祭"
+  description="パンフレットから各種デジタルコンテンツ・オンライン投票へのポータルページです。"
+  pageTitleEn="ONLINE CONTENTS"
+  pageTitleJa="デジタルコンテンツ・投票ポータル"
+>
+  <!-- ローディング画面 -->
+  <div id="loading-screen">
+    <div class="loader-logo-container">
+      <img src={mainLogoImg.src} alt="Loading..." class="loader-logo-img" />
+      <p class="loader-text">Loading...</p>
+    </div>
+  </div>
+
+  <div class="contents-wrapper" id="main-content" style="opacity: 0;">
+    
+    <!-- 1. OFFICIAL WEBSITE 誘導 -->
+    <section class="portal-section">
+      <div class="section-header">
+        <h2 class="section-title">OFFICIAL WEBSITE</h2>
+        <p class="section-subtitle">文化祭公式ウェブサイト トップページ</p>
+      </div>
+      <a href="/" class="main-btn">
+        <span>ウェブサイト TOPへアクセス</span>
+        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </section>
+
+    <!-- 2. OFFICIAL SNS 誘導 (画像デザインの再現) -->
+    <section class="portal-section">
+      <div class="section-header">
+        <h2 class="section-title">OFFICIAL SNS</h2>
+        <p class="section-subtitle">公式SNS・最新情報はこちら</p>
+      </div>
+      
+      <div class="sns-cards-container">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/komafes69/" target="_blank" rel="noopener noreferrer" class="sns-card">
+          <div class="sns-icon-circle">
+            <img src={instagramIcon.src} alt="Instagram" />
+          </div>
+          <div class="sns-info">
+            <div class="sns-name-group">
+              <span class="sns-name">Instagram</span>
+              <span class="sns-handle">@komafes69</span>
+            </div>
+            <p class="sns-desc">各参加団体の紹介動画や準備風景、各種情報を投稿中！</p>
+          </div>
+          <div class="sns-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@komafes69" target="_blank" rel="noopener noreferrer" class="sns-card">
+          <div class="sns-icon-circle">
+            <img src={youtubeIcon.src} alt="YouTube" />
+          </div>
+          <div class="sns-info">
+            <div class="sns-name-group">
+              <span class="sns-name">YouTube</span>
+              <span class="sns-handle">@Komafes69</span>
+            </div>
+            <p class="sns-desc">各参加団体の紹介動画や、PVを順次公開予定！</p>
+          </div>
+          <div class="sns-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- X (Twitter) -->
+        <a href="https://x.com/Komafes69" target="_blank" rel="noopener noreferrer" class="sns-card">
+          <div class="sns-icon-circle">
+            <img src={xIcon.src} alt="X" />
+          </div>
+          <div class="sns-info">
+            <div class="sns-name-group">
+              <span class="sns-name">X (旧Twitter)</span>
+              <span class="sns-handle">@komafes69</span>
+            </div>
+            <p class="sns-desc">文化祭についての情報を発信！</p>
+          </div>
+          <div class="sns-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. ONLINE VOTING 誘導 -->
+    <section class="portal-section">
+      <div class="section-header">
+        <h2 class="section-title">ONLINE VOTING</h2>
+        <p class="section-subtitle">各企画のオンライン投票はこちら</p>
+      </div>
+      
+      <div class="voting-grid">
+        <a href="/vote/bodykoma" class="vote-card">
+          <span class="vote-title">ボディコマ</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/vote/utakomafirst" class="vote-card">
+          <span class="vote-title">歌コマ予選</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/vote/nightfes" class="vote-card">
+          <span class="vote-title">中夜祭</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/vote/utakomasecond" class="vote-card">
+          <span class="vote-title">歌コマ決勝</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/vote/osikoma" class="vote-card">
+          <span class="vote-title">推しコマ</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    import { gsap } from "gsap";
+
+    // ==========================================
+    // ローディング & 画面表示アニメーション
+    // ==========================================
+    const wheelRotation = gsap.to(".loader-logo-img", {
+      rotation: "+=360",
+      duration: 2,
+      repeat: -1,
+      ease: "power1.inOut",
+    });
+    
+    const MIN_LOADING_TIME = 1000;
+    const minWaitPromise = new Promise<void>((resolve) =>
+      setTimeout(resolve, MIN_LOADING_TIME),
+    );
+    const pageLoadPromise = new Promise<void>((resolve) => {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", () => resolve(), { once: true });
+    });
+
+    Promise.all([minWaitPromise, pageLoadPromise]).then(() => {
+      const tl = gsap.timeline();
+      tl.to("#loading-screen", {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        onComplete: () => {
+          const loader = document.getElementById("loading-screen");
+          if (loader) loader.style.display = "none";
+          wheelRotation.kill();
+          
+          // メインコンテンツのフェードインアニメーション
+          gsap.to("#main-content", {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out"
+          });
+        },
+      });
+    });
+  </script>
+
+<style>
+    /* ローディング画面 */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #101011;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .loader-logo-container {
+      width: 140px;
+      height: 140px;
+      max-width: 50vw;
+      max-height: 50vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .loader-logo-img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    .loader-text {
+      color: #fff;
+      font-family: "Bebas Neue", cursive;
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    /* メインコンテナ */
+    .contents-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      transform: translateY(20px);
+    }
+
+    /* 各セクション共通ヘッダー */
+    .portal-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .section-header {
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: "Bebas Neue", cursive;
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 0.9;
+      margin: 0 0 8px 0;
+      color: #000;
+      letter-spacing: 0.02em;
+    }
+    .section-subtitle {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #111;
+      margin: 0;
+    }
+
+    /* WEBボタン */
+    .main-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #111;
+      color: #fff;
+      padding: 1.25rem 2rem;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .main-btn:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+    .main-btn .arrow-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* SNSカード UI (画像準拠) */
+    .sns-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .sns-card {
+      background-color: #fafafa;
+      border-radius: 20px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      text-decoration: none;
+      color: #111;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .sns-card:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-2px);
+    }
+    .sns-icon-circle {
+      width: 56px;
+      height: 56px;
+      background: #111;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .sns-icon-circle img {
+      width: 28px;
+      height: 28px;
+      filter: brightness(0) invert(1);
+    }
+    .sns-info {
+      flex: 1;
+      min-width: 0; /* 追加: テキストが枠を押し広げるのを防ぐ */
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sns-name-group {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap; /* 追加: 名前とIDが長い場合に折り返す */
+      gap: 8px;
+    }
+    .sns-name {
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+    .sns-handle {
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 700;
+    }
+    .sns-desc {
+      font-size: 0.85rem;
+      margin: 0;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .sns-arrow {
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0; /* 追加: 矢印要素が潰れないようにする */
+    }
+    .sns-arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* 投票グリッド */
+    .voting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .vote-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+    .vote-card:hover {
+      border-color: #3b82f6;
+      background: #eff6ff;
+      color: #1d4ed8;
+      transform: translateY(-2px);
+    }
+    .vote-card .arrow-icon {
+      width: 20px;
+      height: 20px;
+      color: #94a3b8;
+    }
+    .vote-card:hover .arrow-icon {
+      color: #3b82f6;
+    }
+
+    @media (max-width: 768px) {
+      .contents-wrapper {
+        gap: 3rem;
+      }
+      .sns-card {
+        padding: 1.25rem;
+      }
+      .sns-name-group {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</Layout>
