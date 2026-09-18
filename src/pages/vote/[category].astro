@@ -13,7 +13,7 @@ export function getStaticPaths() {
 
 const { category } = Astro.params;
 
-// 投票設定：ボディコマのみ type を 'grouped' にしてグループ情報を追加
+// 各カテゴリーの候補者データを更新
 const categoriesConfig: Record<string, any> = {
   bodykoma: {
     title: 'ボディコマ 投票',
@@ -23,9 +23,33 @@ const categoriesConfig: Record<string, any> = {
       { id: 'groupB', name: 'B組', maxVotes: 2, candidates: ['武田', '高橋', '松本', '鈴木', '林', '大竹'] }
     ]
   },
-  utakomafirst: { title: '歌コマ (第1部) 投票', type: 'single', candidates: [] },
-  nightfes: { title: '後夜祭 投票', type: 'single', candidates: [] },
-  utakomasecond: { title: '歌コマ (第2部) 投票', type: 'single', candidates: [] },
+  utakomafirst: { 
+    title: '歌コマ予選 投票', 
+    type: 'single', 
+    candidates: [
+      '村越 (しょげないでよBaby)',
+      '山﨑 (水平線)',
+      '下堀 (クスシキ)',
+      '森崎藤岡谷口 (洋楽)',
+      'じつい (東京フラッシュ)',
+      '岡本 (前前前世)',
+      '中安 (ひまわりの約束)',
+      '森本 (RPG)',
+      '加藤金子 (ちいかわ)',
+      '中川 (卒業)',
+      '林 (怪獣の花唄)',
+      '大村 (さよならエナジー)',
+      '谷口拓 (ブルーアンバー)',
+      '李 (カーテンコール)',
+      '細野佐渡藤井 (沈丁花)'
+    ]
+  },
+  nightfes: { 
+    title: '中夜祭 投票', 
+    type: 'single', 
+    candidates: ['煉帝', 'カマキリ', '非モテ委員会', 'Nations', 'カラムーチョ'] 
+  },
+  utakomasecond: { title: '歌コマ決勝 投票', type: 'single', candidates: [] },
   osikoma: {
     title: '推しコマ 投票',
     type: 'single',
@@ -71,7 +95,7 @@ const currentCategory = categoriesConfig[category as string];
         </div>
       )}
 
-      <!-- 単一選択の場合 (推しコマ等) -->
+      <!-- 単一選択の場合 (歌コマ・中夜祭・推しコマ等) -->
       {currentCategory.type === 'single' && (
         <div class="candidates-grid">
           {currentCategory.candidates.map((name: string) => (
@@ -100,7 +124,7 @@ const currentCategory = categoriesConfig[category as string];
     async function init() {
       const container = document.getElementById('app-container');
       const category = container?.dataset.category;
-      const voteType = container?.dataset.type; // 'grouped' or 'single'
+      const voteType = container?.dataset.type;
       const loading = document.getElementById('loading');
       const alertBox = document.getElementById('alert-box');
       const voteForm = document.getElementById('vote-form');
@@ -147,7 +171,6 @@ const currentCategory = categoriesConfig[category as string];
           if (voteType === 'grouped') {
             const aSelected = document.querySelectorAll('.grouped-btn.selected[data-group="groupA"]').length;
             const bSelected = document.querySelectorAll('.grouped-btn.selected[data-group="groupB"]').length;
-            // A組・B組それぞれ2名ずつ選択されている場合のみ有効化
             submitBtn.disabled = !(aSelected === 2 && bSelected === 2);
           } else {
             submitBtn.disabled = document.querySelectorAll('.single-btn.selected').length === 0;
@@ -162,10 +185,8 @@ const currentCategory = categoriesConfig[category as string];
             const maxVotes = parseInt(target.dataset.max || '2', 10);
 
             if (target.classList.contains('selected')) {
-              // 選択解除
               target.classList.remove('selected');
             } else {
-              // 新規選択（上限に達していないかチェック）
               const currentSelected = document.querySelectorAll(`.grouped-btn.selected[data-group="${groupId}"]`);
               if (currentSelected.length < maxVotes) {
                 target.classList.add('selected');
@@ -177,7 +198,7 @@ const currentCategory = categoriesConfig[category as string];
           });
         });
 
-        // 【単一選択（推しコマ等）のイベント】
+        // 【単一選択（歌コマ・中夜祭・推しコマ等）のイベント】
         singleBtns.forEach(btn => {
           btn.addEventListener('click', (e) => {
             singleBtns.forEach(b => b.classList.remove('selected'));
@@ -197,7 +218,6 @@ const currentCategory = categoriesConfig[category as string];
             submitBtn.textContent = '送信中...';
 
             try {
-              // 複数の投票データを一括で保存（バッチ処理）
               const batch = writeBatch(db);
               
               selectedBtns.forEach(btn => {
@@ -261,7 +281,6 @@ const currentCategory = categoriesConfig[category as string];
     }
     .hidden { display: none !important; }
     
-    /* グループ用スタイル */
     .groups-container {
       display: flex;
       flex-direction: column;
