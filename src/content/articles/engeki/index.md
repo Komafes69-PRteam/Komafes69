@@ -1,6 +1,6 @@
 ---
 title: 演劇同好会 最高のdramaを集まった13人のactors-
-sexhibitionSlug: "演劇同好会" 
+exhibitionSlug: "演劇同好会" 
 date: "2026-09-16"
 heroImage: "./images/media/engeki.webp"
 ---
